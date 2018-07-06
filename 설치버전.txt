@@ -20,6 +20,10 @@
 
 -Maven : Maven 3.5.4
 
+-apache 2.4
+
+-php5
+
 -형상관리
 #Git 2.15.1.2
 #sourceTree 2.3.5
