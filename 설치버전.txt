@@ -1,0 +1,15 @@
+-Apache Tomcat 7.0 (Tomcat v7-25.3.1)
+
+-MySQL Server 5.7 
+
+-Android Studio 3.0.1
+
+-HeidiSQL 9.0.5.5196
+
+-eclipse Oxygen Release (4.7.0) 
+
+-spring 3.1.1.release
+
+-형상관리
+#Git 2.15.1.2
+#sourceTree 2.3.5
