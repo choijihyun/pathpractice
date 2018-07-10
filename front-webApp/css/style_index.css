@@ -1,0 +1,77 @@
+body{
+	/*
+	background: #dd3247;
+	padding-top: 10%;*/
+}
+.wdi-red{
+	color: #dd3247;
+}
+.login-box{
+	background: #fff;
+	padding: 50px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.flat-input{
+	margin-top: 20px;
+	border: none;
+	border-radius: 0;
+	border-bottom: 1px solid #dd3247;
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+	background: -webkit-linear-gradient(top, rgba(255,255,255,0) 96%, #dd3247 4%);
+	background: linear-gradient(to bottom , rgba(255,255,255,0) 96%, #dd3247 4%);
+	background-position: -500px 0;
+	background-size: 100% 100%;
+	background-repeat: no-repeat; 
+}
+.flat-input:focus{
+	box-shadow: none;
+	outline: none;
+	background-position: 0 0;
+	border-bottom: 0px;
+}
+
+.btn-login{
+	border-radius: 0;
+	background: #dd3247;
+	color: #fff;
+	-webkit-transition: all 0.8s;
+	transition: all 0.8s;
+}
+
+.btn-login:hover{
+	background: transparent;
+	border: 1px solid #dd3247;
+	color: #dd3247;
+}
+
+.checkbox{
+	margin-top: 20px;
+	margin-bottom: 15px;
+	font-size: 15px;
+	color: #dd3247;
+	-webkit-transition: all 0.8s;
+	transition: all 0.8s;
+}
+
+.btn-join{
+	margin-top: 10px;
+	border-bottom: 1px solid #dd3247;
+	border-radius: 0;
+	background: white;
+	font-size: 10px;
+	color: #dd3247;
+	-webkit-transition: all 0.8s;
+	transition: all 0.8s;
+}
+
+.btn-search{
+	margin-top: 10px;
+	border-bottom: 1px solid #dd3247;
+	border-radius: 0;
+	background: white;
+	font-size: 10px;
+	color: #dd3247;
+	-webkit-transition: all 0.8s;
+	transition: all 0.8s;
+}

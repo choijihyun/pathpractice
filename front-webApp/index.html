@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="kr">
+<head>
+	<title>Login Page</title>
+
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+	<!-- Costumize CSS -->
+	<link rel="stylesheet" type="text/css" href="css/style_index.css">
+</head>
+
+
+<script type="text/javascript">
+	//id,pw 입력 확인 함수
+	function beforeSubmit(){
+
+		id = document.getElementById("username");
+		password = document.getElementById("password");
+
+		if (id.value == "") {
+			alert("회원 ID를 입력하십시오");
+			password.value = "";
+			return false;
+		}
+
+		else if (password.value == "") {
+			alert("회원 PW를 입력하십시오");
+			id.value = "";
+			return false;
+		}
+
+		return true;
+
+	}
+</script>
+
+<body class="text-center">
+	<!-- Container -->
+	<div class="container">
+		<div class="row justify-content-md-center justify-content-xs-center">
+			<div class="col-md-6 col-md-auto col-xs-6 col-xs-auto login-box ">
+				<h1 class="text-center wdi-red">Login</h1>
+				<hr>
+				<form>
+					<div class="form-row">
+						
+						<!-- input id, pw -->
+						<div class= "col-md-12 col-xs-12">
+							<input type="text" id="username" class="form-control form-control-lg flat-input" placeholder="username">
+						</div>
+						<div class= "col-md-12 col-xs-12">
+							<input type="password" id="password" class="form-control form-control-lg flat-input" placeholder="password" >
+						</div>
+
+						<!-- remember user infomation - checkbox -->
+						<div class="checkbox col-md-12">
+							<label>
+								<input type="checkbox" value="remember-me">
+								Remember me
+							</label>
+						</div>
+
+						<!-- login/join/find pw button-->
+						<div class= "col-md-12 col-xs-12">
+							<a class="btn btn-lg btn-block btn-login" href="home.html" onclick="return beforeSubmit()" >
+								LOGIN
+							</a>
+						</div>
+						<div class= "col-md-6 col-xs-6">
+							<a class="btn btn-lg btn-xs btn-block btn-join" href="join.html">
+								회원가입
+							</a>
+						</div>
+						<div class= "col-md-6 col-xs-6">
+							<button type="submit" class="btn btn-lg btn-xs btn-block btn-search">PW 찾기</button>
+						</div>
+
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+</body>
+</html>
