@@ -8,21 +8,41 @@ body{
 }
 .login-box{
 	background: #fff;
-	padding: 50px;
+	padding: 0px;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
+.app-header {
+    line-height: 1;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 10px;
+}
+.app-header-logo {
+	color: #dd3247;
+}
+
 .btn-logout{
-	border-radius: 0;
+	border-radius: 1;
 	background: #dd3247;
 	color: #fff;
+	border-radius: 0;
+	margin-top: 10px;
 	-webkit-transition: all 0.8s;
 	transition: all 0.8s;
 }
 
 .btn-logout:hover{
+	border-radius: 0;
+	margin-top: 10px;
 	background: transparent;
 	border: 1px solid #dd3247;
 	color: #dd3247;
 }
-
+.app-footer {
+    line-height: 1;
+    border-top: 1px solid #e5e5e5;
+    padding: 2.5rem 0;
+    color: #999;
+    text-align: center;
+    background-color: #f9f9f9;
+}
