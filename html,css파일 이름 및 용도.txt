@@ -6,6 +6,16 @@ home.html / style_home.css - 로그인 후 보여지는 홈 화면
 
 assignment_add.html / style_assignment_add.css - 과제 추가 화면
 
-header_customize.html /  style_header_customize.css - 상단바만 따로 빼놓은 것
+assignment.html / style.assignment.css - 과제 전부 보여주는 화면
 
-footer_customize.html /  style_footer_customize.css - 상단바만 따로 빼놓은 것
+header_customize.html /  style_header_customize.css - 상단바만 따로 빼 놓은 것
+
+footer_customize.html /  style_footer_customize.css - 상단바만 따로 빼 놓은 것
+
+menu.html / style_menu.css - 메뉴 보여주는 화면
+
+mypage.html / style_mypage.css - 마이페이지 보여주는 화면
+
+timetable_page.html / style_timetable_page.css - 시간표 크게 보여주는 화면
+
+timetable.html / style_timetable.css - 시간표 테이블만 따로 빼 놓은 것
