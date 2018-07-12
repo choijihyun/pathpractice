@@ -22,6 +22,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 .star-input>.input>label[for="p5"]{width:150px;z-index:1;}
 .star-input>output{display:inline-block;width:60px; font-size:18px;text-align:right; vertical-align:middle;}
 .col-md-12 {padding: 3px;}
+.form-row>.col, .form-row>[class*=col-]{padding-top : 5px;}
 </style>
 
 <head>
@@ -90,10 +91,18 @@ star-input>.input.focus{outline:1px dotted #ddd;}
   							</span>				
 						</span>
 
+						<div class= "col-md-3 col-xs-3 label">
+							<h6> 마감일 </h6>
+						</div>
+						<div class= "col-md-3 col-xs-3 label">
+							<form action = "demo_form.asp">
+								<input type="date" class = "col-mdname ="date">
+							</form>
+						</div>
 
 						<!--join/cancel button -->
 						<div class= "col-md-12 col-xs-12">
-							<a class="btn btn-lg btn-block btn-primary" href="home.html"> OK</a>
+							<a class="btn btn-lg btn-block btn-primary" type ="submit" href="assignment.html"> SUBMIT</a>
 						</div>
 
 						<div class= "col-md-12 col-xs-12">
