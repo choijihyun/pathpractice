@@ -11,32 +11,33 @@ body{
 	padding: 0px;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
+/*상단바*/
 .app-header {
     line-height: 1;
     border-bottom: 1px solid #e5e5e5;
     background-color: #f9f9f9;
 }
+/*상단바에 PATH 로고*/
 .app-header-logo {
 	color: #dd3247;
 	margin :8px;
 }
-
+/*상단,하단 바 제외한 가운데 영역*/
 .main-area{
-	margin-bottom: 5px;
-	margin-top: 5px;
 	background: #fff;
 }
-
-.btn-logout{
-	border-radius: 0;
-	background: #dd3247;
-	color: #fff;
-	-webkit-transition: all 0.8s;
-	transition: all 0.8s;
-	font-size: 10px;
+/*로그아웃 버튼*/
+.btn-log-out{
+	border: 0;
+	margin-left: 25px;
+	margin-top: 10px;
+	align-content: right;
+	background: #f9f9f9;
+	color: #6c757d;
 	max-width: 60px;
 	max-height: 30px;
 }
+/*로그아웃 버튼에 마우스 올릴 때*/
 .btn-logout:hover{
 	border-radius: 0;
 	background: transparent;
@@ -45,6 +46,7 @@ body{
 	max-width: 60px;
 	max-height: 30px;
 }
+/*하단바 */
 .app-footer {
     line-height: 1;
     border-top: 1px solid #e5e5e5;
@@ -53,21 +55,13 @@ body{
     text-align: center;
     background-color: #f9f9f9;
 }
+/*하단 바 아이콘*/
 .btn-icon{
 	border: 0;
 	background: #f9f9f9;
 	color: #6c757d;
 }
-
-.btn-log-out{
-	border: 0;
-	margin-left: 25px;
-	margin-top: 10px;
-	align-content: right;
-	background: #f9f9f9;
-	color: #6c757d;
-}
-
+/*시간표*/
 .table-time{
 	padding:0px;
 	color : #6c757d;

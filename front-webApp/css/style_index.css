@@ -6,11 +6,13 @@ body{
 .wdi-red{
 	color: #dd3247;
 }
+
 .login-box{
 	background: #fff;
 	padding: 50px;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
+/*input 영역*/
 .flat-input{
 	margin-top: 20px;
 	border: none;
@@ -24,13 +26,14 @@ body{
 	background-size: 100% 100%;
 	background-repeat: no-repeat; 
 }
+/*input 영역 클릭 했을 때*/
 .flat-input:focus{
 	box-shadow: none;
 	outline: none;
 	background-position: 0 0;
 	border-bottom: 0px;
 }
-
+/*로그인 버튼*/
 .btn-login{
 	border-radius: 0;
 	background: #dd3247;
@@ -38,13 +41,13 @@ body{
 	-webkit-transition: all 0.8s;
 	transition: all 0.8s;
 }
-
+/*로그인 버튼 클릭 했을 때*/
 .btn-login:hover{
 	background: transparent;
 	border: 1px solid #dd3247;
 	color: #dd3247;
 }
-
+/*f로그인 유지 선택하는 checkbox*/
 .checkbox{
 	margin-top: 20px;
 	margin-bottom: 15px;
@@ -53,7 +56,7 @@ body{
 	-webkit-transition: all 0.8s;
 	transition: all 0.8s;
 }
-
+/*가입 버튼*/
 .btn-join{
 	margin-top: 10px;
 	border-bottom: 1px solid #dd3247;
@@ -64,7 +67,7 @@ body{
 	-webkit-transition: all 0.8s;
 	transition: all 0.8s;
 }
-
+/*비밀번호 찾기 버튼*/
 .btn-search{
 	margin-top: 10px;
 	border-bottom: 1px solid #dd3247;

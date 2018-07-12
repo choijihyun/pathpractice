@@ -11,7 +11,7 @@ body{
 	padding: 50px;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
-
+/*input 영역*/
 .flat-input{
 	margin-top: 20px;
 	border: none;
@@ -25,18 +25,19 @@ body{
 	background-size: 100% 100%;
 	background-repeat: no-repeat; 
 }
+/*input 영역 클릭 했을 때*/
 .flat-input:focus{
 	box-shadow: none;
 	outline: none;
 	background-position: 0 0;
 	border-bottom: 0px;
 }
-
+/*input영역 옆에 label*/
 .label{
 	margin-top: 35px;
 	color: #dd3247;
 }
-
+/*가입 완료 버튼*/
 .btn-join {
 	margin-top: 30px;
 	border-radius: 0;
@@ -45,14 +46,14 @@ body{
 	-webkit-transition: all 0.8s;
 	transition: all 0.8s;
 }
-
+/*가입 완료 버튼 클릭 했을 때*/
 .btn-join:hover{
 	margin-top: 30px;
 	background: transparent;
 	border: 1px solid #dd3247;
 	color: #dd3247;
 }
-
+/*가입 취소 버튼*/
 .btn-cancel {
 	margin-top: 30px;
 	border-radius: 0;
@@ -61,14 +62,14 @@ body{
 	-webkit-transition: all 0.8s;
 	transition: all 0.8s;
 }
-
+/*가입 취소 버튼 클릭 했을 때*/
 .btn-cancel:hover{
 	margin-top: 30px;
 	background: transparent;
 	border: 1px solid #dd3247;
 	color: #dd3247;
 }
-
+/*학년 선택 dropdown*/
 .dropdown-grade{
 	position: relative;
 	margin-top: 30px;
@@ -78,7 +79,7 @@ body{
 	color: #dd3247;
 	border: 1px solid #dd3247;
 }
-
+/*학기 선택 dropdown*/
 .dropdown-semester{
 	position: relative;
 	margin-top: 30px;
@@ -88,15 +89,4 @@ body{
 	background: #fff;
 	color: #dd3247;
 	border: 1px solid #dd3247;
-}
-
-.label-grade{
-	margin-top: 35px;
-	text-align: left;
-	color: #dd3247;
-}
-
-.label-semester{
-	margin-top: 35px;
-	color: #dd3247;
 }
