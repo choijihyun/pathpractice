@@ -1,5 +1,6 @@
 var headerHtml='';
 
+
 headerHtml+='<link rel="stylesheet" type="text/css" href="css/style_header.css">';
 headerHtml+='<header class="app-header">';
 headerHtml+='	<div class="row col-auto justify-content-end">';
