@@ -1,5 +1,6 @@
 var footerHtml='';
 
+footerHtml+='<link rel="stylesheet" type="text/css" href="css/style_footer.css">';
 footerHtml+='<footer class="app-footer py-1">';
 footerHtml+='<div class="nav-scroller mb-2">';
 footerHtml+='<nav class="nav justify-content-between">';

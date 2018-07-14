@@ -1,5 +1,6 @@
 var timetableHtml='';
 
+timetableHtml+='<link rel="stylesheet" type="text/css" href="css/style_timetable.css">';
 timetableHtml+='		<!-- 시간표 테이블 -->';
 timetableHtml+='		<table class="table table-striped table-bordered table-time">';
 timetableHtml+='			<thead>';
