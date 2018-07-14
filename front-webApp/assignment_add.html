@@ -34,9 +34,16 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
 	<!-- Costumize CSS -->
 	<link rel="stylesheet" type="text/css" href="css/style_assignment_add.css">
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 </head>
 
 
@@ -44,48 +51,48 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 	<!-- Container -->
 	<div class="container" data-spy = "scroll">
 		<div class="row justify-content-md-center justify-content-xs-center">
-			<div class="col-md-6 col-md-auto col-xs-6 col-xs-auto login-box ">
+			<div class="col-md-6 col-md-auto col-xs-6 col-xs-auto login-box  p-md-0 ">
 				<h1 class="text-center wdi-red">ADD ASSINGMENT</h1>
-				<hr>
+				<hr class="m-1">
 				<form>
-					<div class="form-row">
+					<div class="form-row m-3">
 
-						<div class= "col-md-3 col-xs-3 label">
+						<div class= "col-md-3 col-xs-3 mt-1 mb-1 label">
 							<h6> 과목명 </h6>
 						</div>
-						<div class= "col-md-6 col-xs-6">
-							<input type="text"  class="form-control form-control-lg flat-input">
+						<div class= "col-md-7 col-xs-7 ">
+							<input type="text"  class="form-control form-control-lg mt-1 mb-1 flat-input">
 						</div>
-						<div class= "col-md-3 col-xs-3">
-							<a class="btn" href="find_subject.html">
-							<img class="btn-img" width="30" height="30" src="img/find.png">
+						<div class= "col-md-2 col-xs-2 mt-1 mb-1">
+							<a  class="btn btn-default btn-icon" aria-label="Left Align" href="find_subject.html">
+								<span class="glyphicon glyphicon glyphicon-search" aria-hidden="true"></span>
 							</a>
 						</div>
 
 
 						<!--PW lable/input tag -->
-						<div class= "col-md-3 col-xs-3 label">
+						<div class= "col-md-3 col-xs-3 mt-1 mb-1 label">
 							<h6> 제목 </h6>
 						</div>
-						<div class= "col-md-9 col-xs-9">
-							<input type="text"  class="form-control form-control-lg flat-input" >
+						<div class= "col-md-7 col-xs-7">
+							<input type="text"  class="form-control form-control-lg mt-1 mb-1 flat-input" >
 						</div>
 
 						<!--NAME lable/input tag -->
-						<div class= "col-md-3 col-xs-3 label">
+						<div class= "col-md-3 col-xs-3 mt-1 mb-1 label">
 							<h6> 내용 </h6>
 						</div>
-						<div class= "col-md-9 col-xs-9">
-							<input type="text"  class="form-control form-control-lg flat-input" >
+						<div class= "col-md-7 col-xs-7">
+							<input type="text"  class="form-control form-control-lg mt-1 mb-1 flat-input" >
 						</div>
 
 						<!--GRADE lable/Dropdow tag -->
-						<div class= "col-md-3 col-xs-3 label">
+						<div class= "col-md-3 col-xs-3 mt-1 mb-1 label">
 							<h6> 중요도 </h6>
 						</div>
-						<span class="star-input col-md-9 col-xs-9 ">
+						<span class="star-input col-md-7 col-xs-7 ">
 							<span class="input">
-								<input type="radio" name="star-input" value="1" id="p1">							    	
+								<input type="radio" name="star-input" value="1" id="p1">
 								<label for="p1">1</label>
 								<input type="radio" name="star-input" value="2" id="p2">
 								<label for="p2">2</label>
@@ -95,25 +102,27 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 								<label for="p4">4</label>
 								<input type="radio" name="star-input" value="5" id="p5">
 								<label for="p5">5</label>
-							</span>				
+							</span>  			
 						</span>
 
-						<div class= "col-md-3 col-xs-3 label">
-							<h6> 마감일 </h6>
+						<div class= "col-md-3 col-xs-3 mt-1 mb-1 label">
+							<h6 style="text-align:bottom"> 마감일 </h6>
 						</div>
-						<div class= "col-md-3 col-xs-3 label">
+						<div class= "col-md-6 col-xs-6 mt-1 mb-1">
 							<form action = "demo_form.asp">
-								<input type="date" class = "col-mdname ="date">
+								<input type="date" class = "col-mdname=date">
 							</form>
+						</div>
+						<div class= "col-md-3 col-xs-3 mt-1 mb-1">
 						</div>
 
 						<!--join/cancel button -->
-						<div class= "col-md-12 col-xs-12">
-							<a class="btn btn-lg btn-block btn-primary" type ="submit" href="assignment.html"> SUBMIT</a>
+						<div class= "col-md-6 col-xs-6">
+							<a class="btn btn-block btn-submit" href="assignment.html"> SUBMIT</a>
 						</div>
 
-						<div class= "col-md-12 col-xs-12">
-							<a class="btn btn-lg btn-block btn-cancel" href="assignment.html"> CANCEL</a>
+						<div class= "col-md-6 col-xs-6">
+							<a class="btn btn-block btn-cancel" href="assignment.html"> CANCEL</a>
 						</div>
 
 					</div>

@@ -26,7 +26,24 @@ body{
 	color: #dd3247;
 }
 
+
+.btn-submit{
+	border-radius: 0;
+	background: #4E8DC6;
+	color: #fff;
+	-webkit-transition: all 0.8s;
+	transition: all 0.8s;
+}
+
+.btn-submit:hover{
+	background: transparent;
+	border: 1px solid #4E8DC6;
+	color: #4E8DC6;
+}
+
+/*input 영역*/
 .flat-input{
+	box-shadow: none;
 	margin-top: 20px;
 	border: none;
 	border-radius: 0;
@@ -46,3 +63,15 @@ body{
 	background-position: 0 0;
 	border-bottom: 0px;
 }
+
+.label{
+	margin-top: 35px;
+	color: #dd3247;
+}
+
+.btn-icon{
+	border: 0;
+	background: #fff;
+	color: #6c757d;
+}
+
