@@ -12,7 +12,6 @@ headerHtml+='		</div>';
 headerHtml+='		<div class= "col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4">';
 headerHtml+='			<a class="btn btn-default btn-log-out" aria-label="Left Align" href="index.html">';
 headerHtml+='				<span class="fas fa-sign-out-alt"></span> ';
-// headerHtml+='				<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>';
 headerHtml+='			</a>';
 headerHtml+='		</div>';
 headerHtml+='	</div>';
