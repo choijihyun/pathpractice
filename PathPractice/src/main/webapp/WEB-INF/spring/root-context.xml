@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- local DB start -->
+	<bean id="dataSource"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+        <property name="url" value="jdbc:mysql://203.250.148.53/PATH?useSSL=false&amp;serverTimezone=UTC"></property>
+        <property name="username" value="jihyun"></property>
+        <property name="password" value="root"></property>
+
+    </bean>
+    <!-- local DB end -->
+    <!-- origin DB start -->
+    <!-- 
+	<bean id="dataSource"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+        <property name="url" value="jdbc:mysql://localhost/flywjdgus10"></property>
+        <property name="username" value="flywjdgus10"></property>
+        <property name="password" value="Gg72007310!"></property>
+    </bean>
+ 	 -->
+ 	 <!-- origin DB end -->
+ 	 
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+    </bean>
+    
+ 
+    <bean id="transactionManager"
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+ 
+    <bean id="SqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg ref="sqlSessionFactory"></constructor-arg>
+    </bean>
+    
+	<bean id="userDao" class="com.homeworkNotice.dao.UserDao">
+		<property name="sqlSession" ref="SqlSessionTemplate"></property>
+	</bean>
+</beans>
