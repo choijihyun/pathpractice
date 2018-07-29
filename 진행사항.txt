@@ -1,0 +1,15 @@
+##########   USER   ###########
+
+로그인 구현 /user/checkUser.json?stuId=39398&pw=393    => result 값 1 또는 0 반환
+모든 user data 보기 /user/getAllUserData.json?select=1      => result 값 모든 데이터 반환
+회원 가입/user/insertUser.json?name=kimeunsuk&stuId=16010946&semester=6&pw=16010946&email=dkdla58@hanmail.net
+
+=> 근데 이거 정현오빠는 user 에 date를 넣어서 현재시간 들어가게 하라고 했었는데 이번에도 그렇게 해야하나?
+
+######### HOMEWORK #########
+
+과제 추가 /homework/insertHomework.json?stuId=16010946&dueDate=202020&importance=2&title=kwwk&contents=elel&subNo=4&success=3
+ => result 값 1 또는 0 반환
+과제 삭제 
+과제 수정
+과제 전체 보기 => id 별로 보기
