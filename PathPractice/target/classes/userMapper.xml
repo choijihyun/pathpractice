@@ -18,8 +18,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectUserInfo" resultType="com.homeworkNotice.dto.UserDto" parameterType="map">
     	select * from Student where stuId=#{stuId}
     </select> 
-   <!--  <insert id="insertUser" parameterType="map">
-    	insert into user(id,password,name,grade,email,date) values ( #{id},#{password},#{name},#{grade},#{email},NOW())
-    </insert>-->
+   <insert id="insertUser" parameterType="map">
+    	insert into Student(name,stuId,semester,pw,email) values ( #{name},#{stuId},#{semester},#{pw},#{email})
+    </insert>
     
 </mapper>

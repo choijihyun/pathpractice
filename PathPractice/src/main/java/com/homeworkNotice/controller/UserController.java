@@ -84,17 +84,17 @@ public class UserController {
     @RequestMapping(value = "/user/insertUser.json", method = RequestMethod.GET)// value라는 값에 매핑, get방식 사용
     public String insertUser(
     			Model model,
-    			@RequestParam(value = "id", required=true) String id,
-    			@RequestParam(value = "password", required=true) String password,
     			@RequestParam(value = "name", required=true) String name,
-    			@RequestParam(value = "grade", required=true) String grade,
+    			@RequestParam(value = "stuId", required=true) String stuId,
+    			@RequestParam(value = "semester", required=true) final int semester,
+    			@RequestParam(value = "pw", required=true) String pw,
     			@RequestParam(value = "email", required=true) String email) { // 이렇게 5개의 파라미터를 받아오고 내용 안쓰면 x
 		HashMap<Object, Object> param=new HashMap<Object, Object>(); //각각의 id마다 hashmap 만들어주니까 생성을 해줌
 		
-		param.put("id",id);		
-		param.put("password",password);		
 		param.put("name",name);		
-		param.put("grade",grade);		
+		param.put("stuId",stuId);		
+		param.put("semester",semester);		
+		param.put("pw",pw);		
 		param.put("email",email);
 		//
 		
@@ -165,14 +165,14 @@ public class UserController {
     			@RequestParam(value = "select", required=true) final int select) {//안드로이드에서 받을 파라미터, 사실 요거 하나만 받음 댐
 
     	List<UserDto> userDtoList=userDao.selectAllList();//쿼리문 만들고 싶으면 user-mapping.xml 참고
-    	
+    	System.out.println(userDtoList);
     	JSONArray jSONArray=new JSONArray();
     	List<JSONObject> jsonList=new ArrayList<JSONObject>();
         if(!userDtoList.isEmpty()) {//반환받은 데이터가 유효하면(db에 있으면) 브라우저 화면에 결과를 뿌려준다
         	for(int i=0;i<userDtoList.size();i++) {
         		JSONObject jSONObject = new JSONObject();
         		jSONObject.put("name",userDtoList.get(i).getName());
-        		jSONObject.put("id", userDtoList.get(i).getStuId());
+        		jSONObject.put("stuId", userDtoList.get(i).getStuId());
         		jSONObject.put("semester", userDtoList.get(i).getSemester());
         		jSONObject.put("pw", userDtoList.get(i).getPw());
         		jSONObject.put("email",userDtoList.get(i).getEmail());
@@ -192,10 +192,10 @@ public class UserController {
     		        
     		      
     		        switch(select) {
-    		        case 1: valA = (String) a.get("name");valB = (String) b.get("id");break;
-    		        case 2: vA = (Integer) a.get("id");vB = (Integer) b.get("id");break;
-    		        case 3: vA = (Integer) a.get("semester");vB = (Integer) b.get("name");break;
-    		        case 4: vA= (Integer)a.get("pw");vB = (Integer) b.get("grade");if(vA==vB) return 0; if(vA>vB) return 1; else return -1;
+    		        case 1: valA = (String) a.get("name");valB = (String) b.get("name");break;
+    		        case 2: vA = (Integer) a.get("stuId");vB = (Integer) b.get("stuId");break;
+    		        case 3: vA = (Integer) a.get("semester");vB = (Integer) b.get("semester");break;
+    		        case 4: vA= (Integer)a.get("pw");vB = (Integer) b.get("pw");if(vA==vB) return 0; if(vA>vB) return 1; else return -1;
     		        case 5: valA = (String) a.get("email");valB = (String) b.get("email");break;
     		        }
 

@@ -6,9 +6,11 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <configuration>
 	<typeAliases>
 		<typeAlias alias="user" type="com.homeworkNotice.dto.UserDto"/>
+		<typeAlias alias="homework" type="com.homeworkNotice.dto.HomeworkDto"/>
 	</typeAliases>
 	
     <mappers>
         <mapper resource ="userMapper.xml"/>
+        <mapper resource ="homeworkMapper.xml"/>
     </mappers >
 </configuration>

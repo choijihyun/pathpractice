@@ -44,4 +44,7 @@
 	<bean id="userDao" class="com.homeworkNotice.dao.UserDao">
 		<property name="sqlSession" ref="SqlSessionTemplate"></property>
 	</bean>
+	<bean id="homeworkDao" class="com.homeworkNotice.dao.HomeworkDao">
+		<property name="sqlSession" ref="SqlSessionTemplate"></property>
+	</bean>
 </beans>
