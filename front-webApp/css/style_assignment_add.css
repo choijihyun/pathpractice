@@ -18,12 +18,14 @@ body{
 	color: #fff;
 	-webkit-transition: all 0.8s;
 	transition: all 0.8s;
+	margin-top: 10px;
 }
 
 .btn-cancel:hover{
 	background: transparent;
 	border: 1px solid #dd3247;
 	color: #dd3247;
+	margin-top: 10px;
 }
 
 
@@ -33,18 +35,19 @@ body{
 	color: #fff;
 	-webkit-transition: all 0.8s;
 	transition: all 0.8s;
+	margin-top: 10px;
 }
 
 .btn-submit:hover{
 	background: transparent;
 	border: 1px solid #4E8DC6;
 	color: #4E8DC6;
+	margin-top: 10px;
 }
 
 /*input 영역*/
 .flat-input{
 	box-shadow: none;
-	margin-top: 20px;
 	border: none;
 	border-radius: 0;
 	border-bottom: 1px solid #dd3247;
@@ -54,7 +57,7 @@ body{
 	background: linear-gradient(to bottom , rgba(255,255,255,0) 96%, #dd3247 4%);
 	background-position: -500px 0;
 	background-size: 100% 100%;
-	background-repeat: no-repeat; 
+	background-repeat: no-repeat;
 }
 /*input 영역 클릭 했을 때*/
 .flat-input:focus{

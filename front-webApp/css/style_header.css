@@ -9,3 +9,14 @@
 	color: #dd3247;
 	margin :8px;
 }
+.btn-log-out{
+	border: 0;
+	background: #f9f9f9;
+	color: #6c757d;
+}
+
+.btn-log-out:hover{
+	border: 0;
+	background: #f9f9f9;
+	color:  #dd3247;
+}
