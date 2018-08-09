@@ -36,4 +36,15 @@ body{
 	max-width: 60px;
 	max-height: 30px;
 }
+.btn-add{
+	border:0;
+	border-radius: 0;
+	-webkit-transition: all 0.8s;
+	transition: all 0.8s;
+	color: #6c757d;
+	background: #fff;
+}
+.btn-add:hover{
+	border-radius: 0;
+	color: #dd3247;
 
