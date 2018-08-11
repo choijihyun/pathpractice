@@ -18,6 +18,32 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 </head>
 
+<script type="text/javascript">
+		$("#joinbtn").click(function(){
+			var param ="&name="+$("#name").val()+"stuId="+$("#id").val()+"&semester="
+  +$("#semester").val()+"&pw="+$("#pw").val()+"&email="+$("#email").val();
+
+			$.ajax({
+				url:"localhost:8090/user/insertUser.json",
+				type : "GET",
+				data : param,
+				cache : false,
+				async : false,
+
+				success:function(data){
+					if(data.result =="1"){ //회원가입
+						$mobile.changePage('./index.html');
+					}else{
+						alert('다시 입력하세요');
+					}
+				}
+				error:function(){
+					alert('다시 입력하세요');
+				}
+			});
+		});
+</script>
+
 <body class="text-center">
 	<!-- Container -->
 	<div class="container">
@@ -65,18 +91,9 @@
 							</select> 
 						</div>
 
-						<div class="container col-md-3 col-xs-3 dropdown-semester">
-							<select class="form-control">
-								<option>1</option> 
-								<option>2</option> 
-								<option>3</option> 
-								<option>4</option>
-							</select> 
-						</div>
-
 						<!--join/cancel button -->
 						<div class= "col-md-6 col-xs-6 btns">
-							<a class="btn btn-sm btn-block btn-join" href="index.html"> 
+							<a class="btn btn-sm btn-block btn-join" id="joinbtn">
 							JOIN</a>
 						</div>
 						<div class= "col-md-6 col-xs-6 btns">

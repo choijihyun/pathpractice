@@ -22,26 +22,27 @@
 
 <script type="text/javascript">
 	//id,pw 입력 확인 함수
-	function beforeSubmit(){
+	$("#lgbtn").click(function(){
+			var param = 'stuId='+$('#id').val()+'&pw='+$('#pw').val();
+			$.ajax({
+				url:"localhost:8090/user/checkUser.json",
+				type : "GET",
+				data : param,
+				cache : false,
+				async : false,
 
-		id = document.getElementById("username");
-		password = document.getElementById("password");
+				success:function(data){
+					$('#id').empty();
+					$('#pw').empty();
 
-		if (id.value == "") {
-			alert("회원 ID를 입력하십시오");
-			password.value = "";
-			return false;
-		}
-
-		else if (password.value == "") {
-			alert("회원 PW를 입력하십시오");
-			id.value = "";
-			return false;
-		}
-
-		return true;
-
-	}
+							if(data.result =="1"){ //로그인 성공
+								$mobile.changePage('./home.html');
+							}else{
+								alert('not user');
+							}
+				}
+			});
+		});
 </script>
 
 <body class="text-center">
@@ -71,10 +72,10 @@
 						</div>
 
 						<!-- login/join/find pw button-->
-						<div class= "col-md-12 col-xs-12">
-							<a class="btn btn-lg btn-block btn-login" href="home.html" onclick="return beforeSubmit()" >
+						<div class= "col-md-12 col-xs-12" >
+							<button type="submit" class="btn btn-lg btn-block btn-login" id="lgbtn">
 								LOGIN
-							</a>
+							</button>
 						</div>
 						<div class= "col-md-6 col-xs-6">
 							<a class="btn btn-lg btn-xs btn-block btn-join" href="join.html">
