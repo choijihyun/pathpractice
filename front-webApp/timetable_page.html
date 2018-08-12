@@ -16,7 +16,7 @@
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 </head>
@@ -34,41 +34,60 @@
 				</div>
 
 				<!-- 상단바와 하단바를 제외한 부분 class="main-area" -->
-				<div class="jumbotron p-md-0 main-area">
+				<div class="jumbotron p-md-0 m-0 main-area">
+					<!-- + 버튼  -->
 					<div class="row col-auto justify-content-end setting">
-						<div class= "col-10 col-xs-10 col-sm-10 col-lg-10 col-md-10">
-						</div>
+						<div class= "col-10 col-xs-10 col-sm-10 col-lg-10 col-md-10"></div>
+						<button class="btn-lg btn-add p-0 lowerbarCollapse" aria-label="Left Align">
+							<span class="fas fa-plus-square"></span>
+						</button>
+					</div>
 
-						<div class= "col-2 col-xs-2 col-sm-2 col-lg-2 col-md-2">
-							<button id="popbutton_timetable_page" type="button" class="btn btn-block btn-lg btn-add p-0" aria-label="Left Align" >
-								<span class="fas fa-plus-square"></span>
-							</button>
-							<!-- Modal -->
-							<div class="modal fade" tabindex="-1" role="dialog">
-								<div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title"> 과목추가 </h5>
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
-										</div>
-										<div class="modal-body">
-											과목 리스트
-										</div>
-										<!-- modal의 버튼들 -->
-										<div class="modal-footer">
-											<a class="btn btn-sm btn-primary " aria-label="Left Align" >Add</a>
-											<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
-										</div>
-									</div>
-								</div>
+					<!-- +버튼 클릭시 추가 창 띄움-->
+					<div id="wrap" class="p-0 md-1 col-12 col-xs-12 col-sm-12 col-lg-12 col-md-12">
+						<nav id="topbar" class="navbar">
+							<div class="list-group">
+								<button type="button" id="add-by-directly" class=" p-1 btn-sm list-group-item">직접 추가하기</button>
+								<button type="button" id="add-by-searching" class="p-1 btn-sm list-group-item">검색하기</button>
+								<button type="button" id="btn-undo2" class="p-1 btn-sm list-group-item">취소하기</button>
 							</div>
-						</div>
+
+							<div class="mt-1 form-add" >
+								<form>
+									<div class="form-group m-0">
+										<label for="subjectName" class="col-12 label">과목명</label>
+										<input type="text" class="form-control input"  id="subjectName">
+									</div>
+									<div class="form-group m-0">
+										<label for="professorName" class="col-12 label" >교수명</label>
+										<input type="text" class="form-control input" id="professorName">
+									</div>
+									<div class="form-group m-0">
+										<label for="time" class="col-12 label" >시간</label>
+										<input type="text" class="form-control input" id="time">
+									</div>
+									<div>
+										<label for="place" class="col-12 label" >장소</label>
+										<input type="text" class="form-control input" id="place">
+									</div>
+								</form>
+								<!-- 고치기!!! -->
+								<button type="button" id="btn-suncess" class="btn-sm btn-add btn-addSub p-2 m-1" >
+									추가
+								</button>
+								<!-- 누르면 topbar 없어지게!-->
+								<button type="button" id="btn-undo1" class="btn-sm btn-add btn-addSub p-2 m-1" href="timetable_page.html">
+									취소
+								</button>
+							</div>
+						</nav>
+						<div class="overlay col-12"></div>
 					</div>
 
 					<div id="timetable">
 					</div>
+
+					
 				</div>
 
 				<!-- footer 하단바 class="app-footer" -->
@@ -79,17 +98,11 @@
 		</div>
 	</div>
 </body>
-</html>
+</html> 
 
-<!-- modal -->
-<script type="text/javascript">
-	$(function(){
-		$("#popbutton_timetable_page").click(function(){
-			$('div.modal').modal();
-		})	
-	})
-</script>
- 
+<script src="js/common/header.js"></script>
+<script src="js/common/timetable.js"></script>
+<script src="js/common/footer.js"></script>
 
 <!-- table click event -->
 <script>
@@ -105,12 +118,25 @@
 				console.log("ROW:" +rIndex+ ", Cell:" +cIndex);
 			}
 		}
-
 	}	
-	
-
 </script>
 
-<script src="js/common/header.js"></script>
-<script src="js/common/timetable.js"></script>
-<script src="js/common/footer.js"></script>
+<script type="text/javascript">
+	$('#btn-undo2').on('click', function () {
+		$('#topbar').fadeOut();
+	});
+
+	$('#btn-undo1').on('click', function () {
+		$('.form-add').fadeOut();
+	});
+
+	$('.lowerbarCollapse').on('click', function () {
+		$('#topbar').addClass('active');
+		$('#topbar').fadeIn();
+	});
+
+	$('#add-by-directly').on('click', function () {
+		$('.form-add').addClass('active');
+		$('.form-add').fadeIn();
+	});
+</script>

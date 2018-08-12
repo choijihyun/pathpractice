@@ -38,13 +38,72 @@ body{
 }
 .btn-add{
 	border:0;
-	border-radius: 0;
 	-webkit-transition: all 0.8s;
 	transition: all 0.8s;
-	color: #6c757d;
+	font-weight: bold;
 	background: #fff;
 }
 .btn-add:hover{
-	border-radius: 0;
+	font-weight: bold;
+	background: #fff;
+}
+.btn-addSub{
+	box-shadow: none;
 	color: #dd3247;
+	font-size: 11px;
+	color: black;
+}
+.lowerbarCollapse{
+}
+#topbar {
+	display: none;
+}
+#topbar.active {
+	transition: all 0.5s;
+}
+.overlay {
+    top: 0%;
+    height: 60%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 998;
+    display: none;
+}
 
+
+
+/*tatable_add 에서 가져온 거 */
+.list-group-item{
+	border-radius: 0;
+	font-size: 12px;
+	font-weight: bold;
+	background: #e5e5e5;
+}
+.form-group{
+	background: #fff;
+}
+.form-add{	
+	display: none;
+	background: #fff;
+}
+.form-add.active{
+	background: #fff;
+}
+.label{
+	text-align: left;
+	font-size: 10px;
+	font-weight: bold;
+}
+.input{
+	border-radius: 0;
+	box-shadow: none;
+	outline: none;	
+}
+.input:focus{
+	border-radius: 0;
+	box-shadow: none;
+	outline: none;	
+	border-color: #dd3247;
+	background-position: -500px 0;
+	background-size: 100% 100%;
+	background-repeat: no-repeat; 
+}

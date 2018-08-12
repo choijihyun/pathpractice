@@ -1,0 +1,58 @@
+body{
+	/*
+	background: #dd3247;
+	padding-top: 10%;*/
+}
+.wdi-red{
+	color: #dd3247;
+}
+.login-box{
+	background: #fff;
+	padding: 50px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+.list-group-item{
+	border-radius: 0;
+	font-size: 12px;
+	font-weight: bold;
+	background: #e5e5e5;
+}
+.form-group{
+	background: #fff;
+}
+.form-add{
+	background: #fff;
+}
+.label{
+	text-align: left;
+	font-size: 10px;
+	font-weight: bold;
+}
+.input{
+	border-radius: 0;
+	box-shadow: none;
+	outline: none;	
+}
+.input:focus{
+	border-radius: 0;
+	box-shadow: none;
+	outline: none;	
+	border-color: #dd3247;
+	background-position: -500px 0;
+	background-size: 100% 100%;
+	background-repeat: no-repeat; 
+}
+.btn-add{
+	border-radius: 0;
+	font-size: 11px;
+	font-weight: bold;
+	color: black;
+	background: #e5e5e5;
+}
+.btn-add:hover{
+	border-radius: 0;
+	font-size: 11px;
+	color: black;
+	font-weight: bold;
+	background: #e5e5e5;
+}
