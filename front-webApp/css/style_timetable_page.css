@@ -119,12 +119,14 @@ body{
 	background-size: 100% 100%;
 	background-repeat: no-repeat; 
 }
-#sHour,#eHour,#sMinute,#eMinute,.dropdown-menu,
-#sHour:focus,#eHour:focus,#sMinute:focus,#eMinute:focus,.dropdown-menu:focus{
+#sHour,#eHour,#sMinute,#eMinute,#day1,#day2,.dropdown-menu,
+#sHour:focus,#eHour:focus,#sMinute:focus,#eMinute:focus,#day1:focus,#day2:focus,.dropdown-menu:focus{
 	background: #fff;
 	box-shadow: none;
 	outline: none;
 	font-size: 10px;
+	padding-top:3px;
+	padding-bottom:3px;
 }
 .time-label{
 	padding-top:6.6px; 

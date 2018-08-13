@@ -65,9 +65,29 @@
 										<div class="form-group m-0">
 											<label for="time" class="col-12 label">시간</label>
 											<div id="time" class="col-12 form-row">
+												<label class="mx-auto time-label">요일</label>
+												<div class="mx-auto">
+													<select id="day1" class="form-control-xs">
+														<option value="">요일</option> 
+														<option value="mon">mon</option> 
+														<option value="tue">tue</option> 
+														<option value="wen">wen</option> 
+														<option value="thu">thu</option> 
+														<option value="fri">fri</option> 
+													</select>
+													<select id="day2" class="form-control-xs">
+														<option value="">요일</option>
+														<option value="none">없음</option>  
+														<option value="mon">mon</option> 
+														<option value="tue">tue</option> 
+														<option value="wen">wen</option> 
+														<option value="thu">thu</option> 
+														<option value="fri">fri</option> 
+													</select>
+												</div>
 												<label class="mx-auto time-label">시작시간</label>
 												<div class="mx-auto">
-													<select id="sHour" class="form-control-xs p-1">
+													<select id="sHour" class="form-control-xs">
 														<option value="">시</option> 
 														<option value="9">9</option> 
 														<option value="10">10</option> 
@@ -80,7 +100,7 @@
 														<option value="17">17</option> 
 														<option value="18">18</option>
 													</select> 
-													<select id="sMinute" class="form-control-xs p-1">
+													<select id="sMinute" class="form-control-xs">
 														<option value="">분</option> 
 														<option value="00">00</option> 
 														<option value="30">30</option> 
@@ -88,7 +108,7 @@
 												</div>
 												<label class="mx-auto time-label">종료시간</label>
 												<div class="mx-auto">
-													<select id="eHour" class="form-control-xs p-1">
+													<select id="eHour" class="form-control-xs">
 														<option value="">시</option> 
 														<option value="9">9</option> 
 														<option value="10">10</option> 
@@ -101,11 +121,11 @@
 														<option value="17">17</option> 
 														<option value="18">18</option>
 													</select> 
-													<select id="eMinute" class="form-control-xs p-1">
+													<select id="eMinute" class="form-control-xs">
 														<option value="">분</option> 
 														<option value="00">00</option> 
 														<option value="30">30</option> 
-													</select> 														
+													</select> 									
 												</div>
 											</div>
 										</div>
@@ -114,10 +134,8 @@
 											<input type="text" class="form-control input" id="place">
 										</div>
 									</form>
-									<!-- 고치기!!! -->
 									<div class="form-row mx-auto btn-submit">
 										<button type="button" id="btn-success" class="mx-auto col-5 btn btn-sm btn-addSub">추가</button>
-										<!-- 누르면 topbar 없어지게!-->
 										<button type="button" id="btn-undo1" class="mx-auto col-5 btn btn-sm btn-addSub">취소</button>
 									</div>
 								</div>
@@ -128,7 +146,6 @@
 
 					<div id="timetable">
 					</div>
-
 
 				</div>
 
@@ -179,34 +196,27 @@
 	$('#btn-success').on('click', function () {
 		var shour = document.getElementById("sHour");
 		var val_shour = shour.options[shour.selectedIndex].value;
-
 		var sminute = document.getElementById("sMinute");
 		var val_sminute = sminute.options[sminute.selectedIndex].value;
 
 		var ehour = document.getElementById("eHour");
 		var val_ehour = ehour.options[ehour.selectedIndex].value;
-
 		var eminute = document.getElementById("eMinute");
 		var val_eminute = eminute.options[eminute.selectedIndex].value;
 
-		if(val_sminute == "30"){
-			val_shour = (val_shour -8)*2;
-			console.log(val_shour);
-		}
-		else if(val_sminute  == "00"){
-			val_shour = (val_shour -8)*2-1;
-			console.log(val_shour);
-		}
+		var day1 = document.getElementById("day1");
+		var val_day1 = day1.options[day1.selectedIndex].value;
+		var day2 = document.getElementById("day2");
+		var val_day2 = day2.options[day2.selectedIndex].value;
 
-		if(val_eminute == "30"){
-			val_ehour = (val_ehour -8)*2;
-			console.log(val_ehour);
-		}
-		else if(val_eminute== "00"){
-			val_ehour = (val_ehour -8)*2-1;
-			console.log(val_ehour);
-		}
+		if(val_sminute == "30") {val_shour = (val_shour -8)*2;}
+		else if(val_sminute  == "00") {val_shour = (val_shour -8)*2-1;}
 
+		if(val_eminute == "30") {val_ehour = (val_ehour -8)*2;}
+		else if(val_eminute== "00") {val_ehour = (val_ehour -8)*2-1;}
+
+		//color random
+		//var random
 		for(i=val_shour ; i<=val_ehour ; i++){
 		if( i ==1 )
 			$('table tr:nth-child(1) td:nth-child(2)').css('background-color', 'red');
@@ -237,10 +247,8 @@
 		if( i ==14 )
 			$('table tr:nth-child(14) td:nth-child(2)').css('background-color', 'red');
 		}
-		$('#add-by-directly').trigger('click');
-			// for(i=val_shour ; i<=val_ehour ; i++){
 
-			// 	$('table tr:nth-child(i) td:nth-child(2)').css('background-color', 'red');
-			// }
+		$('#add-by-directly').trigger('click');
+			
 		});
 	</script>
