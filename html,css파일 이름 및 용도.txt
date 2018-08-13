@@ -17,7 +17,6 @@ mypage.html & style_mypage.css - 마이페이지 보여주는 화면
 timetable_page.html & style_timetable_page.css - 시간표 크게 보여주는 화면
 
 
-
 	<front-webApp/js/common> ==>> 공통적인 부분들을 js로 따로 빼놓은 파일들을 모아놓은 폴더
 
 header.js - 상단바만 따로 빼 놓은 것

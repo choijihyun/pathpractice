@@ -16,11 +16,10 @@
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 </head>
-
 
 <body class="text-center">
 
@@ -28,47 +27,109 @@
 	<div class="container">
 		<div class="row justify-content-md-center justify-content-xs-center justify-content-sm-center justify-content-lg-center">
 			<div class="col-md-6 col-md-auto col-xs-6 col-xs-auto col-sm-6 col-sm-auto col-lg-6 col-lg-auto login-box ">
-
 				<!-- header (상단바) class="app-header" -->
 				<div id="header">
 				</div>
 
 				<!-- 상단바와 하단바를 제외한 부분 class="main-area" -->
-				<div class="jumbotron p-md-0 main-area">
+				<div class="jumbotron p-md-0 m-0 main-area">
+					<!-- + 버튼  -->
 					<div class="row col-auto justify-content-end setting">
-						<div class= "col-10 col-xs-10 col-sm-10 col-lg-10 col-md-10">
-						</div>
+						<div class= "col-10 col-xs-10 col-sm-10 col-lg-10 col-md-10"></div>
+						<button class="btn-lg btn-add p-0 mx-2 upperbarCollapse" type="button" data-toggle="collapse" data-target="#collapseAdd" aria-label="Left Align" aria-expanded="false" aria-controls="collapseAdd">
+							<span class="fas fa-plus-square"></span>
+						</button>
+					</div>
 
-						<div class= "col-2 col-xs-2 col-sm-2 col-lg-2 col-md-2">
-							<button id="popbutton_timetable_page" type="button" class="btn btn-block btn-lg btn-add p-0" aria-label="Left Align" >
-								<span class="fas fa-plus-square"></span>
-							</button>
-							<!-- Modal -->
-							<div class="modal fade" tabindex="-1" role="dialog">
-								<div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title"> 과목추가 </h5>
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
+					<!-- +버튼 클릭시 추가 창 띄움-->
+					<div id="collapseAdd" class="collapse p-0 md-1 col-12 col-xs-12 col-sm-12 col-lg-12 col-md-12">
+						<div id="topbar" class="card card-body lower-card">
+							<div class="list-group">
+
+								<button id="add-by-directly" class="btn p-1 btn-sm list-group-item" type="button" data-toggle="collapse" data-target="#collapseDirect" aria-expanded="false" aria-controls="collapseDirect">직접 추가하기</button>
+								<button type="button" id="add-by-searching" class="p-1 btn-sm list-group-item">검색하기</button>
+								<button type="button" id="btn-undo2" class="p-1 btn-sm list-group-item">취소하기</button>
+							</div>
+
+							<div class="collapse mt-1 form-add" id="collapseDirect">
+								<div class="card card-body upper-card p-2">
+									<form>
+										<div class="form-group m-0">
+											<label for="subjectName" class="col-12 label">과목명</label>
+											<input type="text" class="form-control input"  id="subjectName">
 										</div>
-										<div class="modal-body">
-											과목 리스트
+										<div class="form-group m-0">
+											<label for="professorName" class="col-12 label" >교수명</label>
+											<input type="text" class="form-control input" id="professorName">
 										</div>
-										<!-- modal의 버튼들 -->
-										<div class="modal-footer">
-											<a class="btn btn-sm btn-primary " aria-label="Left Align" >Add</a>
-											<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+										<div class="form-group m-0">
+											<label for="time" class="col-12 label">시간</label>
+											<div id="time" class="col-12 form-row">
+												<label class="mx-auto time-label">시작시간</label>
+												<div class="mx-auto">
+													<select id="sHour" class="form-control-xs p-1">
+														<option value="">시</option> 
+														<option value="9">9</option> 
+														<option value="10">10</option> 
+														<option value="11">11</option> 
+														<option value="12">12</option> 
+														<option value="13">13</option> 
+														<option value="14">14</option> 
+														<option value="15">15</option> 
+														<option value="16">16</option>
+														<option value="17">17</option> 
+														<option value="18">18</option>
+													</select> 
+													<select id="sMinute" class="form-control-xs p-1">
+														<option value="">분</option> 
+														<option value="00">00</option> 
+														<option value="30">30</option> 
+													</select> 														
+												</div>
+												<label class="mx-auto time-label">종료시간</label>
+												<div class="mx-auto">
+													<select id="eHour" class="form-control-xs p-1">
+														<option value="">시</option> 
+														<option value="9">9</option> 
+														<option value="10">10</option> 
+														<option value="11">11</option> 
+														<option value="12">12</option> 
+														<option value="13">13</option> 
+														<option value="14">14</option> 
+														<option value="15">15</option> 
+														<option value="16">16</option>
+														<option value="17">17</option> 
+														<option value="18">18</option>
+													</select> 
+													<select id="eMinute" class="form-control-xs p-1">
+														<option value="">분</option> 
+														<option value="00">00</option> 
+														<option value="30">30</option> 
+													</select> 														
+												</div>
+											</div>
 										</div>
+										<div class="form-group m-0">
+											<label for="place" class="col-12 label" >장소</label>
+											<input type="text" class="form-control input" id="place">
+										</div>
+									</form>
+									<!-- 고치기!!! -->
+									<div class="form-row mx-auto btn-submit">
+										<button type="button" id="btn-success" class="mx-auto col-5 btn btn-sm btn-addSub">추가</button>
+										<!-- 누르면 topbar 없어지게!-->
+										<button type="button" id="btn-undo1" class="mx-auto col-5 btn btn-sm btn-addSub">취소</button>
 									</div>
 								</div>
 							</div>
 						</div>
+						<div class="overlay col-12"></div>
 					</div>
 
 					<div id="timetable">
 					</div>
+
+
 				</div>
 
 				<!-- footer 하단바 class="app-footer" -->
@@ -79,17 +140,11 @@
 		</div>
 	</div>
 </body>
-</html>
+</html> 
 
-<!-- modal -->
-<script type="text/javascript">
-	$(function(){
-		$("#popbutton_timetable_page").click(function(){
-			$('div.modal').modal();
-		})	
-	})
-</script>
- 
+<script src="js/common/header.js"></script>
+<script src="js/common/timetable.js"></script>
+<script src="js/common/footer.js"></script>
 
 <!-- table click event -->
 <script>
@@ -105,12 +160,87 @@
 				console.log("ROW:" +rIndex+ ", Cell:" +cIndex);
 			}
 		}
-
 	}	
-	
-
 </script>
 
-<script src="js/common/header.js"></script>
-<script src="js/common/timetable.js"></script>
-<script src="js/common/footer.js"></script>
+<!-- 취ㅗ하기 버튼 클릭 시 다시 창 닫기 -->
+<script type="text/javascript">
+	$('#btn-undo2').on('click', function () {
+		$('.upperbarCollapse').trigger('click');
+	});
+
+	$('#btn-undo1').on('click', function () {
+		$('#add-by-directly').trigger('click');
+	});
+</script>
+
+<!-- dropdown 선택 값 가져오기 -->
+<script type="text/javascript">
+	$('#btn-success').on('click', function () {
+		var shour = document.getElementById("sHour");
+		var val_shour = shour.options[shour.selectedIndex].value;
+
+		var sminute = document.getElementById("sMinute");
+		var val_sminute = sminute.options[sminute.selectedIndex].value;
+
+		var ehour = document.getElementById("eHour");
+		var val_ehour = ehour.options[ehour.selectedIndex].value;
+
+		var eminute = document.getElementById("eMinute");
+		var val_eminute = eminute.options[eminute.selectedIndex].value;
+
+		if(val_sminute == "30"){
+			val_shour = (val_shour -8)*2;
+			console.log(val_shour);
+		}
+		else if(val_sminute  == "00"){
+			val_shour = (val_shour -8)*2-1;
+			console.log(val_shour);
+		}
+
+		if(val_eminute == "30"){
+			val_ehour = (val_ehour -8)*2;
+			console.log(val_ehour);
+		}
+		else if(val_eminute== "00"){
+			val_ehour = (val_ehour -8)*2-1;
+			console.log(val_ehour);
+		}
+
+		for(i=val_shour ; i<=val_ehour ; i++){
+		if( i ==1 )
+			$('table tr:nth-child(1) td:nth-child(2)').css('background-color', 'red');
+		if( i ==2 )
+			$('table tr:nth-child(2) td:nth-child(2)').css('background-color', 'red');
+		if( i ==3 )
+			$('table tr:nth-child(3) td:nth-child(2)').css('background-color', 'red');
+		if( i ==4 )
+			$('table tr:nth-child(4) td:nth-child(2)').css('background-color', 'red');
+		if( i ==5 )
+			$('table tr:nth-child(5) td:nth-child(2)').css('background-color', 'red');
+		if( i ==6 )
+			$('table tr:nth-child(6) td:nth-child(2)').css('background-color', 'red');
+		if( i ==7 )
+			$('table tr:nth-child(7) td:nth-child(2)').css('background-color', 'red');
+		if( i ==8 )
+			$('table tr:nth-child(8) td:nth-child(2)').css('background-color', 'red');
+		if( i ==9 )
+			$('table tr:nth-child(9) td:nth-child(2)').css('background-color', 'red');
+		if( i ==10 )
+			$('table tr:nth-child(10) td:nth-child(2)').css('background-color', 'red');
+		if( i ==11 )
+			$('table tr:nth-child(11) td:nth-child(2)').css('background-color', 'red');
+		if( i ==12 )
+			$('table tr:nth-child(12) td:nth-child(2)').css('background-color', 'red');
+		if( i ==13 )
+			$('table tr:nth-child(13) td:nth-child(2)').css('background-color', 'red');
+		if( i ==14 )
+			$('table tr:nth-child(14) td:nth-child(2)').css('background-color', 'red');
+		}
+		$('#add-by-directly').trigger('click');
+			// for(i=val_shour ; i<=val_ehour ; i++){
+
+			// 	$('table tr:nth-child(i) td:nth-child(2)').css('background-color', 'red');
+			// }
+		});
+	</script>
