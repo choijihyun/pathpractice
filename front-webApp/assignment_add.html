@@ -45,6 +45,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 
 
@@ -61,7 +62,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 							<h6> 과목명 </h6>
 						</div>
 						<div class= "col-md-7 col-xs-7 ">
-							<input type="text"  class="form-control form-control-sm mt-1 mb-1 flat-input">
+							<input type="text"  class="form-control form-control-sm mt-1 mb-1 flat-input" id="subjectName">
 						</div>
 						<div class= "col-md-2 col-xs-2 mt-1 mb-1">
 							<a  class="btn btn-sm btn-icon" aria-label="Left Align" href="find_subject.html">
@@ -97,7 +98,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 								<label for="p4">4</label>
 								<input type="radio" name="star-input" value="5" id="p5">
 								<label for="p5">5</label>
-							</span>  			
+							</span>
 						</span>
 
 						<div class= "col-md-3 col-xs-3 mt-1 mb-1 label">
@@ -113,11 +114,15 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 
 						<!--join/cancel button -->
 						<div class= "col-md-6 col-xs-6">
-							<a class="btn btn-sm btn-block btn-submit" href="assignment.html"> SUBMIT</a>
+							<a class="btn btn-sm btn-block btn-submit" id="submit">
+								SUBMIT
+							</a>
 						</div>
 
 						<div class= "col-md-6 col-xs-6">
-							<a class="btn btn-sm btn-block btn-cancel" href="assignment.html"> CANCEL</a>
+							<a class="btn btn-sm btn-block btn-cancel" href="assignment.html">
+								CANCEL
+							</a>
 						</div>
 					</div>
 
@@ -125,5 +130,27 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+	   $(document).ready(function(){
+	      $('#submit').on('click',function(){
+	         $.ajax({
+	            url:"http://localhost:8090/user/checkUser.json",
+	            type : "GET",
+	            data : {'stuId':$('#id').val(), 'pw':$('#pw').val()},
+	            success : function(result){
+	               console.log(result);
+	               if(result['result'] === '1'){ //로그인 성공
+	                  location.href = "home.html";
+	               }else{
+	                  alert('로그인 실패');
+	               }
+	            },
+	            error : function(){
+								alert('로그인 에러');
+	            }
+	         });
+	      });
+	   });
+	</script>
 </body>
 </html>

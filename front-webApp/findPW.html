@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="kr">
 <head>
-   <title>Login Page</title>
+   <title>find password</title>
 
    <!-- Required meta tags -->
    <meta charset="utf-8">
@@ -26,7 +26,7 @@
 <div class="container" id="content">
    <div class="row justify-content-md-center justify-content-xs-center">
       <div class="col-md-6 col-md-auto col-xs-6 col-xs-auto login-box ">
-         <h1 class="text-center wdi-red">Login</h1>
+         <h1 class="text-center wdi-red">PW</h1>
          <hr>
          <form>
             <div class="form-row">
@@ -35,33 +35,20 @@
                <div class= "col-md-12 col-xs-12">
                   <input type="text" id="id" class="form-control form-control-lg flat-input" placeholder="username">
                </div>
-               <div class= "col-md-12 col-xs-12">
-                  <input type="password" id="pw" class="form-control form-control-lg flat-input" placeholder="password" >
-               </div>
-
-               <!-- remember user infomation - checkbox -->
-               <div class="checkbox col-md-12">
-                  <label>
-                     <input type="checkbox" value="remember-me">
-                     Remember me
-                  </label>
+               <div class= "col-md-6 col-xs-6">
+                  <a id="pw"></a>
                </div>
 
                <!-- login/join/find pw button-->
                <div class= "col-md-12 col-xs-12" >
-                 <a class="btn btn-lg btn-block btn-login" id = "submit" >
-               LOGIN
-             </a>
+                 <a class="btn btn-sm btn-block btn-cancel" id = "submit" >
+                 FIND
+                 </a>
                </div>
-               <div class= "col-md-6 col-xs-6">
-                  <a class="btn btn-lg btn-xs btn-block btn-join" href="join.html">
-                     회원가입
-                  </a>
-               </div>
-               <div class= "col-md-6 col-xs-6">
-                  <a class="btn btn-lg btn-xs btn-block btn-join" href="findPW.html">
-                    PW 찾기
-                  </a>
+               <div class= "col-md-12 col-xs-12">
+                 <a class="btn btn-sm btn-block btn-cancel" href="index.html">
+                 CANCEL
+                 </a>
                </div>
 
             </div>
@@ -73,15 +60,15 @@
    $(document).ready(function(){
       $('#submit').on('click',function(){
          $.ajax({
-            url:"http://localhost:8090/user/checkUser.json",
+            url:"http://localhost:8090/user/getUserPwdInfo.json",
             type : "GET",
-            data : {'stuId':$('#id').val(), 'pw':$('#pw').val()},
+            data : {'id':$('#id').val()},
             success : function(result){
                console.log(result);
-               if(result['result'] === '1'){ //로그인 성공
-                  location.href = "home.html";
+               if(result['result'] === "no data"){ //회원정보 없음
+                  alert('회원정보가 없습니다.');
                }else{
-                  alert('로그인 실패');
+                  alert(result['result']);
                }
             },
             error : function(){
