@@ -71,7 +71,7 @@
    $(document).ready(function(){
       $('#submit').on('click',function(){
          $.ajax({
-            url:"http://localhost:8090/user/checkUser.json",
+            url:"http://localhost:8080/user/checkUser.json",
             type : "GET",
             data : {'stuId':$('#id').val(), 'pw':$('#pw').val()},
             success : function(result){
