@@ -73,21 +73,21 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 							<h6> 제목 </h6>
 						</div>
 						<div class= "col-md-7 col-xs-7">
-							<input type="text"  class="form-control form-control-sm mt-1 mb-1 flat-input" >
+							<input type="text"  class="form-control form-control-sm mt-1 mb-1 flat-input" id="title">
 						</div>
 
 						<div class= "col-md-3 col-xs-3 mt-1 mb-1 label">
 							<h6> 내용 </h6>
 						</div>
 						<div class= "col-md-7 col-xs-7">
-							<input type="text"  class="form-control form-control-sm mt-1 mb-1 flat-input" >
+							<input type="text"  class="form-control form-control-sm mt-1 mb-1 flat-input" id="contents">
 						</div>
 
 						<div class= "col-md-3 col-xs-3 mt-1 mb-1 label">
 							<h6> 중요도 </h6>
 						</div>
 						<span class="star-input col-md-7 col-xs-7 ">
-							<span class="input">
+							<span class="input" id="importance">
 								<input type="radio" name="star-input" value="1" id="p1">
 								<label for="p1">1</label>
 								<input type="radio" name="star-input" value="2" id="p2">
@@ -106,7 +106,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 						</div>
 						<div class= "col-md-6 col-xs-6 mt-1 mb-1">
 							<form action = "demo_form.asp">
-								<input type="date" class = "col-mdname=date">
+								<input type="date" class = "col-mdname=date" id="dueDate">
 							</form>
 						</div>
 						<div class= "col-md-3 col-xs-3 mt-1 mb-1">
@@ -134,7 +134,8 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 	   $(document).ready(function(){
 	      $('#submit').on('click',function(){
 	         $.ajax({
-	            url:"http://localhost:8090/user/checkUser.json",
+						 alert($('#importance').val());
+	            url:"http://localhost:8090/user/insertHomework.json",
 	            type : "GET",
 	            data : {'stuId':$('#id').val(), 'pw':$('#pw').val()},
 	            success : function(result){
@@ -142,11 +143,11 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 	               if(result['result'] === '1'){ //로그인 성공
 	                  location.href = "home.html";
 	               }else{
-	                  alert('로그인 실패');
+	                  alert('과제 등록 실패');
 	               }
 	            },
 	            error : function(){
-								alert('로그인 에러');
+								alert('과제 등록 에러');
 	            }
 	         });
 	      });
