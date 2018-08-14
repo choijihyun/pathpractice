@@ -39,15 +39,15 @@ public class UserController {
     public String getUserPwdInfo(//url에 맵핑(연결)된 함수
     			Locale locale, //안드로이드에서 받을 파라미터
     			Model model, //안드로이드에서 받을 파라미터
-    			@RequestParam(value = "id", required=true) String id) {//안드로이드에서 받을 파라미터, 사실 요거 하나만 받음 댐
+    			@RequestParam(value = "stuId", required=true) String stuId) {//안드로이드에서 받을 파라미터, 사실 요거 하나만 받음 댐
 				// ?id=1 이런식으로 치면 1에 해당하는 password가 나오는 함수인데 여기에서 @RequestParam 부분은 id라는 거를 받아줄 통? 을 만들었다고 보면 됨
 		
 		HashMap<Object, Object> param=new HashMap<Object, Object>();// 이부분은 잘 모르겠어요!!!!!!!!!!!!!!!!!!!!!!!!!
 		//xml의 sql에서 필요로 하는 정보가 있다면 여기에 담아서 전달해줌. 이 함수에선 id겠지?(밑에 보이는)
 		
-		param.put("id",id);		
+		param.put("stuId",stuId);		
 		//파라미터에 안드로이드에서 건네받은 id를 등록한다
-    	List<UserDto> userDtoList=userDao.selectUser(param);//쿼리문 만들고 싶으면 user-mapping.xml 참고
+    	List<UserDto> userDtoList=userDao.selectUser(param);//쿼리문 만들고 싶으면 user-mapping.xml 참고	
     	//id들을 userdto 리스트에 저장함
     	//그 파라미터를 sql에 던져준다!! 그러면 userDtoList 여기에 반환.
     	
