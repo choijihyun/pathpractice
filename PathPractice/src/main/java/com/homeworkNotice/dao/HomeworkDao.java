@@ -26,5 +26,12 @@ public class HomeworkDao {
 		return sqlSession.insert("HomeworkDao.insertHomework",param);
 	}
 	
+	public int deleteHomework(HashMap<Object, Object> param) {
+		return sqlSession.delete("HomeworkDao.deleteHomework",param);
+	}
+	
+	public int updateHomework(HashMap<Object,Object> param) {
+		return sqlSession.update("HomeworkDao.updateHomework",param);
+	}
 	
 }

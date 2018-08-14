@@ -92,7 +92,7 @@
 	   $(document).ready(function(){
 	      $('#joinbtn').on('click',function(){
 	         $.ajax({
-	            url:"http://localhost:8090/user/insertUser.json",
+	            url:"http://localhost:8080/user/insertUser.json",
 	            type : "GET",
 	            data : {'stuId':$('#id').val(), 'pw':$('#pw').val(),'name':$("#name").val(),
 							'semester':$("#semester").val(), 'email':$("#email").val()},

@@ -21,5 +21,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    <insert id="insertUser" parameterType="map">
     	insert into Student(name,stuId,semester,pw,email) values ( #{name},#{stuId},#{semester},#{pw},#{email})
     </insert>
-    
 </mapper>
