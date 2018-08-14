@@ -75,20 +75,12 @@ body{
 .upperbarCollapse,.upperbarCollapse:focus{
 	color: #6c757d;
 }
-.lower-card{
+.card-plus{
 	background: #f2f2f2;
 }
-.upper-card{
+.card-directly{
 	background: #f9f9f9;
 }
-.overlay {
-    top: 0%;
-    height: 60%;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 998;
-    display: none;
-}
-
 .list-group-item{
 	font-size: 12px;
 	font-weight: bold;
