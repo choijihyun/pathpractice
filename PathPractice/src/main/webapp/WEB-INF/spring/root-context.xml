@@ -13,18 +13,6 @@
         <property name="password" value="root"></property>
 
     </bean>
-    <!-- local DB end -->
-    <!-- origin DB start -->
-    <!-- 
-	<bean id="dataSource"
-        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-        <property name="url" value="jdbc:mysql://localhost/flywjdgus10"></property>
-        <property name="username" value="flywjdgus10"></property>
-        <property name="password" value="Gg72007310!"></property>
-    </bean>
- 	 -->
- 	 <!-- origin DB end -->
  	 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"></property>

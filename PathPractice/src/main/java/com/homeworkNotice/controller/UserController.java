@@ -11,6 +11,7 @@ import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -70,8 +71,6 @@ public class UserController {
     	}
     	return jSONObject.toString();//요청한 내용들을 반환해준다.
     }
-	
-
 	
 	//안드로이드에서 사용할 회원가입 url이야!!
 	//서버 킨 후에 크롬,익스플로러 브라우저 아무거나에 url 치는 곳에다가
@@ -146,6 +145,7 @@ public class UserController {
 		if(!userDtoList.isEmpty() && userDtoList.size()==1) {//반환받은 데이터가 유효하면(db에 있으면) 브라우저 화면에 결과를 뿌려준다
 			if(pw.equals(userDtoList.get(0).getPw())) {
 				jSONObject.put("result","1");//id도 존재하고 비번도 맞는 경우
+				System.out.println("success");
 			}
 			else {
 				jSONObject.put("result","0");//비번이 다른 경우
@@ -154,6 +154,8 @@ public class UserController {
 		else {//없으면 에러라고 브라우저에 뿌려준다
 			jSONObject.put("result", "0"); //id가 존재하지 않는경우
 		}
+		
+		System.out.println("send data");
 		return jSONObject.toString();//요청한 내용들을 반환해준다.
 	}
 	
