@@ -31,11 +31,37 @@
 			<div class="col-md-6 col-md-auto col-xs-6 col-xs-auto login-box ">
 				<h1 class="text-center wdi-red">FIND!</h1>
 				<hr>
-				<form>
-					
-				</form>
+
+				<div class="form-row m-3">
+				<div class= "col-md-3 col-xs-3 mt-1 mb-1 label">
+					<h6> 과목명 </h6>
+				</div>
+				<div class= "col-md-7 col-xs-7 ">
+					<input type="text"  class="form-control form-control-sm mt-1 mb-1 flat-input" id="subjectName">
+				</div>
+				<div class= "col-md-2 col-xs-2 mt-1 mb-1">
+					<a  class="btn btn-sm btn-icon" aria-label="Left Align">
+						<span class="fas fa-search" id="click"></span>
+					</a>
+				</div>
+			</div>
+
+			<div class= "col-md-12 col-xs-12" >
+				<a class="btn btn-lg btn-block btn-login" id = "submit" >
+					OK
+				</a>
+			</div>
+
+
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+	   $(document).ready(function(){
+	      $('#click').on('click',function(){ //입력한 과목명 가지고 선택할 수 있게 만들어야함.(subNum 받아야함!)
+
+	      });
+	   });
+	</script>
 </body>
 </html>

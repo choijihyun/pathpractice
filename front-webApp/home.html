@@ -31,7 +31,7 @@
 				<!-- header (상단바) class="app-header" -->
 				<div id="header">
 				</div>
-				
+
 				<!-- 상단바와 하단바를 제외한 부분 class="main-area" -->
 				<div class="jumbotron p-md-0 text-white main-area">
 					<div style="cursor:pointer; height: auto" onclick="location.href='timetable_page.html';" class="scrollbar scrollbar-track scrollbar-thumb" data-spy="scroll" data-offset="0">
@@ -53,7 +53,7 @@
 						<p>...</p>
 					</div>
 
-				</div> 
+				</div>
 
 				<!-- footer 하단바 class="app-footer" -->
 				<div id="footer">
@@ -62,6 +62,24 @@
 			</div>
 		</div>
 	</div>
+<script type="text/javascript">
+	 var userInputId = getCookie("userInputId");
+	 console.log(userInputId);
+
+	 function getCookie(cookieName) {
+       cookieName = cookieName + '=';
+       var cookieData = document.cookie;
+       var start = cookieData.indexOf(cookieName);
+       var cookieValue = '';
+       if(start != -1){
+           start += cookieName.length;
+           var end = cookieData.indexOf(';', start);
+           if(end == -1)end = cookieData.length;
+           cookieValue = cookieData.substring(start, end);
+       }
+       return unescape(cookieValue);
+   }
+</script>
 </body>
 </html>
 <script src="js/common/header.js"></script>

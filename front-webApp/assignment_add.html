@@ -87,7 +87,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 							<h6> 중요도 </h6>
 						</div>
 						<span class="star-input col-md-7 col-xs-7 ">
-							<span class="input" id="importance">
+							<span class="input">
 								<input type="radio" name="star-input" value="1" id="p1">
 								<label for="p1">1</label>
 								<input type="radio" name="star-input" value="2" id="p2">
@@ -133,15 +133,19 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 	<script type="text/javascript">
 	   $(document).ready(function(){
 	      $('#submit').on('click',function(){
+					var radioVal = $('input[name="star-input"]:checked').val();
+					var due = $('#dueDate').val();
+
 	         $.ajax({
-						 alert($('#importance').val());
 	            url:"http://localhost:8090/user/insertHomework.json",
 	            type : "GET",
-	            data : {'stuId':$('#id').val(), 'pw':$('#pw').val()},
+	            data : {'stuId':$('#id').val(), 'importance':radioVal,
+							'dueDate':due,'title':$('#title').val(), 'contents':$('#contents').val()
+						  ,'success':'0', 'stuId':, 'subNo':},
 	            success : function(result){
 	               console.log(result);
-	               if(result['result'] === '1'){ //로그인 성공
-	                  location.href = "home.html";
+	               if(result['result'] === '1'){ //과제 등록 성공
+	                  location.href = "assignment.html";
 	               }else{
 	                  alert('과제 등록 실패');
 	               }
