@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.homeworkNotice.dto.HomeworkDto;
+import com.homeworkNotice.dto.UserDto;
 
 @Repository
 public class HomeworkDao {
@@ -32,6 +33,10 @@ public class HomeworkDao {
 	
 	public int updateHomework(HashMap<Object,Object> param) {
 		return sqlSession.update("HomeworkDao.updateHomework",param);
+	}
+	
+	public List<HomeworkDto> selectHomework(HashMap<Object,Object> param) {
+		return sqlSession.selectList("HomeworkDao.selectHomework", param);
 	}
 	
 }

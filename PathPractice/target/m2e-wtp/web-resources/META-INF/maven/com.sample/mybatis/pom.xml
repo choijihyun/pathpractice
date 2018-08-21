@@ -132,13 +132,7 @@
             <artifactId>mybatis</artifactId>
             <version>3.2.7</version>
         </dependency>
- 		<!-- https://mvnrepository.com/artifact/aopalliance/aopalliance -->
-<dependency>
-    <groupId>aopalliance</groupId>
-    <artifactId>aopalliance</artifactId>
-    <version>1.0</version>
-</dependency>
- 		
+ 
  
         <!-- MyBatis-Spring -->
         <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
@@ -146,11 +140,6 @@
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
             <version>1.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.2.8</version>
         </dependency>
  
         <!-- Spring-jdbc -->
@@ -186,28 +175,7 @@
     		<artifactId>xercesImpl</artifactId>
     		<version>2.9.1</version>
 		</dependency>
-<<<<<<< HEAD
-
-		<!-- 안드로이드 통신 -->
-		<dependency>
-   			<groupId>com.googlecode.json-simple</groupId>
-    		<artifactId>json-simple</artifactId>
-    		<version>1.1.1</version>
-		</dependency>
-		<dependency>
-   			<groupId>org.codehaus.jackson</groupId>
-    		<artifactId>jackson-mapper-asl</artifactId>
-    		<version>1.9.13</version>
-		</dependency>
-		<dependency>
-   			<groupId>com.fasterxml.jackson.core</groupId>
-    		<artifactId>jackson-databind</artifactId>
-    		<version>2.7.3</version>
-		</dependency>
-
-=======
  
->>>>>>> 09b5923de21cb0f686f3cba4beee3667a898488f
     </dependencies>
     
     <build>
