@@ -99,16 +99,19 @@
 	$(document).ready(function(){
 		$('#joinbtn').on('click',function(){
 
-	      	if( !chkInput() ) return;
-
+	      	if( !chkInput() ) {
+	      		alert("정보를 모두 입력해 주세요.");
+	      		return;
+	      	}
 	      	$.ajax({
 	      		url:"http://localhost:8090/user/insertUser.json",
 	      		type : "GET",
-	      		data : {'stuId':$('#id').val(), 'pw':$('#pw').val(),'name':$("#name").val(),
-	      		'semester':$("#semester").val(), 'email':$("#email").val()},
+	      		data : {'stuId':$('#id').val(), 'pw':$('#pw').val(),'name':$('#name').val(),
+	      		'semester':$('semester').val(), 'email':$('#email').val()},
 	      		success : function(result){
 	      			console.log(result);
-	               if(result['result'] === '1'){ //회원가입 성공
+	      		
+	               if(result["result"] === '1'){ //회원가입 성공
 	               	alert('회원가입 성공');
 	               	location.href = "index.html";
 	               }else{

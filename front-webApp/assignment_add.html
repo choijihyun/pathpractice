@@ -21,8 +21,8 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 .star-input>.input>label[for="p4"]{width:120px;z-index:2;}
 .star-input>.input>label[for="p5"]{width:150px;z-index:1;}
 .star-input>output{display:inline-block;width:60px; font-size:18px;text-align:right; vertical-align:middle;}
-/*.col-md-12 {padding: 3px;}*/
-/*.form-row>.col, .form-row>[class*=col-]{padding-top : 5px;}*/
+.col-md-12 {padding: 3px;}
+.form-row>.col, .form-row>[class*=col-]{padding-top : 5px;}
 
 </style>
 
@@ -147,12 +147,11 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 			var due = $('#dueDate').val();
 
 			$.ajax({
-				url:"http://localhost:8090/homework/insertHomework",
-
+				url:"http://localhost:8090/homework/insertHomework.json",
 				type : "GET",
-				data : {'stuId':$('#id').val(), 'importance':radioVal,
-				'dueDate':due,'title':$('#title').val(), 'contents':$('#contents').val()
-				,'success':'0', 'stuId':'1', 'subNo':'111'},
+				data : {'stuId':'1','importance':radioVal,'dueDate':due,
+				'title':$('#title').val(), 'contents':$('#contents').val()
+				,'success':0, 'subNo':'111'},
 				success : function(result){
 					console.log(result);
 	               if(result['result'] === '1'){ //과제 등록 성공
