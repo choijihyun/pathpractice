@@ -41,7 +41,7 @@
 							<h6> PW </h6>
 						</div>
 						<div class= "col-md-9 col-xs-9">
-							<input type="password"  class="form-control form-control-lg flat-input" title="PW" id = "pw">
+							<input type="password"  class="form-control form-control-lg flat-input" title="PW" id="pw">
 						</div>
 
 						<!--NAME lable/input tag -->
@@ -64,7 +64,7 @@
 							<h6> YEAR </h6>
 						</div>
 						<div class="container col-md-3 col-xs-3 dropdown-grade">
-							<select class="form-control" id = "semester">
+							<select class="form-control" id="semester">
 								<option>1</option>
 								<option>2</option>
 								<option>3</option>
@@ -88,40 +88,39 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#joinbtn').on('click',function(){
 
+		      	if( !chkInput() ) {
+		      		return;
+		      	}
+
+		      	$.ajax({
+		      		url:"http://localhost:8090/user/insertUser.json",
+		      		type : "GET",
+		      		data : {'stuId':$('#id').val(), 'pw':$('#pw').val(),'name':$('#name').val(),
+		      		'semester':$('#semester').val(), 'email':$('#email').val()},
+		      		success : function(result){
+		      			console.log(result);
+
+		            if(result["result"] === "1"){ //회원가입 성공
+		            	alert('회원가입 성공');
+		            	location.href = "index.html";
+		            }else{
+		            	alert('회원가입 실패');
+                }
+		           },
+		          error : function(){
+
+		          	alert('회원가입 에러');
+		          }
+		       });
+		      });
+		});
+	</script>
 
 </body>
 </html>
 
 <script src="js/common/func_check_input.js"></script>
-
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('#joinbtn').on('click',function(){
-
-	      	if( !chkInput() ) {
-	      		alert("정보를 모두 입력해 주세요.");
-	      		return;
-	      	}
-	      	$.ajax({
-	      		url:"http://localhost:8090/user/insertUser.json",
-	      		type : "GET",
-	      		data : {'stuId':$('#id').val(), 'pw':$('#pw').val(),'name':$('#name').val(),
-	      		'semester':$('semester').val(), 'email':$('#email').val()},
-	      		success : function(result){
-	      			console.log(result);
-	      		
-	               if(result["result"] === '1'){ //회원가입 성공
-	               	alert('회원가입 성공');
-	               	location.href = "index.html";
-	               }else{
-	               	alert('회원가입 실패');
-	               }
-	           },
-	           error : function(){
-	           	alert('회원가입 에러');
-	           }
-	       });
-	      });
-	});
-</script>
