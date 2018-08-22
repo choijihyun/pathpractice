@@ -92,6 +92,9 @@ public class SubjectController {
         	JSONObject jsObject=new JSONObject();
         	jsObject.put("result", jSONArray);
 
+        	System.out.println(jsObject);
+        	System.out.println("STRING : "+ jsObject.toString());
+        	
             return jsObject.toString();
         } 
         else {//없으면 에러라고 브라우저에 뿌려준다
