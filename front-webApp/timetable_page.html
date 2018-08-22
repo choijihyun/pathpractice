@@ -57,11 +57,11 @@
 									<form class="commonForm">
 										<div class="form-group m-0">
 											<label for="subjectName" class="col-12 label">과목명</label>
-											<input type="text" class="form-control input"  id="subjectName">
+											<input type="text" class="form-control input" title="과목명" id="subjectName">
 										</div>
 										<div class="form-group m-0">
 											<label for="professorName" class="col-12 label" >교수명</label>
-											<input type="text" class="form-control input" id="professorName">
+											<input type="text" class="form-control input" title="교수명" id="professorName">
 										</div>
 										<div class="form-group m-0">
 											<label for="time" class="col-12 label">시간</label>
@@ -131,8 +131,8 @@
 											</div>
 										</div>
 										<div class="form-group m-0">
-											<label for="place" class="col-12 label" >장소</label>
-											<input type="text" class="form-control input" id="place">
+											<label for="place" class="col-12 label">장소</label>
+											<input type="text" class="form-control input" title="장소" id="place">
 										</div>
 									</form>
 									<div class="form-row mx-auto btn-submit">
@@ -163,7 +163,7 @@
 	<script src="js/common/header.js"></script>
 	<script src="js/common/timetable.js"></script>
 	<script src="js/common/footer.js"></script>
-
+	<script src="js/common/func_check_input.js"></script>
 
 
 	<!-- 취소하기 버튼 클릭 시 다시 창 닫기 -->
@@ -182,7 +182,7 @@
 	<script>
 		$('#btn-success').on('click', function () {
 
-			//if( !chkInput() ) return;
+			// if( !chkInput() ) return;
 
 			var shour = document.getElementById("sHour");
 			var val_shour = shour.options[shour.selectedIndex].value;
