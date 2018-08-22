@@ -5,11 +5,10 @@ var chkInput = function(){
 
 	inputObjs.each(function(index){
 		if($(this).val() == ''){
-			console.log($(this));
 			focus = $(this);
 			bEmpty = false;
 
-			alert($(this).attr('id') + '은 필수 입력사항입니다.');
+			alert($(this).attr('title') + '은 필수 입력사항입니다.');
 			focus.focus();
 
 			return false;

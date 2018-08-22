@@ -62,26 +62,16 @@
 			</div>
 		</div>
 	</div>
-<script type="text/javascript">
-	 var userInputId = getCookie("userInputId");
-	 console.log(userInputId);
 
-	 function getCookie(cookieName) {
-       cookieName = cookieName + '=';
-       var cookieData = document.cookie;
-       var start = cookieData.indexOf(cookieName);
-       var cookieValue = '';
-       if(start != -1){
-           start += cookieName.length;
-           var end = cookieData.indexOf(';', start);
-           if(end == -1)end = cookieData.length;
-           cookieValue = cookieData.substring(start, end);
-       }
-       return unescape(cookieValue);
-   }
-</script>
 </body>
 </html>
 <script src="js/common/header.js"></script>
 <script src="js/common/timetable.js"></script>
 <script src="js/common/footer.js"></script>
+<script src="js/common/func_cookie.js"></script>
+
+<script type="text/javascript">
+	var userInputId = getCookie("userInputId");
+	console.log(userInputId);
+
+</script>

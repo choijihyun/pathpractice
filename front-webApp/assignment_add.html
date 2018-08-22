@@ -6,7 +6,7 @@
 .star-input>.input>label:hover,
 .star-input>.input>input:focus+label,
 .star-input>.input>input:checked+label{display: inline-block;vertical-align:top;background:url('img/grade_img.png')no-repeat;}
-.star-input{display:inline-block; white-space:nowrap;width:225px;height:20px;padding:30px;line-height:10px;}
+.star-input{display:inline-block; white-space:nowrap;width:225px;height:20px;/*padding:20px;*/line-height:10px;}
 .star-input>.input{display:inline-block;width:150px;background-size:150px;height:28px;white-space:nowrap;overflow:hidden;position: relative;}
 .star-input>.input>input{position:absolute;width:1px;height:1px;opacity:0;}
 star-input>.input.focus{outline:1px dotted #ddd;}
@@ -21,8 +21,8 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 .star-input>.input>label[for="p4"]{width:120px;z-index:2;}
 .star-input>.input>label[for="p5"]{width:150px;z-index:1;}
 .star-input>output{display:inline-block;width:60px; font-size:18px;text-align:right; vertical-align:middle;}
-.col-md-12 {padding: 3px;}
-.form-row>.col, .form-row>[class*=col-]{padding-top : 5px;}
+/*.col-md-12 {padding: 3px;}*/
+/*.form-row>.col, .form-row>[class*=col-]{padding-top : 5px;}*/
 
 </style>
 
@@ -56,35 +56,35 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 			<div class="col-md-6 col-md-auto col-xs-6 col-xs-auto login-box  p-md-0 ">
 				<h2 class="text-center wdi-red mt-1">ADD ASSINGMENT</h2>
 				<hr class="m-1">
-				<form>
+				<form class="commonForm">
 					<div class="form-row m-3">
-						<div class= "col-md-3 col-xs-3 mt-1 mb-1 label">
-							<h6> 과목명 </h6>
+						<div class= "col-md-3 col-xs-3 my-2 label">
+							과목명
 						</div>
 						<div class= "col-md-7 col-xs-7 ">
-							<input type="text"  class="form-control form-control-sm mt-1 mb-1 flat-input" id="subjectName">
+							<input type="text"  class="form-control form-control-sm mt-1 mb-1  flat-input" id="subjectName" title="과목명">
 						</div>
 						<div class= "col-md-2 col-xs-2 mt-1 mb-1">
 							<a  class="btn btn-sm btn-icon" aria-label="Left Align" href="find_subject.html">
 								<span class="fas fa-search"></span>
 							</a>
 						</div>
-						<div class= "col-md-3 col-xs-3 mt-1 mb-1 label">
-							<h6> 제목 </h6>
+						<div class= "col-md-3 col-xs-3 my-2 label">
+							제목
 						</div>
 						<div class= "col-md-7 col-xs-7">
-							<input type="text"  class="form-control form-control-sm mt-1 mb-1 flat-input" id="title">
+							<input type="text"  class="form-control form-control-sm mt-1 mb-1 flat-input" title="제목" id="title">
 						</div>
 
-						<div class= "col-md-3 col-xs-3 mt-1 mb-1 label">
-							<h6> 내용 </h6>
+						<div class= "col-md-3 col-xs-3 my-2 label">
+							내용
 						</div>
 						<div class= "col-md-7 col-xs-7">
-							<input type="text"  class="form-control form-control-sm mt-1 mb-1 flat-input" id="contents">
+							<input type="text"  class="form-control form-control-sm mt-1 mb-1 flat-input" title="내용" id="contents">
 						</div>
 
-						<div class= "col-md-3 col-xs-3 mt-1 mb-1 label">
-							<h6> 중요도 </h6>
+						<div class= "col-md-3 col-xs-3 my-2 label">
+							중요도
 						</div>
 						<span class="star-input col-md-7 col-xs-7 ">
 							<span class="input">
@@ -101,8 +101,8 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 							</span>
 						</span>
 
-						<div class= "col-md-3 col-xs-3 mt-1 mb-1 label">
-							<h6 style="text-align:bottom"> 마감일 </h6>
+						<div class= "col-md-3 col-xs-3 my-2 label">
+							마감일
 						</div>
 						<div class= "col-md-6 col-xs-6 mt-1 mb-1">
 							<form action = "demo_form.asp">
@@ -114,9 +114,9 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 
 						<!--join/cancel button -->
 						<div class= "col-md-6 col-xs-6">
-							<a class="btn btn-sm btn-block btn-submit" id="submit">
+							<button class="btn btn-sm btn-block btn-submit" id="submit">
 								SUBMIT
-							</a>
+							</button>
 						</div>
 
 						<div class= "col-md-6 col-xs-6">
@@ -130,32 +130,40 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript">
-	   $(document).ready(function(){
-	      $('#submit').on('click',function(){
-					var radioVal = $('input[name="star-input"]:checked').val();
-					var due = $('#dueDate').val();
 
-	         $.ajax({
-	            url:"http://localhost:8090/user/insertHomework.json",
-	            type : "GET",
-	            data : {'stuId':$('#id').val(), 'importance':radioVal,
-							'dueDate':due,'title':$('#title').val(), 'contents':$('#contents').val()
-						  ,'success':'0', 'stuId':, 'subNo':},
-	            success : function(result){
-	               console.log(result);
-	               if(result['result'] === '1'){ //과제 등록 성공
-	                  location.href = "assignment.html";
-	               }else{
-	                  alert('과제 등록 실패');
-	               }
-	            },
-	            error : function(){
-								alert('과제 등록 에러');
-	            }
-	         });
-	      });
-	   });
-	</script>
+
 </body>
 </html>
+
+<script src="js/common/func_check_input.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#submit').on('click',function(){
+
+			// if( !chkInput() ) return;
+
+			var radioVal = $('input[name="star-input"]:checked').val();
+			var due = $('#dueDate').val();
+
+			$.ajax({
+				url:"http://localhost:8090/user/insertHomework.json",
+				type : "GET",
+				data : {'stuId':$('#id').val(), 'importance':radioVal,
+				'dueDate':due,'title':$('#title').val(), 'contents':$('#contents').val()
+				,'success':'0', 'stuId':1, 'subNo':111},
+				success : function(result){
+					console.log(result);
+	               if(result['result'] === '1'){ //과제 등록 성공
+	               	location.href = "assignment.html";
+	               }else{
+	               	alert('과제 등록 실패');
+	               }
+	           },
+	           error : function(){
+	           	alert('과제 등록 에러');
+	           }
+	       });
+		});
+	});
+</script>
