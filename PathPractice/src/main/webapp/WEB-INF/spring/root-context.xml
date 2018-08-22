@@ -51,4 +51,6 @@
 	<bean id="subjectDao" class="com.homeworkNotice.dao.SubjectDao">
 		<property name="sqlSession" ref="SqlSessionTemplate"></property>
 	</bean>
+	
+
 </beans>
