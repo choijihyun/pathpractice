@@ -62,17 +62,17 @@
          $.ajax({
             url:"http://localhost:8090/user/getUserPwdInfo.json",
             type : "GET",
-            data : {'id':$('#id').val()},
+            data : {'stuId':$('#id').val()},
             success : function(result){
                console.log(result);
                if(result['result'] === "no data"){ //회원정보 없음
                   alert('회원정보가 없습니다.');
                }else{
-                  alert(result['result']);
+                  alert("비밀번호 : "+result['result']);
                }
             },
             error : function(){
-							alert('로그인 에러');
+							alert('비밀번호 찾기 에러');
             }
          });
       });
