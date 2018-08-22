@@ -24,3 +24,5 @@ header.js - 상단바만 따로 빼 놓은 것
 footer.js - 하단바만 따로 빼 놓은 것
 
 timetable.js - 시간표 테이블만 따로 빼 놓은 것
+
+func_check_input.js - 입력확인 함수만 따로 빼 놓은 것

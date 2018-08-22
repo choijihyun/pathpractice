@@ -11,7 +11,6 @@ import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,7 +35,7 @@ public class UserController {
     //앞으로 많을 요청 중 하나의 함수
     //안드로이드에서 비밀번호를 달라고 요청하는 함수.
 	@ResponseBody
-    @RequestMapping(value = "/user/getUserPwdInfo.json", method = RequestMethod.GET)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.
+    @RequestMapping(value = "/user/getUserPwdInfo", method = RequestMethod.GET)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.
     public String getUserPwdInfo(//url에 맵핑(연결)된 함수
     			Locale locale, //안드로이드에서 받을 파라미터
     			Model model, //안드로이드에서 받을 파라미터
@@ -72,6 +71,8 @@ public class UserController {
     	return jSONObject.toString();//요청한 내용들을 반환해준다.
     }
 	
+
+	
 	//안드로이드에서 사용할 회원가입 url이야!!
 	//서버 킨 후에 크롬,익스플로러 브라우저 아무거나에 url 치는 곳에다가
 	//http://localhost:8080/main/user/insertUser.json?id=test123&password=test123&name=test123&grade=1&email=test123
@@ -80,7 +81,7 @@ public class UserController {
 	//일부러 이 밑에는 주석 다 뺏으니까 어떤 내용인지 혼자 생각해보고 기억안나면 위에 함수로 올라가서
 	//주석 보고 공부해봐 ㅎㅎ
 	@ResponseBody
-    @RequestMapping(value = "/user/insertUser.json", method = RequestMethod.GET)// value라는 값에 매핑, get방식 사용
+    @RequestMapping(value = "/user/insertUser", method = RequestMethod.GET)// value라는 값에 매핑, get방식 사용
     public String insertUser(
     			Model model,
     			@RequestParam(value = "name", required=true) String name,
@@ -124,7 +125,7 @@ public class UserController {
 
 
 	@ResponseBody
-	@RequestMapping(value = "/user/checkUser.json", method = RequestMethod.GET)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.
+	@RequestMapping(value = "/user/checkUser", method = RequestMethod.GET)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.
 	public String checkUser(//url에 맵핑(연결)된 함수
 			Locale locale, //안드로이드에서 받을 파라미터
 			Model model, //안드로이드에서 받을 파라미터
@@ -145,7 +146,6 @@ public class UserController {
 		if(!userDtoList.isEmpty() && userDtoList.size()==1) {//반환받은 데이터가 유효하면(db에 있으면) 브라우저 화면에 결과를 뿌려준다
 			if(pw.equals(userDtoList.get(0).getPw())) {
 				jSONObject.put("result","1");//id도 존재하고 비번도 맞는 경우
-				System.out.println("success");
 			}
 			else {
 				jSONObject.put("result","0");//비번이 다른 경우
@@ -154,13 +154,11 @@ public class UserController {
 		else {//없으면 에러라고 브라우저에 뿌려준다
 			jSONObject.put("result", "0"); //id가 존재하지 않는경우
 		}
-		
-		System.out.println("send data");
 		return jSONObject.toString();//요청한 내용들을 반환해준다.
 	}
 	
 	@ResponseBody
-    @RequestMapping(value = "/user/getAllUserData.json", method = RequestMethod.GET)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.
+    @RequestMapping(value = "/user/getAllUserData", method = RequestMethod.GET)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.
     public String getAllUserData(//url에 맵핑(연결)된 함수
     			Locale locale, //안드로이드에서 받을 파라미터
     			Model model,
@@ -224,5 +222,7 @@ public class UserController {
         	return jSONObject.toString();
         }
 	}
+	
+	
 	
 }

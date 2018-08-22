@@ -116,8 +116,8 @@
    function setCookie(cookieName, value, exdays){
        var exdate = new Date();
        exdate.setDate(exdate.getDate() + exdays);
-       var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
-       document.cookie = cookieName + "=" + cookieValue;
+       document.cookie = name + "=" + escape(value) + "; path=/; expires=" + todayDate.toGMTString()
+	+ "; domain=example.com";
    }
 
    function deleteCookie(cookieName){

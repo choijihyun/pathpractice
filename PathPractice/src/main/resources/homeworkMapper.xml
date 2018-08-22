@@ -16,7 +16,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
     
     <update id="updateHomework" parameterType="map">
-    	update from Assignment     
+    	update Assignment set dueDate=#{dueDate},importance=#{importance},title=#{title},contents=#{contents},subNo=#{subNo} where stuId=#{stuId} and assignNo=#{assignNo}
     </update>
-    
+     <select id="selectHomework" resultType="com.homeworkNotice.dto.HomeworkDto" parameterType="map">
+    	select * from Assignment where stuId=#{stuId}
+    </select>
 </mapper>

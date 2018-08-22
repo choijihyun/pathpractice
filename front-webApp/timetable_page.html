@@ -54,7 +54,7 @@
 							<!-- 직접 추가하기 창 -->
 							<div class="collapse mt-1 form-add" id="collapseDirect">
 								<div class="card card-body card-directly p-2">
-									<form>
+									<form class="commonForm">
 										<div class="form-group m-0">
 											<label for="subjectName" class="col-12 label">과목명</label>
 											<input type="text" class="form-control input"  id="subjectName">
@@ -164,27 +164,13 @@
 	<script src="js/common/timetable.js"></script>
 	<script src="js/common/footer.js"></script>
 
-	<!-- table click event -->
-	<script>
-		var table = document.getElementById("table"),rIndex,cIndex;
 
-		for(var i = 1 ; i < table.rows.length ; i++)
-		{
-			for(var j = 1 ; j<table.rows[i].cells.length ; j++){
-				table.rows[i].cells[j].onclick = function()
-				{
-					rIndex = this.parentElement.rowIndex;
-					cIndex = this.cellIndex;
-					console.log("ROW:" +rIndex+ ", Cell:" +cIndex);
-				}
-			}
-		}	
-	</script>
 
 	<!-- 취소하기 버튼 클릭 시 다시 창 닫기 -->
 	<script type="text/javascript">
 		$('#btn-undo2').on('click', function () {
 			$('.upperbarCollapse').trigger('click');
+			$('#add-by-directly').trigger('click');
 		});
 
 		$('#btn-undo1').on('click', function () {
@@ -193,8 +179,11 @@
 	</script>
 
 	<!--select box 선택 값 가져오기 -->
-	<script type="text/javascript">
+	<script>
 		$('#btn-success').on('click', function () {
+
+			//if( !chkInput() ) return;
+
 			var shour = document.getElementById("sHour");
 			var val_shour = shour.options[shour.selectedIndex].value;
 			var sminute = document.getElementById("sMinute");
@@ -211,39 +200,84 @@
 			var val_day2 = day2.options[day2.selectedIndex].value;
 			var index_day1,index_day2;
 
+			var table = document.getElementById("table"),rIndex,cIndex;
+			var row_length = table.rows.length;
+			var new_row_len = val_ehour;
+
+			//동적으로 테이블 조정
+			new_row_len = (new_row_len-8)*2;
+			if(val_eminute == '30')	new_row_len++;
+
+			var cell = new Array(); 
+			if(row_length < new_row_len){
+				for(var i = row_length+1 ; i < new_row_len ; i++){
+					newRow = table.insertRow(table.length),
+					cell[0] = newRow.insertCell(0),
+					cell[1] = newRow.insertCell(1),
+					cell[2] = newRow.insertCell(2),
+					cell[3] = newRow.insertCell(3),
+					cell[4] = newRow.insertCell(4),
+					cell[5] = newRow.insertCell(5),
+
+					time = (i%2 == 0 ?  (i/2)+8 : '' );
+					text = '#';
+
+					cell[0].innerHTML = time;
+					for(var j =1 ; j<6 ; j++)
+						cell[j].innerHTML = text;
+
+					if(i%2 == 0 )
+						$(newRow).addClass("stripe-top");
+					for(var j=0 ; j<5 ; j++)
+						$(cell[j]).css("border-right","1px solid #e5e5e5");
+				}
+			}
+
 			if(val_sminute == "30") {val_shour = (val_shour -8)*2;}
 			else if(val_sminute  == "00") {val_shour = (val_shour -8)*2-1;}
 
 			if(val_eminute == "30") {val_ehour = (val_ehour -8)*2;}
 			else if(val_eminute== "00") {val_ehour = (val_ehour -8)*2-1;}
 
-			switch(val_day1){
-				case 'mon': index_day1 = 1; break;
-				case 'tue': index_day1 = 2; break;
-				case 'wen': index_day1 = 3; break;
-				case 'thu': index_day1 = 4; break;
-				case 'fri': index_day1 = 5; break;
-			}
-			switch(val_day2){
-				case 'mon': index_day2 = 1; break;
-				case 'tue': index_day2 = 2; break;
-				case 'wen': index_day2 = 3; break;
-				case 'thu': index_day2 = 4; break;
-				case 'fri': index_day2 = 5; break;
+			var days = ['mon','tue','wen','thu','fri'];
+			for(var i=0 ; i<5 ; i++){
+				if( days[i] == val_day1)
+					index_day1 = i+1;
+				if( days[i] == val_day2)
+					index_day2 = i+1;
 			}
 
-		//color random
-		var colorCode = "#"+Math.round(Math.random() * 0xFFFFFF).toString(16);
+			//color random
+			var colorCode = "#"+Math.round(Math.random() * 0xFFFFFF).toString(16);
 
-		//paint time
-		for(i=val_shour ; i<val_ehour ; i++){
-			$( 'table tr:nth-child(' + i + ') td:eq(' + index_day1 + ')' ).css('background-color', colorCode);
-			$( 'table tr:nth-child(' + i + ') td:eq(' + index_day2 + ')' ).css('background-color', colorCode);
-		}
-		// select box value init
-		$('select').find("option:eq(0)").prop("selected", true);
+			//paint time
+			for(i=val_shour ; i<val_ehour ; i++){
+				$( 'table tr:nth-child(' + i + ') td:eq(' + index_day1 + ')' ).css('background-color', colorCode);
+				$( 'table tr:nth-child(' + i + ') td:eq(' + index_day2 + ')' ).css('background-color', colorCode);
+			}
+			// select box value init
+			$('select').find("option:eq(0)").prop("selected", true);
 
-		$('#add-by-directly').trigger('click');
-	});
-		// 요일, 시간 중에 하나라도 선택하지 않으면 경고창 띄우기 
-</script>
+			$('#add-by-directly').trigger('click');
+			$('.upperbarCollapse').trigger('click');
+		});
+	</script>
+
+
+	<!-- 테이블 클릭 시 수정 -->
+	<script>
+		var table = document.getElementById("table"),rIndex,cIndex;
+
+		$('#btn-success').on('click', function (){
+			for(var i = 1 ; i < table.rows.length ; i++){				
+				for(var j = 1 ; j<table.rows[i].cells.length ; j++){
+					table.rows[i].cells[j].onclick = function(){
+						rIndex = this.parentElement.rowIndex;
+						cIndex = this.cellIndex;
+
+						console.log("ROW:" +rIndex+ ", Cell:" +cIndex);
+					}
+				}
+			}	
+		});
+	</script>

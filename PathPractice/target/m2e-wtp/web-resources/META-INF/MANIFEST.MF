@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: USER
+=======
+Built-By: ghwnw
+>>>>>>> a7ab2ee6d52e1d51e7c5b1177bd49306252e956a
 Build-Jdk: 1.8.0_131
 Created-By: Maven Integration for Eclipse
 

@@ -26,7 +26,7 @@
 				<h1 class="text-center wdi-red">JOIN</h1>
 				<hr>
 				<form>
-					<div class="form-row">
+					<div class="form-row commonForm">
 
 						<!-- ID lable/input tag -->
 						<div class= "col-md-3 col-xs-3 label">
@@ -41,7 +41,7 @@
 							<h6> PW </h6>
 						</div>
 						<div class= "col-md-9 col-xs-9">
-							<input type="text"  class="form-control form-control-lg flat-input" id = "pw">
+							<input type="password"  class="form-control form-control-lg flat-input" id = "pw">
 						</div>
 
 						<!--NAME lable/input tag -->
@@ -71,11 +71,12 @@
 								<option>4</option>
 							</select>
 						</div>
+						<div class= "col-md-6 col-xs-6"></div>
 
 						<!--join/cancel button -->
 						<div class= "col-md-6 col-xs-6 btns">
-							<a class="btn btn-sm btn-block btn-join" id="joinbtn">
-							JOIN</a>
+							<button class="btn btn-sm btn-block btn-join" id="joinbtn">
+							JOIN</button> 
 						</div>
 						<div class= "col-md-6 col-xs-6 btns">
 							<a class="btn btn-sm btn-block btn-cancel" href="index.html">
@@ -88,29 +89,36 @@
 		</div>
 	</div>
 
-	<script type="text/javascript">
-	   $(document).ready(function(){
-	      $('#joinbtn').on('click',function(){
-	         $.ajax({
-	            url:"http://localhost:8090/user/insertUser.json",
-	            type : "GET",
-	            data : {'stuId':$('#id').val(), 'pw':$('#pw').val(),'name':$("#name").val(),
-							'semester':$("#semester").val(), 'email':$("#email").val()},
-	            success : function(result){
-	               console.log(result);
-	               if(result['result'] === '1'){ //회원가입 성공
-									 alert('회원가입 성공');
-	                  location.href = "index.html";
-	               }else{
-	                  alert('회원가입 실패');
-	               }
-	            },
-	            error : function(){
-								alert('회원가입 에러');
-	            }
-	         });
-	      });
-	   });
-	</script>
+
 </body>
 </html>
+
+<script src="js/common/func_check_input.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#joinbtn').on('click',function(){
+
+	      	if( !chkInput() ) return;
+
+	      	$.ajax({
+	      		url:"http://localhost:8090/user/insertUser.json",
+	      		type : "GET",
+	      		data : {'stuId':$('#id').val(), 'pw':$('#pw').val(),'name':$("#name").val(),
+	      		'semester':$("#semester").val(), 'email':$("#email").val()},
+	      		success : function(result){
+	      			console.log(result);
+	               if(result['result'] === '1'){ //회원가입 성공
+	               	alert('회원가입 성공');
+	               	location.href = "index.html";
+	               }else{
+	               	alert('회원가입 실패');
+	               }
+	           },
+	           error : function(){
+	           	alert('회원가입 에러');
+	           }
+	       });
+	      });
+	});
+</script>

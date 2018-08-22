@@ -38,3 +38,24 @@ body{
 	max-width: 60px;
 	max-height: 30px;
 }
+.list-group-item{
+	border-radius: 0;
+	font-size: 12px;
+	font-weight: bold;
+	box-shadow: none;
+}
+.list-group-item:hover,.list-group-item:focus{
+	border-radius: 0;
+	font-size: 12px;
+	font-weight: bold;
+	box-shadow: none;
+	color: #dd3247;
+}
+.user-icon{
+	font-size:40px; 
+	color: gray;
+}
+.info{
+	font-weight: bold;
+	color: gray;
+}
