@@ -105,6 +105,7 @@
           type : "GET",
           data : {'stuId':$('#id').val(), 'pw':$('#pw').val()},
           success : function(result){
+
            console.log(result);
            console.log(result["result"]);
                if(result["result"] === "1"){ //로그인 성공
