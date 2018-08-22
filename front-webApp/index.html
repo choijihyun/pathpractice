@@ -105,14 +105,10 @@
           type : "GET",
           data : {'stuId':$('#id').val(), 'pw':$('#pw').val()},
           success : function(result){
-<<<<<<< HEAD
-               console.log(result);
-               if(result['result'] === '1'){ //로그인 성공
-=======
+
            console.log(result);
            console.log(result["result"]);
                if(result["result"] === "1"){ //로그인 성공
->>>>>>> e96226eaa1f3ad6e54789f2dc187cc7772ac1da4
                 location.href = "home.html";
               }else{
                 alert('로그인 실패');
