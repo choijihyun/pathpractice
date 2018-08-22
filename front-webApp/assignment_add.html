@@ -151,7 +151,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 				type : "GET",
 				data : {'stuId':$('#id').val(), 'importance':radioVal,
 				'dueDate':due,'title':$('#title').val(), 'contents':$('#contents').val()
-				,'success':'0', 'stuId':1, 'subNo':},
+				,'success':'0', 'stuId':1, 'subNo':111},
 				success : function(result){
 					console.log(result);
 	               if(result['result'] === '1'){ //과제 등록 성공

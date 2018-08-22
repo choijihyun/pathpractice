@@ -101,7 +101,7 @@
        $('#submit').on('click',function(){
          setCookie("userInputId", userInputId, 7); // 7일 동안 쿠키 보관
          $.ajax({
-          url:"http://localhost:8090/user/checkUser.json",
+          url:"http://localhost:8090/user/checkUser",
           type : "GET",
           data : {'stuId':$('#id').val(), 'pw':$('#pw').val()},
           success : function(result){
