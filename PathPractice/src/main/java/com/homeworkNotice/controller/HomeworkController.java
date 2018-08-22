@@ -155,7 +155,8 @@ public class HomeworkController {
 		public String selectHomework(//url에 맵핑(연결)된 함수
 				Locale locale, //안드로이드에서 받을 파라미터
 				Model model, //안드로이드에서 받을 파라미터
-				@RequestParam(value = "stuId", required=true) String stuId) {
+				@RequestParam(value = "stuId", required=true) String stuId,
+				@RequestParam(value = "select", required=true) final int select) {
 			
 			HashMap<Object, Object> param=new HashMap<Object, Object>();
 			
@@ -170,6 +171,7 @@ public class HomeworkController {
 	        	for(int i=0;i<homeworkDtoList.size();i++) {
 	        		JSONObject jSONObject = new JSONObject();
 	        		jSONObject.put("assignNo",homeworkDtoList.get(i).getAssignNo());
+	        		jSONObject.put("stuId",homeworkDtoList.get(i).getStuId());
 	        		jSONObject.put("registerDate", homeworkDtoList.get(i).getRegisterDate());
 	        		jSONObject.put("dueDate", homeworkDtoList.get(i).getDueDate());
 	        		jSONObject.put("importance", homeworkDtoList.get(i).getImportance());
@@ -184,21 +186,14 @@ public class HomeworkController {
 	        		
 	        		System.out.println(jsonList);
 	        	}
+	        	
 	        	Collections.sort( jsonList, new Comparator<JSONObject>() {
 
 	    		    public int compare(JSONObject a, JSONObject b) {
 	    		        String valA = new String();
 	    		        String valB = new String();
 	    		        int vA,vB;
-//	    		        
-//	    		      
-//	    		        switch("assignNo") {
-//	    		        case 1: valA = (String) a.get("name");valB = (String) b.get("name");break;
-//	    		        case 2: vA = (Integer) a.get("stuId");vB = (Integer) b.get("stuId");break;
-//	    		        case 3: vA = (Integer) a.get("semester");vB = (Integer) b.get("semester");break;
-//	    		        case 4: vA= (Integer)a.get("pw");vB = (Integer) b.get("pw");if(vA==vB) return 0; if(vA>vB) return 1; else return -1;
-//	    		        case 5: valA = (String) a.get("email");valB = (String) b.get("email");break;
-//	    		        }
+
 
 	    		        return valA.compareTo(valB);
 	    		    }
