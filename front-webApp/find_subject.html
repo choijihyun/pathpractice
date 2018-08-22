@@ -20,7 +20,7 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 
 
@@ -46,11 +46,16 @@
 							</a>
 						</div>
 						<table style="overflow:auto;" id="table_findSub" class="table table-borderless table-sm table-time">
+							<colgroup>
+								<col width="20%"/>
+								<col width="40%"/>
+								<col width="40%"/>
+							</colgroup>
 							<thead>
 								<tr>
-									<th class="text-center">#</th>
+									<th class="text-center">NO</th>
 									<th class="text-center" style="border-left: 1px solid #e5e5e5;">교수명</th>
-									<th class="text-center" style="border-left: 1px solid #e5e5e5;">과목명</th>
+									<th class="text-center" style="border-left: 1px solid #e5e5e5;">학수번호</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -60,7 +65,7 @@
 
 					<div class= "col-md-12 col-xs-12" >
 						<a class="btn btn-lg btn-block btn-login" id = "submit" >
-						OK
+							OK
 						</a>
 					</div>
 
@@ -69,29 +74,44 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-	   $(document).ready(function(){
+		$(document).ready(function(){
 	      $('#click').on('click',function(){ //입력한 과목명 가지고 선택할 수 있게 만들어야함.(subNum 받아야함!)
-					var checkList = [];
-					var findLen;
+	      	var checkList = [];
 
-					$.ajax({
+	      	$.ajax({
 	      		url:"http://localhost:8090//subject/searchSubject.json",
 	      		type : "GET",
 	      		data : {'word':$('#subjectName').val()},
 	      		success : function(result){
 	               if(result['result'] === 'no data'){ //과목 검색 성공
-									alert('검색 실패');
+	               	alert('검색 실패');
 	               }else{
 	               	alert('검색 성공');
-									console.log(result);
+	               	console.log(result);
 
-									console.log(result['result'][0]['subNo']);
-									console.log(result['result'].length);
-									findLen = result['result'].length;
+	               	console.log(result['result'][0]['subNo']);
+	               	console.log(result['result'].length);
 
+	               	var	tableLen = result['result'].length;
+	               	var table = document.getElementById("table_findSub"),rIndex,cIndex;
 
+	               	var cell = new Array(); 
+	               	for(var i=0 ; i <tableLen ; i++){
+	               		newRow = table.insertRow(table.length),
+	               		cell[0] = newRow.insertCell(0),
+	               		cell[1] = newRow.insertCell(1),
+	               		cell[2] = newRow.insertCell(2),
 
+	               		cell[0].innerHTML = i+1;
+	               		cell[1].innerHTML = result['result'][0]['subNo'];
+
+	               		if(i%2 == 0 )
+	               			$(newRow).addClass("stripe-top");
+	               		for(var j=0 ; j<5 ; j++)
+	               			$(cell[j]).css("border-right","1px solid #e5e5e5");
+	               	}
 	               }
+               
 	           },
 	           error : function(){
 	           	alert('검색 에러');
@@ -100,7 +120,7 @@
 
 
 	      });
-	   });
+	  });
 	</script>
 </body>
 </html>
