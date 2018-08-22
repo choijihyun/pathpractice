@@ -186,8 +186,7 @@
     		<artifactId>xercesImpl</artifactId>
     		<version>2.9.1</version>
 		</dependency>
-<<<<<<< HEAD
-
+		
 		<!-- 안드로이드 통신 -->
 		<dependency>
    			<groupId>com.googlecode.json-simple</groupId>
@@ -204,10 +203,6 @@
     		<artifactId>jackson-databind</artifactId>
     		<version>2.7.3</version>
 		</dependency>
-
-=======
- 
->>>>>>> 09b5923de21cb0f686f3cba4beee3667a898488f
     </dependencies>
     
     <build>
