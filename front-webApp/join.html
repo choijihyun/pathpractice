@@ -92,31 +92,30 @@
 		$(document).ready(function(){
 			$('#joinbtn').on('click',function(){
 
-		      	if( !chkInput() ) {
-		      		return;
-		      	}
+				if( !chkInput() ) {
+					return;
+				}
 
-		      	$.ajax({
-		      		url:"http://localhost:8090/user/insertUser.json",
-		      		type : "GET",
-		      		data : {'stuId':$('#id').val(), 'pw':$('#pw').val(),'name':$('#name').val(),
-		      		'semester':$('#semester').val(), 'email':$('#email').val()},
-		      		success : function(result){
-		      			console.log(result);
+				$.ajax({
+					url:"http://localhost:8090/user/insertUser.json",
+					type : "GET",
+					data : {'stuId':$('#id').val(), 'pw':$('#pw').val(),'name':$('#name').val(),
+					'semester':$('#semester').val(), 'email':$('#email').val()},
+					success : function(result){
+						console.log(result);
 
 		            if(result["result"] === "1"){ //회원가입 성공
 		            	alert('회원가입 성공');
 		            	location.href = "index.html";
 		            }else{
 		            	alert('회원가입 실패');
-                }
-		           },
-		          error : function(){
-
-		          	alert('회원가입 에러');
-		          }
-		       });
-		      });
+		            }
+		        },
+		        error : function(){
+		        	alert('회원가입 에러');
+		        }
+		    });
+			});
 		});
 	</script>
 

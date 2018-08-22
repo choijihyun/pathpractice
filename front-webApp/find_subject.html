@@ -54,8 +54,8 @@
 							<thead>
 								<tr>
 									<th class="text-center">NO</th>
-									<th class="text-center" style="border-left: 1px solid #e5e5e5;">교수명</th>
 									<th class="text-center" style="border-left: 1px solid #e5e5e5;">학수번호</th>
+									<th class="text-center" style="border-left: 1px solid #e5e5e5;">교수명</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -104,15 +104,15 @@
 	               		cell[2] = newRow.insertCell(2),
 
 	               		cell[0].innerHTML = i+1;
-	               		cell[1].innerHTML = result['result'][0]['subNo'];
+	               		cell[1].innerHTML = result['result'][i]['subNo'];
+	               		cell[2].innerHTML = result['result'][i]['profName'];
 
-	               		if(i%2 == 0 )
-	               			$(newRow).addClass("stripe-top");
-	               		for(var j=0 ; j<5 ; j++)
+	               		
+	               		$(newRow).addClass("stripe-top");
+	               		for(var j=0 ; j<2 ; j++)
 	               			$(cell[j]).css("border-right","1px solid #e5e5e5");
 	               	}
-	               }
-               
+	               }               
 	           },
 	           error : function(){
 	           	alert('검색 에러');
