@@ -1,145 +1,121 @@
 <!DOCTYPE html>
 <html lang="kr">
 <head>
-   <title>Login Page</title>
+ <title>Login Page</title>
 
-   <!-- Required meta tags -->
-   <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ <!-- Required meta tags -->
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-   <!-- Bootstrap CSS -->
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-   <!-- Customize CSS -->
-   <link rel="stylesheet" type="text/css" href="css/style_index.css">
+ <!-- Bootstrap CSS -->
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+ <!-- Customize CSS -->
+ <link rel="stylesheet" type="text/css" href="css/style_index.css">
 
-   <!-- Optional JavaScript -->
-   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+ <!-- Optional JavaScript -->
+ <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+ <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 
 <body class="text-center">
-<!-- Container -->
-<div class="container" id="content">
+  <!-- Container -->
+  <div class="container" id="content">
    <div class="row justify-content-md-center justify-content-xs-center">
-      <div class="col-md-6 col-md-auto col-xs-6 col-xs-auto login-box ">
-         <h1 class="text-center wdi-red">Login</h1>
-         <hr>
-         <form>
-            <div class="form-row">
+    <div class="col-md-6 col-md-auto col-xs-6 col-xs-auto login-box ">
+     <h1 class="text-center wdi-red">Login</h1>
+     <hr>
+     <form>
+      <div class="form-row">
 
-               <!-- input id, pw -->
-               <div class= "col-md-12 col-xs-12">
-                  <input type="text" id="id" class="form-control form-control-lg flat-input" placeholder="username">
-               </div>
-               <div class= "col-md-12 col-xs-12">
-                  <input type="password" id="pw" class="form-control form-control-lg flat-input" placeholder="password" >
-               </div>
-
-               <!-- remember user infomation - checkbox -->
-               <div class="checkbox col-md-12">
-                  <label>
-                     <input type="checkbox" value="remember-me" id="idSaveCheck">
-                     Remember me
-                  </label>
-               </div>
-
-               <!-- login/join/find pw button-->
-               <div class= "col-md-12 col-xs-12" >
-                 <a class="btn btn-lg btn-block btn-login" id = "submit" >
-               LOGIN
-             </a>
-               </div>
-               <div class= "col-md-6 col-xs-6">
-                  <a class="btn btn-lg btn-xs btn-block btn-join" href="join.html">
-                     회원가입
-                  </a>
-               </div>
-               <div class= "col-md-6 col-xs-6">
-                  <a class="btn btn-lg btn-xs btn-block btn-join" href="findPW.html">
-                    PW 찾기
-                  </a>
-               </div>
-
-            </div>
-         </form>
+       <!-- input id, pw -->
+       <div class= "col-md-12 col-xs-12">
+        <input type="text" id="id" class="form-control form-control-lg flat-input" placeholder="username">
       </div>
+      <div class= "col-md-12 col-xs-12">
+        <input type="password" id="pw" class="form-control form-control-lg flat-input" placeholder="password" >
+      </div>
+
+      <!-- remember user infomation - checkbox -->
+      <div class="checkbox col-md-12">
+        <label>
+         <input type="checkbox" value="remember-me" id="idSaveCheck">
+         Remember me
+       </label>
+     </div>
+
+     <!-- login/join/find pw button-->
+     <div class= "col-md-12 col-xs-12" >
+       <a class="btn btn-lg btn-block btn-login" id = "submit" >
+         LOGIN
+       </a>
+     </div>
+     <div class= "col-md-6 col-xs-6">
+      <a class="btn btn-lg btn-xs btn-block btn-join" href="join.html">
+       회원가입
+     </a>
    </div>
+   <div class= "col-md-6 col-xs-6">
+    <a class="btn btn-lg btn-xs btn-block btn-join" href="findPW.html">
+      PW 찾기
+    </a>
+  </div>
+
 </div>
+</form>
+</div>
+</div>
+</div>
+
+</body>
+</html>
+
+   
+<script src="js/common/func_cookie.js"></script>
+
 <script type="text/javascript">
-   $(document).ready(function(){
-       var userInputId = getCookie("userInputId");
-       $('#id').val(userInputId);
-       console.log($('#id').val());
+ $(document).ready(function(){
+   var userInputId = getCookie("userInputId");
+   $('#id').val(userInputId);
+   console.log($('#id').val());
 
        if($('#id').val() != ""){ // 그 전에 ID를 저장해서 처음 페이지 로딩 시, 입력 칸에 저장된 ID가 표시된 상태라면,
-           console.log("id.val()");
+         console.log("id.val()");
            $("#idSaveCheck").attr("checked", true); // ID 저장하기를 체크 상태로 두기.
-       }
+         }
 
        $("#idSaveCheck").change(function(){ // 체크박스에 변화가 있다면,
            if($("#idSaveCheck").is(":checked")){ // ID 저장하기 체크했을 때,
-               console.log("check in remember me");
-               var userInputId = $('#id').val();
+             console.log("check in remember me");
+             var userInputId = $('#id').val();
                setCookie("userInputId", userInputId, 7); // 7일 동안 쿠키 보관
            }else{ // ID 저장하기 체크 해제 시,
-               console.log("no check");
-               deleteCookie("userInputId");
+             console.log("no check");
+             deleteCookie("userInputId");
            }
-       });
+         });
 
-      $('#submit').on('click',function(){
+       $('#submit').on('click',function(){
          setCookie("userInputId", userInputId, 7); // 7일 동안 쿠키 보관
          $.ajax({
-            url:"http://localhost:8090/user/checkUser.json",
-            type : "GET",
-            data : {'stuId':$('#id').val(), 'pw':$('#pw').val()},
-            success : function(result){
-               console.log(result);
+          url:"http://localhost:8090/user/checkUser.json",
+          type : "GET",
+          data : {'stuId':$('#id').val(), 'pw':$('#pw').val()},
+          success : function(result){
+           console.log(result);
                if(result['result'] === '1'){ //로그인 성공
-                  location.href = "home.html";
-               }else{
-                  alert('로그인 실패');
-               }
+                location.href = "home.html";
+              }else{
+                alert('로그인 실패');
+              }
             },
             error : function(){
-							alert('로그인 에러');
+              alert('로그인 에러');
             }
-         });
-      });
-   });
-
-
-   function setCookie(cookieName, value, exdays){
-       var exdate = new Date();
-       exdate.setDate(exdate.getDate() + exdays);
-       document.cookie = name + "=" + escape(value) + "; path=/; expires=" + todayDate.toGMTString()
-	+ "; domain=example.com";
-   }
-
-   function deleteCookie(cookieName){
-       var expireDate = new Date();
-       expireDate.setDate(expireDate.getDate() - 1);
-       document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
-   }
-
-   function getCookie(cookieName) {
-       cookieName = cookieName + '=';
-       var cookieData = document.cookie;
-       var start = cookieData.indexOf(cookieName);
-       var cookieValue = '';
-       if(start != -1){
-           start += cookieName.length;
-           var end = cookieData.indexOf(';', start);
-           if(end == -1)end = cookieData.length;
-           cookieValue = cookieData.substring(start, end);
-       }
-       return unescape(cookieValue);
-   }
-
-</script>
-</body>
-</html>
+          });
+       });
+     });
+   </script>

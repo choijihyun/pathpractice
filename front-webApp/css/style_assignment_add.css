@@ -64,12 +64,13 @@ body{
 	box-shadow: none;
 	outline: none;
 	background-position: 0 0;
-	border-bottom: 0px;
+	border-bottom: 1px solid #dd3247;
 }
 
 .label{
-	margin-top: 35px;
 	color: #dd3247;
+	font-size: 14px;
+	font-weight: bold;
 }
 
 .btn-icon{
