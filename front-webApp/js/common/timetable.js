@@ -151,7 +151,3 @@ timetableHtml+='		</table>';
 
 var timetable = document.getElementById("timetable");
 timetable.innerHTML=timetableHtml;
-
-
-
-
