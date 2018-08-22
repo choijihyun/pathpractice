@@ -8,7 +8,7 @@
 	<bean id="dataSource"
         class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-        <property name="url" value="jdbc:mysql://203.250.148.53/PATH?useSSL=false&amp;serverTimezone=UTC"></property>
+        <property name="url" value="jdbc:mysql://203.250.148.53/PATH?useSSL=false&amp;serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf8"></property>
         <property name="username" value="jihyun"></property>
         <property name="password" value="root"></property>
 
@@ -45,6 +45,10 @@
 		<property name="sqlSession" ref="SqlSessionTemplate"></property>
 	</bean>
 	<bean id="homeworkDao" class="com.homeworkNotice.dao.HomeworkDao">
+		<property name="sqlSession" ref="SqlSessionTemplate"></property>
+	</bean>
+	
+	<bean id="subjectDao" class="com.homeworkNotice.dao.SubjectDao">
 		<property name="sqlSession" ref="SqlSessionTemplate"></property>
 	</bean>
 </beans>

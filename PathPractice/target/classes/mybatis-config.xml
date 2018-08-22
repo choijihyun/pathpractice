@@ -7,10 +7,12 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<typeAliases>
 		<typeAlias alias="user" type="com.homeworkNotice.dto.UserDto"/>
 		<typeAlias alias="homework" type="com.homeworkNotice.dto.HomeworkDto"/>
+		<typeAlias alias="subject" type="com.homeworkNotice.dto.SubjectDto"/>
 	</typeAliases>
 	
     <mappers>
         <mapper resource ="userMapper.xml"/>
         <mapper resource ="homeworkMapper.xml"/>
+        <mapper resource="subjectMapper.xml"/>
     </mappers >
 </configuration>
