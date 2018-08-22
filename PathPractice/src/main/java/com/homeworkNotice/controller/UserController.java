@@ -35,7 +35,7 @@ public class UserController {
     //앞으로 많을 요청 중 하나의 함수
     //안드로이드에서 비밀번호를 달라고 요청하는 함수.
 	@ResponseBody
-    @RequestMapping(value = "/user/getUserPwdInfo", method = RequestMethod.GET)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.
+    @RequestMapping(value = "/user/getUserPwdInfo.json", method = RequestMethod.GET)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.
     public String getUserPwdInfo(//url에 맵핑(연결)된 함수
     			Locale locale, //안드로이드에서 받을 파라미터
     			Model model, //안드로이드에서 받을 파라미터
@@ -81,7 +81,7 @@ public class UserController {
 	//일부러 이 밑에는 주석 다 뺏으니까 어떤 내용인지 혼자 생각해보고 기억안나면 위에 함수로 올라가서
 	//주석 보고 공부해봐 ㅎㅎ
 	@ResponseBody
-    @RequestMapping(value = "/user/insertUser", method = RequestMethod.GET)// value라는 값에 매핑, get방식 사용
+    @RequestMapping(value = "/user/insertUser.json", method = RequestMethod.GET)// value라는 값에 매핑, get방식 사용
     public String insertUser(
     			Model model,
     			@RequestParam(value = "name", required=true) String name,
@@ -125,7 +125,7 @@ public class UserController {
 
 
 	@ResponseBody
-	@RequestMapping(value = "/user/checkUser", method = RequestMethod.GET)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.
+	@RequestMapping(value = "/user/checkUser.json", method = RequestMethod.GET)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.
 	public String checkUser(//url에 맵핑(연결)된 함수
 			Locale locale, //안드로이드에서 받을 파라미터
 			Model model, //안드로이드에서 받을 파라미터
@@ -158,7 +158,7 @@ public class UserController {
 	}
 	
 	@ResponseBody
-    @RequestMapping(value = "/user/getAllUserData", method = RequestMethod.GET)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.
+    @RequestMapping(value = "/user/getAllUserData.json", method = RequestMethod.GET)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.
     public String getAllUserData(//url에 맵핑(연결)된 함수
     			Locale locale, //안드로이드에서 받을 파라미터
     			Model model,
