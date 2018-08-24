@@ -1,0 +1,22 @@
+/*하단바 */
+.app-footer {
+    line-height: 1;
+    border-top: 1px solid #e5e5e5;
+    padding: 2.5rem 0;
+    color: #999;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+/*하단 바 아이콘*/
+.btn-icon{
+	border: 0;
+	background: #f9f9f9;
+	color: #6c757d;
+}
+
+.btn-icon:hover{
+	border: 0;
+	background: #f9f9f9;
+	color:  #dd3247;
+}
