@@ -16,6 +16,7 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 <body class="text-center">
@@ -63,7 +64,7 @@
 						<div class= "col-md-3 col-xs-3 label">
 							<h6> YEAR </h6>
 						</div>
-						<div class="container col-md-3 col-xs-3 dropdown-grade">
+						<div class="container col-md-9 col-xs-9 dropdown-grade">
 							<select class="form-control" id="semester">
 								<option>1</option>
 								<option>2</option>
@@ -71,7 +72,6 @@
 								<option>4</option>
 							</select>
 						</div>
-						<div class= "col-md-6 col-xs-6"></div>
 
 						<!--join/cancel button -->
 						<div class= "col-md-6 col-xs-6 btns">
@@ -92,28 +92,50 @@
 		$(document).ready(function(){
 			$('#joinbtn').on('click',function(){
 
-				if( !chkInput() ) {
-					return;
+				var bEmpty = true;
+				if($('#id').val() == ''){
+					alert($('#id').attr('title') + '은 필수 입력사항입니다.');
+					bEmpty = false;
 				}
+				else if($('#pw').val() == ''){
+					alert($('#pw').attr('title') + '은 필수 입력사항입니다.');
+					bEmpty = false;
+				}
+				else if($('#email').val() == ''){
+					alert($('#email').attr('title') + '은 필수 입력사항입니다.');
+					bEmpty = false;
+				}
+				else if($('#semester').val() == ''){
+					alert($('#semester').attr('title') + '은 필수 입력사항입니다.');
+					bEmpty = false;
+				}
+				else if($('#name').val() == ''){
+					alert($('#name').attr('title') + '은 필수 입력사항입니다.');
+					bEmpty = false;
+				}
+				if(!bEmpty)return;
 
+				console.log('ajax!');
 				$.ajax({
 					url:"http://localhost:8090/user/insertUser.json",
 					type : "GET",
-					data : {'stuId':$('#id').val(), 'pw':$('#pw').val(),'name':$('#name').val(),
-					'semester':$('#semester').val(), 'email':$('#email').val()},
+					data : {'stuId':$('#id').val(), 'pw':$('#pw').val(),'name':$('#name').val(),'semester':$('#semester').val(), 'email':$('#email').val()},
+					error : function(request,status,error){
+							alert('회원가입 에러');
+							alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					},
 					success : function(result){
-						console.log(result);
-
-		            if(result["result"] === "1"){ //회원가입 성공
-		            	alert('회원가입 성공');
-		            	location.href = "index.html";
-		            }else{
-		            	alert('회원가입 실패');
-		            }
-		        },
-		        error : function(){
-		        	alert('회원가입 에러');
-		        }
+							console.log(result);
+		          if(result["result"] === "1"){ //회원가입 성공
+		          	alert('회원가입 성공');
+		          	location.href = "index.html";
+		          }else{
+		          	alert('회원가입 실패');
+		          }
+		      },
+					complete : function(result){
+						alert('result : '+result);
+					}
 		    });
 			});
 		});
@@ -121,5 +143,3 @@
 
 </body>
 </html>
-
-<script src="js/common/func_check_input.js"></script>
