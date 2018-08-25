@@ -100,8 +100,13 @@
 				$.ajax({
 					url:"http://localhost:8090/user/insertUser.json",
 					type : "GET",
-					data : {'stuId':$('#id').val(), 'pw':$('#pw').val(),'name':$('#name').val(),
-					'semester':$('#semester').val(), 'email':$('#email').val()},
+					data : {
+						'stuId':$('#id').val(),
+						'pw':$('#pw').val(),
+						'name':$('#name').val(),
+						'semester':$('#semester').val(),
+						'email':$('#email').val()
+					},
 					success : function(result){
 						console.log(result);
 

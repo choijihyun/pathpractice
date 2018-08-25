@@ -40,7 +40,7 @@ public class SubjectController {
 		
 		param.put("word",word);			
 		
-		System.out.println(word);
+		System.out.println("TTTT :::: "+word);
 		List<SubjectDto> subjectDtoList =subjectDao.searchSubject(param);	
 
     	JSONArray jSONArray=new JSONArray();
