@@ -95,6 +95,7 @@
 				if( !chkInput() ) {
 					return;
 				}
+				event.preventDefault();
 
 				$.ajax({
 					url:"http://localhost:8090/user/insertUser.json",

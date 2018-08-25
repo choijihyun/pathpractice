@@ -77,7 +77,8 @@
 		$(document).ready(function(){
 	      $('#click').on('click',function(){ //입력한 과목명 가지고 선택할 수 있게 만들어야함.(subNum 받아야함!)
 	      	var checkList = [];
-
+	      	
+	      	event.preventDefault();
 	      	$.ajax({
 	      		url:"http://localhost:8090//subject/searchSubject.json",
 
