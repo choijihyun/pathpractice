@@ -61,31 +61,27 @@
 
 						<!-- 스크롤바 제외한 과제들 보여주는 영역 -->
 						<div id="showAssign" class="px-2">
-
-							<!-- Button trigger modal -->
-
 							<!-- Modal -->
 							<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
 								<div class="modal-dialog modal-dialog-centered modal-sm" role="document">
 									<div class="modal-content">
 										<div class="modal-header">
-											<h5 class="modal-title"> </h5>
+											<h5 class="modal-title"></h5>
 											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 												<span aria-hidden="true">&times;</span>
 											</button>
 										</div>
-										<div class="modal-body">
-											
-										</div>
+										<div class="modal-body"></div>
 										
 										<div class="modal-footer">
 											<a class="btn btn-sm btn-primary " aria-label="Left Align" href="assignment_add.html">Change</a>
 											<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
-											<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Delete</button>
+											<button type="button" id='assign_del' class="btn btn-sm btn-danger" data-dismiss="modal">Delete</button>
 										</div>
 									</div>
 								</div>
 							</div>
+
 						</div>
 					</div>
 				</div>
@@ -100,16 +96,53 @@
 </body>
 </html>
 
-<!-- modal -->
+<!-- modal-->
 <script type="text/javascript">
 	$(function(){
-		$(document).on("click",'.popbutton_assignment',function() { 
+		$(document).on("click",'.popbutton_assignment',function() {
+			var title = $(this).data('title');
+			var body = '';
+			body += 'due-date=' + $(this).data('dueDate');
+			body += ' , importance=' + $(this).data('importance');
+			body += ' , contents=' + $(this).data('contents');
+
+			$('.modal-title').text(title);
+			$('.modal-body').text(body);
 
 			$('div.modal').modal();
-
 		}); 
 
 	})
+</script>
+
+
+<!-- 과제 삭제 버튼 클릭-->
+<script type="text/javascript">
+	$('#assign_del').on('click', function (){
+		var assignNo = $(this).data('assignNo');
+		alert(assignNo);
+		
+		event.preventDefault();
+		$.ajax({
+			url:"http://localhost:8090/homework/deleteHomework.json",
+			type : "GET",
+			data : {
+				'stuId':'1',
+				'assignNo': assignNo
+			},
+			success : function(result){
+				if(result['result'] === '1'){ 
+					alert('삭제 성공');
+					console.log(result);	
+				}else{
+					alert('삭제 실패');
+				}
+			},
+			error : function(){
+				alert('삭제 에러');
+			}
+		});
+	});
 </script>
 
 <!-- 화면에 과제 표시 -->
@@ -121,7 +154,7 @@
 			type : "GET",
 			data : {
 				'stuId':'1',
-				'select':1,
+				'select':1
 			},
 			success : function(result){
 				if(result['result'] === 'no data'){ 
@@ -130,19 +163,25 @@
 					alert('불러오기 성공');
 					console.log(result);	
 
-
 					for(var i=0 ; i<result['result'].length ; i++){
 
 						var assign_title = result['result'][i]['title'];
 						var assign_contents = result['result'][i]['contents'];
 
 						var str = '';
-						str += '<button type="button" class="btn btn-lg btn-block btn-outline-danger popbutton_assignment"> ';
-						str += '<h6 id="assign'+(i+1)+'_title" style="font-weight: bold" class="mb-2">-'+ assign_title +'</h6>';
-						str += '<p6 id="assign'+(i+1)+'_context">'+assign_contents+'</p6>';
+						str += '<button type="button" ';
+						str += 'class="btn btn-lg btn-block btn-outline-danger popbutton_assignment" ';
+						str += 'data-due-date= " ' + result['result'][i]['dueDate'] + ' " ';
+						str += 'data-importance= " ' + result['result'][i]['importance'] + ' " ';
+						str += 'data-title= " ' + assign_title + ' " ';
+						str += 'data-assign-no= " ' + result['result'][i]['assignNo'] + ' " ';
+						str += 'data-contents= " ' + assign_contents + '">';
+						str += '<h6 id="assign' + (i+1) + '_title" ';
+						str += 'style="font-weight: bold" class="mb-2">-' + assign_title + '</h6>';
+						str += '<p6 id="assign' + (i+1) + '_context">' + assign_contents + '</p6>';
 						str += '</button>';
 						$('#showAssign').append(str);
-					}
+					} 
 				}
 
 			},
@@ -152,6 +191,7 @@
 		});
 	});
 </script>
+
 
 <script src="js/common/header.js"></script>
 <script src="js/common/footer.js"></script>
