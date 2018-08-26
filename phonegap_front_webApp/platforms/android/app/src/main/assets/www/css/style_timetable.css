@@ -1,0 +1,11 @@
+/*시간표 영역*/
+.table-time{
+	padding:0px;
+	color : #6c757d;
+	font-size: 12px;
+	height: 100px;
+	border : 1px solid #e5e5e5;
+}
+.stripe-top{
+	border-top: 1px solid #e5e5e5;
+}

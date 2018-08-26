@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: kiiimes
 Build-Jdk: 1.8.0_144
+=======
+Built-By: ghwnw
+Build-Jdk: 1.8.0_131
+>>>>>>> fc264fd186c8aeae945459385cf1aea64db89971
 Created-By: Maven Integration for Eclipse
 
