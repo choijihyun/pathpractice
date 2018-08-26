@@ -75,8 +75,7 @@
 										
 										<div class="modal-footer">
 											<a class="btn btn-sm btn-primary " aria-label="Left Align" href="assignment_add.html">Change</a>
-											<button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
-											<button type="button" id='assign_del' class="btn btn-sm btn-danger" data-dismiss="modal">Delete</button>
+											<button type="button" id='assignDel' class="btn btn-sm btn-danger" data-dismiss="modal">Delete</button>
 										</div>
 									</div>
 								</div>
@@ -92,7 +91,7 @@
 			</div>
 		</div>
 	</div>
-
+	<input type = "hidden" id="hiddenAssign" name = "hide" value = "" >
 </body>
 </html>
 
@@ -102,6 +101,10 @@
 		$(document).on("click",'.popbutton_assignment',function() {
 			var title = $(this).data('title');
 			var body = '';
+
+			var assignNo = $(this).data('assignNo');
+			$('#hiddenAssign').val(assignNo).trigger('change');
+
 			body += 'due-date=' + $(this).data('dueDate');
 			body += ' , importance=' + $(this).data('importance');
 			body += ' , contents=' + $(this).data('contents');
@@ -118,10 +121,8 @@
 
 <!-- 과제 삭제 버튼 클릭-->
 <script type="text/javascript">
-	$('#assign_del').on('click', function (){
-		var assignNo = $(this).data('assignNo');
-		alert(assignNo);
-		
+	$('#assignDel').on('click', function (){
+		var assignNo = $('#hiddenAssign').val();
 		event.preventDefault();
 		$.ajax({
 			url:"http://localhost:8090/homework/deleteHomework.json",
@@ -131,7 +132,7 @@
 				'assignNo': assignNo
 			},
 			success : function(result){
-				if(result['result'] === '1'){ 
+				if(result['result'] === "1"){ 
 					alert('삭제 성공');
 					console.log(result);	
 				}else{
