@@ -58,8 +58,7 @@
 									<th class="text-center" style="border-left: 1px solid #e5e5e5;">교수명</th>
 								</tr>
 							</thead>
-							<tbody>
-							</tbody>
+							<tbody></tbody>
 						</table>
 					</div>
 
@@ -78,9 +77,11 @@
 	      $('#click').on('click',function(){ //입력한 과목명 가지고 선택할 수 있게 만들어야함.(subNum 받아야함!)
 	      	var checkList = [];
 
+	      	$( '#table_findSub > tbody').empty();
+	      	
 	      	event.preventDefault();
 	      	$.ajax({
-	      		url:"http://localhost:8090/subject/searchSubject.json]",
+	      		url:"http://localhost:8090//subject/searchSubject.json",
 
 	      		type : "GET",
 	      		data : {'word':$('#subjectName').val()},
