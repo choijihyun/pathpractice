@@ -45,14 +45,16 @@
 								<span class="fas fa-search" id="click"></span>
 							</a>
 						</div>
-						<table style="overflow:auto;" id="table_findSub" class="table table-borderless table-sm table-time">
+							<table style="overflow:auto;" id="table_findSub" class="table table-borderless table-sm table-time">
 							<colgroup>
+								<col width="10%"/>
 								<col width="20%"/>
 								<col width="40%"/>
-								<col width="40%"/>
+								<col width="30%"/>
 							</colgroup>
 							<thead>
 								<tr>
+									<th class="text-center" style="border-left: 1px solid #e5e5e5;">CK</th>
 									<th class="text-center">NO</th>
 									<th class="text-center" style="border-left: 1px solid #e5e5e5;">학수번호</th>
 									<th class="text-center" style="border-left: 1px solid #e5e5e5;">교수명</th>
@@ -78,11 +80,10 @@
 	      	var checkList = [];
 
 	      	$( '#table_findSub > tbody').empty();
-	      	
+
 	      	event.preventDefault();
 	      	$.ajax({
 	      		url:"http://localhost:8090//subject/searchSubject.json",
-
 	      		type : "GET",
 	      		data : {'word':$('#subjectName').val()},
 	      		success : function(result){
@@ -98,32 +99,59 @@
 	               	var	tableLen = result['result'].length;
 	               	var table = document.getElementById("table_findSub"),rIndex,cIndex;
 
-	               	var cell = new Array(); 
+
+									var cell = new Array();
 	               	for(var i=0 ; i <tableLen ; i++){
 	               		newRow = table.insertRow(table.length),
-	               		cell[0] = newRow.insertCell(0),
+										//newRow.innerHTML = "<tr>",
+										cell[0] = newRow.insertCell(0),
 	               		cell[1] = newRow.insertCell(1),
 	               		cell[2] = newRow.insertCell(2),
+	               		cell[3] = newRow.insertCell(3),
 
-	               		cell[0].innerHTML = i+1;
-	               		cell[1].innerHTML = result['result'][i]['subNo'];
-	               		cell[2].innerHTML = result['result'][i]['profName'];
 
-	               		
+										cell[1].innerHTML = i+1;
+	               		cell[2].innerHTML = result['result'][i]['subNo'];
+	               		cell[3].innerHTML = result['result'][i]['profName'];
+										//newRow.innerHTML = "</tr>";
+
 	               		$(newRow).addClass("stripe-top");
 	               		for(var j=0 ; j<2 ; j++)
 	               			$(cell[j]).css("border-right","1px solid #e5e5e5");
 	               	}
-	               }               
+
+	               }
 	           },
 	           error : function(){
 	           	alert('검색 에러');
 	           }
 	       });
 
-
+				 $('#submit').on('click',function(){ //입력한 과목명 가지고 선택할 수 있게 만들어야함.(subNum 받아야함!)
+ 	      		$.ajax({
+							type : "post",
+							url : "assignment_add.html",
+							success : function(result){
+								console.log(result);
+								$('#subNo').html(result);
+							}
+						})
 	      });
+
+				$('.stripe-top').click(function(){
+					// 현재 클릭된 Row(<tr>)
+					var tr = $(this);
+					console.log(tr);
+					var td = tr.children();
+					var children = td.find('tr');
+					console.log(td);
+
+					// td.eq(index)를 통해 값을 가져올 수도 있다.
+					No = children.children();
+					console.log(No);
+			});
 	  });
+	});
 	</script>
 </body>
 </html>
