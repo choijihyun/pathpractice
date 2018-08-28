@@ -97,7 +97,7 @@ public class UserController {
 		param.put("pw",pw);		
 		param.put("email",email);
 		//
-		
+		System.out.println(param);
 		//이 함수(url)은 회원가입이 주 목적이기 때문에
 		//결과로 성공 or 실패만 알려 주면 돼
 		//int 값으로 반환이 되는데 1이면 성공 나머지 값이면 실패!!
@@ -110,7 +110,7 @@ public class UserController {
 			// TODO: handle exception
 		}
 
-
+		System.out.println(result);
     	JSONObject jSONObject = new JSONObject();
     	//그래서 여기서 성공 or 실패 구분해서 안드로이드에 json 데이터를 결과로 전달해줄거야
     	if(result==1) {
