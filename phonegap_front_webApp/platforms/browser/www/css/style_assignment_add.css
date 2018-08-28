@@ -1,0 +1,81 @@
+body{
+	/*
+	background: #dd3247;
+	padding-top: 10%;*/
+}
+.wdi-red{
+	color: #dd3247;
+}
+.login-box{
+	background: #fff;
+	padding: 50px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.btn-cancel{
+	border-radius: 0;
+	background: #dd3247;
+	color: #fff;
+	-webkit-transition: all 0.8s;
+	transition: all 0.8s;
+	margin-top: 10px;
+}
+
+.btn-cancel:hover{
+	background: transparent;
+	border: 1px solid #dd3247;
+	color: #dd3247;
+	margin-top: 10px;
+}
+
+
+.btn-submit{
+	border-radius: 0;
+	background: #4E8DC6;
+	color: #fff;
+	-webkit-transition: all 0.8s;
+	transition: all 0.8s;
+	margin-top: 10px;
+}
+
+.btn-submit:hover{
+	background: transparent;
+	border: 1px solid #4E8DC6;
+	color: #4E8DC6;
+	margin-top: 10px;
+}
+
+/*input 영역*/
+.flat-input{
+	margin-top: 20px;
+	border: none;
+	border-radius: 0;
+	border-bottom: 1px solid #dd3247;
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+	background: -webkit-linear-gradient(top, rgba(255,255,255,0) 96%, #dd3247 4%);
+	background: linear-gradient(to bottom , rgba(255,255,255,0) 96%, #dd3247 4%);
+	background-position: -500px 0;
+	background-size: 100% 100%;
+	background-repeat: no-repeat; 
+}
+/*input 영역 클릭 했을 때*/
+.flat-input:focus{
+	box-shadow: none;
+	outline: none;
+	background-position: 0 0;
+	border-bottom: 1px solid #dd3247;
+}
+
+.label{
+	color: #dd3247;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.btn-icon{
+	border: 0;
+	background: #fff;
+	color: #6c757d;
+}
+

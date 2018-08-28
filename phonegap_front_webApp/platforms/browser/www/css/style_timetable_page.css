@@ -1,0 +1,131 @@
+body{
+	/*
+	background: #dd3247;
+	padding-top: 10%;*/
+}
+.wdi-red{
+	color: #dd3247;
+}
+.login-box{
+	background: #fff;
+	padding: 0px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+/*상단,하단 바 제외한 가운데 영역*/
+.main-area{
+	background: #fff;
+}
+/*로그아웃 버튼*/
+.btn-log-out{
+	border: 0;
+	margin-left: 25px;
+	margin-top: 10px;
+	align-content: right;
+	background: #f9f9f9;
+	color: #6c757d;
+	max-width: 60px;
+	max-height: 30px;
+}
+/*로그아웃 버튼에 마우스 올릴 때*/
+.btn-logout:hover{
+	border-radius: 0;
+	background: transparent;
+	border: 1px solid #dd3247;
+	color: #dd3247;
+	max-width: 60px;
+	max-height: 30px;
+}
+.btn-add{
+	border:0;
+	outline: none;
+	-webkit-transition: all 0.8s;
+	transition: all 0.8s;
+	font-weight: bold;
+	background: #fff;
+}
+.btn-add:hover,.btn-add:focus{
+	border:0;
+	outline: none;
+	font-weight: bold;
+	background: #fff;
+	color: #dd3247;
+}
+.btn-addSub{
+	font-weight: bold;
+	border-radius: 0;
+	box-shadow: none;
+	outline: none;
+	border-color: #d5d5d5;
+	font-size: 11px;
+	background: #fff;
+	margin: 10px;
+}
+.btn-addSub:hover,.btn-addSub:focus{
+	font-weight: bold;
+	border-radius: 0;
+	box-shadow: none;
+	outline: none;
+	border-color: #d5d5d5;
+	font-size: 11px;
+	background: #fff;
+	margin: 10px;
+	color: #dd3247;
+}
+.upperbarCollapse,.upperbarCollapse:focus{
+	color: #6c757d;
+}
+.card-plus{
+	background: #f2f2f2;
+}
+.card-directly{
+	background: #f9f9f9;
+}
+.list-group-item{
+	font-size: 12px;
+	font-weight: bold;
+	box-shadow: none;
+}
+.list-group-item:hover,.list-group-item:focus{
+	font-size: 12px;
+	font-weight: bold;
+	box-shadow: none;
+	color: #dd3247;
+}
+.label{
+	text-align: left;
+	font-size: 11px;
+	font-weight: bold;
+}
+.input{
+	border-radius: 0;
+	box-shadow: none;
+	outline: none;	
+}
+.input:focus{
+	border-radius: 0;
+	box-shadow: none;
+	outline: none;	
+	border-color: #dd3247;
+	background-position: -500px 0;
+	background-size: 100% 100%;
+	background-repeat: no-repeat; 
+}
+#sHour,#eHour,#sMinute,#eMinute,#day1,#day2,.dropdown-menu,
+#sHour:focus,#eHour:focus,#sMinute:focus,#eMinute:focus,#day1:focus,#day2:focus,.dropdown-menu:focus{
+	background: #fff;
+	box-shadow: none;
+	outline: none;
+	font-size: 10px;
+	padding-top:3px;
+	padding-bottom:3px;
+}
+.time-label{
+	padding-top:6.6px; 
+	text-align: left;
+	font-size: 10px;
+	font-weight: bold;
+}
+.btn-submit{
+	width: 100%;
+}

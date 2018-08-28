@@ -25,7 +25,7 @@ public class HomeworkController {
 	
 	//insert
 	@ResponseBody
-    @RequestMapping(value = "/homework/insertHomework.json", method = RequestMethod.GET)// value라는 값에 매핑, get방식 사용
+    @RequestMapping(value = "/homework/insertHomework.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value라는 값에 매핑, get방식 사용
     public String insertUser(
     			Model model,
 
@@ -74,7 +74,7 @@ public class HomeworkController {
 	
 	//delete
 	@ResponseBody
-	@RequestMapping(value = "/homework/deleteHomework.json", method = RequestMethod.GET)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.
+	@RequestMapping(value = "/homework/deleteHomework.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.
 	public String deleteHomework(//url에 맵핑(연결)된 함수
 			Locale locale, //안드로이드에서 받을 파라미터
 			Model model, //안드로이드에서 받을 파라미터
@@ -103,7 +103,7 @@ public class HomeworkController {
 	
 	//update
 	@ResponseBody
-    @RequestMapping(value = "/homework/updateHomework.json", method = RequestMethod.GET)// value라는 값에 매핑, get방식 사용
+    @RequestMapping(value = "/homework/updateHomework.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value라는 값에 매핑, get방식 사용
     public String updateUser(
     			Model model,
 
@@ -151,7 +151,7 @@ public class HomeworkController {
 
 	//select
 		@ResponseBody
-		@RequestMapping(value = "/homework/selectHomework.json", method = RequestMethod.GET)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.
+		@RequestMapping(value = "/homework/selectHomework.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.
 		public String selectHomework(//url에 맵핑(연결)된 함수
 				Locale locale, //안드로이드에서 받을 파라미터
 				Model model, //안드로이드에서 받을 파라미터
