@@ -108,16 +108,16 @@
 	               				cell[1] = newRow.insertCell(1),
 	               				cell[2] = newRow.insertCell(2),
 	               				cell[3] = newRow.insertCell(3),
-												cell[4] = newRow.insertCell(3),
+								cell[4] = newRow.insertCell(4),
 
-	               				cell[0].innerHTML = '<input type="radio" name="select">';
+	               				cell[0].innerHTML = '<input type="radio" id="radio'+(i+1)+'" name="select">';
 	               				cell[1].innerHTML = i+1;
 	               				cell[2].innerHTML = result['result'][i]['startHour'];
-												cell[3].innerHTML = result['result'][i]['classRoom'];
+								cell[3].innerHTML = result['result'][i]['classRoom'];
 	               				cell[4].innerHTML = result['result'][i]['profName'];
 
 	              	 			$(newRow).addClass("stripe-top");
-	               				for(var j=0 ; j<3 ; j++)
+	               				for(var j=0 ; j<5 ; j++)
 	               					$(cell[j]).css("border-right","1px solid #e5e5e5");
 	             	  		}
 
@@ -127,20 +127,7 @@
 	           			alert('검색 에러');
 	          	 	}
 	      		});
-
-				//  $('.stripe-top').click(function(){
-				// 	// 현재 클릭된 Row(<tr>)
-				// 	var tr = $(this);
-				// 	console.log(tr);
-				// 	var td = tr.children();
-				// 	var children = td.find('tr');
-				// 	console.log(td);
-
-				// 	// td.eq(index)를 통해 값을 가져올 수도 있다.
-				// 	No = children.children();
-				// 	console.log(No);
-				// });
-			});
+	      	});
 	  	});
 	</script>
 	<script type="text/javascript">
@@ -164,13 +151,11 @@
 					table.rows[i].cells[j].onclick = function(){
 						rIndex = this.parentElement.rowIndex;
 						cIndex = this.cellIndex;
-
-						//내가 하려는게 행 누르면 checkbox 위치도 바뀔수 있게!!!!!
-
-						//table.rows[rIndex].cells[0].innerHTML = checked;
-						//table.rows[rIndex].cells[0].checked();
-						//console.log(table.rows[rIndex].cells[0].innerHTML);
+						
 						console.log("ROW:" +rIndex+ ", Cell:" +cIndex);
+						
+						$('input:radio[id="radio'+rIndex+'"]:radio[name="select"]').prop("checked", true)
+
 					}
 				}
 			}
