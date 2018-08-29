@@ -21,4 +21,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    <insert id="insertUser" parameterType="map">
     	insert into Student(name,stuId,semester,pw,email) values ( #{name},#{stuId},#{semester},#{pw},#{email})
     </insert>
+    
+    <!--
+        로그인된 경우 해당 세션id와 유효시간을 사용자 테이블에 세팅한다.
+     -->
+    <update id="keepLogin">
+        update Student set sessionKey = #{sessionId}, sessionLimit = #{next} where stuId=#{stuId}
+    </update>
+    <!--
+        유효기간이 남아 있으면서 해당 sessionId를 가지는 사용자 정보를 꺼내오는 부분
+     
+    <select id="checkUserWithSessionKey" resultType="UserVO">
+        select * from Student where sessionKey = #{sessionId} and sessionLimit > now()
+    </select>
+	-->
+
 </mapper>
