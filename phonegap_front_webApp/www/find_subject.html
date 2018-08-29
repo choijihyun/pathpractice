@@ -79,9 +79,8 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 	     	$('#click').on('click',function(){ //입력한 과목명 가지고 선택할 수 있게 만들어야함.(subNum 받아야함!)
+						$('.addTable').empty(); // .addTable 클래스를 가진항목 지우기(테이블 내용 지우기)
 	   		   	var checkList = [];
-
-	      		$( '#table_findSub > tbody').empty();
 
 	      		event.preventDefault();
 				$.ajax({
@@ -108,15 +107,16 @@
 	               				cell[1] = newRow.insertCell(1),
 	               				cell[2] = newRow.insertCell(2),
 	               				cell[3] = newRow.insertCell(3),
-								cell[4] = newRow.insertCell(4),
+												cell[4] = newRow.insertCell(4),
 
 	               				cell[0].innerHTML = '<input type="radio" id="radio'+(i+1)+'" name="select">';
 	               				cell[1].innerHTML = i+1;
 	               				cell[2].innerHTML = result['result'][i]['startHour'];
-								cell[3].innerHTML = result['result'][i]['classRoom'];
+												cell[3].innerHTML = result['result'][i]['classRoom'];
 	               				cell[4].innerHTML = result['result'][i]['profName'];
 
 	              	 			$(newRow).addClass("stripe-top");
+												$(newRow).addClass("addTable");
 	               				for(var j=0 ; j<5 ; j++)
 	               					$(cell[j]).css("border-right","1px solid #e5e5e5");
 	             	  		}
@@ -151,9 +151,9 @@
 					table.rows[i].cells[j].onclick = function(){
 						rIndex = this.parentElement.rowIndex;
 						cIndex = this.cellIndex;
-						
+
 						console.log("ROW:" +rIndex+ ", Cell:" +cIndex);
-						
+
 						$('input:radio[id="radio'+rIndex+'"]:radio[name="select"]').prop("checked", true)
 
 					}
