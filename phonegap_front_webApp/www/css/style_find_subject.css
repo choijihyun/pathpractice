@@ -92,13 +92,3 @@ body{
 .stripe-top{
 	border-top: 1px solid #e5e5e5;
 }
-
-table.row-clickable tbody tr td {
-    padding: 0;
-}
-
-table.row-clickable tbody tr td a {
-    display: block;
-    padding: 8px;
-}
-#table_findSub tr:hover {cursor: pointer;}
