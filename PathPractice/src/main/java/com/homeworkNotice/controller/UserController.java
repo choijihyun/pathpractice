@@ -60,14 +60,16 @@ public class UserController {
     	//Dao4. Dao3까지 진행해서 만든 sql을 userDao.?????로 만들어서 사용하면 되고, 파라미터 넣는법은 바로 위에 적었지??ㅎㅎ
     	
     	JSONObject jSONObject = new JSONObject();
-    	if(!userDtoList.isEmpty() && userDtoList.size()==1) {//반환받은 데이터가 유효하면(db에 있으면) 브라우저 화면에 결과를 뿌려준다
-        	jSONObject.put("result", userDtoList.get(0).getPw()); 
+    	if(!userDtoList.isEmpty()) {//반환받은 데이터가 유효하면(db에 있으면) 브라우저 화면에 결과를 뿌려준다
+        	jSONObject.put("pw", userDtoList.get(0).getPw()); 
+        	jSONObject.put("email", userDtoList.get(0).getEmail());
         	//여기도 궁금!!!! 그 userDtoList.get(0)은 뭘 의미하는거에영???
         	//db에서 받은 리스트들 중 첫번째 인덱스를 가져오는거야 (근데 사실 id로 가져오면 항상 1개밖에 없긴함;;;ㅎㅎ)
     	}
     	else {//없으면 에러라고 브라우저에 뿌려준다
     		jSONObject.put("result", "no data");
     	}
+    	System.out.println(jSONObject.toString());
     	return jSONObject.toString();//요청한 내용들을 반환해준다.
     }
 	
