@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	select * from Student
     </select>    
     <select id="selectUser" resultType="com.homeworkNotice.dto.UserDto" parameterType="map">
-    	select pw from Student where stuId = #{stuId}
+    	select pw,email from Student where stuId = #{stuId}
     </select> 
    <!-- 여기 password 불러오는거 있으니까 굳이 여기에서는 안만들어도 됨 -->
     <select id="selectUserInfo" resultType="com.homeworkNotice.dto.UserDto" parameterType="map">
