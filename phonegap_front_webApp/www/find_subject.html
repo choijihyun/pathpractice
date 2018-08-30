@@ -71,11 +71,11 @@
 							OK
 						</a>
 					</div>
-
 				</div>
 			</div>
 		</div>
 	</div>
+	<input type = "hidden" id="hiddenAssign" name = "hide" value = "" >
 	<script type="text/javascript">
 		$(document).ready(function(){
 	     	$('#click').on('click',function(){ //입력한 과목명 가지고 선택할 수 있게 만들어야함.(subNum 받아야함!)
@@ -109,10 +109,11 @@
 	               				cell[3] = newRow.insertCell(3),
 												cell[4] = newRow.insertCell(4),
 
-	               				cell[0].innerHTML = '<input type="radio" id="radio'+(i+1)+'" name="select">';
+
+	               				cell[0].innerHTML = '<input type="radio" id="radio'+(i+1)+'" name="select" data-sub-no="'+result['result'][i]['subNo']+'">';
 	               				cell[1].innerHTML = i+1;
 	               				cell[2].innerHTML = result['result'][i]['startHour'];
-												cell[3].innerHTML = result['result'][i]['classRoom'];
+												cell[3].innerHTML = result['result'][i]['classroom'];
 	               				cell[4].innerHTML = result['result'][i]['profName'];
 
 	              	 			$(newRow).addClass("stripe-top");
@@ -120,7 +121,6 @@
 	               				for(var j=0 ; j<5 ; j++)
 	               					$(cell[j]).css("border-right","1px solid #e5e5e5");
 	             	  		}
-
 	             		}
 	         	  	},
 	          	 	error : function(){
@@ -132,14 +132,19 @@
 	</script>
 	<script type="text/javascript">
 		$('#submit').on('click',function(){ //입력한 과목명 가지고 선택할 수 있게 만들어야함.(subNum 받아야함!)
-		 	$.ajax({
-		 		type : "post",
-		 		url : "assignment_add.html",
-		 		success : function(result){
-		 			console.log(result);
-		 			$('#subNo').html(result);
-		 		}
-		 	})
+			//var checkBox =
+			var subNo = $('#hiddenAssign').val();
+
+			//여기서 해야되는게 이제 subNo을 assignment_add.html로 보내야함!!!!
+			//location.href="assignment_add.html?"+
+		 	//$.ajax({
+		 	//	type : "post",
+		 	//	url : "assignment_add.html",
+		 	//	success : function(result){
+		 	//		console.log(result);
+		 	//		$('#subNo').html(result);
+		 	//	}
+		 	//})
 		});
 
 		//테이블 클릭하면 행,열의 인덱스 찍어줌
@@ -154,8 +159,10 @@
 
 						console.log("ROW:" +rIndex+ ", Cell:" +cIndex);
 
-						$('input:radio[id="radio'+rIndex+'"]:radio[name="select"]').prop("checked", true)
+						$('input:radio[id="radio'+rIndex+'"]:radio[name="select"]').prop("checked", true);
+						var subNo = $("#radio"+rIndex).data('subNo')
 
+						$('#hiddenAssign').val(subNo).trigger('change');
 					}
 				}
 			}
