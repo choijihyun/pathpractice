@@ -60,14 +60,16 @@ public class UserController {
     	//Dao4. Dao3까지 진행해서 만든 sql을 userDao.?????로 만들어서 사용하면 되고, 파라미터 넣는법은 바로 위에 적었지??ㅎㅎ
     	
     	JSONObject jSONObject = new JSONObject();
-    	if(!userDtoList.isEmpty() && userDtoList.size()==1) {//반환받은 데이터가 유효하면(db에 있으면) 브라우저 화면에 결과를 뿌려준다
-        	jSONObject.put("result", userDtoList.get(0).getPw()); 
+    	if(!userDtoList.isEmpty()) {//반환받은 데이터가 유효하면(db에 있으면) 브라우저 화면에 결과를 뿌려준다
+        	jSONObject.put("pw", userDtoList.get(0).getPw()); 
+        	jSONObject.put("email", userDtoList.get(0).getEmail());
         	//여기도 궁금!!!! 그 userDtoList.get(0)은 뭘 의미하는거에영???
         	//db에서 받은 리스트들 중 첫번째 인덱스를 가져오는거야 (근데 사실 id로 가져오면 항상 1개밖에 없긴함;;;ㅎㅎ)
     	}
     	else {//없으면 에러라고 브라우저에 뿌려준다
     		jSONObject.put("result", "no data");
     	}
+    	System.out.println(jSONObject.toString());
     	return jSONObject.toString();//요청한 내용들을 반환해준다.
     }
 	
@@ -121,7 +123,45 @@ public class UserController {
     	}
     	return jSONObject.toString();
 	}
-	
+
+	//id에 해당하는 pw를 바꿈 지현이가 한부분!!!
+	@ResponseBody
+    @RequestMapping(value = "/user/updatePW.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value라는 값에 매핑, get방식 사용
+    public String updatePW(
+    			Model model,
+    			@RequestParam(value = "stuId", required=true) String stuId,
+    			@RequestParam(value = "pw", required=true) String pw) { 
+		HashMap<Object, Object> param=new HashMap<Object, Object>(); //각각의 id마다 hashmap 만들어주니까 생성을 해줌
+			
+		param.put("stuId",stuId);	
+		param.put("pw",pw);	
+		
+		System.out.println(param);
+		//이 함수(url)은 회원가입이 주 목적이기 때문에
+		//결과로 성공 or 실패만 알려 주면 돼
+		//int 값으로 반환이 되는데 1이면 성공 나머지 값이면 실패!!
+		int result=0;
+		try {
+			result=userDao.updatePW(param);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+
+		System.out.println(result);
+    	JSONObject jSONObject = new JSONObject();
+    	//그래서 여기서 성공 or 실패 구분해서 안드로이드에 json 데이터를 결과로 전달해줄거야
+    	if(result==1) {
+    		jSONObject.put("result", "1");//성공    		
+    	}
+    	else {
+    		jSONObject.put("result", "0");
+    	}
+    	System.out.println(jSONObject.toString());
+    	return jSONObject.toString();
+	}
+
 
 
 	@ResponseBody

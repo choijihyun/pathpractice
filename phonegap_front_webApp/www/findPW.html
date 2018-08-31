@@ -68,7 +68,8 @@
                if(result['result'] === "no data"){ //회원정보 없음
                   alert('회원정보가 없습니다.');
                }else{
-                  alert("비밀번호 : "+result['result']);
+                  alert("비밀번호 : "+result['pw']);
+                  alert("email : "+result['email']);
                }
             },
             error : function(){
