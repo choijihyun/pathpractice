@@ -28,101 +28,151 @@
 	<!-- Container -->
 	<div class="container" data-spy = "scroll">
 		<div class="row justify-content-md-center justify-content-xs-center">
-			<div class="col-md-6 col-md-auto col-xs-6 col-xs-auto login-box ">
-				<h1 class="text-center m-0 wdi-red">FIND!</h1>
+			<div class="col-md-6 col-md-auto col-xs-6 col-xs-auto login_box ">
+				<h1 class="text-center m-0 wdi_red">FIND!</h1>
 				<hr>
-				<div class="jumbotron p-0 rounded main-area">
+				<div class="jumbotron p-0 rounded main_area">
 
 					<div class="form-row m-3">
-						<div class= "col-md-3 col-xs-3 mt-1 mb-1 label">
+						<div class= "col-md-3 col-xs-3 mt-1 mb-1 label_input">
 							과목명
 						</div>
 						<div class= "col-md-7 col-xs-7 ">
-							<input type="text"  class="form-control form-control-sm mt-1 mb-1 flat-input" id="subjectName">
+							<input type="text"  class="form-control form-control-sm mt-1 mb-1 flat_input" id="subjectName">
 						</div>
 						<div class= "col-md-2 col-xs-2 mt-1 mb-1">
-							<a  class="btn btn-sm btn-icon" aria-label="Left Align">
+							<a  class="btn btn-sm btn_icon" aria-label="Left Align">
 								<span class="fas fa-search" id="click"></span>
 							</a>
 						</div>
-						<table style="overflow:auto;" id="table_findSub" class="table table-borderless table-sm table-time">
+						<table style="overflow:auto;" id="tableFindSub" class="table table-sm table_time">
 							<colgroup>
+								<col width="10%"/>
+								<col width="5%"/>
+								<col width="25%"/>
 								<col width="20%"/>
-								<col width="40%"/>
-								<col width="40%"/>
+								<col width="20%"/>
+								<col width="20%"/>
 							</colgroup>
 							<thead>
 								<tr>
 									<th class="text-center">NO</th>
-									<th class="text-center" style="border-left: 1px solid #e5e5e5;">학수번호</th>
+									<th class="text-center" style="border-left: 1px solid #e5e5e5;">CK</th>
+									<th class="text-center" style="border-left: 1px solid #e5e5e5;">과목명</th>
+									<th class="text-center" style="border-left: 1px solid #e5e5e5;">시간</th>
+									<th class="text-center" style="border-left: 1px solid #e5e5e5;">장소</th>
 									<th class="text-center" style="border-left: 1px solid #e5e5e5;">교수명</th>
 								</tr>
 							</thead>
-							<tbody>
-							</tbody>
+							<tbody></tbody>
 						</table>
 					</div>
 
 					<div class= "col-md-12 col-xs-12" >
-						<a class="btn btn-lg btn-block btn-login" id = "submit" >
+						<a class="btn btn-lg btn_login" id="submit" >
 							OK
 						</a>
+						<a class="btn btn-lg btn_login" id="submit" href="assignment_add.html">
+							CANCEL
+						</a>
 					</div>
-
 				</div>
 			</div>
 		</div>
 	</div>
+	<input type = "hidden" id="hiddenAssign" name="hide" value="" >
 	<script type="text/javascript">
 		$(document).ready(function(){
-	      $('#click').on('click',function(){ //입력한 과목명 가지고 선택할 수 있게 만들어야함.(subNum 받아야함!)
-	      	var checkList = [];
+	     	$('#click').on('click',function(){ //입력한 과목명 가지고 선택할 수 있게 만들어야함.(subNum 받아야함!)
+				$('.add_row').empty(); // .add_row 클래스를 가진항목 지우기(테이블 내용 지우기)
 
-	      	event.preventDefault();
-	      	$.ajax({
-	      		url:"http://localhost:8090/subject/searchSubject.json",
+				var checkList = [];
 
-	      		type : "GET",
-	      		data : {'word':$('#subjectName').val()},
-	      		success : function(result){
-	               if(result['result'] === 'no data'){ //과목 검색 성공
-	               	alert('검색 실패');
-	               }else{
-	               	alert('검색 성공');
-	               	console.log(result);
+	      		event.preventDefault();
+				$.ajax({
+	      			url:"http://localhost:8090//subject/searchSubject.json",
+	      			type : "GET",
+	      			data : {
+	      				'word':$('#subjectName').val()
+	      			},
+	      			success : function(result){
+	               		if(result['result'] === 'no data'){ //과목 검색 성공
+	               			alert('검색 실패');
+	               		}else{
+	               			alert('검색 성공');
 
-	               	console.log(result['result'][0]['subNo']);
-	               	console.log(result['result'].length);
+	               			var	tableLen = result['result'].length;
+	               			var table = document.getElementById("tableFindSub"),rIndex,cIndex;
 
-	               	var	tableLen = result['result'].length;
-	               	var table = document.getElementById("table_findSub"),rIndex,cIndex;
+	               			var cell = new Array();
+	             	  		for(var i=0 ; i <tableLen ; i++){
+	               				newRow = table.insertRow(table.length),
+	               				cell[0] = newRow.insertCell(0),
+	               				cell[1] = newRow.insertCell(1),
+	               				cell[2] = newRow.insertCell(2),
+	               				cell[3] = newRow.insertCell(3),
+								cell[4] = newRow.insertCell(4),
+								cell[5] = newRow.insertCell(5),
 
-	               	var cell = new Array(); 
-	               	for(var i=0 ; i <tableLen ; i++){
-	               		newRow = table.insertRow(table.length),
-	               		cell[0] = newRow.insertCell(0),
-	               		cell[1] = newRow.insertCell(1),
-	               		cell[2] = newRow.insertCell(2),
+	               				cell[0].innerHTML = i+1;
+	               				cell[1].innerHTML = '<input type="radio" id="radio'+(i+1)+'" name="select" data-sub-no="'+result['result'][i]['subNo']+'">';
+	               				cell[2].innerHTML = result['result'][i]['subName'];
+	               				cell[3].innerHTML = result['result'][i]['startHour'];
+								cell[4].innerHTML = result['result'][i]['classroom'];
+	               				cell[5].innerHTML = result['result'][i]['profName'];
 
-	               		cell[0].innerHTML = i+1;
-	               		cell[1].innerHTML = result['result'][i]['subNo'];
-	               		cell[2].innerHTML = result['result'][i]['profName'];
+	              	 			$(newRow).addClass("stripe_border_top");
+								$(newRow).addClass("add_row");
+	               				for(var j=0 ; j<6 ; j++)
+	               					$(cell[j]).css("border-right","1px solid #e5e5e5");
+	             	  		}
+	             		}
+	         	  	},
+	          	 	error : function(){
+	           			alert('검색 에러');
+	          	 	}
+	      		});
+	      	});
+	  	});
+	</script>
+	<script type="text/javascript">
+		$('#submit').on('click',function(){ //입력한 과목명 가지고 선택할 수 있게 만들어야함.(subNum 받아야함!)
+			//var checkBox =
+			var subNo = $('#hiddenAssign').val();
 
-	               		
-	               		$(newRow).addClass("stripe-top");
-	               		for(var j=0 ; j<2 ; j++)
-	               			$(cell[j]).css("border-right","1px solid #e5e5e5");
-	               	}
-	               }               
-	           },
-	           error : function(){
-	           	alert('검색 에러');
-	           }
-	       });
+			//여기서 해야되는게 이제 subNo을 assignment_add.html로 보내야함!!!!
+			//location.href="assignment_add.html?"+
+		 	//$.ajax({
+		 	//	type : "post",
+		 	//	url : "assignment_add.html",
+		 	//	success : function(result){
+		 	//		console.log(result);
+		 	//		$('#subNo').html(result);
+		 	//	}
+		 	//})
+		});
 
+		//테이블 클릭하면 행,열의 인덱스 찍어줌
+		var table = document.getElementById("tableFindSub"),rIndex,cIndex;
 
-	      });
-	  });
+		$('#tableFindSub').on('click', function (){
+			for(var i = 1 ; i < table.rows.length ; i++){
+				for(var j = 0 ; j<table.rows[i].cells.length ; j++){
+					table.rows[i].cells[j].onclick = function(){
+						rIndex = this.parentElement.rowIndex;
+						cIndex = this.cellIndex;
+
+						console.log("ROW:" +rIndex+ ", Cell:" +cIndex);
+
+						$('input:radio[id="radio'+rIndex+'"]:radio[name="select"]').prop("checked", true);
+						var subNo = $("#radio"+rIndex).data('subNo')
+
+						$('#hiddenAssign').val(subNo).trigger('change');
+					}
+				}
+			}
+		});
+
 	</script>
 </body>
 </html>

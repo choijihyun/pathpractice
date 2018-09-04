@@ -28,12 +28,9 @@ public class SubjectController {
 	
 	//search
 	@ResponseBody
-<<<<<<< HEAD
+
 	@RequestMapping(value = "/subject/searchSubject.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.
-=======
-	@RequestMapping(value = "/subject/searchSubject.json", produces="text/plain;application/json;charset=UTF-8", method = RequestMethod.GET)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.
-	
->>>>>>> fc264fd186c8aeae945459385cf1aea64db89971
+
 	public String searchSubject(//url에 맵핑(연결)된 함수
 			Locale locale, //안드로이드에서 받을 파라미터
 			Model model, //안드로이드에서 받을 파라미터
