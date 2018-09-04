@@ -37,7 +37,11 @@ public class UserDao {
 		return sqlSession.insert("UserDao.insertUser", param);		
 	}
 	
-	public int updatePW(HashMap<Object, Object> param) {
-		return sqlSession.insert("UserDao.updatePW", param);		
+	public int updatePw(HashMap<Object, Object> param) {
+		return sqlSession.insert("UserDao.updatePw", param);		
+	}
+	
+	public int updateUser(HashMap<Object,Object> param) {
+		return sqlSession.update("UserDao.updateUser",param);
 	}
 }
