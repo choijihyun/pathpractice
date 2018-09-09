@@ -43,10 +43,10 @@
 					</div>
 
 					<div class="list-group">
-						<button class="btn p-1 btn-sm list-group-item" type="button">정보 수정</button>
+						<button id="updateInfo"class="btn p-1 btn-sm list-group-item" type="button">정보 수정</button>
 						<button class="btn p-1 btn-sm list-group-item" type="button" onclick="location.href='changePW.html'">비밀번호 변경</button>
 						<button class="btn p-1 btn-sm list-group-item" type="button">알림 끄기</button>
-						<button class="btn p-1 btn-sm list-group-item" type="button">탈퇴</button>
+						<button id='secession' class="btn p-1 btn-sm list-group-item" type="button">탈퇴</button>
 					</div>
 				</div>
 
@@ -61,3 +61,33 @@
 </html>
 <script src="js/common/header.js"></script>
 <script src="js/common/footer.js"></script>
+<script type="text/javascript">
+	$('updateInfo').on('click',function(){
+
+		$.ajax({
+			url:"http://localhost:8090/user/insertUser.json",
+			type : "GET",
+			data : {
+				'stuId':$('#id').val(),
+				'pw':$('#pw').val(),
+				'name':$('#name').val(),
+				'semester':$('#semester').val(),
+				'email':$('#email').val()
+			},
+			success : function(result){
+				console.log(result);
+
+		            if(result["result"] === "1"){ //회원가입 성공
+		            	alert('정보수정 성공');
+		            	location.href = "index.html";
+		            }else{
+		            	alert('정보수정 실패');
+		            }
+		        },
+		        error : function(){
+		        	alert('정보수정 에러');
+		        }
+		    });
+	});
+
+</script>
