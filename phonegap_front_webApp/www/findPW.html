@@ -34,11 +34,11 @@
                <div class= "col-md-12 col-xs-12">
                   <input type="text" id="id" class="form-control form-control-lg flat_input" placeholder="username">
                </div>
-               <!-- 이건 뭐야...??? -->
+               <!-- 이건 뭐야...???
                <div class= "col-md-6 col-xs-6">
                   <a id="pw"></a>
                </div>
-
+-->
                <div class= "col-md-12 col-xs-12 mt-3" >
                   <button type="button" class="btn btn-md col-md-5 btn_submit" id="submit" >
                   FIND
@@ -53,6 +53,8 @@
       </div>
    </div>
 </div>
+<input type = "hidden" id="email" name="hide" value="" >
+<input type = "hidden" id="to_pw" name="hide" value="" >
 <script type="text/javascript">
    $(document).ready(function(){
       $('#submit').on('click',function(){
@@ -61,12 +63,27 @@
             type : "GET",
             data : {'stuId':$('#id').val()},
             success : function(result){
-               console.log(result);
                if(result['result'] === "no data"){ //회원정보 없음
                   alert('회원정보가 없습니다.');
-               }else{
-                  alert("비밀번호 : "+result['pw']);
-                  alert("email : "+result['email']);
+               }else{//회원정보가 존재함!
+                 $('#email').val(result['email']).trigger('change');
+                 $('#to_pw').val(result['pw']).trigger('change');
+
+                  $.ajax({
+                    type:"post",
+                    url : "content_me.php",
+                    success : function(result){
+                      if(result){
+                        alert("메일이 전송되었습니다.");
+                      }
+                      else{
+                        alert("메일이 전송되지 않았습니다.");
+                      }
+                    },
+                    error : function(){
+                      alert("php에 접근하지 못하였습니다.");
+                    }
+                  });
                }
             },
             error : function(){

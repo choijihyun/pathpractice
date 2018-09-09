@@ -124,9 +124,53 @@ public class UserController {
     	return jSONObject.toString();
 	}
 
+	@ResponseBody
+    @RequestMapping(value = "/user/updateUser.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value라는 값에 매핑, get방식 사용
+    public String updateUser(
+    			Model model,
+    			@RequestParam(value="name",required=true) String name,
+    			@RequestParam(value = "stuId", required=true) String stuId,
+    			@RequestParam(value = "semester", required=true) final int semester,
+    			@RequestParam(value = "pw", required=true) String pw,
+    			@RequestParam(value = "email", required=true) String email) { // 이렇게 5개의 파라미터를 받아오고 내용 안쓰면 x
+		HashMap<Object, Object> param=new HashMap<Object, Object>(); //각각의 id마다 hashmap 만들어주니까 생성을 해줌
+		
+		param.put("name", name);
+		param.put("stuId",stuId);		
+		param.put("semester",semester);		
+		param.put("pw",pw);		
+		param.put("email",email);
+		//
+		System.out.println(param);
+		//이 함수(url)은 회원가입이 주 목적이기 때문에
+		//결과로 성공 or 실패만 알려 주면 돼
+		//int 값으로 반환이 되는데 1이면 성공 나머지 값이면 실패!!
+		int result=0;
+		try {
+			result=userDao.updateUser(param);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+
+		System.out.println(result);
+    	JSONObject jSONObject = new JSONObject();
+    	//그래서 여기서 성공 or 실패 구분해서 안드로이드에 json 데이터를 결과로 전달해줄거야
+    	if(result==1) {
+    		jSONObject.put("result", "1");//성공    		
+    	}
+    	else {
+    		jSONObject.put("result", "0");
+    	}
+    	return jSONObject.toString();
+	}
+	
+	
+	
 	//id에 해당하는 pw를 바꿈 지현이가 한부분!!!
 	@ResponseBody
-    @RequestMapping(value = "/user/updatePW.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value라는 값에 매핑, get방식 사용
+    @RequestMapping(value = "/user/updatePw.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value라는 값에 매핑, get방식 사용
     public String updatePW(
     			Model model,
     			@RequestParam(value = "stuId", required=true) String stuId,
@@ -142,7 +186,7 @@ public class UserController {
 		//int 값으로 반환이 되는데 1이면 성공 나머지 값이면 실패!!
 		int result=0;
 		try {
-			result=userDao.updatePW(param);
+			result=userDao.updatePw(param);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
