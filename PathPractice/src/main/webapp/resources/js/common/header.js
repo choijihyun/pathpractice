@@ -10,7 +10,7 @@ headerHtml+='		<div class= "col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4">';
 headerHtml+='			<h2 class="app-header-logo"> PATH </h2>';
 headerHtml+='		</div>';
 headerHtml+='		<div class= "col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4">';
-headerHtml+='			<a class="btn btn-default btn-log-out" aria-label="Left Align" href="index.html">';
+headerHtml+='			<a class="btn btn-default btn-log-out" aria-label="Left Align" href="/index">';
 headerHtml+='				<span class="fas fa-sign-out-alt"></span> ';
 headerHtml+='			</a>';
 headerHtml+='		</div>';
