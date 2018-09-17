@@ -1,0 +1,50 @@
+테이블 총 5개 (18.09.17. 기준)
+
+Assignment
+ - 유저들이 과제를 등록하면 저장되는 테이블
+assignNo : 키값
+stuId : 등록한 유저 아이디
+registerDate : 등록날짜
+dueDate : 과제 마감날짜
+importance : 과제 중요도
+title : 과제 등록 이름
+contents : 과제 등록시 등록한 과제 내용
+subNo : 등록된 과제의 강의 번호
+success : 과제 했는지의 여부 등록
+
+
+Complete
+ - 유저의 수료 과목
+stuId : 등록한 유저 아이디
+subNo : 등록된 강의 학수번호
+
+
+Student
+ - 유저 정보
+name : 유저 명
+stuId : 유저 학번
+semester : 유저의 학년
+pw : 비밀번호
+email : 유저의 이메일
+sessionkey : 세선저장
+sessionlimit : 세션 유지기간
+
+
+Subject
+ - 강의 정보
+subjectKey : 키값
+subNo : 학수번호
+class : 분반
+subName : 강의명
+day : 강의 날짜
+classRoom : 강의실
+profName : 교수님 이름
+startHour : 시작시간
+endHour : 끝나는 시간
+add : 강의 직접 추가여부 (0일때가 학생이 등록한게 아닌 원래 등록된것, 1이 학생등록)
+
+
+TimeTable
+ - 각 유저의 시간표정보를 저장하는 테이블
+stuId : 등록유저
+subjectKey : 등록된 강의
