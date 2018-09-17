@@ -11,6 +11,7 @@ title : 과제 등록 이름
 contents : 과제 등록시 등록한 과제 내용
 subNo : 등록된 과제의 강의 번호
 success : 과제 했는지의 여부 등록
+team : 팀과제인지 개인과제인지(0:개인)
 
 
 Complete
