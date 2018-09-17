@@ -35,7 +35,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 	<!-- Costumize CSS -->
-	<link rel="stylesheet" type="text/css" href="css/style_assignment_add.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style_assignment_add.css">
 
 	<!-- fontawesome 으로 icon 사용하기 -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
@@ -65,7 +65,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 							<input type="text"  class="form-control form-control-sm mt-1 mb-1  flat_input" id="subjectName" title="과목명">
 						</div>
 						<div class= "col-md-2 col-xs-2 mt-1 mb-1">
-							<a  class="btn btn-sm btn_icon" aria-label="Left Align" href="find_subject.html">
+							<a  class="btn btn-sm btn_icon" aria-label="Left Align" href="/find_subject">
 								<span class="fas fa-search"></span>
 							</a>
 						</div>
@@ -120,7 +120,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 						</div>
 
 						<div class= "col-md-6 col-xs-6">
-							<a class="btn btn-sm btn-block btn_cancel" href="assignment.html">
+							<a class="btn btn-sm btn-block btn_cancel" href="/assignment">
 								CANCEL
 							</a>
 						</div>
@@ -135,7 +135,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 </body>
 </html>
 
-<script src="js/common/func_check_input.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/func_check_input.js"></script>
 
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -163,7 +163,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 				success : function(result){
 					console.log(result);
 	               if(result['result'] === '1'){ //과제 등록 성공
-	               	location.href = "assignment.html";
+	               	location.href = "/assignment";
 	               }else{
 	               	alert('과제 등록 실패');
 	               }

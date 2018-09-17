@@ -9,7 +9,7 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"> 
 	<!-- Customize CSS -->
-	<link rel="stylesheet" type="text/css" href="css/style_timetable_page.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style_timetable_page.css">
 
 	<!-- fontawesome 으로 icon 사용하기 -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
@@ -47,7 +47,7 @@
 							<div class="list-group">
 
 								<button id="addByDirectly" class="btn p-1 btn-sm list-group-item" type="button" data-toggle="collapse" data-target="#collapseDirect" aria-expanded="false" aria-controls="collapseDirect">직접 추가하기</button>
-								<button id="addBySearching" class="btn p-1 btn-sm list-group-item" type="button" data-toggle="collapse" data-target="#collapseSearching" aria-expanded="false" aria-controls="collapseSearching" href="find_subject.html">검색하기</button>
+								<button id="addBySearching" class="btn p-1 btn-sm list-group-item" type="button" data-toggle="collapse" data-target="#collapseSearching" aria-expanded="false" aria-controls="collapseSearching" href="/find_subject">검색하기</button>
 								<button type="button" id="btnUndo2" class="p-1 btn-sm list-group-item">취소하기</button>
 							</div>
 
@@ -156,10 +156,10 @@
 	</body>
 	</html> 
 
-	<script src="js/common/header.js"></script>
-	<script src="js/common/timetable.js"></script>
-	<script src="js/common/footer.js"></script>
-	<script src="js/common/func_check_input.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/common/header.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/common/timetable.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/common/footer.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/common/func_check_input.js"></script>
 
 
 	<!-- 취소하기 버튼 클릭 시 다시 창 닫기 -->

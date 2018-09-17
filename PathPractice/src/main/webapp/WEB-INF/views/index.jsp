@@ -60,7 +60,7 @@
      </button>
    </div>
    <div class= "col-md-6 col-xs-6">
-    <button type="button" class="btn btn-lg btn-xs btn-block btn_join" onclick='location.href="findPW.jsp"'>
+    <button type="button" class="btn btn-lg btn-xs btn-block btn_join" onclick='location.href="/findPW"'>
       PW ì°¾ê¸°
     </button>
   </div>

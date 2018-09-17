@@ -9,7 +9,7 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 	<!-- Customize CSS -->
-	<link rel="stylesheet" type="text/css" href="css/style_assignment.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style_assignment.css">
 
 	<!-- fontawesome 으로 icon 사용하기 -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
@@ -46,7 +46,7 @@
 						</div>
 						<!-- log-out 아이콘 버튼 누르면 assignment_add.html로 이동 -->
 						<div class= "col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4">
-							<a class="btn btn-lg btn_add p-0" aria-label="Left Align" href="assignment_add.html">
+							<a class="btn btn-lg btn_add p-0" aria-label="Left Align" href="/assignment_add">
 								<span class="fas fa-plus-square"></span>
 							</a>
 							<button class="btn btn-lg btn_add p-0" aria-label="Left Align">
@@ -74,7 +74,7 @@
 										<div class="modal-body"></div>
 
 										<div class="modal-footer">
-											<a class="btn btn-sm btn-primary " aria-label="Left Align" href="assignment_add.html">Change</a>
+											<a class="btn btn-sm btn-primary " aria-label="Left Align" href="/assignment_add">Change</a>
 											<button type="button" id='assignDel' class="btn btn-sm btn-danger" data-dismiss="modal">Delete</button>
 										</div>
 									</div>
@@ -194,5 +194,5 @@
 </script>
 
 
-<script src="js/common/header.js"></script>
-<script src="js/common/footer.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/header.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/footer.js"></script>

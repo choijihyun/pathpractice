@@ -9,7 +9,7 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 	<!-- Customize CSS -->
-	<link rel="stylesheet" type="text/css" href="css/style_mypage.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style_mypage.css">
 
 	<!-- fontawesome 으로 icon 사용하기 -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
@@ -44,7 +44,7 @@
 
 					<div class="list-group">
 						<button class="btn p-1 btn-sm list-group-item" type="button">정보 수정</button>
-						<button class="btn p-1 btn-sm list-group-item" type="button" onclick="location.href='changePW.html'">비밀번호 변경</button>
+						<button class="btn p-1 btn-sm list-group-item" type="button" onclick="location.href='/changePW'">비밀번호 변경</button>
 						<button class="btn p-1 btn-sm list-group-item" type="button">알림 끄기</button>
 						<button class="btn p-1 btn-sm list-group-item" type="button">탈퇴</button>
 					</div>
@@ -59,5 +59,5 @@
 	</div>
 </body>
 </html>
-<script src="js/common/header.js"></script>
-<script src="js/common/footer.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/header.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/footer.js"></script>

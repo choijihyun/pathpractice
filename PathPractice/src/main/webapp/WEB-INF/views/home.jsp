@@ -9,7 +9,7 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 	<!-- Customize CSS -->
-	<link rel="stylesheet" type="text/css" href="css/style_home.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style_home.css">
 
 	<!-- fontawesome 으로 icon 사용하기 -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
@@ -34,7 +34,7 @@
 
 				<!-- 상단바와 하단바를 제외한 부분 class="main-area" -->
 				<div class="jumbotron p-md-0 text-white main_area">
-					<div style="cursor:pointer; height: auto" onclick="location.href='timetable_page.html';" class="scrollbar scrollbar_track scrollbar_thumb" data-spy="scroll" data-offset="0">
+					<div style="cursor:pointer; height: auto" onclick="location.href='/timetable_page';" class="scrollbar scrollbar_track scrollbar_thumb" data-spy="scroll" data-offset="0">
 						<div id="timetable">
 						</div>
 					</div>
@@ -55,10 +55,10 @@
 
 </body>
 </html>
-<script src="js/common/header.js"></script>
-<script src="js/common/timetable.js"></script>
-<script src="js/common/footer.js"></script>
-<script src="js/common/func_cookie.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/header.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/timetable.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/footer.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/func_cookie.js"></script>
 
 <script type="text/javascript">
 	var userInputId = getCookie("userInputId");
