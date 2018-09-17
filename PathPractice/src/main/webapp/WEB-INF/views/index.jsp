@@ -56,12 +56,12 @@
      <div id="home"></div>
      <div class= "col-md-6 col-xs-6">
       <button type="button" id="register" class="btn btn-lg btn-xs btn-block btn_join" >
-       회원가입
+       íìê°ìÂÂ
      </button>
    </div>
    <div class= "col-md-6 col-xs-6">
     <button type="button" class="btn btn-lg btn-xs btn-block btn_join" onclick='location.href="findPW.jsp"'>
-      PW ì°¾ê¸°
+      PW
     </button>
   </div>
 
@@ -83,17 +83,17 @@
  $('#id').val(userInputId);
  console.log($('#id').val());
   
-       if($('#id').val() != ""){ // ê·¸ ì ì IDë¥¼ ì ì¥í´ì ì²ì íì´ì§ ë¡ë© ì, ìë ¥ ì¹¸ì ì ì¥ë IDê° íìë ìíë¼ë©´,
+       if($('#id').val() != ""){ // ÃªÂ·Â¸ Ã¬Â ÂÃ¬ÂÂ IDÃ«Â¥Â¼ Ã¬Â ÂÃ¬ÂÂ¥Ã­ÂÂ´Ã¬ÂÂ Ã¬Â²ÂÃ¬ÂÂ Ã­ÂÂÃ¬ÂÂ´Ã¬Â§Â Ã«Â¡ÂÃ«ÂÂ© Ã¬ÂÂ, Ã¬ÂÂÃ«Â Â¥ Ã¬Â¹Â¸Ã¬ÂÂ Ã¬Â ÂÃ¬ÂÂ¥Ã«ÂÂ IDÃªÂ°Â Ã­ÂÂÃ¬ÂÂÃ«ÂÂ Ã¬ÂÂÃ­ÂÂÃ«ÂÂ¼Ã«Â©Â´,
          console.log("id.val()");
-           $("#idSaveCheck").attr("checked", true); // ID ì ì¥íê¸°ë¥¼ ì²´í¬ ìíë¡ ëê¸°.
+           $("#idSaveCheck").attr("checked", true); // ID Ã¬Â ÂÃ¬ÂÂ¥Ã­ÂÂÃªÂ¸Â°Ã«Â¥Â¼ Ã¬Â²Â´Ã­ÂÂ¬ Ã¬ÂÂÃ­ÂÂÃ«Â¡Â Ã«ÂÂÃªÂ¸Â°.
          }
 
-       $("#idSaveCheck").change(function(){ // ì²´í¬ë°ì¤ì ë³íê° ìë¤ë©´,
-           if($("#idSaveCheck").is(":checked")){ // ID ì ì¥íê¸° ì²´í¬íì ë,
+       $("#idSaveCheck").change(function(){ // Ã¬Â²Â´Ã­ÂÂ¬Ã«Â°ÂÃ¬ÂÂ¤Ã¬ÂÂ Ã«Â³ÂÃ­ÂÂÃªÂ°Â Ã¬ÂÂÃ«ÂÂ¤Ã«Â©Â´,
+           if($("#idSaveCheck").is(":checked")){ // ID Ã¬Â ÂÃ¬ÂÂ¥Ã­ÂÂÃªÂ¸Â° Ã¬Â²Â´Ã­ÂÂ¬Ã­ÂÂÃ¬ÂÂ Ã«ÂÂ,
              console.log("check in remember me");
              var userInputId = $('#id').val();
-             setCookie("userInputId", userInputId, 7); // 7ì¼ ëì ì¿ í¤ ë³´ê´
-           }else{ // ID ì ì¥íê¸° ì²´í¬ í´ì  ì,
+             setCookie("userInputId", userInputId, 7); // 7Ã¬ÂÂ¼ Ã«ÂÂÃ¬ÂÂ Ã¬Â¿Â Ã­ÂÂ¤ Ã«Â³Â´ÃªÂ´Â
+           }else{ // ID Ã¬Â ÂÃ¬ÂÂ¥Ã­ÂÂÃªÂ¸Â° Ã¬Â²Â´Ã­ÂÂ¬ Ã­ÂÂ´Ã¬Â Â Ã¬ÂÂ,
              console.log("no check");
             deleteCookie("userInputId");
            }
@@ -109,7 +109,7 @@
 		    });
 		});
        $('#submit').on('click',function(){
-        setCookie("userInputId", userInputId, 7); // 7ì¼ ëì ì¿ í¤ ë³´ê´
+        setCookie("userInputId", userInputId, 7); // 7Ã¬ÂÂ¼ Ã«ÂÂÃ¬ÂÂ Ã¬Â¿Â Ã­ÂÂ¤ Ã«Â³Â´ÃªÂ´
 		event.preventDefault();
 
         $.ajax({
@@ -122,7 +122,7 @@
           success : function(result){
         	  //console.log(result);
            //console.log(result["result"]);
-               if(result.result === "1"){ //ë¡ê·¸ì¸ ì±ê³µ
+               if(result.result === "1"){ //Ã«Â¡ÂÃªÂ·Â¸Ã¬ÂÂ¸ Ã¬ÂÂ±ÃªÂ³Âµ
                 location.href = "/home";
               }else{
             	  alert('silpae');
