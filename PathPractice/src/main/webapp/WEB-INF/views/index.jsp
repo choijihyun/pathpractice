@@ -56,12 +56,12 @@
      <div id="home"></div>
      <div class= "col-md-6 col-xs-6">
       <button type="button" id="register" class="btn btn-lg btn-xs btn-block btn_join" >
-       회원가입
-     </button>
+       회원가입
+  </button>
    </div>
    <div class= "col-md-6 col-xs-6">
     <button type="button" class="btn btn-lg btn-xs btn-block btn_join" onclick='location.href="findPW.jsp"'>
-      PW ì°¾ê¸°
+      PW
     </button>
   </div>
 
@@ -125,11 +125,11 @@
                if(result.result === "1"){ //ë¡ê·¸ì¸ ì±ê³µ
                 location.href = "/home";
               }else{
-            	  alert('silpae');
+            	  alert('실패');
               }
             },
             error : function(){
-              alert('error');
+              alert('에러');
             }
           });
        });

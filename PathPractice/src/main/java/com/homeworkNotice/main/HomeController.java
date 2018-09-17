@@ -58,27 +58,4 @@ public class HomeController {
     }
     
     
-
-
-    
-    /*
-    @RequestMapping(value = "/homeTest", method = RequestMethod.GET)
-    public String homeTest(Locale locale, Model model) {
-    	StringBuffer sb=new StringBuffer();
-    	List<UserDto> userDtoList=userDao.selectAllList();
-    	for(UserDto userDto : userDtoList) {
-    		sb.append(userDto.getId().toString());
-    	}
-    	return "home";
-    }
-    
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public String user(Locale locale, Model model) {
-    	StringBuffer sb=new StringBuffer();
-    	List<UserDto> userDtoList=userDao.selectAllList();
-    	for(UserDto userDto : userDtoList) {
-    		sb.append(userDto.getId().toString());
-    	}
-    	return sb.toString();
-    }*/
 }
