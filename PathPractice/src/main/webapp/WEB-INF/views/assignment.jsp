@@ -11,7 +11,7 @@
 	<!-- Customize CSS -->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style_assignment.css">
 
-	<!-- fontawesome 으로 icon 사용하기 -->
+	<!-- fontawesome ì¼ë¡ icon ì¬ì©íê¸° -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
 	<!-- Optional JavaScript -->
@@ -28,13 +28,13 @@
 		<div class="row justify-content-md-center justify-content-xs-center row justify-content-sm-center justify-content-lg-center">
 			<div class="col col-md-6 col-md-auto col-xs-6 col-xs-auto col-sm-6 col-sm-auto col-lg-6 col-lg-auto login_box ">
 
-				<!-- header (상단바) class="app-header" -->
+				<!-- header (ìë¨ë°) class="app-header" -->
 				<div id="header"></div>
 
-				<!-- 상단바와 하단바를 제외한 부분 class="main-area" -->
+				<!-- ìë¨ë°ì íë¨ë°ë¥¼ ì ì¸í ë¶ë¶ class="main-area" -->
 				<div class="jumbotron m-2 p-0 text-white rounded main_area">
 
-					<!--  개인인지 팀플인지,,, 추가 등 설정 버튼들 있는 영역-->
+					<!--  ê°ì¸ì¸ì§ ííì¸ì§,,, ì¶ê° ë± ì¤ì  ë²í¼ë¤ ìë ìì­-->
 					<div class="row col-auto justify-content-end setting">
 						<div class= "p-0 col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4">
 							<div class="btn-group" role="group" aria-label="Basic example">
@@ -44,7 +44,7 @@
 						</div>
 						<div class= "col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4">
 						</div>
-						<!-- log-out 아이콘 버튼 누르면 assignment_add.html로 이동 -->
+						<!-- log-out ìì´ì½ ë²í¼ ëë¥´ë©´ assignment_add.htmlë¡ ì´ë -->
 						<div class= "col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4">
 							<a class="btn btn-lg btn_add p-0" aria-label="Left Align" href="/assignment_add">
 								<span class="fas fa-plus-square"></span>
@@ -55,11 +55,11 @@
 						</div>
 					</div>
 
-					<!-- 과제전체 보여주는 영역(스크롤바 포함) -->
-					<!-- 과제가 여러개 이면 스크롤 생김 -->
+					<!-- ê³¼ì ì ì²´ ë³´ì¬ì£¼ë ìì­(ì¤í¬ë¡¤ë° í¬í¨) -->
+					<!-- ê³¼ì ê° ì¬ë¬ê° ì´ë©´ ì¤í¬ë¡¤ ìê¹ -->
 					<div style="overflow:auto; width:auto; height:300px;" class="mt-3 scrollbar scrollbar-track scrollbar-thumb" data-offset="0">
 
-						<!-- 스크롤바 제외한 과제들 보여주는 영역 -->
+						<!-- ì¤í¬ë¡¤ë° ì ì¸í ê³¼ì ë¤ ë³´ì¬ì£¼ë ìì­ -->
 						<div class="px-2 content_show_assign">
 							<!-- Modal -->
 							<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
@@ -85,7 +85,7 @@
 					</div>
 				</div>
 
-				<!-- footer 하단바 class="app-footer" -->
+				<!-- footer íë¨ë° class="app-footer" -->
 				<div id="footer"></div>
 
 			</div>
@@ -119,7 +119,7 @@
 </script>
 
 
-<!-- 과제 삭제 버튼 클릭-->
+<!-- ê³¼ì  ì­ì  ë²í¼ í´ë¦­-->
 <script type="text/javascript">
 	$('#assignDel').on('click', function (){
 		var assignNo = $('#hiddenAssign').val();
@@ -146,7 +146,7 @@
 	});
 </script>
 
-<!-- 화면에 과제 표시 -->
+<!-- íë©´ì ê³¼ì  íì -->
 <script type="text/javascript">
 	$(document).ready(function(){
 
@@ -159,7 +159,7 @@
 			},
 			success : function(result){
 				if(result['result'] === 'no data'){
-					alert('불러오기 실패');
+					alert('등록된 과제 없음');
 				}else{
 					alert('불러오기 성공');
 					console.log(result);
