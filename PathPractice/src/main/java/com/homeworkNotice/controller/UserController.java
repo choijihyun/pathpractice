@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.homeworkNotice.dao.UserDao;
 import com.homeworkNotice.dto.UserDto;
@@ -208,6 +209,7 @@ public class UserController {
 
 
 
+
 	@ResponseBody
 	@RequestMapping(value = "/user/checkUser.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.
 	public String checkUser(//url에 맵핑(연결)된 함수
@@ -215,6 +217,7 @@ public class UserController {
 			Model model, //안드로이드에서 받을 파라미터
 			@RequestParam(value = "stuId", required=true) String stuId,
 			@RequestParam(value = "pw", required=true) String pw) {
+		
 		
 		HashMap<Object, Object> param=new HashMap<Object, Object>();
 		
@@ -238,6 +241,7 @@ public class UserController {
 		else {//없으면 에러라고 브라우저에 뿌려준다
 			jSONObject.put("result", "0"); //id가 존재하지 않는경우
 		}
+		//System.out.println(jSONObject.toString());
 		return jSONObject.toString();//요청한 내용들을 반환해준다.
 	}
 	

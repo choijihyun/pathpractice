@@ -1,0 +1,80 @@
+body{
+	/*
+	background: #dd3247;
+	padding-top: 10%;*/
+}
+.wdi_red{
+	color: #dd3247;
+}
+
+.login_box{
+	background: #fff;
+	padding: 50px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+/*input 영역*/
+.flat_input{
+	margin-top: 20px;
+	border: none;
+	border-radius: 0;
+	border-bottom: 1px solid #dd3247;
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+	background: -webkit-linear-gradient(top, rgba(255,255,255,0) 96%, #dd3247 4%);
+	background: linear-gradient(to bottom , rgba(255,255,255,0) 96%, #dd3247 4%);
+	background-position: -500px 0;
+	background-size: 100% 100%;
+	background-repeat: no-repeat; 
+}
+/*input 영역 클릭 했을 때*/
+.flat_input:focus{
+	box-shadow: none;
+	outline: none;
+	background-position: 0 0;
+	border-bottom: 1px solid #dd3247;
+}
+/*로그인 버튼*/
+.btn_login{
+	border-radius: 0;
+	background: #dd3247;
+	color: #fff;
+	-webkit-transition: all 0.8s;
+	transition: all 0.8s;
+}
+/*로그인 버튼 클릭 했을 때*/
+.btn_login:hover{
+	background: transparent;
+	border: 1px solid #dd3247;
+	color: #dd3247;
+}
+/*f로그인 유지 선택하는 checkbox*/
+.checkbox{
+	margin-top: 20px;
+	margin-bottom: 15px;
+	font-size: 15px;
+	color: #dd3247;
+	-webkit-transition: all 0.8s;
+	transition: all 0.8s;
+}
+/*가입 버튼*/
+.btn_join{
+	margin-top: 10px;
+	border-bottom: 1px solid #dd3247;
+	border-radius: 0;
+	background: white;
+	font-size: 10px;
+	color: #dd3247;
+	-webkit-transition: all 0.8s;
+	transition: all 0.8s;
+}
+/*비밀번호 찾기 버튼*/
+.btn_search{
+	margin-top: 10px;
+	border-bottom: 1px solid #dd3247;
+	border-radius: 0;
+	background: white;
+	font-size: 10px;
+	color: #dd3247;
+	-webkit-transition: all 0.8s;
+	transition: all 0.8s;
+}
