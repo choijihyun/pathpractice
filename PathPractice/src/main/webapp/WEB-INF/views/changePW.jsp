@@ -65,7 +65,7 @@
     $(document).ready(function() {
       $('#submit').on('click', function() { //해당 아이디의 비밀번호와 입력된 비번이 같은지 확인
         $.ajax({
-          url: "http://localhost:8090/user/checkUser.json",
+          url: "/user/checkUser.json",
           type: "GET",
           data: {
             'stuId':$('#id').val(),

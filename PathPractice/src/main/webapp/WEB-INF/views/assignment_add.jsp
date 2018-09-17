@@ -149,7 +149,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 			var due = $('#dueDate').val();
 			
 			$.ajax({
-				url:"http://localhost:8090/homework/insertHomework.json",
+				url:"/homework/insertHomework.json",
 				type : "GET",
 				data : {
 					'stuId':'1',

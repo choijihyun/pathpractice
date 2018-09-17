@@ -59,7 +59,7 @@
    $(document).ready(function(){
       $('#submit').on('click',function(){
          $.ajax({
-            url:"http://localhost:8090/user/getUserPwdInfo.json",
+            url:"/user/getUserPwdInfo.json",
             type : "GET",
             data : {'stuId':$('#id').val()},
             success : function(result){

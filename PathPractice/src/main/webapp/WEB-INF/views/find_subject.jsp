@@ -90,7 +90,7 @@
 
 	      		event.preventDefault();
 				$.ajax({
-	      			url:"http://localhost:8090//subject/searchSubject.json",
+	      			url:"/subject/searchSubject.json",
 	      			type : "GET",
 	      			data : {
 	      				'word':$('#subjectName').val()

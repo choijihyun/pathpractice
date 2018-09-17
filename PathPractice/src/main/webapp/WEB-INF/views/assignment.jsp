@@ -125,7 +125,7 @@
 		var assignNo = $('#hiddenAssign').val();
 		event.preventDefault();
 		$.ajax({
-			url:"http://localhost:8090/homework/deleteHomework.json",
+			url:"/homework/deleteHomework.json",
 			type : "GET",
 			data : {
 				'stuId':'1',
@@ -151,7 +151,7 @@
 	$(document).ready(function(){
 
 		$.ajax({
-			url:"http://localhost:8090/homework/selectHomework.json",
+			url:"/homework/selectHomework.json",
 			type : "GET",
 			data : {
 				'stuId':'1',
