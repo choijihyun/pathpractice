@@ -1,6 +1,6 @@
 var timetableHtml='';
 
-timetableHtml+='<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style_timetable.css">';
+timetableHtml+='<link rel="stylesheet" type="text/css" href="resources/css/style_timetable.css">';
 timetableHtml+='		<table style="overflow:auto;" id="table" class="table table-borderless table-sm table-time">';
 timetableHtml+='			<colgroup>';
 timetableHtml+='				<col width="10%"/>';
