@@ -9,7 +9,7 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 	<!-- Customize CSS -->
-	<link rel="stylesheet" type="text/css" href="css/style_join.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style_join.css">
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -79,7 +79,7 @@
 							JOIN</button>
 						</div>
 						<div class= "col-md-6 col-xs-6 btns">
-							<a class="btn btn-sm btn-block btn_cancel" href="index.html">
+							<a class="btn btn-sm btn-block btn_cancel" href="/index">
 							CANCEL</a>
 						</div>
 
@@ -112,7 +112,7 @@
 
 		            if(result["result"] === "1"){ //회원가입 성공
 		            	alert('회원가입 성공');
-		            	location.href = "index.html";
+		            	location.href = "/index";
 		            }else{
 		            	alert('아이디 중복');
 		            }
@@ -128,4 +128,4 @@
 </body>
 </html>
 
-<script src="js/common/func_check_input.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/func_check_input.js"></script>

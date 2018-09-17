@@ -11,7 +11,7 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
   <!-- Customize CSS -->
-  <link rel="stylesheet" type="text/css" href="css/style_changePW.css">
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style_changePW.css">
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -43,7 +43,7 @@
               <button class="btn btn-md btn_submit mx-0" id="submit" >
                 확인
               </button>
-              <button type="button" class="btn btn-md btn_cancel mx-0" id="cancel" onclick="location.href='mypage.html'">
+              <button type="button" class="btn btn-md btn_cancel mx-0" id="cancel" onclick="location.href='/mypage'">
                 취소
               </button>
             </div>
@@ -96,7 +96,7 @@
             console.log(result);
             if (result['result'] === "1") { //회원정보 없음
               alert("비밀번호 변경 성공");
-              location.href = "mypage.html";
+              location.href = "/mypage";
             } else {
               alert("비밀번호 변경 성공");
             }

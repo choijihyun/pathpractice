@@ -10,7 +10,7 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 	<!-- Costumize CSS -->
-	<link rel="stylesheet" type="text/css" href="css/style_find_subject.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style_find_subject.css">
 
 	<!-- fontawesome 으로 icon 사용하기 -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
@@ -72,7 +72,7 @@
 						<a class="btn btn-lg btn_login" id="submit" >
 							OK
 						</a>
-						<a class="btn btn-lg btn_login" id="submit" href="assignment_add.html">
+						<a class="btn btn-lg btn_login" id="submit" href="/assignment_add">
 							CANCEL
 						</a>
 					</div>
@@ -142,7 +142,7 @@
 
 			//여기서 해야되는게 이제 subNo을 assignment_add.html로 보내야함!!!!
 
-			//location.href="assignment_add.html?"+
+			//location.href="/assignment_add?"+
 		 	//$.ajax({
 		 	//	type : "post",
 		 	//	url : "assignment_add.html",

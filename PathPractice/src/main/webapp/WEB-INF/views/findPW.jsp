@@ -10,7 +10,7 @@
    <!-- Bootstrap CSS -->
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
    <!-- Customize CSS -->
-   <link rel="stylesheet" type="text/css" href="css/style_changePW.css">
+   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style_changePW.css">
 
    <!-- Optional JavaScript -->
    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -43,7 +43,7 @@
                   <button type="button" class="btn btn-md col-md-5 btn_submit" id="submit" >
                   FIND
                  </button>
-                 <button type="button" class="btn btn-md col-md-5 btn_cancel" onclick='location.href="index.html"'>
+                 <button type="button" class="btn btn-md col-md-5 btn_cancel" onclick='location.href="/index"'>
                   CANCEL
                  </button>
                </div>

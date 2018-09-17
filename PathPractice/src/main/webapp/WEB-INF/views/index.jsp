@@ -56,6 +56,7 @@
      <div id="home"></div>
      <div class= "col-md-6 col-xs-6">
       <button type="button" id="register" class="btn btn-lg btn-xs btn-block btn_join" >
+
        íìê°ìÂÂ
      </button>
    </div>
@@ -82,7 +83,7 @@
  var userInputId = getCookie("userInputId");
  $('#id').val(userInputId);
  console.log($('#id').val());
-  
+
        if($('#id').val() != ""){ // ÃªÂ·Â¸ Ã¬Â ÂÃ¬ÂÂ IDÃ«Â¥Â¼ Ã¬Â ÂÃ¬ÂÂ¥Ã­ÂÂ´Ã¬ÂÂ Ã¬Â²ÂÃ¬ÂÂ Ã­ÂÂÃ¬ÂÂ´Ã¬Â§Â Ã«Â¡ÂÃ«ÂÂ© Ã¬ÂÂ, Ã¬ÂÂÃ«Â Â¥ Ã¬Â¹Â¸Ã¬ÂÂ Ã¬Â ÂÃ¬ÂÂ¥Ã«ÂÂ IDÃªÂ°Â Ã­ÂÂÃ¬ÂÂÃ«ÂÂ Ã¬ÂÂÃ­ÂÂÃ«ÂÂ¼Ã«Â©Â´,
          console.log("id.val()");
            $("#idSaveCheck").attr("checked", true); // ID Ã¬Â ÂÃ¬ÂÂ¥Ã­ÂÂÃªÂ¸Â°Ã«Â¥Â¼ Ã¬Â²Â´Ã­ÂÂ¬ Ã¬ÂÂÃ­ÂÂÃ«Â¡Â Ã«ÂÂÃªÂ¸Â°.
@@ -98,14 +99,14 @@
             deleteCookie("userInputId");
            }
          });
-       
+
 		$("#register").on('click',function(){
 			 $.ajax({
 		          url:"/join",
 		          type:"GET",
 		          success : function (data){
 		        	  document.write(data);
-		          }		
+		          }
 		    });
 		});
        $('#submit').on('click',function(){
@@ -125,11 +126,11 @@
                if(result.result === "1"){ //Ã«Â¡ÂÃªÂ·Â¸Ã¬ÂÂ¸ Ã¬ÂÂ±ÃªÂ³Âµ
                 location.href = "/home";
               }else{
-            	  alert('silpae');
+            	  alert('실패');
               }
             },
             error : function(){
-              alert('error');
+              alert('에러');
             }
           });
        });

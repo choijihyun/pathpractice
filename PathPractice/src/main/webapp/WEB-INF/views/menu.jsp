@@ -9,7 +9,7 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 	<!-- Customize CSS -->
-	<link rel="stylesheet" type="text/css" href="css/style_menu.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style_menu.css">
 
 	<!-- fontawesome 으로 icon 사용하기 -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
@@ -46,5 +46,5 @@
 	</div>
 </body>
 </html>
-<script src="js/common/header.js"></script>
-<script src="js/common/footer.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/header.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/footer.js"></script>
