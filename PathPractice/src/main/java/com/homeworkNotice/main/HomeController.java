@@ -29,7 +29,7 @@ public class HomeController {
     public String home(Locale locale, Model model) {
     	System.out.println("server start");
     	/*
-    	 * Çò°¥¸± ¶§ °øºÎ¿ëÀ¸·Î ½á~~~~~~~~~~~~~~
+    	 * ï¿½ò°¥¸ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½~~~~~~~~~~~~~~
     	List<UserDto> userDtoList=userDao.selectAllList();
     	for(UserDto userDto : userDtoList) {
     		System.out.println(userDto.getId());
@@ -38,7 +38,7 @@ public class HomeController {
     	for(HomeworkDto homeworkDto : homeworkDtoList) {
     		System.out.println(homeworkDto.getId());
     	}
-    	 * Çò°¥¸± ¶§ °øºÎ¿ëÀ¸·Î ½á~~~~~~~~~~~~~~
+    	 * ï¿½ò°¥¸ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½~~~~~~~~~~~~~~
     	*/
         return "index";
     }
@@ -103,6 +103,12 @@ public class HomeController {
     public String timetable_page(Locale locale, Model model) {
        System.out.println("timetable_page!");
         return "timetable_page";
+    }
+    
+    @RequestMapping(value = "/update_information", method = RequestMethod.GET)
+    public String update_information(Locale locale, Model model) {
+       System.out.println("update_information!");
+        return "update_information";
     }
 
     
