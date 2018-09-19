@@ -25,18 +25,18 @@
   <!-- Container -->
   <div class="container" id="content">
    <div class="row justify-content-md-center justify-content-xs-center">
-    <div class="col-md-6 col-md-auto col-xs-6 col-xs-auto login-box ">
-     <h1 class="text-center wdi-red">Login</h1>
+    <div class="col-md-6 col-md-auto col-xs-6 col-xs-auto login_box ">
+     <h1 class="text-center wdi_red">Login</h1>
      <hr>
      <form>
       <div class="form-row">
 
        <!-- input id, pw -->
        <div class= "col-md-12 col-xs-12">
-        <input type="text" id="id" class="form-control form-control-lg flat-input" placeholder="username">
+        <input type="text" id="id" class="form-control form-control-lg flat_input" placeholder="username">
       </div>
       <div class= "col-md-12 col-xs-12">
-        <input type="password" id="pw" class="form-control form-control-lg flat-input" placeholder="password" >
+        <input type="password" id="pw" class="form-control form-control-lg flat_input" placeholder="password" >
       </div>
 
       <!-- remember user infomation - checkbox -->
@@ -49,19 +49,19 @@
 
      <!-- login/join/find pw button-->
      <div class= "col-md-12 col-xs-12" >
-       <a class="btn btn-lg btn-block btn-login" id = "submit" >
+       <button class="btn btn-lg btn-block btn_login" id="submit" >
          LOGIN
-       </a>
+       </button>
      </div>
      <div class= "col-md-6 col-xs-6">
-      <a class="btn btn-lg btn-xs btn-block btn-join" href="join.html">
+      <button type="button" class="btn btn-lg btn-xs btn-block btn_join" onclick='location.href="join.html"'>
        회원가입
-     </a>
+     </button>
    </div>
    <div class= "col-md-6 col-xs-6">
-    <a class="btn btn-lg btn-xs btn-block btn-join" href="findPW.html">
+    <button type="button" class="btn btn-lg btn-xs btn-block btn_join" onclick='location.href="findPW.html"'>
       PW 찾기
-    </a>
+    </button>
   </div>
 
 </div>
@@ -73,15 +73,15 @@
 </body>
 </html>
 
-   
+
 <script src="js/common/func_cookie.js"></script>
 
 <script type="text/javascript">
  $(document).ready(function(){
-   var userInputId = getCookie("userInputId");
-   $('#id').val(userInputId);
-   console.log($('#id').val());
-
+  var userInputId = getCookie("userInputId");
+  $('#id').val(userInputId);
+  console.log($('#id').val());
+  
        if($('#id').val() != ""){ // 그 전에 ID를 저장해서 처음 페이지 로딩 시, 입력 칸에 저장된 ID가 표시된 상태라면,
          console.log("id.val()");
            $("#idSaveCheck").attr("checked", true); // ID 저장하기를 체크 상태로 두기.
@@ -89,7 +89,7 @@
 
        $("#idSaveCheck").change(function(){ // 체크박스에 변화가 있다면,
            if($("#idSaveCheck").is(":checked")){ // ID 저장하기 체크했을 때,
-             console.log("check in remember me");a
+             console.log("check in remember me");
              var userInputId = $('#id').val();
                setCookie("userInputId", userInputId, 7); // 7일 동안 쿠키 보관
            }else{ // ID 저장하기 체크 해제 시,
@@ -103,7 +103,10 @@
          $.ajax({
           url:"http://localhost:8090/user/checkUser.json",
           type : "GET",
-          data : {'stuId':$('#id').val(), 'pw':$('#pw').val()},
+          data : {
+            'stuId':$('#id').val(),
+            'pw':$('#pw').val()
+          },
           success : function(result){
 
            console.log(result);

@@ -3,19 +3,19 @@ body{
 	background: #dd3247;
 	padding-top: 10%;*/
 }
-.wdi-red{
+.wdi_red{
 	color: #dd3247;
 }
-.login-box{
+.login_box{
 	background: #fff;
   padding:0px;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
-.main-area{
+.main_area{
 	background: #fff;
 }
 
-.btn-cancel{
+.btn_cancel{
 	border-radius: 0;
 	background: #dd3247;
 	color: #fff;
@@ -24,7 +24,7 @@ body{
 	margin-top: 10px;
 }
 
-.btn-cancel:hover{
+.btn_cancel:hover{
 	background: transparent;
 	border: 1px solid #dd3247;
 	color: #dd3247;
@@ -32,7 +32,7 @@ body{
 }
 
 
-.btn-submit{
+.btn_submit{
 	border-radius: 0;
 	background: #4E8DC6;
 	color: #fff;
@@ -41,7 +41,7 @@ body{
 	margin-top: 10px;
 }
 
-.btn-submit:hover{
+.btn_submit:hover{
 	background: transparent;
 	border: 1px solid #4E8DC6;
 	color: #4E8DC6;
@@ -49,7 +49,7 @@ body{
 }
 
 /*input 영역*/
-.flat-input{
+.flat_input{
 	box-shadow: none;
 	border: none;
 	border-radius: 0;
@@ -63,32 +63,32 @@ body{
 	background-repeat: no-repeat;
 }
 /*input 영역 클릭 했을 때*/
-.flat-input:focus{
+.flat_input:focus{
 	box-shadow: none;
 	outline: none;
 	background-position: 0 0;
 	border-bottom: 1px solid #dd3247;
 }
 
-.label{
+.label_input{
 	color: #dd3247;
 	font-size: 14px;
 	font-weight: bold;
 }
 
-.btn-icon{
+.btn_icon{
 	border: 0;
 	background: #fff;
 	color: #6c757d;
 }
 /*시간표 영역*/
-.table-time{
+.table_time{
 	padding:0px;
 	color : #6c757d;
 	font-size: 12px;
 	height: 100px;
 	border : 1px solid #e5e5e5;
 }
-.stripe-top{
+.stripe_border_top{
 	border-top: 1px solid #e5e5e5;
 }

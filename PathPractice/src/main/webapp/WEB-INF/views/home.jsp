@@ -11,7 +11,7 @@
 	<!-- Customize CSS -->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style_home.css">
 
-	<!-- fontawesome Ã¬ÂÂ¼Ã«Â¡Â icon Ã¬ÂÂ¬Ã¬ÂÂ©Ã­ÂÂÃªÂ¸Â° -->
+	<!-- fontawesome 으로 icon 사용하기 -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
 	<!-- Optional JavaScript -->
@@ -28,24 +28,24 @@
 		<div class="row justify-content-md-center justify-content-xs-center row justify-content-sm-center justify-content-lg-center">
 			<div class="col-md-6 col-md-auto col-xs-6 col-xs-auto col-sm-6 col-sm-auto col-lg-6 col-lg-auto login_box ">
 
-				<!-- header (Ã¬ÂÂÃ«ÂÂ¨Ã«Â°Â) class="app-header" -->
+				<!-- header (상단바) class="app-header" -->
 				<div id="header">
 				</div>
 
-				<!-- Ã¬ÂÂÃ«ÂÂ¨Ã«Â°ÂÃ¬ÂÂ Ã­ÂÂÃ«ÂÂ¨Ã«Â°ÂÃ«Â¥Â¼ Ã¬Â ÂÃ¬ÂÂ¸Ã­ÂÂ Ã«Â¶ÂÃ«Â¶Â class="main-area" -->
+				<!-- 상단바와 하단바를 제외한 부분 class="main-area" -->
 				<div class="jumbotron p-md-0 text-white main_area">
 					<div style="cursor:pointer; height: auto" onclick="location.href='/timetable_page';" class="scrollbar scrollbar_track scrollbar_thumb" data-spy="scroll" data-offset="0">
 						<div id="timetable">
 						</div>
 					</div>
 
-					<!-- Ã«ÂÂ±Ã«Â¡ÂÃ«ÂÂ ÃªÂ³Â¼Ã¬Â ÂÃ«Â¥Â¼ Ã«Â³Â´Ã¬ÂÂ¬Ã¬Â£Â¼Ã«ÂÂ scrollÃ¬Â°Â½ -->
+					<!-- 등록된 과제를 보여주는 scroll창 -->
 					<div style="overflow:auto; width:auto; height:130px;" class="mt-3 content_preview_assignment scrollbar scrollbar_track scrollbar_thumb" data-spy="scroll" data-offset="0">
 					</div>
 
 				</div>
 
-				<!-- footer Ã­ÂÂÃ«ÂÂ¨Ã«Â°Â class="app-footer" -->
+				<!-- footer 하단바 class="app-footer" -->
 				<div id="footer">
 				</div>
 

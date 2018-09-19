@@ -12,7 +12,7 @@
 	<!-- Costumize CSS -->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style_find_subject.css">
 
-	<!-- fontawesome 으로 icon 사용하기 -->
+	<!-- fontawesome ì¼ë¡ icon ì¬ì©íê¸° -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
 	<!-- Optional JavaScript -->
@@ -35,7 +35,7 @@
 
 					<div class="form-row m-3">
 						<div class= "col-md-3 col-xs-3 mt-1 mb-1 label_input">
-							과목명
+							과목명
 						</div>
 						<div class= "col-md-7 col-xs-7 ">
 							<input type="text"  class="form-control form-control-sm mt-1 mb-1 flat_input" id="subjectName">
@@ -58,10 +58,10 @@
 								<tr>
 									<th class="text-center">NO</th>
 									<th class="text-center" style="border-left: 1px solid #e5e5e5;">CK</th>
-									<th class="text-center" style="border-left: 1px solid #e5e5e5;">과목명</th>
-									<th class="text-center" style="border-left: 1px solid #e5e5e5;">시간</th>
-									<th class="text-center" style="border-left: 1px solid #e5e5e5;">장소</th>
-									<th class="text-center" style="border-left: 1px solid #e5e5e5;">교수명</th>
+									<th class="text-center" style="border-left: 1px solid #e5e5e5;">과목명</th>
+									<th class="text-center" style="border-left: 1px solid #e5e5e5;">시간</th>
+									<th class="text-center" style="border-left: 1px solid #e5e5e5;">장소</th>
+									<th class="text-center" style="border-left: 1px solid #e5e5e5;">교수명</th>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -84,7 +84,7 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 	     	$('#click').on('click',function(){ //입력한 과목명 가지고 선택할 수 있게 만들어야함.(subNum 받아야함!)
-				$('.add_row').empty(); // .add_row 클래스를 가진항목 지우기(테이블 내용 지우기)
+				$('.add_row').empty(); //  .add_row 클래스를 가진항목 지우기(테이블 내용 지우기)
 
 				var checkList = [];
 
@@ -129,7 +129,7 @@
 	             		}
 	         	  	},
 	          	 	error : function(){
-	           			alert('검색 에러');
+	           			alert('ê²ì ìë¬');
 	          	 	}
 	      		});
 	      	});
@@ -153,7 +153,7 @@
 		 	//})
 		});
 
-		//테이블 클릭하면 행,열의 인덱스 찍어줌
+		//테이블 클릭하면 행,열의 인덱스 찍어줌
 		var table = document.getElementById("tableFindSub"),rIndex,cIndex;
 
 		$('#tableFindSub').on('click', function (){

@@ -37,7 +37,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 	<!-- Costumize CSS -->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style_assignment_add.css">
 
-	<!-- fontawesome 으로 icon 사용하기 -->
+	<!-- fontawesome ì¼ë¡ icon ì¬ì©íê¸° -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
 	<!-- Optional JavaScript -->
@@ -59,10 +59,10 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 				<form class="commonForm">
 					<div class="form-row m-3">
 						<div class= "col-md-3 col-xs-3 my-2 label_input">
-							과목명
+							과목명
 						</div>
 						<div class= "col-md-7 col-xs-7 ">
-							<input type="text"  class="form-control form-control-sm mt-1 mb-1  flat_input" id="subjectName" title="과목명">
+							<input type="text"  class="form-control form-control-sm mt-1 mb-1  flat_input" id="subjectName" title="ê³¼ëª©ëª">
 						</div>
 						<div class= "col-md-2 col-xs-2 mt-1 mb-1">
 							<a  class="btn btn-sm btn_icon" aria-label="Left Align" href="/find_subject">
@@ -73,18 +73,18 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 							제목
 						</div>
 						<div class= "col-md-7 col-xs-7">
-							<input type="text"  class="form-control form-control-sm mt-1 mb-1 flat_input" title="제목" id="title">
+							<input type="text"  class="form-control form-control-sm mt-1 mb-1 flat_input" title="ì ëª©" id="title">
 						</div>
 
 						<div class= "col-md-3 col-xs-3 my-2 label_input">
 							내용
 						</div>
 						<div class= "col-md-7 col-xs-7">
-							<input type="text"  class="form-control form-control-sm mt-1 mb-1 flat_input" title="내용" id="contents">
+							<input type="text"  class="form-control form-control-sm mt-1 mb-1 flat_input" title="ë´ì©" id="contents">
 						</div>
 
 						<div class= "col-md-3 col-xs-3 my-2 label_input">
-							중요도
+							중요도
 						</div>
 						<span class="star-input col-md-7 col-xs-7 ">
 							<span class="input">
@@ -162,7 +162,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 				},
 				success : function(result){
 					console.log(result);
-	               if(result['result'] === '1'){ //과제 등록 성공
+	               if(result['result'] === '1'){ 
 	               	location.href = "/assignment";
 	               }else{
 	               	alert('과제 등록 실패');
