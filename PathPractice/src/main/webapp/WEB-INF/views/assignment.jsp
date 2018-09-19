@@ -74,7 +74,7 @@
 										<div class="modal-body"></div>
 
 										<div class="modal-footer">
-											<a class="btn btn-sm btn-primary " aria-label="Left Align" href="/assignment_add">Change</a>
+											<a class="btn btn-sm btn-primary " aria-label="Left Align" href="javascript:a();">Change</a>
 											<button type="button" id='assignDel' class="btn btn-sm btn-danger" data-dismiss="modal">Delete</button>
 										</div>
 									</div>
@@ -95,6 +95,16 @@
 </body>
 </html>
 
+<script>
+function a(){
+	var $btnPopAssignment=$('.btn_pop_assignment');
+	var title=$btnPopAssignment.data('title');
+	
+	location.href="/assignment_add?title="+title;
+	<!-- href="/assignment_add" -->	
+}
+</script>
+
 <!-- modal-->
 <script type="text/javascript">
 	$(function(){
@@ -113,6 +123,7 @@
 			$('.modal-body').text(body);
 
 			$('div.modal').modal();
+			
 		});
 
 	})
@@ -128,7 +139,7 @@
 			url:"/homework/deleteHomework.json",
 			type : "GET",
 			data : {
-				'stuId':'1',
+				'stuId':'16010946',
 				'assignNo': assignNo
 			},
 			success : function(result){
@@ -154,7 +165,7 @@
 			url:"/homework/selectHomework.json",
 			type : "GET",
 			data : {
-				'stuId':'1',
+				'stuId':'16010946',
 				'select':1
 			},
 			success : function(result){

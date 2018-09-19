@@ -4,12 +4,14 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.activation.CommandMap;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -58,10 +60,13 @@ public class HomeController {
 
 
     @RequestMapping(value = "/assignment_add", method = RequestMethod.GET)
-    public String assignment_add(Locale locale, Model model) {
-       System.out.println("assignment_add!");
+    public String assignment_add(Locale locale, Model model,
+    		@RequestParam(value="title", required=false) String title) {
+       System.out.println("assignment_add! " + title);
+       model.addAttribute("title", title);
         return "assignment_add";
     }
+    //using url parameter for send assignment data to assignment_add.jsp 
     
     @RequestMapping(value = "/assignment", method = RequestMethod.GET)
     public String assignment(Locale locale, Model model) {

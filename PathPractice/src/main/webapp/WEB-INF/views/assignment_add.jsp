@@ -152,7 +152,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 				url:"/homework/insertHomework.json",
 				type : "GET",
 				data : {
-					'stuId':'1',
+					'stuId':'16010946',
 					'importance':radioVal,
 					'dueDate':due,
 					'title':$('#title').val(),
@@ -174,4 +174,10 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 	       });
 		});
 	});
+</script>
+
+
+<script>
+var title='${title}';
+alert(title);
 </script>
