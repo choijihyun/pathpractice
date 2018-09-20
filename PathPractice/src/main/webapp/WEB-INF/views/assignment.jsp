@@ -132,13 +132,16 @@
 <!-- 과제 삭제 버튼 클릭-->
 <script type="text/javascript">
 	$('#assignDel').on('click', function (){
+		<%
+			String id = (String)session.getAttribute("id");
+		%>
 		var assignNo = $('#hiddenAssign').val();
 		event.preventDefault();
 		$.ajax({
 			url:"/homework/deleteHomework.json",
 			type : "GET",
 			data : {
-				'stuId':'16010946',
+				'stuId':<%=id%>,
 				'assignNo': assignNo
 			},
 			success : function(result){
@@ -159,12 +162,11 @@
 <!-- 화면에 과제 표시 -->
 <script type="text/javascript">
 	$(document).ready(function(){
-
 		$.ajax({
 			url:"/homework/selectHomework.json",
 			type : "GET",
 			data : {
-				'stuId':'16010946',
+				'stuId':<%=id%>,
 				'select':1
 			},
 			success : function(result){
