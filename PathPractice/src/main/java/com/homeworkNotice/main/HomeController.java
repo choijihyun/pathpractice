@@ -69,7 +69,7 @@ public class HomeController {
     		@RequestParam(value="assignNo", required=false) int assignNo) {
       
     	System.out.println("assignment_add! ");
-       
+
     	model.addAttribute("title", title);
     	model.addAttribute("dueDate", dueDate);
     	model.addAttribute("importance", importance);

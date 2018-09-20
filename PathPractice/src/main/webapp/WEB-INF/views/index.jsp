@@ -122,11 +122,11 @@
                if(result.result === "1"){ 
                 location.href = "/home";
               }else{
-            	  alert('ì¤í¨');
+            	  alert('로그인 실패');
               }
             },
             error : function(){
-              alert('ìë¬');
+              alert('로그인 에러');
             }
           });
        });

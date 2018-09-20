@@ -74,7 +74,7 @@
 										<div class="modal-body"></div>
 
 										<div class="modal-footer">
-											<a id='assignChange' class="btn btn-sm btn-primary " aria-label="Left Align" href="javascript:a();">Change</a>
+											<button type="button" id='assignChange' class="btn btn-sm btn-primary " aria-label="Left Align">Change</button>
 											<button type="button" id='assignDel' class="btn btn-sm btn-danger" data-dismiss="modal">Delete</button>
 										</div>
 									</div>
@@ -142,7 +142,6 @@ function a(){
 				+"&assignNo="+assignNo;
 			});
 		});
-
 	})
 </script>
 

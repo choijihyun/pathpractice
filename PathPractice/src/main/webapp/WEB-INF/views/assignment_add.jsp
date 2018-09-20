@@ -1,15 +1,16 @@
 <!doctype html>
+
 <html lang="kr">
 
 <style>
 .star-input>.input,
 .star-input>.input>label:hover,
 .star-input>.input>input:focus+label,
-.star-input>.input>input:checked+label{display: inline-block;vertical-align:top;background:url('img/grade_img.png')no-repeat;}
+.star-input>.input>input:checked+label{display: inline-block;vertical-align:top;background:url('${pageContext.request.contextPath}/resources/img/grade_img.png')no-repeat;}
 .star-input{display:inline-block; white-space:nowrap;width:225px;height:20px;/*padding:20px;*/line-height:10px;}
 .star-input>.input{display:inline-block;width:150px;background-size:150px;height:28px;white-space:nowrap;overflow:hidden;position: relative;}
 .star-input>.input>input{position:absolute;width:1px;height:1px;opacity:0;}
-star-input>.input.focus{outline:1px dotted #ddd;}
+.star-input>.input.focus{outline:1px dotted #ddd;}
 .star-input>.input>label{width:30px;height:0;padding:28px 0 0 0;overflow: hidden;float:left;cursor: pointer;position: absolute;top: 0;left: 0;}
 .star-input>.input>label:hover,
 .star-input>.input>input:focus+label,
@@ -22,7 +23,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 .star-input>.input>label[for="p5"]{width:150px;z-index:1;}
 .star-input>output{display:inline-block;width:60px; font-size:18px;text-align:right; vertical-align:middle;}
 .col-md-12 {padding: 3px;}
-.form-row>.col, .form-row>[class*=col-]{padding-top : 5p
+.form-row>.col, .form-row>[class*=col-]{padding-top : 5px;}
 </style>
 
 <head>
@@ -49,9 +50,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
 	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -139,6 +138,25 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 <script src="${pageContext.request.contextPath}/resources/js/common/func_check_input.js"></script>
 
 <script type="text/javascript">
+	var title = '${title}';
+ 	var dueDate = '${dueDate}';
+	var importance = '${importance}';
+	var contents = '${contents}';
+	var assignNo = '${assignNo}'; 
+	console.log(title);
+	
+	alert(dueDate +"=dueDate  ,"+ importance +"=importance  ,"+ contents +"=contents  ,"+title);
+	
+	document.getElementById("title").value = title;
+	document.getElementById("contents").value = contents;
+	//document.getElementById("dueDate").value = dueDate;
+	for(var i=1 ; i<=importance ; i++)
+	$('input:radio[id="p'+i+'"]:radio[name="star-input"]').prop("checked", true);
+	
+	
+</script>
+
+<script type="text/javascript">
 	$(document).ready(function() {
 		$('#submit').on('click', function() {
 
@@ -179,19 +197,5 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 </script>
 
 
-<script type="text/javascript">
-	var title='${title}';
-	var dueDate = '${dueDate}';
-	var importance = '${importance}';
-	var contents = '${contents}';
-	var assignNo = '${assignNo}';
-	alert(dueDate +""+ importance +""+ contents +""+title);
-	
-	document.getElementById("title").value = title;
-	document.getElementById("contents").value = contents;/*
-	document.getElementById("dueDate").value = dueDate; 
-	document.getElementById("importance").value = importance; */
-	
-	
-</script>
+
 
