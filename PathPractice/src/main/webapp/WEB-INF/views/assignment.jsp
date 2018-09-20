@@ -74,7 +74,7 @@
 										<div class="modal-body"></div>
 
 										<div class="modal-footer">
-											<a class="btn btn-sm btn-primary " aria-label="Left Align" href="javascript:a();">Change</a>
+											<a id='assignChange' class="btn btn-sm btn-primary " aria-label="Left Align" href="javascript:a();">Change</a>
 											<button type="button" id='assignDel' class="btn btn-sm btn-danger" data-dismiss="modal">Delete</button>
 										</div>
 									</div>
@@ -95,35 +95,52 @@
 </body>
 </html>
 
-<script>
+<!-- <script type="text/javascript">
 function a(){
 	var $btnPopAssignment=$('.btn_pop_assignment');
-	var title=$btnPopAssignment.data('title');
+	var title = $btnPopAssignment.data('title');
+	var duaDate = $btnPopAssignment.data('dueDate');
+	var importance = $btnPopAssignment.data('importance');
+	var contents = $btnPopAssignment.data('contents');
+	var assignNo = $btnPopAssignment.data('assignNo');
 	
-	location.href="/assignment_add?title="+title;
-	<!-- href="/assignment_add" -->	
+	location.href="/assignment_add?title="+title
+								+"&dueDate="+duaDate
+								+"&importance="+importance
+								+"&contents="+contents
+								+"&assignNo="+assignNo;
 }
-</script>
+</script> -->
 
 <!-- modal-->
 <script type="text/javascript">
 	$(function(){
 		$(document).on("click",'.btn_pop_assignment',function() {
-			var title = $(this).data('title');
 			var body = '';
-
+			var title = $(this).data('title');
+			var dueDate = $(this).data('dueDate');
+			var importance = $(this).data('importance');
+			var contents = $(this).data('contents');
 			var assignNo = $(this).data('assignNo');
+			
 			$('#hiddenAssign').val(assignNo).trigger('change');
 
-			body += 'due-date=' + $(this).data('dueDate');
-			body += ' , importance=' + $(this).data('importance');
-			body += ' , contents=' + $(this).data('contents');
+			body += 'due-date=' + dueDate;
+			body += ' , importance=' + importance;
+			body += ' , contents=' + contents;
 
 			$('.modal-title').text(title);
 			$('.modal-body').text(body);
-
 			$('div.modal').modal();
 			
+			//modify assignment
+			$('#assignChange').on('click', function (){
+				location.href="/assignment_add?title="+title
+				+"&dueDate="+dueDate
+				+"&importance="+importance
+				+"&contents="+contents
+				+"&assignNo="+assignNo;
+			});
 		});
 
 	})
