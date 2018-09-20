@@ -74,7 +74,7 @@
 										<div class="modal-body"></div>
 
 										<div class="modal-footer">
-											<a class="btn btn-sm btn-primary " aria-label="Left Align" href="javascript:a();">Change</a>
+											<button type="button" id='assignChange' class="btn btn-sm btn-primary " aria-label="Left Align">Change</button>
 											<button type="button" id='assignDel' class="btn btn-sm btn-danger" data-dismiss="modal">Delete</button>
 										</div>
 									</div>
@@ -95,37 +95,36 @@
 </body>
 </html>
 
-<script>
-function a(){
-	var $btnPopAssignment=$('.btn_pop_assignment');
-	var title=$btnPopAssignment.data('title');
-	
-	location.href="/assignment_add?title="+title;
-	<!-- href="/assignment_add" -->	
-}
-</script>
-
 <!-- modal-->
 <script type="text/javascript">
 	$(function(){
 		$(document).on("click",'.btn_pop_assignment',function() {
-			var title = $(this).data('title');
 			var body = '';
-
-			var assignNo = $(this).data('assignNo');
+			var title = $(this).data('title');
+			var dueDate = $(this).data('dueDate');
+			var importance = $(this).data('importance');
+			var contents = $(this).data('contents');
+			var subNo = $(this).data('subNo');
+			
 			$('#hiddenAssign').val(assignNo).trigger('change');
 
-			body += 'due-date=' + $(this).data('dueDate');
-			body += ' , importance=' + $(this).data('importance');
-			body += ' , contents=' + $(this).data('contents');
+			body += 'due-date=' + dueDate;
+			body += ' , importance=' + importance;
+			body += ' , contents=' + contents;
 
 			$('.modal-title').text(title);
 			$('.modal-body').text(body);
-
 			$('div.modal').modal();
 			
+			//modify assignment
+			$('#assignChange').on('click', function (){
+				location.href="/assignment_add?title="+title
+				+"&dueDate="+dueDate
+				+"&importance="+importance
+				+"&contents="+contents
+				+"&subNo="+subNo;
+			});
 		});
-
 	})
 </script>
 

@@ -105,34 +105,39 @@
             deleteCookie("userInputId");
            }
          });
-       $('#submit').on('click', function() { //í´ë¹ ìì´ëì ë¹ë°ë²í¸ì ìë ¥ë ë¹ë²ì´ ê°ìì§ íì¸
-    	   event.preventDefault();
-           $.ajax({
-             url: "/user/checkUser.json",
-             type: "GET",
-             data: {
-               'stuId':$('#id').val(),
-               'pw':$('#pw').val()
-             },
-             success: function(result) {
-               console.log(result);
-               if(result["result"] === "1"){ 
-           		   alert('로그인 성공');
-                	location.href = "/home";
-                  }else{
-                	 <%
-              		  session.setAttribute("id",null);
-                   	%>
-                	  alert('로그인 실패');
-                  }
-                },
-               error : function(){
-            	   <%
-           		  session.setAttribute("id",null);
-                	%>
-                 alert('로그인 에러');
-               }
-           });
-         });
+		$("#register").on('click',function(){
+			 $.ajax({
+		          url:"/join",
+		          type:"GET",
+		          success : function (data){
+		        	  document.write(data);
+		          }
+		    });
+		});
+       $('#submit').on('click',function(){
+    	   
+        //setCookie("userInputId", userInputId, 7); // 7일 동안 쿠키 보관
+		event.preventDefault();
+
+        $.ajax({
+          url:"/user/checkUser.json",
+          method:"get",
+          data : {
+            'stuId':$('#id').val(),
+            'pw':$('#pw').val()
+          },
+          success : function(result){
+               if(result.result === "1"){ 
+                location.href = "/home";
+              }else{
+            	  alert('로그인 실패');
+              }
+            },
+            error : function(){
+              alert('로그인 에러');
+            }
+          });
+       });
+>>>>>>> origin/master
      });
    </script>

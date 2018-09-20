@@ -59,14 +59,24 @@ public class HomeController {
     }
 
 
+    //using url parameter for send assignment data to assignment_add.jsp 
     @RequestMapping(value = "/assignment_add", method = RequestMethod.GET)
     public String assignment_add(Locale locale, Model model,
-    		@RequestParam(value="title", required=false) String title) {
-       System.out.println("assignment_add! " + title);
-       model.addAttribute("title", title);
+    		@RequestParam(value="title", required=false) String title,
+    		@RequestParam(value="dueDate", required=false) String dueDate,
+    		@RequestParam(value="importance", required=false, defaultValue="0") int importance,
+    		@RequestParam(value="contents", required=false) String contents,
+    		@RequestParam(value="subNo", required=false, defaultValue="0") int subNo) {
+  
+    	System.out.println("assignment_add! ");
+    	
+    	model.addAttribute("title", title);
+    	model.addAttribute("dueDate", dueDate);
+    	model.addAttribute("importance", importance);
+    	model.addAttribute("contents", contents);
+    	model.addAttribute("subNo", subNo);
         return "assignment_add";
     }
-    //using url parameter for send assignment data to assignment_add.jsp 
     
     @RequestMapping(value = "/assignment", method = RequestMethod.GET)
     public String assignment(Locale locale, Model model) {
