@@ -28,13 +28,13 @@
 		<div class="row justify-content-md-center justify-content-xs-center row justify-content-sm-center justify-content-lg-center">
 			<div class="col col-md-6 col-md-auto col-xs-6 col-xs-auto col-sm-6 col-sm-auto col-lg-6 col-lg-auto login_box ">
 
-				<!-- header (ìë¨ë°) class="app-header" -->
+				<!-- header (상단바) class="app-header" -->
 				<div id="header"></div>
 
-				<!-- ìë¨ë°ì íë¨ë°ë¥¼ ì ì¸í ë¶ë¶ class="main-area" -->
+				<!-- 상단바와 하단바를 제외한 부분 class="main-area" -->
 				<div class="jumbotron m-2 p-0 text-white rounded main_area">
 
-					<!--  ê°ì¸ì¸ì§ ííì¸ì§,,, ì¶ê° ë± ì¤ì  ë²í¼ë¤ ìë ìì­-->
+					<!--  개인인지 팀플인지,,, 추가 등 설정 버튼들 있는 영역-->
 					<div class="row col-auto justify-content-end setting">
 						<div class= "p-0 col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4">
 							<div class="btn-group" role="group" aria-label="Basic example">
@@ -44,7 +44,7 @@
 						</div>
 						<div class= "col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4">
 						</div>
-						<!-- log-out ìì´ì½ ë²í¼ ëë¥´ë©´ assignment_add.htmlë¡ ì´ë -->
+						<!-- log-out 아이콘 버튼 누르면 assignment_add.html로 이동 -->
 						<div class= "col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4">
 							<a class="btn btn-lg btn_add p-0" aria-label="Left Align" href="/assignment_add">
 								<span class="fas fa-plus-square"></span>
@@ -55,11 +55,11 @@
 						</div>
 					</div>
 
-					<!-- ê³¼ì ì ì²´ ë³´ì¬ì£¼ë ìì­(ì¤í¬ë¡¤ë° í¬í¨) -->
-					<!-- ê³¼ì ê° ì¬ë¬ê° ì´ë©´ ì¤í¬ë¡¤ ìê¹ -->
+					<!-- 과제전체 보여주는 영역(스크롤바 포함) -->
+					<!-- 과제가 여러개 이면 스크롤 생김 -->
 					<div style="overflow:auto; width:auto; height:300px;" class="mt-3 scrollbar scrollbar-track scrollbar-thumb" data-offset="0">
 
-						<!-- ì¤í¬ë¡¤ë° ì ì¸í ê³¼ì ë¤ ë³´ì¬ì£¼ë ìì­ -->
+						<!-- 스크롤바 제외한 과제들 보여주는 영역 -->
 						<div class="px-2 content_show_assign">
 							<!-- Modal -->
 							<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
@@ -74,7 +74,7 @@
 										<div class="modal-body"></div>
 
 										<div class="modal-footer">
-											<a class="btn btn-sm btn-primary " aria-label="Left Align" href="/assignment_add">Change</a>
+											<a class="btn btn-sm btn-primary " aria-label="Left Align" href="javascript:a();">Change</a>
 											<button type="button" id='assignDel' class="btn btn-sm btn-danger" data-dismiss="modal">Delete</button>
 										</div>
 									</div>
@@ -85,7 +85,7 @@
 					</div>
 				</div>
 
-				<!-- footer íë¨ë° class="app-footer" -->
+				<!-- footer 하단바 class="app-footer" -->
 				<div id="footer"></div>
 
 			</div>
@@ -94,6 +94,16 @@
 	<input type="hidden" id="hiddenAssign" name="hide" value="" >
 </body>
 </html>
+
+<script>
+function a(){
+	var $btnPopAssignment=$('.btn_pop_assignment');
+	var title=$btnPopAssignment.data('title');
+	
+	location.href="/assignment_add?title="+title;
+	<!-- href="/assignment_add" -->	
+}
+</script>
 
 <!-- modal-->
 <script type="text/javascript">
@@ -113,13 +123,14 @@
 			$('.modal-body').text(body);
 
 			$('div.modal').modal();
+			
 		});
 
 	})
 </script>
 
 
-<!-- ê³¼ì  ì­ì  ë²í¼ í´ë¦­-->
+<!-- 과제 삭제 버튼 클릭-->
 <script type="text/javascript">
 	$('#assignDel').on('click', function (){
 		var assignNo = $('#hiddenAssign').val();
@@ -128,7 +139,7 @@
 			url:"/homework/deleteHomework.json",
 			type : "GET",
 			data : {
-				'stuId':'1',
+				'stuId':'16010946',
 				'assignNo': assignNo
 			},
 			success : function(result){
@@ -146,7 +157,7 @@
 	});
 </script>
 
-<!-- íë©´ì ê³¼ì  íì -->
+<!-- 화면에 과제 표시 -->
 <script type="text/javascript">
 	$(document).ready(function(){
 
@@ -154,7 +165,7 @@
 			url:"/homework/selectHomework.json",
 			type : "GET",
 			data : {
-				'stuId':'1',
+				'stuId':'16010946',
 				'select':1
 			},
 			success : function(result){

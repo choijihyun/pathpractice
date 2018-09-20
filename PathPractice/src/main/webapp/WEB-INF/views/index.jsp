@@ -56,8 +56,7 @@
      <div id="home"></div>
      <div class= "col-md-6 col-xs-6">
       <button type="button" id="register" class="btn btn-lg btn-xs btn-block btn_join" >
-
-       íìê°ìÂÂ
+			회원가입
      </button>
    </div>
    <div class= "col-md-6 col-xs-6">
@@ -75,26 +74,24 @@
 </body>
 </html>
 
-
 <script src="${pageContext.request.contextPath}/resources/js/common/func_cookie.js"></script>
 
 <script type="text/javascript">
  $(document).ready(function(){
  var userInputId = getCookie("userInputId");
  $('#id').val(userInputId);
- console.log($('#id').val());
 
-       if($('#id').val() != ""){ // ÃªÂ·Â¸ Ã¬Â ÂÃ¬ÂÂ IDÃ«Â¥Â¼ Ã¬Â ÂÃ¬ÂÂ¥Ã­ÂÂ´Ã¬ÂÂ Ã¬Â²ÂÃ¬ÂÂ Ã­ÂÂÃ¬ÂÂ´Ã¬Â§Â Ã«Â¡ÂÃ«ÂÂ© Ã¬ÂÂ, Ã¬ÂÂÃ«Â Â¥ Ã¬Â¹Â¸Ã¬ÂÂ Ã¬Â ÂÃ¬ÂÂ¥Ã«ÂÂ IDÃªÂ°Â Ã­ÂÂÃ¬ÂÂÃ«ÂÂ Ã¬ÂÂÃ­ÂÂÃ«ÂÂ¼Ã«Â©Â´,
+       if($('#id').val() != ""){
          console.log("id.val()");
-           $("#idSaveCheck").attr("checked", true); // ID Ã¬Â ÂÃ¬ÂÂ¥Ã­ÂÂÃªÂ¸Â°Ã«Â¥Â¼ Ã¬Â²Â´Ã­ÂÂ¬ Ã¬ÂÂÃ­ÂÂÃ«Â¡Â Ã«ÂÂÃªÂ¸Â°.
-         }
+           $("#idSaveCheck").attr("checked", true);
+       }
 
-       $("#idSaveCheck").change(function(){ // Ã¬Â²Â´Ã­ÂÂ¬Ã«Â°ÂÃ¬ÂÂ¤Ã¬ÂÂ Ã«Â³ÂÃ­ÂÂÃªÂ°Â Ã¬ÂÂÃ«ÂÂ¤Ã«Â©Â´,
-           if($("#idSaveCheck").is(":checked")){ // ID Ã¬Â ÂÃ¬ÂÂ¥Ã­ÂÂÃªÂ¸Â° Ã¬Â²Â´Ã­ÂÂ¬Ã­ÂÂÃ¬ÂÂ Ã«ÂÂ,
+       $("#idSaveCheck").change(function(){ 
+           if($("#idSaveCheck").is(":checked")){ 
              console.log("check in remember me");
              var userInputId = $('#id').val();
-             setCookie("userInputId", userInputId, 7); // 7Ã¬ÂÂ¼ Ã«ÂÂÃ¬ÂÂ Ã¬Â¿Â Ã­ÂÂ¤ Ã«Â³Â´ÃªÂ´Â
-           }else{ // ID Ã¬Â ÂÃ¬ÂÂ¥Ã­ÂÂÃªÂ¸Â° Ã¬Â²Â´Ã­ÂÂ¬ Ã­ÂÂ´Ã¬Â Â Ã¬ÂÂ,
+             //setCookie("userInputId", userInputId, 7); 
+           }else{ 
              console.log("no check");
             deleteCookie("userInputId");
            }
@@ -110,7 +107,8 @@
 		    });
 		});
        $('#submit').on('click',function(){
-        setCookie("userInputId", userInputId, 7); // 7Ã¬ÂÂ¼ Ã«ÂÂÃ¬ÂÂ Ã¬Â¿Â Ã­ÂÂ¤ Ã«Â³Â´ÃªÂ´
+    	   
+        //setCookie("userInputId", userInputId, 7); // 7일 동안 쿠키 보관
 		event.preventDefault();
 
         $.ajax({
@@ -121,16 +119,14 @@
             'pw':$('#pw').val()
           },
           success : function(result){
-        	  //console.log(result);
-           //console.log(result["result"]);
-               if(result.result === "1"){ //Ã«Â¡ÂÃªÂ·Â¸Ã¬ÂÂ¸ Ã¬ÂÂ±ÃªÂ³Âµ
+               if(result.result === "1"){ 
                 location.href = "/home";
               }else{
-            	  alert('실패');
+            	  alert('ì¤í¨');
               }
             },
             error : function(){
-              alert('에러');
+              alert('ìë¬');
             }
           });
        });
