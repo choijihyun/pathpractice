@@ -63,6 +63,9 @@
 <script type="text/javascript">
 	var userInputId = getCookie("userInputId");
 	console.log(userInputId);
+	<%
+		System.out.println("home session : "+session.getAttribute("id"));
+	%>
 
 </script>
 

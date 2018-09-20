@@ -43,7 +43,7 @@
                   <button type="button" class="btn btn-md col-md-5 btn_submit" id="submit" >
                   FIND
                  </button>
-                 <button type="button" class="btn btn-md col-md-5 btn_cancel" onclick='location.href="/index"'>
+                 <button type="button" class="btn btn-md col-md-5 btn_cancel" onclick='location.href="/"'>
                   CANCEL
                  </button>
                </div>

@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import java.util.*;
 
 import org.json.simple.JSONObject;
@@ -21,78 +24,78 @@ import com.homeworkNotice.dao.UserDao;
 import com.homeworkNotice.dto.UserDto;
 
 
-//C:\Users\Àº¼÷\.m2\repository
-//¶óÀÌºê·¯¸® ¸ðÀ½Áý
-//¶óÀÌºê·¯¸®µé °¡Á®¿À´Â°Å? ¾ÈµÇ¸é ÀÌ °æ·Î·Î µé¾î°¡¼­ ¾È¿¡ÀÖ´Â ¶óÀÌºê·¯¸®µé ´Ù Áö¿ì°í ´Ù½Ã ÇØº¸¸é µÊ!
+//C:\Users\ï¿½ï¿½ï¿½ï¿½\.m2\repository
+//ï¿½ï¿½ï¿½Ìºê·¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//ï¿½ï¿½ï¿½Ìºê·¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â°ï¿½? ï¿½ÈµÇ¸ï¿½ ï¿½ï¿½ ï¿½ï¿½Î·ï¿½ ï¿½ï¿½î°¡ï¿½ï¿½ ï¿½È¿ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½Ìºê·¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½Øºï¿½ï¿½ï¿½ ï¿½ï¿½!
 
-//¿ÜºÎ(¾Èµå·ÎÀÌµå)¿¡¼­ À¯Àú Á¤º¸¸¦ url·Î ¿äÃ»ÇÏ¸é ÀÌ¸®·Î ¿À°Ô µÈ´Ù! 
+//ï¿½Üºï¿½(ï¿½Èµï¿½ï¿½ï¿½Ìµï¿½)ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ urlï¿½ï¿½ ï¿½ï¿½Ã»ï¿½Ï¸ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½È´ï¿½! 
 @Controller
 public class UserController {
 	
-	//½Ì±ÛÅæÀ¸·Î ¶°µµ´Â userDao¸¦ Àâ¾Æ¿È
-    @Autowired //¸¸¾à¿¡ µû·Î Á¤ÇØÁø id °¡ ÀÖÀ¸¸é autowired ¾Æ´Ï¶ó ´Ù¸¥°Å·Î ¤¾¤¾¤¾¤¾;;
+	//ï¿½Ì±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ userDaoï¿½ï¿½ ï¿½ï¿½Æ¿ï¿½
+    @Autowired //ï¿½ï¿½ï¿½à¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ id ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ autowired ï¿½Æ´Ï¶ï¿½ ï¿½Ù¸ï¿½ï¿½Å·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½;;
     private UserDao userDao;
     
-    //¾ÕÀ¸·Î ¸¹À» ¿äÃ» Áß ÇÏ³ªÀÇ ÇÔ¼ö
-    //¾Èµå·ÎÀÌµå¿¡¼­ ºñ¹Ð¹øÈ£¸¦ ´Þ¶ó°í ¿äÃ»ÇÏ´Â ÇÔ¼ö.
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã» ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
+    //ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ï¿½ï¿½ ï¿½ï¿½Ð¹ï¿½È£ï¿½ï¿½ ï¿½Þ¶ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½Ï´ï¿½ ï¿½Ô¼ï¿½.
 	@ResponseBody
-    @RequestMapping(value = "/user/getUserPwdInfo.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//¿ä ºÎºÐÀÌ url //get¹æ½ÄÀ¸·Î Àú /user/getUserPwdInfo.jsonÀÌ¶ó´Â url·Î µé¾î¿Í¼­ °ªÀ» È®ÀÎ ÇÒ ¼ö ÀÖ´Ù.
-    public String getUserPwdInfo(//url¿¡ ¸ÊÇÎ(¿¬°á)µÈ ÇÔ¼ö
-    			Locale locale, //¾Èµå·ÎÀÌµå¿¡¼­ ¹ÞÀ» ÆÄ¶ó¹ÌÅÍ
-    			Model model, //¾Èµå·ÎÀÌµå¿¡¼­ ¹ÞÀ» ÆÄ¶ó¹ÌÅÍ
-    			@RequestParam(value = "stuId", required=true) String stuId) {//¾Èµå·ÎÀÌµå¿¡¼­ ¹ÞÀ» ÆÄ¶ó¹ÌÅÍ, »ç½Ç ¿ä°Å ÇÏ³ª¸¸ ¹ÞÀ½ ´ï
-				// ?id=1 ÀÌ·±½ÄÀ¸·Î Ä¡¸é 1¿¡ ÇØ´çÇÏ´Â password°¡ ³ª¿À´Â ÇÔ¼öÀÎµ¥ ¿©±â¿¡¼­ @RequestParam ºÎºÐÀº id¶ó´Â °Å¸¦ ¹Þ¾ÆÁÙ Åë? À» ¸¸µé¾ú´Ù°í º¸¸é µÊ
+    @RequestMapping(value = "/user/getUserPwdInfo.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ url //getï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ /user/getUserPwdInfo.jsonï¿½Ì¶ï¿½ï¿½ urlï¿½ï¿½ ï¿½ï¿½ï¿½Í¼ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.
+    public String getUserPwdInfo(//urlï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ ï¿½Ô¼ï¿½
+    			Locale locale, //ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½
+    			Model model, //ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½
+    			@RequestParam(value = "stuId", required=true) String stuId) {//ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+				// ?id=1 ï¿½Ì·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä¡ï¿½ï¿½ 1ï¿½ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ passwordï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½â¿¡ï¿½ï¿½ @RequestParam ï¿½Îºï¿½ï¿½ï¿½ idï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ ï¿½Þ¾ï¿½ï¿½ï¿½ ï¿½ï¿½? ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 		
-		HashMap<Object, Object> param=new HashMap<Object, Object>();// ÀÌºÎºÐÀº Àß ¸ð¸£°Ú¾î¿ä!!!!!!!!!!!!!!!!!!!!!!!!!
-		//xmlÀÇ sql¿¡¼­ ÇÊ¿ä·Î ÇÏ´Â Á¤º¸°¡ ÀÖ´Ù¸é ¿©±â¿¡ ´ã¾Æ¼­ Àü´ÞÇØÁÜ. ÀÌ ÇÔ¼ö¿¡¼± id°ÚÁö?(¹Ø¿¡ º¸ÀÌ´Â)
+		HashMap<Object, Object> param=new HashMap<Object, Object>();// ï¿½ÌºÎºï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ð¸£°Ú¾ï¿½ï¿½!!!!!!!!!!!!!!!!!!!!!!!!!
+		//xmlï¿½ï¿½ sqlï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ idï¿½ï¿½ï¿½ï¿½?(ï¿½Ø¿ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½)
 		
 		param.put("stuId",stuId);		
-		//ÆÄ¶ó¹ÌÅÍ¿¡ ¾Èµå·ÎÀÌµå¿¡¼­ °Ç³×¹ÞÀº id¸¦ µî·ÏÇÑ´Ù
-    	List<UserDto> userDtoList=userDao.selectUser(param);//Äõ¸®¹® ¸¸µé°í ½ÍÀ¸¸é user-mapping.xml Âü°í	
-    	//idµéÀ» userdto ¸®½ºÆ®¿¡ ÀúÀåÇÔ
-    	//±× ÆÄ¶ó¹ÌÅÍ¸¦ sql¿¡ ´øÁ®ÁØ´Ù!! ±×·¯¸é userDtoList ¿©±â¿¡ ¹ÝÈ¯.
+		//ï¿½Ä¶ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ï¿½ï¿½ ï¿½Ç³×¹ï¿½ï¿½ï¿½ idï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
+    	List<UserDto> userDtoList=userDao.selectUser(param);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ user-mapping.xml ï¿½ï¿½ï¿½ï¿½	
+    	//idï¿½ï¿½ï¿½ï¿½ userdto ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    	//ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½Í¸ï¿½ sqlï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½!! ï¿½×·ï¿½ï¿½ï¿½ userDtoList ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½È¯.
     	
-    	//±Ùµ¥ ÀÌ ºÎºÐ¿¡¼­ UserDaoÀÇ selectUser·Î °¡ÀÝ¾Æ¾Æ¿µ 
-    	//±Ùµ¥ ±× UserDao¿¡¼­ return sqlSession.selectList("~~~~~~ ÀÌ·±°Å ÇØÁÖ´Âµ¥ ÀÌ°Ç ¹¹¿¡¿©???
-    	//userDao(Ä³¸¯ÅÍ)°¡ xmlÀÇ sql(¹«±â)¸¦ »ç¿ëÇØ¼­ °á°ú¸¦ ¾òÀº°É userDtoList¿¡ ÀúÀåÇÏ´Â°Å¾ß
-    	//¹«±â¸¦ »ç¿ëÇÏ´Â ÇàÀ§°¡ sqlSession.selectList ÀÌ°É ½ÇÇà½ÃÅ°´Â°ÅÀÎ °ÅÁö
+    	//ï¿½Ùµï¿½ ï¿½ï¿½ ï¿½ÎºÐ¿ï¿½ï¿½ï¿½ UserDaoï¿½ï¿½ selectUserï¿½ï¿½ ï¿½ï¿½ï¿½Ý¾Æ¾Æ¿ï¿½ 
+    	//ï¿½Ùµï¿½ ï¿½ï¿½ UserDaoï¿½ï¿½ï¿½ï¿½ return sqlSession.selectList("~~~~~~ ï¿½Ì·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ö´Âµï¿½ ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½???
+    	//userDao(Ä³ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ xmlï¿½ï¿½ sql(ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ userDtoListï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´Â°Å¾ï¿½
+    	//ï¿½ï¿½ï¿½â¸¦ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ sqlSession.selectList ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Å°ï¿½Â°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     	
     	
-    	//Dao4. Dao3±îÁö ÁøÇàÇØ¼­ ¸¸µç sqlÀ» userDao.?????·Î ¸¸µé¾î¼­ »ç¿ëÇÏ¸é µÇ°í, ÆÄ¶ó¹ÌÅÍ ³Ö´Â¹ýÀº ¹Ù·Î À§¿¡ Àû¾úÁö??¤¾¤¾
+    	//Dao4. Dao3ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ sqlï¿½ï¿½ userDao.?????ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½î¼­ ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Ç°ï¿½, ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Â¹ï¿½ï¿½ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½??ï¿½ï¿½ï¿½ï¿½
     	
     	JSONObject jSONObject = new JSONObject();
-    	if(!userDtoList.isEmpty()) {//¹ÝÈ¯¹ÞÀº µ¥ÀÌÅÍ°¡ À¯È¿ÇÏ¸é(db¿¡ ÀÖÀ¸¸é) ºê¶ó¿ìÀú È­¸é¿¡ °á°ú¸¦ »Ñ·ÁÁØ´Ù
+    	if(!userDtoList.isEmpty()) {//ï¿½ï¿½È¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½È¿ï¿½Ï¸ï¿½(dbï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È­ï¿½é¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ·ï¿½ï¿½Ø´ï¿½
         	jSONObject.put("pw", userDtoList.get(0).getPw()); 
         	jSONObject.put("email", userDtoList.get(0).getEmail());
-        	//¿©±âµµ ±Ã±Ý!!!! ±× userDtoList.get(0)Àº ¹» ÀÇ¹ÌÇÏ´Â°Å¿¡¿µ???
-        	//db¿¡¼­ ¹ÞÀº ¸®½ºÆ®µé Áß Ã¹¹øÂ° ÀÎµ¦½º¸¦ °¡Á®¿À´Â°Å¾ß (±Ùµ¥ »ç½Ç id·Î °¡Á®¿À¸é Ç×»ó 1°³¹Û¿¡ ¾ø±äÇÔ;;;¤¾¤¾)
+        	//ï¿½ï¿½ï¿½âµµ ï¿½Ã±ï¿½!!!! ï¿½ï¿½ userDtoList.get(0)ï¿½ï¿½ ï¿½ï¿½ ï¿½Ç¹ï¿½ï¿½Ï´Â°Å¿ï¿½ï¿½ï¿½???
+        	//dbï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ Ã¹ï¿½ï¿½Â° ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â°Å¾ï¿½ (ï¿½Ùµï¿½ ï¿½ï¿½ï¿½ idï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×»ï¿½ 1ï¿½ï¿½ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½;;;ï¿½ï¿½ï¿½ï¿½)
     	}
-    	else {//¾øÀ¸¸é ¿¡·¯¶ó°í ºê¶ó¿ìÀú¿¡ »Ñ·ÁÁØ´Ù
+    	else {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ·ï¿½ï¿½Ø´ï¿½
     		jSONObject.put("result", "no data");
     	}
     	System.out.println(jSONObject.toString());
-    	return jSONObject.toString();//¿äÃ»ÇÑ ³»¿ëµéÀ» ¹ÝÈ¯ÇØÁØ´Ù.
+    	return jSONObject.toString();//ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ï¿½Ø´ï¿½.
     }
 	
 
 	
-	//¾Èµå·ÎÀÌµå¿¡¼­ »ç¿ëÇÒ È¸¿ø°¡ÀÔ urlÀÌ¾ß!!
-	//¼­¹ö Å² ÈÄ¿¡ Å©·Ò,ÀÍ½ºÇÃ·Î·¯ ºê¶ó¿ìÀú ¾Æ¹«°Å³ª¿¡ url Ä¡´Â °÷¿¡´Ù°¡
+	//ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ urlï¿½Ì¾ï¿½!!
+	//ï¿½ï¿½ï¿½ï¿½ Å² ï¿½Ä¿ï¿½ Å©ï¿½ï¿½,ï¿½Í½ï¿½ï¿½Ã·Î·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ¹ï¿½ï¿½Å³ï¿½ï¿½ï¿½ url Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ù°ï¿½
 	//http://localhost:8080/main/user/insertUser.json?id=test123&password=test123&name=test123&grade=1&email=test123
-	//ÀÌ urlÀ» ÀÔ·ÂÇØº¸¸é
-	//success µÆ´Ù´Â°É º¼¼öÀÖÀ»°Å¾ß ¤¾¤¾
-	//ÀÏºÎ·¯ ÀÌ ¹Ø¿¡´Â ÁÖ¼® ´Ù »¯À¸´Ï±î ¾î¶² ³»¿ëÀÎÁö È¥ÀÚ »ý°¢ÇØº¸°í ±â¾ï¾È³ª¸é À§¿¡ ÇÔ¼ö·Î ¿Ã¶ó°¡¼­
-	//ÁÖ¼® º¸°í °øºÎÇØºÁ ¤¾¤¾
+	//ï¿½ï¿½ urlï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Øºï¿½ï¿½ï¿½
+	//success ï¿½Æ´Ù´Â°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¾ï¿½ ï¿½ï¿½ï¿½ï¿½
+	//ï¿½ÏºÎ·ï¿½ ï¿½ï¿½ ï¿½Ø¿ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½î¶² ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Øºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½È³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½Ã¶ó°¡¼ï¿½
+	//ï¿½Ö¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Øºï¿½ ï¿½ï¿½ï¿½ï¿½
 	@ResponseBody
-    @RequestMapping(value = "/user/insertUser.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value¶ó´Â °ª¿¡ ¸ÅÇÎ, get¹æ½Ä »ç¿ë
+    @RequestMapping(value = "/user/insertUser.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// valueï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, getï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     public String insertUser(
     			Model model,
     			@RequestParam(value = "name", required=true) String name,
     			@RequestParam(value = "stuId", required=true) String stuId,
     			@RequestParam(value = "semester", required=true) final int semester,
     			@RequestParam(value = "pw", required=true) String pw,
-    			@RequestParam(value = "email", required=true) String email) { // ÀÌ·¸°Ô 5°³ÀÇ ÆÄ¶ó¹ÌÅÍ¸¦ ¹Þ¾Æ¿À°í ³»¿ë ¾È¾²¸é x
-		HashMap<Object, Object> param=new HashMap<Object, Object>(); //°¢°¢ÀÇ id¸¶´Ù hashmap ¸¸µé¾îÁÖ´Ï±î »ý¼ºÀ» ÇØÁÜ
+    			@RequestParam(value = "email", required=true) String email) { // ï¿½Ì·ï¿½ï¿½ï¿½ 5ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½È¾ï¿½ï¿½ï¿½ x
+		HashMap<Object, Object> param=new HashMap<Object, Object>(); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ idï¿½ï¿½ï¿½ï¿½ hashmap ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		
 		param.put("name",name);		
 		param.put("stuId",stuId);		
@@ -101,9 +104,9 @@ public class UserController {
 		param.put("email",email);
 		//
 		System.out.println(param);
-		//ÀÌ ÇÔ¼ö(url)Àº È¸¿ø°¡ÀÔÀÌ ÁÖ ¸ñÀûÀÌ±â ¶§¹®¿¡
-		//°á°ú·Î ¼º°ø or ½ÇÆÐ¸¸ ¾Ë·Á ÁÖ¸é µÅ
-		//int °ªÀ¸·Î ¹ÝÈ¯ÀÌ µÇ´Âµ¥ 1ÀÌ¸é ¼º°ø ³ª¸ÓÁö °ªÀÌ¸é ½ÇÆÐ!!
+		//ï¿½ï¿½ ï¿½Ô¼ï¿½(url)ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ or ï¿½ï¿½ï¿½Ð¸ï¿½ ï¿½Ë·ï¿½ ï¿½Ö¸ï¿½ ï¿½ï¿½
+		//int ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ ï¿½Ç´Âµï¿½ 1ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½!!
 		int result=0;
 		try {
 			result=userDao.insertUser(param);
@@ -115,9 +118,9 @@ public class UserController {
 
 		System.out.println(result);
     	JSONObject jSONObject = new JSONObject();
-    	//±×·¡¼­ ¿©±â¼­ ¼º°ø or ½ÇÆÐ ±¸ºÐÇØ¼­ ¾Èµå·ÎÀÌµå¿¡ json µ¥ÀÌÅÍ¸¦ °á°ú·Î Àü´ÞÇØÁÙ°Å¾ß
+    	//ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¼­ ï¿½ï¿½ï¿½ï¿½ or ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ json ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù°Å¾ï¿½
     	if(result==1) {
-    		jSONObject.put("result", "1");//¼º°ø    		
+    		jSONObject.put("result", "1");//ï¿½ï¿½ï¿½ï¿½    		
     	}
     	else {
     		jSONObject.put("result", "0");
@@ -126,15 +129,15 @@ public class UserController {
 	}
 
 	@ResponseBody
-    @RequestMapping(value = "/user/updateUser.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value¶ó´Â °ª¿¡ ¸ÅÇÎ, get¹æ½Ä »ç¿ë
+    @RequestMapping(value = "/user/updateUser.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// valueï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, getï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     public String updateUser(
     			Model model,
     			@RequestParam(value="name",required=true) String name,
     			@RequestParam(value = "stuId", required=true) String stuId,
     			@RequestParam(value = "semester", required=true) final int semester,
     			@RequestParam(value = "pw", required=true) String pw,
-    			@RequestParam(value = "email", required=true) String email) { // ÀÌ·¸°Ô 5°³ÀÇ ÆÄ¶ó¹ÌÅÍ¸¦ ¹Þ¾Æ¿À°í ³»¿ë ¾È¾²¸é x
-		HashMap<Object, Object> param=new HashMap<Object, Object>(); //°¢°¢ÀÇ id¸¶´Ù hashmap ¸¸µé¾îÁÖ´Ï±î »ý¼ºÀ» ÇØÁÜ
+    			@RequestParam(value = "email", required=true) String email) { // ï¿½Ì·ï¿½ï¿½ï¿½ 5ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½È¾ï¿½ï¿½ï¿½ x
+		HashMap<Object, Object> param=new HashMap<Object, Object>(); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ idï¿½ï¿½ï¿½ï¿½ hashmap ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		
 		param.put("name", name);
 		param.put("stuId",stuId);		
@@ -143,9 +146,9 @@ public class UserController {
 		param.put("email",email);
 		//
 		System.out.println(param);
-		//ÀÌ ÇÔ¼ö(url)Àº È¸¿ø°¡ÀÔÀÌ ÁÖ ¸ñÀûÀÌ±â ¶§¹®¿¡
-		//°á°ú·Î ¼º°ø or ½ÇÆÐ¸¸ ¾Ë·Á ÁÖ¸é µÅ
-		//int °ªÀ¸·Î ¹ÝÈ¯ÀÌ µÇ´Âµ¥ 1ÀÌ¸é ¼º°ø ³ª¸ÓÁö °ªÀÌ¸é ½ÇÆÐ!!
+		//ï¿½ï¿½ ï¿½Ô¼ï¿½(url)ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ or ï¿½ï¿½ï¿½Ð¸ï¿½ ï¿½Ë·ï¿½ ï¿½Ö¸ï¿½ ï¿½ï¿½
+		//int ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ ï¿½Ç´Âµï¿½ 1ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½!!
 		int result=0;
 		try {
 			result=userDao.updateUser(param);
@@ -157,9 +160,9 @@ public class UserController {
 
 		System.out.println(result);
     	JSONObject jSONObject = new JSONObject();
-    	//±×·¡¼­ ¿©±â¼­ ¼º°ø or ½ÇÆÐ ±¸ºÐÇØ¼­ ¾Èµå·ÎÀÌµå¿¡ json µ¥ÀÌÅÍ¸¦ °á°ú·Î Àü´ÞÇØÁÙ°Å¾ß
+    	//ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¼­ ï¿½ï¿½ï¿½ï¿½ or ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ json ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù°Å¾ï¿½
     	if(result==1) {
-    		jSONObject.put("result", "1");//¼º°ø    		
+    		jSONObject.put("result", "1");//ï¿½ï¿½ï¿½ï¿½    		
     	}
     	else {
     		jSONObject.put("result", "0");
@@ -169,22 +172,22 @@ public class UserController {
 	
 	
 	
-	//id¿¡ ÇØ´çÇÏ´Â pw¸¦ ¹Ù²Þ ÁöÇöÀÌ°¡ ÇÑºÎºÐ!!!
+	//idï¿½ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ pwï¿½ï¿½ ï¿½Ù²ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì°ï¿½ ï¿½ÑºÎºï¿½!!!
 	@ResponseBody
-    @RequestMapping(value = "/user/updatePw.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value¶ó´Â °ª¿¡ ¸ÅÇÎ, get¹æ½Ä »ç¿ë
+    @RequestMapping(value = "/user/updatePw.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// valueï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, getï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     public String updatePW(
     			Model model,
     			@RequestParam(value = "stuId", required=true) String stuId,
     			@RequestParam(value = "pw", required=true) String pw) { 
-		HashMap<Object, Object> param=new HashMap<Object, Object>(); //°¢°¢ÀÇ id¸¶´Ù hashmap ¸¸µé¾îÁÖ´Ï±î »ý¼ºÀ» ÇØÁÜ
+		HashMap<Object, Object> param=new HashMap<Object, Object>(); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ idï¿½ï¿½ï¿½ï¿½ hashmap ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			
 		param.put("stuId",stuId);	
 		param.put("pw",pw);	
 		
 		System.out.println(param);
-		//ÀÌ ÇÔ¼ö(url)Àº È¸¿ø°¡ÀÔÀÌ ÁÖ ¸ñÀûÀÌ±â ¶§¹®¿¡
-		//°á°ú·Î ¼º°ø or ½ÇÆÐ¸¸ ¾Ë·Á ÁÖ¸é µÅ
-		//int °ªÀ¸·Î ¹ÝÈ¯ÀÌ µÇ´Âµ¥ 1ÀÌ¸é ¼º°ø ³ª¸ÓÁö °ªÀÌ¸é ½ÇÆÐ!!
+		//ï¿½ï¿½ ï¿½Ô¼ï¿½(url)ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ or ï¿½ï¿½ï¿½Ð¸ï¿½ ï¿½Ë·ï¿½ ï¿½Ö¸ï¿½ ï¿½ï¿½
+		//int ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ ï¿½Ç´Âµï¿½ 1ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½!!
 		int result=0;
 		try {
 			result=userDao.updatePw(param);
@@ -196,9 +199,9 @@ public class UserController {
 
 		System.out.println(result);
     	JSONObject jSONObject = new JSONObject();
-    	//±×·¡¼­ ¿©±â¼­ ¼º°ø or ½ÇÆÐ ±¸ºÐÇØ¼­ ¾Èµå·ÎÀÌµå¿¡ json µ¥ÀÌÅÍ¸¦ °á°ú·Î Àü´ÞÇØÁÙ°Å¾ß
+    	//ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¼­ ï¿½ï¿½ï¿½ï¿½ or ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ json ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù°Å¾ï¿½
     	if(result==1) {
-    		jSONObject.put("result", "1");//¼º°ø    		
+    		jSONObject.put("result", "1");//ï¿½ï¿½ï¿½ï¿½    		
     	}
     	else {
     		jSONObject.put("result", "0");
@@ -211,10 +214,11 @@ public class UserController {
 
 
 	@ResponseBody
-	@RequestMapping(value = "/user/checkUser.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//¿ä ºÎºÐÀÌ url //get¹æ½ÄÀ¸·Î Àú /user/getUserPwdInfo.jsonÀÌ¶ó´Â url·Î µé¾î¿Í¼­ °ªÀ» È®ÀÎ ÇÒ ¼ö ÀÖ´Ù.
-	public String checkUser(//url¿¡ ¸ÊÇÎ(¿¬°á)µÈ ÇÔ¼ö
-			Locale locale, //¾Èµå·ÎÀÌµå¿¡¼­ ¹ÞÀ» ÆÄ¶ó¹ÌÅÍ
-			Model model, //¾Èµå·ÎÀÌµå¿¡¼­ ¹ÞÀ» ÆÄ¶ó¹ÌÅÍ
+	@RequestMapping(value = "/user/checkUser.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ url //getï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ /user/getUserPwdInfo.jsonï¿½Ì¶ï¿½ï¿½ urlï¿½ï¿½ ï¿½ï¿½ï¿½Í¼ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.
+	public String checkUser(//urlï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ ï¿½Ô¼ï¿½
+			HttpSession session,
+			Locale locale, //ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½
+			Model model, //ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½
 			@RequestParam(value = "stuId", required=true) String stuId,
 			@RequestParam(value = "pw", required=true) String pw) {
 		
@@ -230,33 +234,35 @@ public class UserController {
 	
 		
 		JSONObject jSONObject = new JSONObject();
-		if(!userDtoList.isEmpty() && userDtoList.size()==1) {//¹ÝÈ¯¹ÞÀº µ¥ÀÌÅÍ°¡ À¯È¿ÇÏ¸é(db¿¡ ÀÖÀ¸¸é) ºê¶ó¿ìÀú È­¸é¿¡ °á°ú¸¦ »Ñ·ÁÁØ´Ù
+		if(!userDtoList.isEmpty() && userDtoList.size()==1) {//ï¿½ï¿½È¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½È¿ï¿½Ï¸ï¿½(dbï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È­ï¿½é¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ·ï¿½ï¿½Ø´ï¿½
 			if(pw.equals(userDtoList.get(0).getPw())) {
-				jSONObject.put("result","1");//idµµ Á¸ÀçÇÏ°í ºñ¹øµµ ¸Â´Â °æ¿ì
+				jSONObject.put("result","1");//idï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Â´ï¿½ ï¿½ï¿½ï¿½
+				System.out.println("id : "+stuId);
+				session.setAttribute("id",stuId);
 			}
 			else {
-				jSONObject.put("result","0");//ºñ¹øÀÌ ´Ù¸¥ °æ¿ì
+				jSONObject.put("result","0");//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½
 			}
 		}
-		else {//¾øÀ¸¸é ¿¡·¯¶ó°í ºê¶ó¿ìÀú¿¡ »Ñ·ÁÁØ´Ù
-			jSONObject.put("result", "0"); //id°¡ Á¸ÀçÇÏÁö ¾Ê´Â°æ¿ì
+		else {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ·ï¿½ï¿½Ø´ï¿½
+			jSONObject.put("result", "0"); //idï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â°ï¿½ï¿½
 		}
 		//System.out.println(jSONObject.toString());
-		return jSONObject.toString();//¿äÃ»ÇÑ ³»¿ëµéÀ» ¹ÝÈ¯ÇØÁØ´Ù.
+		return jSONObject.toString();//ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ï¿½Ø´ï¿½.
 	}
 	
 	@ResponseBody
-    @RequestMapping(value = "/user/getAllUserData.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//¿ä ºÎºÐÀÌ url //get¹æ½ÄÀ¸·Î Àú /user/getUserPwdInfo.jsonÀÌ¶ó´Â url·Î µé¾î¿Í¼­ °ªÀ» È®ÀÎ ÇÒ ¼ö ÀÖ´Ù.
-    public String getAllUserData(//url¿¡ ¸ÊÇÎ(¿¬°á)µÈ ÇÔ¼ö
-    			Locale locale, //¾Èµå·ÎÀÌµå¿¡¼­ ¹ÞÀ» ÆÄ¶ó¹ÌÅÍ
+    @RequestMapping(value = "/user/getAllUserData.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ url //getï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ /user/getUserPwdInfo.jsonï¿½Ì¶ï¿½ï¿½ urlï¿½ï¿½ ï¿½ï¿½ï¿½Í¼ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.
+    public String getAllUserData(//urlï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ ï¿½Ô¼ï¿½
+    			Locale locale, //ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½
     			Model model,
-    			@RequestParam(value = "select", required=true) final int select) {//¾Èµå·ÎÀÌµå¿¡¼­ ¹ÞÀ» ÆÄ¶ó¹ÌÅÍ, »ç½Ç ¿ä°Å ÇÏ³ª¸¸ ¹ÞÀ½ ´ï
+    			@RequestParam(value = "select", required=true) final int select) {//ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 
-    	List<UserDto> userDtoList=userDao.selectAllList();//Äõ¸®¹® ¸¸µé°í ½ÍÀ¸¸é user-mapping.xml Âü°í
+    	List<UserDto> userDtoList=userDao.selectAllList();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ user-mapping.xml ï¿½ï¿½ï¿½ï¿½
     	System.out.println(userDtoList);
     	JSONArray jSONArray=new JSONArray();
     	List<JSONObject> jsonList=new ArrayList<JSONObject>();
-        if(!userDtoList.isEmpty()) {//¹ÝÈ¯¹ÞÀº µ¥ÀÌÅÍ°¡ À¯È¿ÇÏ¸é(db¿¡ ÀÖÀ¸¸é) ºê¶ó¿ìÀú È­¸é¿¡ °á°ú¸¦ »Ñ·ÁÁØ´Ù
+        if(!userDtoList.isEmpty()) {//ï¿½ï¿½È¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½È¿ï¿½Ï¸ï¿½(dbï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È­ï¿½é¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ·ï¿½ï¿½Ø´ï¿½
         	for(int i=0;i<userDtoList.size();i++) {
         		JSONObject jSONObject = new JSONObject();
         		jSONObject.put("name",userDtoList.get(i).getName());
@@ -302,7 +308,7 @@ public class UserController {
 
             return jsObject.toString();
         } 
-        else {//¾øÀ¸¸é ¿¡·¯¶ó°í ºê¶ó¿ìÀú¿¡ »Ñ·ÁÁØ´Ù
+        else {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ·ï¿½ï¿½Ø´ï¿½
 
     		JSONObject jSONObject = new JSONObject();
         	jSONObject.put("result", "no data");

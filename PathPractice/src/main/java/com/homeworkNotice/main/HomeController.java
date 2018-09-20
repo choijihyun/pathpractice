@@ -115,6 +115,12 @@ public class HomeController {
        System.out.println("update_information!");
         return "update_information";
     }
+    
+    @RequestMapping(value = "/logout", method = RequestMethod.GET	)
+    public String logout(Locale locale, Model model) {
+       System.out.println("logout!");
+        return "logout";
+    }
 
     
     /*

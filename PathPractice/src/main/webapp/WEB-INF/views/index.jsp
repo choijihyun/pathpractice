@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<%@page language="java" contentType="text/html; cahrset=UTF-8"
+	pageEncoding="UTF-8" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd>
 <html lang="kr">
 <head>
  <title>Login Page</title>
@@ -32,13 +34,16 @@
       <div class="form-row">
 
        <!-- input id, pw -->
-       <div class= "col-md-12 col-xs-12">
-        <input type="text" id="id" class="form-control form-control-lg flat_input" placeholder="username">
-      </div>
-      <div class= "col-md-12 col-xs-12">
-        <input type="password" id="pw" class="form-control form-control-lg flat_input" placeholder="password" >
-      </div>
+       	<div class= "col-md-12 col-xs-12">
+       	 <input type="text" id="id" class="form-control form-control-lg flat_input" placeholder="username">
+     	 </div>
+    	  <div class= "col-md-12 col-xs-12">
+     	   <input type="password" id="pw" class="form-control form-control-lg flat_input" placeholder="password" >
+     	 </div>
+     	 <!-- login/join/find pw button-->
+     
 
+	
       <!-- remember user infomation - checkbox -->
       <div class="checkbox col-md-12">
         <label>
@@ -46,23 +51,24 @@
          Remember me
        </label>
      </div>
-
-     <!-- login/join/find pw button-->
+     
      <div class= "col-md-12 col-xs-12" >
-       <button class="btn btn-lg btn-block btn_login" id="submit" >
+       <button class="btn btn-lg btn-block btn_login" id="submit">
          LOGIN
        </button>
      </div>
+
+
      <div id="home"></div>
      <div class= "col-md-6 col-xs-6">
-      <button type="button" id="register" class="btn btn-lg btn-xs btn-block btn_join" >
+      <button type="button" class="btn btn-lg btn-xs btn-block btn_join" onclick='location.href="/join"'>
 			회원가입
      </button>
    </div>
    <div class= "col-md-6 col-xs-6">
-    <button type="button" class="btn btn-lg btn-xs btn-block btn_join" onclick='location.href="findPW.jsp"'>
-      PW
-    </button>
+   <button type="button" class="btn btn-lg btn-xs btn-block btn_join" onclick='location.href="/findPW"'>
+          PW
+   </button>
   </div>
 
 </div>
@@ -78,6 +84,9 @@
 
 <script type="text/javascript">
  $(document).ready(function(){
+	 <%
+	 	System.out.println("index session : "+session.getAttribute("id"));
+	 %>
  var userInputId = getCookie("userInputId");
  $('#id').val(userInputId);
 
@@ -91,44 +100,39 @@
              console.log("check in remember me");
              var userInputId = $('#id').val();
              //setCookie("userInputId", userInputId, 7); 
-           }else{ 
+           }else{
              console.log("no check");
             deleteCookie("userInputId");
            }
          });
-
-		$("#register").on('click',function(){
-			 $.ajax({
-		          url:"/join",
-		          type:"GET",
-		          success : function (data){
-		        	  document.write(data);
-		          }
-		    });
-		});
-       $('#submit').on('click',function(){
-    	   
-        //setCookie("userInputId", userInputId, 7); // 7일 동안 쿠키 보관
-		event.preventDefault();
-
-        $.ajax({
-          url:"/user/checkUser.json",
-          method:"get",
-          data : {
-            'stuId':$('#id').val(),
-            'pw':$('#pw').val()
-          },
-          success : function(result){
-               if(result.result === "1"){ 
-                location.href = "/home";
-              }else{
-            	  alert('ì¤í¨');
-              }
-            },
-            error : function(){
-              alert('ìë¬');
-            }
-          });
-       });
+       $('#submit').on('click', function() { //í´ë¹ ìì´ëì ë¹ë°ë²í¸ì ìë ¥ë ë¹ë²ì´ ê°ìì§ íì¸
+    	   event.preventDefault();
+           $.ajax({
+             url: "/user/checkUser.json",
+             type: "GET",
+             data: {
+               'stuId':$('#id').val(),
+               'pw':$('#pw').val()
+             },
+             success: function(result) {
+               console.log(result);
+               if(result["result"] === "1"){ 
+           		   alert('로그인 성공');
+                	location.href = "/home";
+                  }else{
+                	 <%
+              		  session.setAttribute("id",null);
+                   	%>
+                	  alert('로그인 실패');
+                  }
+                },
+               error : function(){
+            	   <%
+           		  session.setAttribute("id",null);
+                	%>
+                 alert('로그인 에러');
+               }
+           });
+         });
      });
    </script>

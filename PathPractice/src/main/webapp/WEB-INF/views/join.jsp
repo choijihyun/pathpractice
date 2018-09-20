@@ -79,8 +79,9 @@
 							JOIN</button>
 						</div>
 						<div class= "col-md-6 col-xs-6 btns">
-							<a class="btn btn-sm btn-block btn_cancel" href="/index">
-							CANCEL</a>
+							<button type="button" class="btn btn-sm btn-block btn_join" onclick='location.href="/"'>
+                 				 CANCEL
+                			</button>
 						</div>
 
 					</div>
@@ -110,11 +111,11 @@
 					success : function(result){
 						console.log(result);
 
-		            if(result["result"] === "1"){ //회원가입 성공
+		            if(result["result"] === "1"){ //íìê°ì ì±ê³µ
 		            	alert('회원가입 성공');
-		            	location.href = "/index";
+		            	location.href = "/";
 		            }else{
-		            	alert('아이디 중복');
+		            	alert('회원가입 성공');
 		            }
 		        },
 		        error : function(){
