@@ -42,11 +42,13 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/style_assignment_add.css">
 
-<!-- fontawesome ì¼ë¡ icon ì¬ì©íê¸° -->
+<!-- fontawesome-->
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
 	integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
 	crossorigin="anonymous">
+	
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -59,8 +61,8 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
 	integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
 	crossorigin="anonymous"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
 </head>
 
 
@@ -111,7 +113,7 @@
 						<div class="col-md-3 col-xs-3 my-2 label_input">마감일</div>
 						<div class="col-md-6 col-xs-6 mt-1 mb-1">
 							<form action="demo_form.asp">
-								<input type="date" class="col-mdname=date" id="dueDate">
+								<input type='text' id='dueDate'>
 							</form>
 						</div>
 						<div class="col-md-3 col-xs-3 mt-1 mb-1"></div>
@@ -138,22 +140,36 @@
 <script src="${pageContext.request.contextPath}/resources/js/common/func_check_input.js"></script>
 
 <script type="text/javascript">
+$(document).ready(function() {
 	var title = '${title}';
  	var dueDate = '${dueDate}';
 	var importance = '${importance}';
 	var contents = '${contents}';
-	var assignNo = '${assignNo}'; 
-	console.log(title);
+	var subNo = '${subNo}'; 
 	
 	alert(dueDate +"=dueDate  ,"+ importance +"=importance  ,"+ contents +"=contents  ,"+title);
 	
 	document.getElementById("title").value = title;
 	document.getElementById("contents").value = contents;
-	//document.getElementById("dueDate").value = dueDate;
-	for(var i=1 ; i<=importance ; i++)
-	$('input:radio[id="p'+i+'"]:radio[name="star-input"]').prop("checked", true);
 	
+	//setting datepicker
+	$(function() {
+		$("#dueDate").datepicker({ 
+			changeMonth: true, 
+	        changeYear: true,
+	        dayNames: ['월', '화', '수', '목', '금', '토', '일'], 
+	        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+			dateFormat : "yy/mm/dd"
+		});
+		
+		dueDate = dueDate.replace(/-/gi,'/');
+		$("#dueDate").datepicker('setDate',dueDate);
+	});
 	
+	for(var i=1 ; i<=importance ; i++){
+		$('input:radio[id="p'+i+'"]:radio[name="star-input"]').prop("checked", true);
+	}
+});
 </script>
 
 <script type="text/javascript">
@@ -166,9 +182,14 @@
 			event.preventDefault();
 
 			var radioVal = $('input[name="star-input"]:checked').val();
-			var due = $('#dueDate').val();
-
-			$.ajax({
+			
+			$("#dueDate").datepicker();
+			var due = document.getElementById("dueDate").value;
+			
+ 			due = due.replace('/','-');
+			due = due.replace('/','-'); 
+			alert(due);
+			 $.ajax({
 				url : "/homework/insertHomework.json",
 				type : "GET",
 				data : {
@@ -191,7 +212,7 @@
 				error : function() {
 					alert('과제 등록 에러');
 				}
-			});
+			}); 
 		});
 	});
 </script>

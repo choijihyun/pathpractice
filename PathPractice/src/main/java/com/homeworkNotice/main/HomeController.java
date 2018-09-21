@@ -64,17 +64,17 @@ public class HomeController {
     public String assignment_add(Locale locale, Model model,
     		@RequestParam(value="title", required=false) String title,
     		@RequestParam(value="dueDate", required=false) String dueDate,
-    		@RequestParam(value="importance", required=false) int importance,
+    		@RequestParam(value="importance", required=false, defaultValue="0") int importance,
     		@RequestParam(value="contents", required=false) String contents,
-    		@RequestParam(value="assignNo", required=false) int assignNo) {
-      
+    		@RequestParam(value="subNo", required=false, defaultValue="0") int subNo) {
+  
     	System.out.println("assignment_add! ");
-
+    	
     	model.addAttribute("title", title);
     	model.addAttribute("dueDate", dueDate);
     	model.addAttribute("importance", importance);
     	model.addAttribute("contents", contents);
-    	model.addAttribute("assignNo", assignNo);
+    	model.addAttribute("subNo", subNo);
         return "assignment_add";
     }
     

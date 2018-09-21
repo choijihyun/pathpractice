@@ -95,23 +95,6 @@
 </body>
 </html>
 
-<!-- <script type="text/javascript">
-function a(){
-	var $btnPopAssignment=$('.btn_pop_assignment');
-	var title = $btnPopAssignment.data('title');
-	var duaDate = $btnPopAssignment.data('dueDate');
-	var importance = $btnPopAssignment.data('importance');
-	var contents = $btnPopAssignment.data('contents');
-	var assignNo = $btnPopAssignment.data('assignNo');
-	
-	location.href="/assignment_add?title="+title
-								+"&dueDate="+duaDate
-								+"&importance="+importance
-								+"&contents="+contents
-								+"&assignNo="+assignNo;
-}
-</script> -->
-
 <!-- modal-->
 <script type="text/javascript">
 	$(function(){
@@ -121,7 +104,7 @@ function a(){
 			var dueDate = $(this).data('dueDate');
 			var importance = $(this).data('importance');
 			var contents = $(this).data('contents');
-			var assignNo = $(this).data('assignNo');
+			var subNo = $(this).data('subNo');
 			
 			$('#hiddenAssign').val(assignNo).trigger('change');
 
@@ -139,7 +122,7 @@ function a(){
 				+"&dueDate="+dueDate
 				+"&importance="+importance
 				+"&contents="+contents
-				+"&assignNo="+assignNo;
+				+"&subNo="+subNo;
 			});
 		});
 	})
