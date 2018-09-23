@@ -34,7 +34,7 @@
                <div class= "col-md-12 col-xs-12">
                   <input type="text" id="id" class="form-control form-control-lg flat_input" placeholder="username">
                </div>
-               <!-- 이건 뭐야...???
+              <!-- 이건 뭐야...???
                <div class= "col-md-6 col-xs-6">
                   <a id="pw"></a>
                </div>
@@ -43,7 +43,7 @@
                   <button type="button" class="btn btn-md col-md-5 btn_submit" id="submit" >
                   FIND
                  </button>
-                 <button type="button" class="btn btn-md col-md-5 btn_cancel" onclick='location.href="/index"'>
+                 <button type="button" class="btn btn-md col-md-5 btn_cancel" onclick='location.href="/"'>
                   CANCEL
                  </button>
                </div>
@@ -63,8 +63,8 @@
             type : "GET",
             data : {'stuId':$('#id').val()},
             success : function(result){
-               if(result['result'] === "no data"){ //회원정보 없음
-                  alert('회원정보가 없습니다.');
+               if(result['result'] === "no data"){ //회원정보 없음
+                  alert('íìì ë³´ê° ììµëë¤.');
                }else{//회원정보가 존재함!
                  $('#email').val(result['email']).trigger('change');
                  $('#to_pw').val(result['pw']).trigger('change');

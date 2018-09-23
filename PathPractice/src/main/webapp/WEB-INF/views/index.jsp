@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<%@page language="java" contentType="text/html; cahrset=UTF-8"
+	pageEncoding="UTF-8" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd>
 <html lang="kr">
 <head>
  <title>Login Page</title>
@@ -32,13 +34,16 @@
       <div class="form-row">
 
        <!-- input id, pw -->
-       <div class= "col-md-12 col-xs-12">
-        <input type="text" id="id" class="form-control form-control-lg flat_input" placeholder="username">
-      </div>
-      <div class= "col-md-12 col-xs-12">
-        <input type="password" id="pw" class="form-control form-control-lg flat_input" placeholder="password" >
-      </div>
+       	<div class= "col-md-12 col-xs-12">
+       	 <input type="text" id="id" class="form-control form-control-lg flat_input" placeholder="username">
+     	 </div>
+    	  <div class= "col-md-12 col-xs-12">
+     	   <input type="password" id="pw" class="form-control form-control-lg flat_input" placeholder="password" >
+     	 </div>
+     	 <!-- login/join/find pw button-->
+     
 
+	
       <!-- remember user infomation - checkbox -->
       <div class="checkbox col-md-12">
         <label>
@@ -46,24 +51,24 @@
          Remember me
        </label>
      </div>
-
-     <!-- login/join/find pw button-->
+     
      <div class= "col-md-12 col-xs-12" >
-       <button class="btn btn-lg btn-block btn_login" id="submit" >
+       <button class="btn btn-lg btn-block btn_login" id="submit">
          LOGIN
        </button>
      </div>
+
+
      <div id="home"></div>
      <div class= "col-md-6 col-xs-6">
-      <button type="button" id="register" class="btn btn-lg btn-xs btn-block btn_join" >
-
-       íìê°ìÂÂ
+      <button type="button" class="btn btn-lg btn-xs btn-block btn_join" onclick='location.href="/join"'>
+			회원가입
      </button>
    </div>
    <div class= "col-md-6 col-xs-6">
-    <button type="button" class="btn btn-lg btn-xs btn-block btn_join" onclick='location.href="findPW.jsp"'>
-      PW
-    </button>
+   <button type="button" class="btn btn-lg btn-xs btn-block btn_join" onclick='location.href="/findPW"'>
+          PW
+   </button>
   </div>
 
 </div>
@@ -75,31 +80,31 @@
 </body>
 </html>
 
-
 <script src="${pageContext.request.contextPath}/resources/js/common/func_cookie.js"></script>
 
 <script type="text/javascript">
  $(document).ready(function(){
+	 <%
+	 	System.out.println("index session : "+session.getAttribute("id"));
+	 %>
  var userInputId = getCookie("userInputId");
  $('#id').val(userInputId);
- console.log($('#id').val());
 
-       if($('#id').val() != ""){ // ÃªÂ·Â¸ Ã¬Â ÂÃ¬ÂÂ IDÃ«Â¥Â¼ Ã¬Â ÂÃ¬ÂÂ¥Ã­ÂÂ´Ã¬ÂÂ Ã¬Â²ÂÃ¬ÂÂ Ã­ÂÂÃ¬ÂÂ´Ã¬Â§Â Ã«Â¡ÂÃ«ÂÂ© Ã¬ÂÂ, Ã¬ÂÂÃ«Â Â¥ Ã¬Â¹Â¸Ã¬ÂÂ Ã¬Â ÂÃ¬ÂÂ¥Ã«ÂÂ IDÃªÂ°Â Ã­ÂÂÃ¬ÂÂÃ«ÂÂ Ã¬ÂÂÃ­ÂÂÃ«ÂÂ¼Ã«Â©Â´,
+       if($('#id').val() != ""){
          console.log("id.val()");
-           $("#idSaveCheck").attr("checked", true); // ID Ã¬Â ÂÃ¬ÂÂ¥Ã­ÂÂÃªÂ¸Â°Ã«Â¥Â¼ Ã¬Â²Â´Ã­ÂÂ¬ Ã¬ÂÂÃ­ÂÂÃ«Â¡Â Ã«ÂÂÃªÂ¸Â°.
-         }
+           $("#idSaveCheck").attr("checked", true);
+       }
 
-       $("#idSaveCheck").change(function(){ // Ã¬Â²Â´Ã­ÂÂ¬Ã«Â°ÂÃ¬ÂÂ¤Ã¬ÂÂ Ã«Â³ÂÃ­ÂÂÃªÂ°Â Ã¬ÂÂÃ«ÂÂ¤Ã«Â©Â´,
-           if($("#idSaveCheck").is(":checked")){ // ID Ã¬Â ÂÃ¬ÂÂ¥Ã­ÂÂÃªÂ¸Â° Ã¬Â²Â´Ã­ÂÂ¬Ã­ÂÂÃ¬ÂÂ Ã«ÂÂ,
+       $("#idSaveCheck").change(function(){ 
+           if($("#idSaveCheck").is(":checked")){ 
              console.log("check in remember me");
              var userInputId = $('#id').val();
-             setCookie("userInputId", userInputId, 7); // 7Ã¬ÂÂ¼ Ã«ÂÂÃ¬ÂÂ Ã¬Â¿Â Ã­ÂÂ¤ Ã«Â³Â´ÃªÂ´Â
-           }else{ // ID Ã¬Â ÂÃ¬ÂÂ¥Ã­ÂÂÃªÂ¸Â° Ã¬Â²Â´Ã­ÂÂ¬ Ã­ÂÂ´Ã¬Â Â Ã¬ÂÂ,
+             //setCookie("userInputId", userInputId, 7); 
+           }else{
              console.log("no check");
             deleteCookie("userInputId");
            }
          });
-
 		$("#register").on('click',function(){
 			 $.ajax({
 		          url:"/join",
@@ -110,7 +115,8 @@
 		    });
 		});
        $('#submit').on('click',function(){
-        setCookie("userInputId", userInputId, 7); // 7Ã¬ÂÂ¼ Ã«ÂÂÃ¬ÂÂ Ã¬Â¿Â Ã­ÂÂ¤ Ã«Â³Â´ÃªÂ´
+    	   
+        //setCookie("userInputId", userInputId, 7); // 7일 동안 쿠키 보관
 		event.preventDefault();
 
         $.ajax({
@@ -121,18 +127,17 @@
             'pw':$('#pw').val()
           },
           success : function(result){
-        	  //console.log(result);
-           //console.log(result["result"]);
-               if(result.result === "1"){ //Ã«Â¡ÂÃªÂ·Â¸Ã¬ÂÂ¸ Ã¬ÂÂ±ÃªÂ³Âµ
+               if(result.result === "1"){ 
                 location.href = "/home";
               }else{
-            	  alert('실패');
+            	  alert('로그인 실패');
               }
             },
             error : function(){
-              alert('에러');
+              alert('로그인 에러');
             }
           });
        });
-     });
+ });
+
    </script>

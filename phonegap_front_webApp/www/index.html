@@ -81,7 +81,7 @@
   var userInputId = getCookie("userInputId");
   $('#id').val(userInputId);
   console.log($('#id').val());
-  
+
        if($('#id').val() != ""){ // 그 전에 ID를 저장해서 처음 페이지 로딩 시, 입력 칸에 저장된 ID가 표시된 상태라면,
          console.log("id.val()");
            $("#idSaveCheck").attr("checked", true); // ID 저장하기를 체크 상태로 두기.
@@ -112,6 +112,7 @@
            console.log(result);
            console.log(result["result"]);
                if(result["result"] === "1"){ //로그인 성공
+                 session.setAttribute("id", id);
                 location.href = "home.html";
               }else{
                 alert('로그인 실패');

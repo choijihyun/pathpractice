@@ -1,7 +1,7 @@
 var footerHtml='';
 
 
-footerHtml+='<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style_footer.css">';
+footerHtml+='<link rel="stylesheet" type="text/css" href="resources/css/style_footer.css">';
 footerHtml+='<footer class="app-footer py-1">';
 footerHtml+='<div class="nav-scroller mb-2">';
 footerHtml+='<nav class="nav justify-content-between">';

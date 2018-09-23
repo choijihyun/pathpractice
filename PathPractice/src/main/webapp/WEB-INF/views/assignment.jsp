@@ -11,7 +11,7 @@
 	<!-- Customize CSS -->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style_assignment.css">
 
-	<!-- fontawesome 으로 icon 사용하기 -->
+	<!-- fontawesome ì¼ë¡ icon ì¬ì©íê¸° -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
 	<!-- Optional JavaScript -->
@@ -74,7 +74,7 @@
 										<div class="modal-body"></div>
 
 										<div class="modal-footer">
-											<a class="btn btn-sm btn-primary " aria-label="Left Align" href="/assignment_add">Change</a>
+											<button type="button" id='assignChange' class="btn btn-sm btn-primary " aria-label="Left Align">Change</button>
 											<button type="button" id='assignDel' class="btn btn-sm btn-danger" data-dismiss="modal">Delete</button>
 										</div>
 									</div>
@@ -99,22 +99,32 @@
 <script type="text/javascript">
 	$(function(){
 		$(document).on("click",'.btn_pop_assignment',function() {
-			var title = $(this).data('title');
 			var body = '';
-
-			var assignNo = $(this).data('assignNo');
+			var title = $(this).data('title');
+			var dueDate = $(this).data('dueDate');
+			var importance = $(this).data('importance');
+			var contents = $(this).data('contents');
+			var subNo = $(this).data('subNo');
+			
 			$('#hiddenAssign').val(assignNo).trigger('change');
 
-			body += 'due-date=' + $(this).data('dueDate');
-			body += ' , importance=' + $(this).data('importance');
-			body += ' , contents=' + $(this).data('contents');
+			body += 'due-date=' + dueDate;
+			body += ' , importance=' + importance;
+			body += ' , contents=' + contents;
 
 			$('.modal-title').text(title);
 			$('.modal-body').text(body);
-
 			$('div.modal').modal();
+			
+			//modify assignment
+			$('#assignChange').on('click', function (){
+				location.href="/assignment_add?title="+title
+				+"&dueDate="+dueDate
+				+"&importance="+importance
+				+"&contents="+contents
+				+"&subNo="+subNo;
+			});
 		});
-
 	})
 </script>
 
@@ -122,13 +132,16 @@
 <!-- 과제 삭제 버튼 클릭-->
 <script type="text/javascript">
 	$('#assignDel').on('click', function (){
+		<%
+			String id = (String)session.getAttribute("id");
+		%>
 		var assignNo = $('#hiddenAssign').val();
 		event.preventDefault();
 		$.ajax({
 			url:"/homework/deleteHomework.json",
 			type : "GET",
 			data : {
-				'stuId':'1',
+				'stuId':<%=id%>,
 				'assignNo': assignNo
 			},
 			success : function(result){
@@ -149,17 +162,16 @@
 <!-- 화면에 과제 표시 -->
 <script type="text/javascript">
 	$(document).ready(function(){
-
 		$.ajax({
 			url:"/homework/selectHomework.json",
 			type : "GET",
 			data : {
-				'stuId':'1',
+				'stuId':<%=id%>,
 				'select':1
 			},
 			success : function(result){
 				if(result['result'] === 'no data'){
-					alert('불러오기 실패');
+					alert('등록된 과제 없음');
 				}else{
 					alert('불러오기 성공');
 					console.log(result);

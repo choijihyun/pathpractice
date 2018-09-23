@@ -63,24 +63,30 @@
 <script type="text/javascript">
 	var userInputId = getCookie("userInputId");
 	console.log(userInputId);
+	<%
+		System.out.println("home session : "+session.getAttribute("id"));
+	%>
 
 </script>
 
 <script type="text/javascript">
+	<%
+		String id = (String)session.getAttribute("id");
+	%>
 	$(document).ready(function(){
 
 		$.ajax({
 			url:"/homework/selectHomework.json",
 			type : "GET",
 			data : {
-				'stuId':'1',
+				'stuId':<%=id%>,
 				'select':1
 			},
 			success : function(result){
 				if(result['result'] === 'no data'){
-					alert('불러오기 실패');
+					alert('등록된 과제 없음');
 				}else{
-					alert('불러오기 성공');
+					alert('과제 불러오기 성공');
 					console.log(result);
 
 					for(var i=0 ; i<result['result'].length ; i++){
@@ -101,7 +107,7 @@
 
 			},
 			error : function(){
-				alert('불러오기 에러');
+				alert('과제불러오기 에러');
 			}
 		});
 	});
