@@ -9,9 +9,10 @@ import org.springframework.stereotype.Repository;
 
 import com.homeworkNotice.dto.HomeworkDto;
 import com.homeworkNotice.dto.SubjectDto;
+import com.homeworkNotice.dto.TimeTableDto;
 
 @Repository
-public class SubjectDao {
+public class TimeTableDao {
 	@Autowired
     private SqlSession sqlSession;    
 	public SqlSession getSqlSession() {
@@ -20,13 +21,9 @@ public class SubjectDao {
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
-	
-	public List<SubjectDto> searchSubject(HashMap<Object,Object> param) {
-		return sqlSession.selectList("SubjectDao.searchSubject", param);
-	}
-	
-	public int insertSubject(HashMap<Object, Object> param) {
-		return sqlSession.insert("SubjectDao.insertSubject", param);		
+
+	public int insertTimeTable(HashMap<Object, Object> param) {
+		return sqlSession.insert("TimeTableDao.insertTimeTable", param);		
 	}
 
 }

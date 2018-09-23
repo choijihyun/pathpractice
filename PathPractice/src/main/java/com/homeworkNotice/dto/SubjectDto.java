@@ -1,6 +1,7 @@
 package com.homeworkNotice.dto;
 
 public class SubjectDto {
+	private int subjectKey;
 	private String subNo;
 	private String subName;
 	private String day;
@@ -8,7 +9,14 @@ public class SubjectDto {
 	private String profName;
 	private String startHour;
 	private String endHour;
+	private String add;
 	
+	public int getSubjectKey() {
+		return subjectKey;
+	}
+	public void setSubjectKey (int subjectKey) {
+		this.subjectKey=subjectKey;
+	}
 	public String getSubNo() {
 		return subNo;
 	}
@@ -51,6 +59,11 @@ public class SubjectDto {
 	public void setEndHour(String endHour) {
 		this.endHour = endHour;
 	}
-	
+	public String getAdd() {
+		return add;
+	}
+	public void setAdd(String add) {
+		this.add = add;
+	}
 	
 }

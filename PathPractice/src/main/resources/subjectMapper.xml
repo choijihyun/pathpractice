@@ -23,4 +23,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      <select id="searchSubject" resultType="com.homeworkNotice.dto.SubjectDto" parameterType="map">
     	select * from Subject where subName LIKE CONCAT('%',#{word},'%')
     </select>
+    
+   <insert id="insertSubject" parameterType="map">
+    	insert into Subject(subNo,class,subName,day,classRoom,profName,startHour,endHour,add) values ( #{subNo},#{class},#{subName},#{day},#{classRoom},#{profName},#{startHour},#{endHour},#{add})
+    </insert>
 </mapper>
