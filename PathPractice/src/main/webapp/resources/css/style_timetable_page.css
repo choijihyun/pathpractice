@@ -1,7 +1,5 @@
-body{
-	/*
-	background: #dd3247;
-	padding-top: 10%;*/
+.container{
+	max-width : none;
 }
 .login_box{
 	background: #fff;

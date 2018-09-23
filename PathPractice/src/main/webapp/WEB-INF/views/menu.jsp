@@ -24,25 +24,21 @@
 <body class="text-center">
 
 	<!-- Container -->
-	<div class="container">
-		<div class="row justify-content-md-center justify-content-xs-center row justify-content-sm-center justify-content-lg-center">
-			<div class="col col-md-6 col-md-auto col-xs-6 col-xs-auto col-sm-6 col-sm-auto col-lg-6 col-lg-auto login_box ">
+	<div
+		class="container m-0 p-0 justify-content-md-center justify-content-xs-center">
+		<div class="login_box ">
 
-				<!-- header (상단바)-->
-				<div id="header">
-				</div>
+			<!-- header (상단바)-->
+			<div id="header"></div>
 
-				<!-- 상단바와 하단바를 제외한 부분 class="main-area" -->
-				<div class="jumbotron p-md-3 text-white rounded main_area">
+			<!-- 상단바와 하단바를 제외한 부분 class="main-area" -->
+			<div class="jumbotron p-md-3 text-white rounded main_area"></div>
 
-				</div>
+			<!-- footer 하단바 class="app-footer" -->
+			<div id="footer"></div>
 
-				<!-- footer 하단바 class="app-footer" -->
-				<div id="footer">
-				</div>
-
-			</div>
 		</div>
+
 	</div>
 </body>
 </html>
