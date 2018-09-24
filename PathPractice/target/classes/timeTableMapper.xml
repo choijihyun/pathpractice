@@ -24,4 +24,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    <insert id="insertTimeTable" parameterType="map">
     	insert into TimeTable(stuId,subjectKey) values ( #{stuId},#{subjectKey})
     </insert>
+    
+    
+     <select id="searchTimeTable" resultType="com.homeworkNotice.dto.TimeTableDto" parameterType="map">
+    	select * from TimeTable where stuId=#{stuId}
+    </select>
+    
+    <delete id="deleteTimeTable" parameterType="map">
+    	delete from TimeTable where stuId=#{stuId} and subjectKey=#{subjectKey}
+    </delete>
+    
+    <delete id="deleteAllTimeTable" parameterType="map">
+    	delete from TimeTable where stuId=#{stuId}
+    </delete>
+    
 </mapper>

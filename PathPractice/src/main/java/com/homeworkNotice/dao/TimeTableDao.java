@@ -25,5 +25,16 @@ public class TimeTableDao {
 	public int insertTimeTable(HashMap<Object, Object> param) {
 		return sqlSession.insert("TimeTableDao.insertTimeTable", param);		
 	}
+	
+	public List<TimeTableDto> searchTimeTable(HashMap<Object,Object> param) {
+		return sqlSession.selectList("TimeTableDao.searchTimeTable", param);
+	}
 
+	public int deleteTimeTable(HashMap<Object, Object> param) {
+		return sqlSession.delete("TimeTableDao.deleteTimeTable",param);
+	}
+	
+	public int deleteAllTimeTable(HashMap<Object, Object> param) {
+		return sqlSession.delete("TimeTableDao.deleteAllTimeTable",param);
+	}
 }

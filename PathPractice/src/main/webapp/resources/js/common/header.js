@@ -1,11 +1,7 @@
 var headerHtml='';
 
 
-<<<<<<< HEAD
-headerHtml+='<link rel="stylesheet" type="text/css" href="/resources/css/style_header.css">';
-=======
 headerHtml+='<link rel="stylesheet" type="text/css" href="resources/css/style_header.css">';
->>>>>>> d926a5495d954bbd5c0498790d81e0838357ff1b
 headerHtml+='<header class="app-header">';
 headerHtml+='	<div class="row col-auto justify-content-end">';
 headerHtml+='		<div class= "col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4">';

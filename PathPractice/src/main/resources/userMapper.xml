@@ -29,6 +29,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
     
     
+    <delete id="deleteUser" parameterType="map">
+    	delete from Student where stuId=#{stuId}
+    </delete>
     
     
     <!--
