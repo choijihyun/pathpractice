@@ -1,6 +1,12 @@
+<%@page language="java" contentType="text/html; cahrset=UTF-8"
+	pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="kr">
 <head>
+<%
+	if(session.getAttribute("id")==null)
+		response.sendRedirect("/");
+%>
 	<title>timetable_page</title>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
@@ -11,7 +17,7 @@
 	<!-- Customize CSS -->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style_timetable_page.css">
 
-	<!-- fontawesome 으로 icon 사용하기 -->
+	<!-- fontawesome ì¼ë¡ icon ì¬ì©íê¸° -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
 	<!-- Optional JavaScript -->
@@ -27,13 +33,13 @@
 	<div class="container">
 		<div class="row justify-content-md-center justify-content-xs-center justify-content-sm-center justify-content-lg-center">
 			<div class="col-md-6 col-md-auto col-xs-6 col-xs-auto col-sm-6 col-sm-auto col-lg-6 col-lg-auto login_box ">
-				<!-- header (상단바) class="app-header" -->
+				<!-- header (ìë¨ë°) class="app-header" -->
 				<div id="header">
 				</div>
 
-				<!-- 상단바와 하단바를 제외한 부분 class="main-area" -->
+				<!-- ìë¨ë°ì íë¨ë°ë¥¼ ì ì¸í ë¶ë¶ class="main-area" -->
 				<div class="jumbotron p-md-0 m-0 main_area">
-					<!-- + 버튼  -->
+					<!-- + ë²í¼  -->
 					<div class="row col-auto justify-content-end setting">
 						<div class= "col-10 col-xs-10 col-sm-10 col-lg-10 col-md-10"></div>
 						<button id="plusTime" class="btn-lg btn_add p-0 mx-2" type="button" data-toggle="collapse" data-target="#collapseAdd" aria-label="Left Align" aria-expanded="false" aria-controls="collapseAdd">
@@ -41,35 +47,35 @@
 						</button>
 					</div>
 
-					<!-- +버튼 클릭시 추가 창 띄움-->
+					<!-- +ë²í¼ í´ë¦­ì ì¶ê° ì°½ ëì-->
 					<div id="collapseAdd" class="collapse p-0 md-1 col-12 col-xs-12 col-sm-12 col-lg-12 col-md-12">
 						<div id="topbar" class="card card-body card_plus">
 							<div class="list-group">
 
-								<button id="addByDirectly" class="btn p-1 btn-sm list-group-item" type="button" data-toggle="collapse" data-target="#collapseDirect" aria-expanded="false" aria-controls="collapseDirect">직접 추가하기</button>
-								<button id="addBySearching" class="btn p-1 btn-sm list-group-item" type="button" data-toggle="collapse" data-target="#collapseSearching" aria-expanded="false" aria-controls="collapseSearching" href="/find_subject">검색하기</button>
-								<button type="button" id="btnUndo2" class="p-1 btn-sm list-group-item">취소하기</button>
+								<button id="addByDirectly" class="btn p-1 btn-sm list-group-item" type="button" data-toggle="collapse" data-target="#collapseDirect" aria-expanded="false" aria-controls="collapseDirect">ì§ì  ì¶ê°íê¸°</button>
+								<button id="addBySearching" class="btn p-1 btn-sm list-group-item" type="button" data-toggle="collapse" data-target="#collapseSearching" aria-expanded="false" aria-controls="collapseSearching" href="/find_subject">ê²ìíê¸°</button>
+								<button type="button" id="btnUndo2" class="p-1 btn-sm list-group-item">ì·¨ìíê¸°</button>
 							</div>
 
-							<!-- 직접 추가하기 창 -->
+							<!-- ì§ì  ì¶ê°íê¸° ì°½ -->
 							<div class="collapse mt-1 form-add" id="collapseDirect">
 								<div class="card card-body card_directly p-2">
 									<form class="commonForm">
 										<div class="form-group m-0">
-											<label for="subjectName" class="col-12 label_input">과목명</label>
-											<input type="text" class="form-control input" title="과목명" id="subjectName">
+											<label for="subjectName" class="col-12 label_input">ê³¼ëª©ëª</label>
+											<input type="text" class="form-control input" title="ê³¼ëª©ëª" id="subjectName">
 										</div>
 										<div class="form-group m-0">
-											<label for="professorName" class="col-12 label_input" >교수명</label>
-											<input type="text" class="form-control input" title="교수명" id="professorName">
+											<label for="professorName" class="col-12 label_input" >êµìëª</label>
+											<input type="text" class="form-control input" title="êµìëª" id="professorName">
 										</div>
 										<div class="form-group m-0">
-											<label for="time" class="col-12 label_input">시간</label>
+											<label for="time" class="col-12 label_input">ìê°</label>
 											<div id="time" class="col-12 form-row">
-												<label class="mx-auto time_label">요일</label>
+												<label class="mx-auto time_label">ìì¼</label>
 												<div class="mx-auto">
 													<select id="day1" class="form-control-xs">
-														<option value="">요일</option> 
+														<option value="">ìì¼</option> 
 														<option value="mon">mon</option> 
 														<option value="tue">tue</option> 
 														<option value="wen">wen</option> 
@@ -77,8 +83,8 @@
 														<option value="fri">fri</option> 
 													</select>
 													<select id="day2" class="form-control-xs">
-														<option value="">요일</option>
-														<option value="none">없음</option>  
+														<option value="">ìì¼</option>
+														<option value="none">ìì</option>  
 														<option value="mon">mon</option> 
 														<option value="tue">tue</option> 
 														<option value="wen">wen</option> 
@@ -86,10 +92,10 @@
 														<option value="fri">fri</option> 
 													</select>
 												</div>
-												<label class="mx-auto time_label">시작시간</label>
+												<label class="mx-auto time_label">ìììê°</label>
 												<div class="mx-auto">
 													<select id="sHour" class="form-control-xs">
-														<option value="">시</option> 
+														<option value="">ì</option> 
 														<option value="9">9</option> 
 														<option value="10">10</option> 
 														<option value="11">11</option> 
@@ -102,15 +108,15 @@
 														<option value="18">18</option>
 													</select> 
 													<select id="sMinute" class="form-control-xs">
-														<option value="">분</option> 
+														<option value="">ë¶</option> 
 														<option value="00">00</option> 
 														<option value="30">30</option> 
 													</select> 				
 												</div>
-												<label class="mx-auto time-label">종료시간</label>
+												<label class="mx-auto time-label">ì¢ë£ìê°</label>
 												<div class="mx-auto">
 													<select id="eHour" class="form-control-xs">
-														<option value="">시</option> 
+														<option value="">ì</option> 
 														<option value="9">9</option> 
 														<option value="10">10</option> 
 														<option value="11">11</option> 
@@ -123,7 +129,7 @@
 														<option value="18">18</option>
 													</select> 
 													<select id="eMinute" class="form-control-xs">
-														<option value="">분</option> 
+														<option value="">ë¶</option> 
 														<option value="00">00</option> 
 														<option value="30">30</option> 
 													</select> 		
@@ -131,13 +137,13 @@
 											</div>
 										</div>
 										<div class="form-group m-0">
-											<label for="place" class="col-12 label_input">장소</label>
-											<input type="text" class="form-control input" title="장소" id="place">
+											<label for="place" class="col-12 label_input">ì¥ì</label>
+											<input type="text" class="form-control input" title="ì¥ì" id="place">
 										</div>
 									</form>
 									<div class="form-row mx-auto btn_submit">
-										<button type="button" id="btnSuccess" class="mx-auto col-5 btn btn-sm btn_add_sub">추가</button>
-										<button type="button" id="btnUndo1" class="mx-auto col-5 btn btn-sm btn_add_sub">취소</button>
+										<button type="button" id="btnSuccess" class="mx-auto col-5 btn btn-sm btn_add_sub">ì¶ê°</button>
+										<button type="button" id="btnUndo1" class="mx-auto col-5 btn btn-sm btn_add_sub">ì·¨ì</button>
 									</div>
 								</div>
 							</div>
@@ -148,7 +154,7 @@
 					<div id="timetable">
 					</div>
 				</div>
-				<!-- footer 하단바 class="app-footer" -->
+				<!-- footer íë¨ë° class="app-footer" -->
 				<div id="footer">
 				</div>
 			</div>
@@ -162,7 +168,7 @@
 	<script src="${pageContext.request.contextPath}/resources/js/common/func_check_input.js"></script>
 
 
-	<!-- 취소하기 버튼 클릭 시 다시 창 닫기 -->
+	<!-- ì·¨ìíê¸° ë²í¼ í´ë¦­ ì ë¤ì ì°½ ë«ê¸° -->
 	<script type="text/javascript">
 		$('#btnUndo2').on('click', function () {
 			$('#plusTime').trigger('click');
@@ -180,7 +186,7 @@
 		});
 	</script>
 
-	<!--select box 선택 값 가져오기 -->
+	<!--select box ì í ê° ê°ì ¸ì¤ê¸° -->
 	<script>
 		$('#btnSuccess').on('click', function () {
 
@@ -206,7 +212,7 @@
 			var row_length = table.rows.length;
 			var new_row_len = val_ehour;
 
-			//동적으로 테이블 조정
+			//ëì ì¼ë¡ íì´ë¸ ì¡°ì 
 			new_row_len = (new_row_len-8)*2;
 			if(val_eminute == '30')	new_row_len++;
 
@@ -265,7 +271,7 @@
 		});
 	</script>
 
-	<!-- 테이블 클릭 시 수정 -->
+	<!-- íì´ë¸ í´ë¦­ ì ìì  -->
 	<script>
 		var table = document.getElementById("table"),rIndex,cIndex;
 

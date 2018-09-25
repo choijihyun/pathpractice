@@ -24,7 +24,13 @@
 </head>
 
 <body class="text-center">
-
+	<%
+	System.out.println("mypage session : "+session.getAttribute("id"));
+	if(session.getAttribute("id")==null){
+		System.out.println("session is null");
+		response.sendRedirect("/");
+	}
+	%>
 	<!-- Container -->
 	<div class="container">
 		<div class="row justify-content-md-center justify-content-xs-center justify-content-sm-center justify-content-lg-center">

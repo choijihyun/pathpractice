@@ -1,6 +1,12 @@
+<%@page language="java" contentType="text/html; cahrset=UTF-8"
+	pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="kr">
 <head>
+<%
+	if(session.getAttribute("id")==null)
+		response.sendRedirect("/");
+%>
    <title>find password</title>
 
    <!-- Required meta tags -->
@@ -34,7 +40,7 @@
                <div class= "col-md-12 col-xs-12">
                   <input type="text" id="id" class="form-control form-control-lg flat_input" placeholder="username">
                </div>
-              <!-- 이건 뭐야...???
+              <!-- ì´ê±´ ë­ì¼...???
                <div class= "col-md-6 col-xs-6">
                   <a id="pw"></a>
                </div>
@@ -63,9 +69,9 @@
             type : "GET",
             data : {'stuId':$('#id').val()},
             success : function(result){
-               if(result['result'] === "no data"){ //회원정보 없음
-                  alert('íìì ë³´ê° ììµëë¤.');
-               }else{//회원정보가 존재함!
+               if(result['result'] === "no data"){ //íìì ë³´ ììÂÂ
+                  alert('Ã­ÂÂÃ¬ÂÂÃ¬Â ÂÃ«Â³Â´ÃªÂ°Â Ã¬ÂÂÃ¬ÂÂµÃ«ÂÂÃ«ÂÂ¤.');
+               }else{//íìì ë³´ê° ì¡´ì¬í¨!
                  $('#email').val(result['email']).trigger('change');
                  $('#to_pw').val(result['pw']).trigger('change');
 
@@ -74,20 +80,20 @@
                     url : "content_me.php",
                     success : function(result){
                       if(result){
-                        alert("메일이 전송되었습니다.");
+                        alert("ë©ì¼ì´ ì ì¡ëììµëë¤.");
                       }
                       else{
-                        alert("메일이 전송되지 않았습니다.");
+                        alert("ë©ì¼ì´ ì ì¡ëì§ ìììµëë¤.");
                       }
                     },
                     error : function(){
-                      alert("php에 접근하지 못하였습니다.");
+                      alert("phpì ì ê·¼íì§ ëª»íììµëë¤.");
                     }
                   });
                }
             },
             error : function(){
-							alert('비밀번호 찾기 에러');
+							alert('ë¹ë°ë²í¸ ì°¾ê¸° ìë¬');
             }
          });
       });

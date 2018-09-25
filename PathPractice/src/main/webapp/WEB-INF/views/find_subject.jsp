@@ -1,8 +1,10 @@
+<%@page language="java" contentType="text/html; cahrset=UTF-8"
+	pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="kr">
 
 <head>
-	<title>과목 찾기</title>
+	<title>ê³¼ëª© ì°¾ê¸°</title>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,7 +14,7 @@
 	<!-- Costumize CSS -->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style_find_subject.css">
 
-	<!-- fontawesome ì¼ë¡ icon ì¬ì©íê¸° -->
+	<!-- fontawesome Ã¬ÂÂ¼Ã«Â¡Â icon Ã¬ÂÂ¬Ã¬ÂÂ©Ã­ÂÂÃªÂ¸Â° -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
 	<!-- Optional JavaScript -->
@@ -35,7 +37,7 @@
 
 					<div class="form-row m-3">
 						<div class= "col-md-3 col-xs-3 mt-1 mb-1 label_input">
-							과목명
+							ê³¼ëª©ëªÂ
 						</div>
 						<div class= "col-md-7 col-xs-7 ">
 							<input type="text"  class="form-control form-control-sm mt-1 mb-1 flat_input" id="subjectName">
@@ -58,10 +60,10 @@
 								<tr>
 									<th class="text-center">NO</th>
 									<th class="text-center" style="border-left: 1px solid #e5e5e5;">CK</th>
-									<th class="text-center" style="border-left: 1px solid #e5e5e5;">과목명</th>
-									<th class="text-center" style="border-left: 1px solid #e5e5e5;">시간</th>
-									<th class="text-center" style="border-left: 1px solid #e5e5e5;">장소</th>
-									<th class="text-center" style="border-left: 1px solid #e5e5e5;">교수명</th>
+									<th class="text-center" style="border-left: 1px solid #e5e5e5;">ê³¼ëª©ëªÂ</th>
+									<th class="text-center" style="border-left: 1px solid #e5e5e5;">ìê°Â</th>
+									<th class="text-center" style="border-left: 1px solid #e5e5e5;">ì¥ìÂÂ</th>
+									<th class="text-center" style="border-left: 1px solid #e5e5e5;">êµìëªÂ</th>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -83,8 +85,8 @@
 	<input type = "hidden" id="hiddenAssign" name="hide" value="" >
 	<script type="text/javascript">
 		$(document).ready(function(){
-	     	$('#click').on('click',function(){ //입력한 과목명 가지고 선택할 수 있게 만들어야함.(subNum 받아야함!)
-				$('.add_row').empty(); //  .add_row 클래스를 가진항목 지우기(테이블 내용 지우기)
+	     	$('#click').on('click',function(){ //ìë ¥í ê³¼ëª©ëª ê°ì§ê³  ì íí  ì ìê² ë§ë¤ì´ì¼í¨.(subNum ë°ìì¼í¨!)
+				$('.add_row').empty(); //  .add_row í´ëì¤ë¥¼ ê°ì§í­ëª© ì§ì°ê¸°(íì´ë¸ ë´ì© ì§ì°ê¸°)
 
 				var checkList = [];
 
@@ -96,10 +98,10 @@
 	      				'word':$('#subjectName').val()
 	      			},
 	      			success : function(result){
-	               		if(result['result'] === 'no data'){ //과목 검색 성공
-	               			alert('검색 실패');
+	               		if(result['result'] === 'no data'){ //ê³¼ëª© ê²ì ì±ê³µ
+	               			alert('ê²ì ì¤í¨');
 	               		}else{
-	               			alert('검색 성공');
+	               			alert('ê²ì ì±ê³µ');
 
 	               			var	tableLen = result['result'].length;
 	               			var table = document.getElementById("tableFindSub"),rIndex,cIndex;
@@ -129,18 +131,18 @@
 	             		}
 	         	  	},
 	          	 	error : function(){
-	           			alert('ê²ì ìë¬');
+	           			alert('ÃªÂ²ÂÃ¬ÂÂ Ã¬ÂÂÃ«ÂÂ¬');
 	          	 	}
 	      		});
 	      	});
 	  	});
 	</script>
 	<script type="text/javascript">
-		$('#submit').on('click',function(){ //입력한 과목명 가지고 선택할 수 있게 만들어야함.(subNum 받아야함!)
+		$('#submit').on('click',function(){ //ìë ¥í ê³¼ëª©ëª ê°ì§ê³  ì íí  ì ìê² ë§ë¤ì´ì¼í¨.(subNum ë°ìì¼í¨!)
 			//var checkBox =
 			var subNo = $('#hiddenAssign').val();
 
-			//여기서 해야되는게 이제 subNo을 assignment_add.html로 보내야함!!!!
+			//ì¬ê¸°ì í´ì¼ëëê² ì´ì  subNoì assignment_add.htmlë¡ ë³´ë´ì¼í¨!!!!
 
 			//location.href="/assignment_add?"+
 		 	//$.ajax({
@@ -153,7 +155,7 @@
 		 	//})
 		});
 
-		//테이블 클릭하면 행,열의 인덱스 찍어줌
+		//íì´ë¸ í´ë¦­íë©´ í,ì´ì ì¸ë±ì¤ ì°ì´ì¤Â
 		var table = document.getElementById("tableFindSub"),rIndex,cIndex;
 
 		$('#tableFindSub').on('click', function (){

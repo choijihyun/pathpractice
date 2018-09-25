@@ -1,6 +1,12 @@
+<%@page language="java" contentType="text/html; cahrset=UTF-8"
+	pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="kr">
 <head>
+<%
+	if(session.getAttribute("id")==null)
+		response.sendRedirect("/");
+%>
 	<title>join Page</title>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">

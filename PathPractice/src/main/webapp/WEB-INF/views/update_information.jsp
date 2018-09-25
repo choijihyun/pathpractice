@@ -1,6 +1,12 @@
+<%@page language="java" contentType="text/html; cahrset=UTF-8"
+	pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="kr">
 <head>
+<%
+	if(session.getAttribute("id")==null)
+		response.sendRedirect("/");
+%>
  <title>update information</title>
 
  <!-- Required meta tags -->
@@ -101,15 +107,15 @@
       success : function(result){
         console.log(result);
 
-        if(result["result"] === "1"){ //회원가입 성공
-           alert('정보수정 성공');
+        if(result["result"] === "1"){ //íìê°ì ì±ê³µ
+           alert('ì ë³´ìì  ì±ê³µ');
            location.href = "/mypage";
         }else{
-           alert('정보수정 실패');
+           alert('ì ë³´ìì  ì¤í¨');
         }
       },
       error : function(){
-        alert('정보수정 에러');
+        alert('ì ë³´ìì  ìë¬');
       }
      });
   });
