@@ -4,7 +4,7 @@
 <html lang="kr">
 <%
 	if(session.getAttribute("id")==null)
-		response.sendRedirect("index.jsp");
+		response.sendRedirect("/");
 %>
 <style>
 .star-input>.input,

@@ -3,6 +3,10 @@
 <!doctype html>
 <html lang="kr">
 <head>
+<%
+	if(session.getAttribute("id")==null)
+		response.sendRedirect("/");
+%>
 	<title>assignment</title>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">

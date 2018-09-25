@@ -28,21 +28,22 @@ public class CompleteController {
 
 	//insert
 	@ResponseBody
-    @RequestMapping(value = "/complete/insertComplete.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value¶ó´Â °ª¿¡ ¸ÅÇÎ, get¹æ½Ä »ç¿ë
+    @RequestMapping(value = "/complete/insertComplete.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// valueï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, getï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     public String insertUser(
     			Model model,
     			@RequestParam(value = "stuId", required=true) String stuId,
-    			@RequestParam(value = "subNo", required=true) String subNo){ // ÀÌ·¸°Ô 5°³ÀÇ ÆÄ¶ó¹ÌÅÍ¸¦ ¹Þ¾Æ¿À°í ³»¿ë ¾È¾²¸é x
-		HashMap<Object, Object> param=new HashMap<Object, Object>(); //°¢°¢ÀÇ id¸¶´Ù hashmap ¸¸µé¾îÁÖ´Ï±î »ý¼ºÀ» ÇØÁÜ
+    			@RequestParam(value = "subNo", required=true) String subNo){ // ï¿½Ì·ï¿½ï¿½ï¿½ 5ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½È¾ï¿½ï¿½ï¿½ x
+
+		HashMap<Object, Object> param=new HashMap<Object, Object>(); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ idï¿½ï¿½ï¿½ï¿½ hashmap ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		
 		param.put("stuId",stuId);
 		param.put("subNo",subNo);
 		
 		//
 		
-		//ÀÌ ÇÔ¼ö(url)Àº È¸¿ø°¡ÀÔÀÌ ÁÖ ¸ñÀûÀÌ±â ¶§¹®¿¡
-		//°á°ú·Î ¼º°ø or ½ÇÆÐ¸¸ ¾Ë·Á ÁÖ¸é µÅ
-		//int °ªÀ¸·Î ¹ÝÈ¯ÀÌ µÇ´Âµ¥ 1ÀÌ¸é ¼º°ø ³ª¸ÓÁö °ªÀÌ¸é ½ÇÆÐ!!
+		//ï¿½ï¿½ ï¿½Ô¼ï¿½(url)ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ or ï¿½ï¿½ï¿½Ð¸ï¿½ ï¿½Ë·ï¿½ ï¿½Ö¸ï¿½ ï¿½ï¿½
+		//int ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ ï¿½Ç´Âµï¿½ 1ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½!!
 		int result=0;
 		try {
 			result=completeDao.insertComplete(param);
@@ -54,9 +55,9 @@ public class CompleteController {
 
 
     	JSONObject jSONObject = new JSONObject();
-    	//±×·¡¼­ ¿©±â¼­ ¼º°ø or ½ÇÆÐ ±¸ºÐÇØ¼­ ¾Èµå·ÎÀÌµå¿¡ json µ¥ÀÌÅÍ¸¦ °á°ú·Î Àü´ÞÇØÁÙ°Å¾ß
+    	//ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¼­ ï¿½ï¿½ï¿½ï¿½ or ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ json ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù°Å¾ï¿½
     	if(result==1) {
-    		jSONObject.put("result", "1");//¼º°ø    		
+    		jSONObject.put("result", "1");//ï¿½ï¿½ï¿½ï¿½    		
     	}
     	else {
     		jSONObject.put("result", "0");
@@ -72,7 +73,7 @@ public class CompleteController {
     			Model model,
     			@RequestParam(value = "stuId", required=true) String stuId) {
 
-		HashMap<Object, Object> param=new HashMap<Object, Object>(); //°¢°¢ÀÇ id¸¶´Ù hashmap ¸¸µé¾îÁÖ´Ï±î »ý¼ºÀ» ÇØÁÜ
+		HashMap<Object, Object> param=new HashMap<Object, Object>(); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ idï¿½ï¿½ï¿½ï¿½ hashmap ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		
 		param.put("stuId",stuId);
 		
@@ -81,7 +82,7 @@ public class CompleteController {
     	
     	JSONArray jSONArray=new JSONArray();
     	List<JSONObject> jsonList=new ArrayList<JSONObject>();
-        if(!completeDtoList.isEmpty()) {//¹ÝÈ¯¹ÞÀº µ¥ÀÌÅÍ°¡ À¯È¿ÇÏ¸é(db¿¡ ÀÖÀ¸¸é) ºê¶ó¿ìÀú È­¸é¿¡ °á°ú¸¦ »Ñ·ÁÁØ´Ù
+        if(!completeDtoList.isEmpty()) {//ï¿½ï¿½È¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½È¿ï¿½Ï¸ï¿½(dbï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È­ï¿½é¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ·ï¿½ï¿½Ø´ï¿½
         	for(int i=0;i<completeDtoList.size();i++) {
         		JSONObject jSONObject = new JSONObject();
         		jSONObject.put("stuId",completeDtoList.get(i).getStuId());
@@ -105,7 +106,7 @@ public class CompleteController {
 
             return jsObject.toString();
         } 
-        else {//¾øÀ¸¸é ¿¡·¯¶ó°í ºê¶ó¿ìÀú¿¡ »Ñ·ÁÁØ´Ù
+        else {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ·ï¿½ï¿½Ø´ï¿½
 
     		JSONObject jSONObject = new JSONObject();
         	jSONObject.put("result", "no data");
@@ -117,10 +118,10 @@ public class CompleteController {
 
 	//delete
 	@ResponseBody
-	@RequestMapping(value = "/complete/deleteAllComplete.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//¿ä ºÎºÐÀÌ url //get¹æ½ÄÀ¸·Î Àú /user/getUserPwdInfo.jsonÀÌ¶ó´Â url·Î µé¾î¿Í¼­ °ªÀ» È®ÀÎ ÇÒ ¼ö ÀÖ´Ù.
-	public String deleteAllComplete(//url¿¡ ¸ÊÇÎ(¿¬°á)µÈ ÇÔ¼ö
-			Locale locale, //¾Èµå·ÎÀÌµå¿¡¼­ ¹ÞÀ» ÆÄ¶ó¹ÌÅÍ
-			Model model, //¾Èµå·ÎÀÌµå¿¡¼­ ¹ÞÀ» ÆÄ¶ó¹ÌÅÍ
+	@RequestMapping(value = "/complete/deleteAllComplete.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ url //getï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ /user/getUserPwdInfo.jsonï¿½Ì¶ï¿½ï¿½ urlï¿½ï¿½ ï¿½ï¿½ï¿½Í¼ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.
+	public String deleteAllComplete(//urlï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ ï¿½Ô¼ï¿½
+			Locale locale, //ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½
+			Model model, //ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½
 			@RequestParam(value = "stuId", required=true) String stuId) {
 		
 		HashMap<Object, Object> param=new HashMap<Object, Object>();
@@ -132,13 +133,13 @@ public class CompleteController {
 	
 		
 		JSONObject jSONObject = new JSONObject();
-		if(result==1) {//¹ÝÈ¯¹ÞÀº µ¥ÀÌÅÍ°¡ À¯È¿ÇÏ¸é(db¿¡ ÀÖÀ¸¸é) ºê¶ó¿ìÀú È­¸é¿¡ °á°ú¸¦ »Ñ·ÁÁØ´Ù
-				jSONObject.put("result","1");//idµµ Á¸ÀçÇÏ°í ºñ¹øµµ ¸Â´Â °æ¿ì
+		if(result==1) {//ï¿½ï¿½È¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½È¿ï¿½Ï¸ï¿½(dbï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È­ï¿½é¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ·ï¿½ï¿½Ø´ï¿½
+				jSONObject.put("result","1");//idï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Â´ï¿½ ï¿½ï¿½ï¿½
 		}
-		else {//¾øÀ¸¸é ¿¡·¯¶ó°í ºê¶ó¿ìÀú¿¡ »Ñ·ÁÁØ´Ù
-			jSONObject.put("result", "0"); //id°¡ Á¸ÀçÇÏÁö ¾Ê´Â°æ¿ì
+		else {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ·ï¿½ï¿½Ø´ï¿½
+			jSONObject.put("result", "0"); //idï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â°ï¿½ï¿½
 		}
-		return jSONObject.toString();//¿äÃ»ÇÑ ³»¿ëµéÀ» ¹ÝÈ¯ÇØÁØ´Ù.
+		return jSONObject.toString();//ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ï¿½Ø´ï¿½.
 	}
 	
 	
@@ -146,10 +147,10 @@ public class CompleteController {
 	
 	//delete
 	@ResponseBody
-	@RequestMapping(value = "/complete/deleteComplete.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//¿ä ºÎºÐÀÌ url //get¹æ½ÄÀ¸·Î Àú /user/getUserPwdInfo.jsonÀÌ¶ó´Â url·Î µé¾î¿Í¼­ °ªÀ» È®ÀÎ ÇÒ ¼ö ÀÖ´Ù.
-	public String deleteComplete(//url¿¡ ¸ÊÇÎ(¿¬°á)µÈ ÇÔ¼ö
-			Locale locale, //¾Èµå·ÎÀÌµå¿¡¼­ ¹ÞÀ» ÆÄ¶ó¹ÌÅÍ
-			Model model, //¾Èµå·ÎÀÌµå¿¡¼­ ¹ÞÀ» ÆÄ¶ó¹ÌÅÍ
+	@RequestMapping(value = "/complete/deleteComplete.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ url //getï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ /user/getUserPwdInfo.jsonï¿½Ì¶ï¿½ï¿½ urlï¿½ï¿½ ï¿½ï¿½ï¿½Í¼ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.
+	public String deleteComplete(//urlï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ ï¿½Ô¼ï¿½
+			Locale locale, //ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½
+			Model model, //ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½
 			@RequestParam(value = "stuId", required=true) String stuId,
 			@RequestParam(value="subNo",required=true) String subNo) {
 		
@@ -163,13 +164,13 @@ public class CompleteController {
 	
 		
 		JSONObject jSONObject = new JSONObject();
-		if(result==1) {//¹ÝÈ¯¹ÞÀº µ¥ÀÌÅÍ°¡ À¯È¿ÇÏ¸é(db¿¡ ÀÖÀ¸¸é) ºê¶ó¿ìÀú È­¸é¿¡ °á°ú¸¦ »Ñ·ÁÁØ´Ù
-				jSONObject.put("result","1");//idµµ Á¸ÀçÇÏ°í ºñ¹øµµ ¸Â´Â °æ¿ì
+		if(result==1) {//ï¿½ï¿½È¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½È¿ï¿½Ï¸ï¿½(dbï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È­ï¿½é¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ·ï¿½ï¿½Ø´ï¿½
+				jSONObject.put("result","1");//idï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Â´ï¿½ ï¿½ï¿½ï¿½
 		}
-		else {//¾øÀ¸¸é ¿¡·¯¶ó°í ºê¶ó¿ìÀú¿¡ »Ñ·ÁÁØ´Ù
-			jSONObject.put("result", "0"); //id°¡ Á¸ÀçÇÏÁö ¾Ê´Â°æ¿ì
+		else {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ·ï¿½ï¿½Ø´ï¿½
+			jSONObject.put("result", "0"); //idï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â°ï¿½ï¿½
 		}
-		return jSONObject.toString();//¿äÃ»ÇÑ ³»¿ëµéÀ» ¹ÝÈ¯ÇØÁØ´Ù.
+		return jSONObject.toString();//ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ï¿½Ø´ï¿½.
 	}
 
 
