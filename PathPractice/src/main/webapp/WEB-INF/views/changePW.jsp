@@ -1,7 +1,13 @@
+<%@page language="java" contentType="text/html; cahrset=UTF-8"
+	pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="kr">
 
 <head>
+<%
+	if(session.getAttribute("id")==null)
+		response.sendRedirect("/");
+%>
   <title>find password</title>
 
   <!-- Required meta tags -->
@@ -39,7 +45,7 @@
            </div>
             <div class= "col-md-12 col-xs-12 mt-3 ">
               <button class="btn btn-md btn_submit mx-0" id="submit" >
-          		     확인
+          		     íì¸
               </button>
               <button type="button" class="btn btn-md btn_cancel mx-0" id="cancel" onclick="location.href='/mypage'">
           		      취소
@@ -51,7 +57,7 @@
             </div>
             <div class= "col-md-12 col-xs-12" >
               <a class="btn btn-lg btn-block btn_submit" id="change" style="display:none;">
-              	  변경
+              	  ë³ê²½
               </a>
             </div>
           </div>
@@ -60,7 +66,7 @@
   </div>
   <script type="text/javascript">
     $(document).ready(function() {
-      $('#submit').on('click', function() { //해당 아이디의 비밀번호와 입력된 비번이 같은지 확인
+      $('#submit').on('click', function() { //í´ë¹ ìì´ëì ë¹ë°ë²í¸ì ìë ¥ë ë¹ë²ì´ ê°ìì§ íì¸
         $.ajax({
           url: "/user/checkUser.json",
           type: "GET",
@@ -75,31 +81,31 @@
               $('#rePw').css('display', '');
               $('#change').css('display', '');
             } else {
-              alert("회원정보 없음");
+              alert("íìì ë³´ ìì");
             }
           },
           error: function() {
-            alert('비밀번호 찾기 에러');
+            alert('ë¹ë°ë²í¸ ì°¾ê¸° ìë¬');
           }
         });
       });
 
-      $('#change').on('click', function() {  //해당 아이디의 비밀번호와 입력된 비번이 같은지 확인
+      $('#change').on('click', function() {  //í´ë¹ ìì´ëì ë¹ë°ë²í¸ì ìë ¥ë ë¹ë²ì´ ê°ìì§ íì¸
         $.ajax({
           url: "http://localhost:8090/user/updatePW.json",
           type: "GET",
           data: {'stuId':$('#id').val(), 'pw':$('#rePw').val()},
           success: function(result) {
             console.log(result);
-            if (result['result'] === "1") {
-              alert("비밀번호 변경 성공");
+            if (result['result'] === "1") {ÂÂ
+              alert("ë¹ë°ë²í¸ ë³ê²½ ì±ê³µ");
               location.href = "/mypage";
-            } else {//회원정보 없음
-              alert("비밀번호 변경 실패");
+            } else {//íìì ë³´ ìì
+              alert("ë¹ë°ë²í¸ ë³ê²½ ì¤í¨");
             }
           },
           error: function() {
-            alert('비밀번호 변경 에러');
+            alert('ë¹ë°ë²í¸ ë³ê²½ ìë¬');
           }
         });
       });

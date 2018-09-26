@@ -12,6 +12,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	insert into Assignment(stuId,registerDate,dueDate,importance,title,contents,subNo,success) values ( #{stuId},Now(),#{dueDate},#{importance},#{title},#{contents},#{subNo},#{success})
     </insert>
     <delete id="deleteHomework" parameterType="map">
+    	delete from Assignment where stuId=#{stuId} and assignNo=#{assignNo}
+    </delete>
+    <delete id="deleteAllHomework" parameterType="map">
     	delete from Assignment where stuId=#{stuId}
     </delete>
     

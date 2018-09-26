@@ -44,4 +44,8 @@ public class UserDao {
 	public int updateUser(HashMap<Object,Object> param) {
 		return sqlSession.update("UserDao.updateUser",param);
 	}
+	
+	public int deleteUser(HashMap<Object, Object> param) {
+		return sqlSession.delete("UserDao.deleteUser",param);
+	}
 }

@@ -1,10 +1,16 @@
+<%@page language="java" contentType="text/html; cahrset=UTF-8"
+	pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="kr">
 <head>
+<%
+	if(session.getAttribute("id")==null)
+		response.sendRedirect("/");
+%>
 <title>join Page</title>
 <!-- Required meta tags -->
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> 
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
@@ -22,8 +28,7 @@
 <body class="text-center">
 	<!-- Container -->
 	<div
-		class="container m-0 p-0 justify-content-md-center justify-content-xs-center"
-		id="content">
+		class="container m-0 p-0 justify-content-md-center justify-content-xs-center" id="content">
 		<div class="login_box ">
 			<h1 class="text-center wdi_red">JOIN</h1>
 			<hr>

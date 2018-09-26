@@ -1,7 +1,13 @@
+<%@page language="java" contentType="text/html; cahrset=UTF-8"
+	pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="kr">
 <head>
-<title>update information</title>
+<%
+	if(session.getAttribute("id")==null)
+		response.sendRedirect("/");
+%>
+ <title>update information</title>
 
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -113,7 +119,6 @@
 			},
 			success : function(result) {
 				console.log(result);
-
 				if (result["result"] === "1") { //회원가입 성공
 					alert('정보수정 성공');
 					location.href = "/mypage";

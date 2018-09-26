@@ -1,24 +1,30 @@
+<%@page language="java" contentType="text/html; cahrset=UTF-8"
+	pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="kr">
 <head>
-<title>timetable_page</title>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<%
+	if(session.getAttribute("id")==null)
+		response.sendRedirect("/");
+%>
+	<title>timetable_page</title>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-<!-- Customize CSS -->
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style_timetable_page.css">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"> 
+	<!-- Customize CSS -->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style_timetable_page.css">
 
-<!-- fontawesome 으로 icon 사용하기 -->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+	<!-- fontawesome ì¼ë¡ icon ì¬ì©íê¸° -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 </head>
 
 <body class="text-center">
@@ -243,7 +249,8 @@
 		}
 			//color random
 		var colorCode = "#"+Math.round(Math.random() * 0xFFFFFF).toString(16);
-			//paint time
+		
+		//paint time
 		for(i=val_shour ; i<val_ehour ; i++){
 			$( 'table tr:nth-child(' + i + ') td:eq(' + index_day1 + ')' ).css('background-color', colorCode);
 			$( 'table tr:nth-child(' + i + ') td:eq(' + index_day2 + ')' ).css('background-color', colorCode);
@@ -258,6 +265,7 @@
 <!-- 테이블 클릭 시 수정 -->
 <script>
 	var table = document.getElementById("table"),rIndex,cIndex;
+
 		$('#btnSuccess').on('click', function (){
 		for(var i = 1 ; i < table.rows.length ; i++){				
 			for(var j = 1 ; j<table.rows[i].cells.length ; j++){

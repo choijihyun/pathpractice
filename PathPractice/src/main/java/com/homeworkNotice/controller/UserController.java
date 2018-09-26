@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import java.util.*;
@@ -14,6 +15,7 @@ import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,81 +24,91 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.homeworkNotice.dao.UserDao;
 import com.homeworkNotice.dto.UserDto;
+import com.homeworkNotice.dao.SubjectDao;
+import com.homeworkNotice.dto.SubjectDto;
+import com.homeworkNotice.dao.CompleteDao;
+import com.homeworkNotice.dto.CompleteDto;
+import com.homeworkNotice.dao.TimeTableDao;
+import com.homeworkNotice.dto.TimeTableDto;
+import com.homeworkNotice.dao.HomeworkDao;
+import com.homeworkNotice.dto.HomeworkDto;
 
+//C:\Users\은숙\.m2\repository
+//라이브러리 모음집
+//라이브러리들 가져오는거? 안되면 이 경로로 들어가서 안에있는 라이브러리들 다 지우고 다시 해보면 됨!
 
-//C:\Users\����\.m2\repository
-//���̺귯�� ������
-//���̺귯���� �������°�? �ȵǸ� �� ��η� ���� �ȿ��ִ� ���̺귯���� �� ����� �ٽ� �غ��� ��!
-
-//�ܺ�(�ȵ���̵�)���� ���� ������ url�� ��û�ϸ� �̸��� ���� �ȴ�! 
+//외부(안드로이드)에서 유저 정보를 url로 요청하면 이리로 오게 된다! 
 @Controller
 public class UserController {
 	
-	//�̱������� ������ userDao�� ��ƿ�
-    @Autowired //���࿡ ���� ������ id �� ������ autowired �ƴ϶� �ٸ��ŷ� ��������;;
-    private UserDao userDao;
-    
-    //������ ���� ��û �� �ϳ��� �Լ�
-    //�ȵ���̵忡�� ��й�ȣ�� �޶�� ��û�ϴ� �Լ�.
+	//싱글톤으로 떠도는 userDao를 잡아옴
+  @Autowired //만약에 따로 정해진 id 가 있으면 autowired 아니라 다른거로 ㅎㅎㅎㅎ;;
+  private UserDao userDao;
+  private SubjectDao subjectDao;
+  private CompleteDao completeDao;
+  private TimeTableDao timeTableDao;
+  private HomeworkDao homeworkDao;
+  
+  //앞으로 많을 요청 중 하나의 함수
+  //안드로이드에서 비밀번호를 달라고 요청하는 함수.
 	@ResponseBody
-    @RequestMapping(value = "/user/getUserPwdInfo.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//�� �κ��� url //get������� �� /user/getUserPwdInfo.json�̶�� url�� ���ͼ� ���� Ȯ�� �� �� �ִ�.
-    public String getUserPwdInfo(//url�� ����(����)�� �Լ�
-    			Locale locale, //�ȵ���̵忡�� ���� �Ķ����
-    			Model model, //�ȵ���̵忡�� ���� �Ķ����
-    			@RequestParam(value = "stuId", required=true) String stuId) {//�ȵ���̵忡�� ���� �Ķ����, ��� ��� �ϳ��� ���� ��
-				// ?id=1 �̷������� ġ�� 1�� �ش��ϴ� password�� ������ �Լ��ε� ���⿡�� @RequestParam �κ��� id��� �Ÿ� �޾��� ��? �� ������ٰ� ���� ��
+    @RequestMapping(value = "/user/getUserPwdInfo.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.
+    public String getUserPwdInfo(//url에 맵핑(연결)된 함수
+			Locale locale, //안드로이드에서 받을 파라미터
+			Model model, //안드로이드에서 받을 파라미터
+    			@RequestParam(value = "stuId", required=true) String stuId) {//안드로이드에서 받을 파라미터, 사실 요거 하나만 받음 댐
+		// ?id=1 이런식으로 치면 1에 해당하는 password가 나오는 함수인데 여기에서 @RequestParam 부분은 id라는 거를 받아줄 통? 을 만들었다고 보면 됨
 		
-		HashMap<Object, Object> param=new HashMap<Object, Object>();// �̺κ��� �� �𸣰ھ��!!!!!!!!!!!!!!!!!!!!!!!!!
-		//xml�� sql���� �ʿ�� �ϴ� ������ �ִٸ� ���⿡ ��Ƽ� ��������. �� �Լ����� id����?(�ؿ� ���̴�)
-		
+		HashMap<Object, Object> param=new HashMap<Object, Object>();// 이부분은 잘 모르겠어요!!!!!!!!!!!!!!!!!!!!!!!!!
+		//xml의 sql에서 필요로 하는 정보가 있다면 여기에 담아서 전달해줌. 이 함수에선 id겠지?(밑에 보이는)
+
 		param.put("stuId",stuId);		
-		//�Ķ���Ϳ� �ȵ���̵忡�� �ǳ׹��� id�� ����Ѵ�
-    	List<UserDto> userDtoList=userDao.selectUser(param);//������ ����� ������ user-mapping.xml ����	
-    	//id���� userdto ����Ʈ�� ������
-    	//�� �Ķ���͸� sql�� �����ش�!! �׷��� userDtoList ���⿡ ��ȯ.
+		//파라미터에 안드로이드에서 건네받은 id를 등록한다
+    	List<UserDto> userDtoList=userDao.selectUser(param);//쿼리문 만들고 싶으면 user-mapping.xml 참고
+    	//id들을 userdto 리스트에 저장함
+    	//그 파라미터를 sql에 던져준다!! 그러면 userDtoList 여기에 반환.
     	
-    	//�ٵ� �� �κп��� UserDao�� selectUser�� ���ݾƾƿ� 
-    	//�ٵ� �� UserDao���� return sqlSession.selectList("~~~~~~ �̷��� ���ִµ� �̰� ������???
-    	//userDao(ĳ����)�� xml�� sql(����)�� ����ؼ� ����� ������ userDtoList�� �����ϴ°ž�
-    	//���⸦ ����ϴ� ������ sqlSession.selectList �̰� �����Ű�°��� ����
+    	//근데 이 부분에서 UserDao의 selectUser로 가잖아아영 
+    	//근데 그 UserDao에서 return sqlSession.selectList("~~~~~~ 이런거 해주는데 이건 뭐에여???
+    	//userDao(캐릭터)가 xml의 sql(무기)를 사용해서 결과를 얻은걸 userDtoList에 저장하는거야
+    	//무기를 사용하는 행위가 sqlSession.selectList 이걸 실행시키는거인 거지
     	
     	
-    	//Dao4. Dao3���� �����ؼ� ���� sql�� userDao.?????�� ���� ����ϸ� �ǰ�, �Ķ���� �ִ¹��� �ٷ� ���� ������??����
+    	//Dao4. Dao3까지 진행해서 만든 sql을 userDao.?????로 만들어서 사용하면 되고, 파라미터 넣는법은 바로 위에 적었지??ㅎㅎ
     	
     	JSONObject jSONObject = new JSONObject();
-    	if(!userDtoList.isEmpty()) {//��ȯ���� �����Ͱ� ��ȿ�ϸ�(db�� ������) ������ ȭ�鿡 ����� �ѷ��ش�
+    	if(!userDtoList.isEmpty()) {//반환받은 데이터가 유효하면(db에 있으면) 브라우저 화면에 결과를 뿌려준다
         	jSONObject.put("pw", userDtoList.get(0).getPw()); 
         	jSONObject.put("email", userDtoList.get(0).getEmail());
-        	//���⵵ �ñ�!!!! �� userDtoList.get(0)�� �� �ǹ��ϴ°ſ���???
-        	//db���� ���� ����Ʈ�� �� ù��° �ε����� �������°ž� (�ٵ� ��� id�� �������� �׻� 1���ۿ� ������;;;����)
+        	//여기도 궁금!!!! 그 userDtoList.get(0)은 뭘 의미하는거에영???
+        	//db에서 받은 리스트들 중 첫번째 인덱스를 가져오는거야 (근데 사실 id로 가져오면 항상 1개밖에 없긴함;;;ㅎㅎ)
     	}
-    	else {//������ ������� �������� �ѷ��ش�
+    	else {//없으면 에러라고 브라우저에 뿌려준다
     		jSONObject.put("result", "no data");
     	}
     	System.out.println(jSONObject.toString());
-    	return jSONObject.toString();//��û�� ������� ��ȯ���ش�.
+    	return jSONObject.toString();//요청한 내용들을 반환해준다.
     }
 	
 
-	
-	//�ȵ���̵忡�� ����� ȸ������ url�̾�!!
-	//���� Ų �Ŀ� ũ��,�ͽ��÷η� ������ �ƹ��ų��� url ġ�� �����ٰ�
+	//안드로이드에서 사용할 회원가입 url이야!!
+	//서버 킨 후에 크롬,익스플로러 브라우저 아무거나에 url 치는 곳에다가
 	//http://localhost:8080/main/user/insertUser.json?id=test123&password=test123&name=test123&grade=1&email=test123
-	//�� url�� �Է��غ���
-	//success �ƴٴ°� ���������ž� ����
-	//�Ϻη� �� �ؿ��� �ּ� �� �����ϱ� � �������� ȥ�� �����غ��� ���ȳ��� ���� �Լ��� �ö󰡼�
-	//�ּ� ���� �����غ� ����
+	//이 url을 입력해보면
+	//success 됐다는걸 볼수있을거야 ㅎㅎ
+	//일부러 이 밑에는 주석 다 뺏으니까 어떤 내용인지 혼자 생각해보고 기억안나면 위에 함수로 올라가서
+	//주석 보고 공부해봐 ㅎㅎ
 	@ResponseBody
-    @RequestMapping(value = "/user/insertUser.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value��� ���� ����, get��� ���
+    @RequestMapping(value = "/user/insertUser.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value라는 값에 매핑, get방식 사용
     public String insertUser(
     			Model model,
     			@RequestParam(value = "name", required=true) String name,
     			@RequestParam(value = "stuId", required=true) String stuId,
     			@RequestParam(value = "semester", required=true) final int semester,
     			@RequestParam(value = "pw", required=true) String pw,
-    			@RequestParam(value = "email", required=true) String email) { // �̷��� 5���� �Ķ���͸� �޾ƿ��� ���� �Ⱦ��� x
-		HashMap<Object, Object> param=new HashMap<Object, Object>(); //������ id���� hashmap ������ִϱ� ������ ����
-		
+    			@RequestParam(value = "email", required=true) String email) { // 이렇게 5개의 파라미터를 받아오고 내용 안쓰면 x
+		HashMap<Object, Object> param=new HashMap<Object, Object>(); //각각의 id마다 hashmap 만들어주니까 생성을 해줌
+    			
 		param.put("name",name);		
 		param.put("stuId",stuId);		
 		param.put("semester",semester);		
@@ -104,9 +116,10 @@ public class UserController {
 		param.put("email",email);
 		//
 		System.out.println(param);
-		//�� �Լ�(url)�� ȸ�������� �� �����̱� ������
-		//����� ���� or ���и� �˷� �ָ� ��
-		//int ������ ��ȯ�� �Ǵµ� 1�̸� ���� ������ ���̸� ����!!
+		
+		//이 함수(url)은 회원가입이 주 목적이기 때문에
+		//결과로 성공 or 실패만 알려 주면 돼
+		//int 값으로 반환이 되는데 1이면 성공 나머지 값이면 실패!!
 		int result=0;
 		try {
 			result=userDao.insertUser(param);
@@ -118,9 +131,9 @@ public class UserController {
 
 		System.out.println(result);
     	JSONObject jSONObject = new JSONObject();
-    	//�׷��� ���⼭ ���� or ���� �����ؼ� �ȵ���̵忡 json �����͸� ����� �������ٰž�
+    	//그래서 여기서 성공 or 실패 구분해서 안드로이드에 json 데이터를 결과로 전달해줄거야
     	if(result==1) {
-    		jSONObject.put("result", "1");//����    		
+    		jSONObject.put("result", "1");//성공     		
     	}
     	else {
     		jSONObject.put("result", "0");
@@ -129,15 +142,15 @@ public class UserController {
 	}
 
 	@ResponseBody
-    @RequestMapping(value = "/user/updateUser.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value��� ���� ����, get��� ���
+    @RequestMapping(value = "/user/updateUser.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)
     public String updateUser(
     			Model model,
     			@RequestParam(value="name",required=true) String name,
     			@RequestParam(value = "stuId", required=true) String stuId,
     			@RequestParam(value = "semester", required=true) final int semester,
     			@RequestParam(value = "pw", required=true) String pw,
-    			@RequestParam(value = "email", required=true) String email) { // �̷��� 5���� �Ķ���͸� �޾ƿ��� ���� �Ⱦ��� x
-		HashMap<Object, Object> param=new HashMap<Object, Object>(); //������ id���� hashmap ������ִϱ� ������ ����
+    			@RequestParam(value = "email", required=true) String email) {
+		HashMap<Object, Object> param=new HashMap<Object, Object>();
 		
 		param.put("name", name);
 		param.put("stuId",stuId);		
@@ -146,9 +159,7 @@ public class UserController {
 		param.put("email",email);
 		//
 		System.out.println(param);
-		//�� �Լ�(url)�� ȸ�������� �� �����̱� ������
-		//����� ���� or ���и� �˷� �ָ� ��
-		//int ������ ��ȯ�� �Ǵµ� 1�̸� ���� ������ ���̸� ����!!
+		
 		int result=0;
 		try {
 			result=userDao.updateUser(param);
@@ -160,9 +171,9 @@ public class UserController {
 
 		System.out.println(result);
     	JSONObject jSONObject = new JSONObject();
-    	//�׷��� ���⼭ ���� or ���� �����ؼ� �ȵ���̵忡 json �����͸� ����� �������ٰž�
+    	
     	if(result==1) {
-    		jSONObject.put("result", "1");//����    		
+    		jSONObject.put("result", "1");	
     	}
     	else {
     		jSONObject.put("result", "0");
@@ -171,23 +182,19 @@ public class UserController {
 	}
 	
 	
-	
-	//id�� �ش��ϴ� pw�� �ٲ� �����̰� �Ѻκ�!!!
 	@ResponseBody
-    @RequestMapping(value = "/user/updatePw.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value��� ���� ����, get��� ���
+    @RequestMapping(value = "/user/updatePw.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)
     public String updatePW(
     			Model model,
     			@RequestParam(value = "stuId", required=true) String stuId,
     			@RequestParam(value = "pw", required=true) String pw) { 
-		HashMap<Object, Object> param=new HashMap<Object, Object>(); //������ id���� hashmap ������ִϱ� ������ ����
+		HashMap<Object, Object> param=new HashMap<Object, Object>(); 
 			
 		param.put("stuId",stuId);	
 		param.put("pw",pw);	
 		
 		System.out.println(param);
-		//�� �Լ�(url)�� ȸ�������� �� �����̱� ������
-		//����� ���� or ���и� �˷� �ָ� ��
-		//int ������ ��ȯ�� �Ǵµ� 1�̸� ���� ������ ���̸� ����!!
+		
 		int result=0;
 		try {
 			result=userDao.updatePw(param);
@@ -199,9 +206,8 @@ public class UserController {
 
 		System.out.println(result);
     	JSONObject jSONObject = new JSONObject();
-    	//�׷��� ���⼭ ���� or ���� �����ؼ� �ȵ���̵忡 json �����͸� ����� �������ٰž�
     	if(result==1) {
-    		jSONObject.put("result", "1");//����    		
+    		jSONObject.put("result", "1");	
     	}
     	else {
     		jSONObject.put("result", "0");
@@ -212,13 +218,12 @@ public class UserController {
 
 
 
-
-	@ResponseBody
-	@RequestMapping(value = "/user/checkUser.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//�� �κ��� url //get������� �� /user/getUserPwdInfo.json�̶�� url�� ���ͼ� ���� Ȯ�� �� �� �ִ�.
-	public String checkUser(//url�� ����(����)�� �Լ�
+	@RequestMapping(value = "/user/checkUser.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.POST)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.
+	public @ResponseBody String checkUser(//url에 맵핑(연결)된 함수
+			HttpServletRequest request,
 			HttpSession session,
-			Locale locale, //�ȵ���̵忡�� ���� �Ķ����
-			Model model, //�ȵ���̵忡�� ���� �Ķ����
+			Locale locale, //안드로이드에서 받을 파라미터
+			Model model, //안드로이드에서 받을 파라미터
 			@RequestParam(value = "stuId", required=true) String stuId,
 			@RequestParam(value = "pw", required=true) String pw) {
 		
@@ -234,35 +239,35 @@ public class UserController {
 	
 		
 		JSONObject jSONObject = new JSONObject();
-		if(!userDtoList.isEmpty() && userDtoList.size()==1) {//��ȯ���� �����Ͱ� ��ȿ�ϸ�(db�� ������) ������ ȭ�鿡 ����� �ѷ��ش�
+		if(!userDtoList.isEmpty() && userDtoList.size()==1) {//반환받은 데이터가 유효하면(db에 있으면) 브라우저 화면에 결과를 뿌려준다
 			if(pw.equals(userDtoList.get(0).getPw())) {
-				jSONObject.put("result","1");//id�� �����ϰ� ����� �´� ���
+				jSONObject.put("result","1");//id도 존재하고 비번도 맞는 경우
 				System.out.println("id : "+stuId);
 				session.setAttribute("id",stuId);
 			}
 			else {
-				jSONObject.put("result","0");//����� �ٸ� ���
+				jSONObject.put("result","0");//비번이 다른 경우
 			}
 		}
-		else {//������ ������� �������� �ѷ��ش�
-			jSONObject.put("result", "0"); //id�� �������� �ʴ°��
+		else {//없으면 에러라고 브라우저에 뿌려준다
+			jSONObject.put("result", "0"); //id가 존재하지 않는경우
 		}
 		//System.out.println(jSONObject.toString());
-		return jSONObject.toString();//��û�� ������� ��ȯ���ش�.
+		return jSONObject.toString();//요청한 내용들을 반환해준다.
 	}
 	
 	@ResponseBody
-    @RequestMapping(value = "/user/getAllUserData.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//�� �κ��� url //get������� �� /user/getUserPwdInfo.json�̶�� url�� ���ͼ� ���� Ȯ�� �� �� �ִ�.
-    public String getAllUserData(//url�� ����(����)�� �Լ�
-    			Locale locale, //�ȵ���̵忡�� ���� �Ķ����
+    @RequestMapping(value = "/user/getAllUserData.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)
+    public String getAllUserData(
+    			Locale locale, 
     			Model model,
-    			@RequestParam(value = "select", required=true) final int select) {//�ȵ���̵忡�� ���� �Ķ����, ��� ��� �ϳ��� ���� ��
+    			@RequestParam(value = "select", required=true) final int select) {
 
-    	List<UserDto> userDtoList=userDao.selectAllList();//������ ����� ������ user-mapping.xml ����
+    	List<UserDto> userDtoList=userDao.selectAllList();
     	System.out.println(userDtoList);
     	JSONArray jSONArray=new JSONArray();
     	List<JSONObject> jsonList=new ArrayList<JSONObject>();
-        if(!userDtoList.isEmpty()) {//��ȯ���� �����Ͱ� ��ȿ�ϸ�(db�� ������) ������ ȭ�鿡 ����� �ѷ��ش�
+        if(!userDtoList.isEmpty()) {//반환받은 데이터가 유효하면(db에 있으면) 브라우저 화면에 결과를 뿌려준다
         	for(int i=0;i<userDtoList.size();i++) {
         		JSONObject jSONObject = new JSONObject();
         		jSONObject.put("name",userDtoList.get(i).getName());
@@ -308,7 +313,7 @@ public class UserController {
 
             return jsObject.toString();
         } 
-        else {//������ ������� �������� �ѷ��ش�
+        else {//없으면 에러라고 브라우저에 뿌려준다
 
     		JSONObject jSONObject = new JSONObject();
         	jSONObject.put("result", "no data");
@@ -317,6 +322,45 @@ public class UserController {
         }
 	}
 	
-	
+	@ResponseBody
+    @RequestMapping(value = "/user/deleteUser.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value라는 값에 매핑, get방식 사용
+    public String deleteUser(
+    			Model model,
+    			@RequestParam(value = "stuId", required=true) String stuId) { // 이렇게 5개의 파라미터를 받아오고 내용 안쓰면 x
+		HashMap<Object, Object> param=new HashMap<Object, Object>(); //각각의 id마다 hashmap 만들어주니까 생성을 해줌
+    			
+		param.put("stuId",stuId);	
+		//
+		System.out.println(param);
+		
+		
+		//이 함수(url)은 회원가입이 주 목적이기 때문에
+		//결과로 성공 or 실패만 알려 주면 돼
+		//int 값으로 반환이 되는데 1이면 성공 나머지 값이면 실패!!
+		int result=0,result1=0,result2=0,result3=0,result4=0;
+		try {
+			result=userDao.deleteUser(param);
+			result1=subjectDao.deleteSubject(param);
+			result2=homeworkDao.deleteAllHomework(param);
+			result3=completeDao.deleteAllComplete(param);
+			result4=timeTableDao.deleteAllTimeTable(param);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+
+		System.out.println(result);
+    	JSONObject jSONObject = new JSONObject();
+    	//그래서 여기서 성공 or 실패 구분해서 안드로이드에 json 데이터를 결과로 전달해줄거야
+    	if(result==1&&result1==1&&result2==1&&result3==1&&result4==1) {
+    		jSONObject.put("result", "1");//성공     		
+    	}
+    	else {
+    		jSONObject.put("result", "0");
+    	}
+    	return jSONObject.toString();
+	}
+
 	
 }

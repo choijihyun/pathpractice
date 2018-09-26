@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.homeworkNotice.dao.HomeworkDao;
+import com.homeworkNotice.dto.CompleteDto;
 import com.homeworkNotice.dto.HomeworkDto;
 import com.homeworkNotice.dto.UserDto;
 
@@ -71,6 +72,32 @@ public class HomeworkController {
     	}
     	return jSONObject.toString();
 	}
+
+
+	//delete
+	@ResponseBody
+	@RequestMapping(value = "/homework/deleteAllHomework.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.
+	public String deleteAllHomework(//url에 맵핑(연결)된 함수
+			Locale locale, //안드로이드에서 받을 파라미터
+			Model model, //안드로이드에서 받을 파라미터
+			@RequestParam(value = "stuId", required=true) String stuId) {
+		
+		HashMap<Object, Object> param=new HashMap<Object, Object>();
+		
+		param.put("stuId",stuId);
+		
+		int result=homeworkDao.deleteAllHomework(param);
+		
+		JSONObject jSONObject = new JSONObject();
+		if(result==1) {//반환받은 데이터가 유효하면(db에 있으면) 브라우저 화면에 결과를 뿌려준다
+				jSONObject.put("result","1");//id도 존재하고 비번도 맞는 경우
+		}
+		else {//없으면 에러라고 브라우저에 뿌려준다
+			jSONObject.put("result", "0"); //id가 존재하지 않는경우
+		}
+		return jSONObject.toString();//요청한 내용들을 반환해준다.
+	}
+
 	
 	//delete
 	@ResponseBody
@@ -149,6 +176,8 @@ public class HomeworkController {
 	}
 	
 
+	
+	
 	//select
 		@ResponseBody
 		@RequestMapping(value = "/homework/selectHomework.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.

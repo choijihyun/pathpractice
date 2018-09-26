@@ -23,6 +23,13 @@
 </head>
 
 <body class="text-center">
+	<%
+	System.out.println("mypage session : "+session.getAttribute("id"));
+	if(session.getAttribute("id")==null){
+		System.out.println("session is null");
+		response.sendRedirect("/");
+	}
+	%>
 	<!-- Container -->
 	<div class="container m-0 p-0 justify-content-md-center justify-content-xs-center">
 		<div class="login_box ">

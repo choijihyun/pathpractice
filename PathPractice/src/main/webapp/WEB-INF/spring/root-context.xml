@@ -52,5 +52,12 @@
 		<property name="sqlSession" ref="SqlSessionTemplate"></property>
 	</bean>
 	
+	<bean id="timeTableDao" class="com.homeworkNotice.dao.TimeTableDao">
+		<property name="sqlSession" ref="SqlSessionTemplate"></property>
+	</bean>
+	<bean id="completeDao" class="com.homeworkNotice.dao.CompleteDao">
+		<property name="sqlSession" ref="SqlSessionTemplate"></property>
+	</bean>
+	
 
 </beans>

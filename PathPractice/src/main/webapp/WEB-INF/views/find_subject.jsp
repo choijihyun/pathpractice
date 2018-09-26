@@ -1,7 +1,13 @@
+<%@page language="java" contentType="text/html; cahrset=UTF-8"
+	pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="kr">
 
 <head>
+<%
+	if(session.getAttribute("id")==null)
+		response.sendRedirect("/");
+%>
 <title>과목 찾기</title>
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -85,8 +91,8 @@
 
 <script type="text/javascript">
 		$(document).ready(function(){
-	     	$('#click').on('click',function(){ //입력한 과목명 가지고 선택할 수 있게 만들어야함.(subNum 받아야함!)
-				$('.add_row').empty(); //  .add_row 클래스를 가진항목 지우기(테이블 내용 지우기)
+	     	$('#click').on('click',function(){ //ìë ¥í ê³¼ëª©ëª ê°ì§ê³  ì íí  ì ìê² ë§ë¤ì´ì¼í¨.(subNum ë°ìì¼í¨!)
+				$('.add_row').empty(); //  .add_row í´ëì¤ë¥¼ ê°ì§í­ëª© ì§ì°ê¸°(íì´ë¸ ë´ì© ì§ì°ê¸°)
 
 				var checkList = [];
 
@@ -98,10 +104,10 @@
 	      				'word':$('#subjectName').val()
 	      			},
 	      			success : function(result){
-	               		if(result['result'] === 'no data'){ //과목 검색 성공
-	               			alert('검색 실패');
+	               		if(result['result'] === 'no data'){ //ê³¼ëª© ê²ì ì±ê³µ
+	               			alert('ê²ì ì¤í¨');
 	               		}else{
-	               			alert('검색 성공');
+	               			alert('ê²ì ì±ê³µ');
 
 	               			var	tableLen = result['result'].length;
 	               			var table = document.getElementById("tableFindSub"),rIndex,cIndex;
@@ -131,18 +137,18 @@
 	             		}
 	         	  	},
 	          	 	error : function(){
-	           			alert('ê²ì ìë¬');
+	           			alert('ÃªÂ²ÂÃ¬ÂÂ Ã¬ÂÂÃ«ÂÂ¬');
 	          	 	}
 	      		});
 	      	});
 	  	});
 	</script>
 	<script type="text/javascript">
-		$('#submit').on('click',function(){ //입력한 과목명 가지고 선택할 수 있게 만들어야함.(subNum 받아야함!)
+		$('#submit').on('click',function(){ //ìë ¥í ê³¼ëª©ëª ê°ì§ê³  ì íí  ì ìê² ë§ë¤ì´ì¼í¨.(subNum ë°ìì¼í¨!)
 			//var checkBox =
 			var subNo = $('#hiddenAssign').val();
 
-			//여기서 해야되는게 이제 subNo을 assignment_add.html로 보내야함!!!!
+			//ì¬ê¸°ì í´ì¼ëëê² ì´ì  subNoì assignment_add.htmlë¡ ë³´ë´ì¼í¨!!!!
 
 			//location.href="/assignment_add?"+
 		 	//$.ajax({
@@ -155,7 +161,7 @@
 		 	//})
 		});
 
-		//테이블 클릭하면 행,열의 인덱스 찍어줌
+		//íì´ë¸ í´ë¦­íë©´ í,ì´ì ì¸ë±ì¤ ì°ì´ì¤Â
 		var table = document.getElementById("tableFindSub"),rIndex,cIndex;
 
 		$('#tableFindSub').on('click', function (){

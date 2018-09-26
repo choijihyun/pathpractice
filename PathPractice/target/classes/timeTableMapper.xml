@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
  
  <!-- sql 덩어리!!  dao들에서 얘네를 사용 --> <!-- 이거는 무슨 말인지 알았어요! -->
-<mapper namespace="SubjectDao">
+<mapper namespace="TimeTableDao">
 	<!-- Dao1. 여기에 알맞은 sql을 만들고, id(sql을 구분해줄수 있는)와 resultType(반환해줄 형태)를 적는다~ -->
 	<!-- Dao2. 근데 where절(sql 문법을 절 이라고 표현한다!!)에 뭔가 집어넣어서 select 해야하면 parameterType을 넣는다  -->
 	<!-- Dao3. 그건 parameterType="map" 이라고 항상 적으면 된다  -->
@@ -20,20 +20,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
     
     -->
-     <select id="searchSubject" resultType="com.homeworkNotice.dto.SubjectDto" parameterType="map">
-    	select * from Subject where subName LIKE CONCAT('%',#{word},'%')
-    </select>
     
-     <select id="searchDirSubject" resultType="com.homeworkNotice.dto.SubjectDto" parameterType="map">
-    	select * from Subject where add=#{add}
-    </select>
-    
-   <insert id="insertSubject" parameterType="map">
-    	insert into Subject(subNo,class,subName,day,classRoom,profName,startHour,endHour,add) values ( #{subNo},#{class},#{subName},#{day},#{classRoom},#{profName},#{startHour},#{endHour},#{add})
+   <insert id="insertTimeTable" parameterType="map">
+    	insert into TimeTable(stuId,subjectKey) values ( #{stuId},#{subjectKey})
     </insert>
     
-    <delete id="deleteSubject" parameterType="map">
-    	delete from Subject where add=#{add}
+    
+     <select id="searchTimeTable" resultType="com.homeworkNotice.dto.TimeTableDto" parameterType="map">
+    	select * from TimeTable where stuId=#{stuId}
+    </select>
+    
+    <delete id="deleteTimeTable" parameterType="map">
+    	delete from TimeTable where stuId=#{stuId} and subjectKey=#{subjectKey}
+    </delete>
+    
+    <delete id="deleteAllTimeTable" parameterType="map">
+    	delete from TimeTable where stuId=#{stuId}
     </delete>
     
 </mapper>
