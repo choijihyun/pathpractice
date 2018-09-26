@@ -99,15 +99,6 @@
 				deleteCookie("userInputId");
 			}
 		});
-		$("#register").on('click', function() {
-			$.ajax({
-				url : "/join",
-				type : "GET",
-				success : function(data) {
-					document.write(data);
-				}
-			});
-		});
 		$('#submit').on('click', function() {
 
 			//setCookie("userInputId", userInputId, 7); // 7일 동안 쿠키 보관
@@ -115,7 +106,7 @@
 
 			$.ajax({
 				url : "/user/checkUser.json",
-				method : "get",
+				method : "post",
 				data : {
 					'stuId' : $('#id').val(),
 					'pw' : $('#pw').val()
