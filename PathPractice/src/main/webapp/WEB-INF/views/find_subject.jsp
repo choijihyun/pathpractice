@@ -91,8 +91,8 @@
 
 <script type="text/javascript">
 		$(document).ready(function(){
-	     	$('#click').on('click',function(){ //ìë ¥í ê³¼ëª©ëª ê°ì§ê³  ì íí  ì ìê² ë§ë¤ì´ì¼í¨.(subNum ë°ìì¼í¨!)
-				$('.add_row').empty(); //  .add_row í´ëì¤ë¥¼ ê°ì§í­ëª© ì§ì°ê¸°(íì´ë¸ ë´ì© ì§ì°ê¸°)
+	     	$('#click').on('click',function(){ 
+				$('.add_row').empty(); //  .add_row 
 
 				var checkList = [];
 
@@ -104,10 +104,10 @@
 	      				'word':$('#subjectName').val()
 	      			},
 	      			success : function(result){
-	               		if(result['result'] === 'no data'){ //ê³¼ëª© ê²ì ì±ê³µ
-	               			alert('ê²ì ì¤í¨');
+	               		if(result['result'] === 'no data'){ 
+	               			alert('검색 실패');
 	               		}else{
-	               			alert('ê²ì ì±ê³µ');
+	               			alert('검색 성공');
 
 	               			var	tableLen = result['result'].length;
 	               			var table = document.getElementById("tableFindSub"),rIndex,cIndex;
@@ -137,14 +137,14 @@
 	             		}
 	         	  	},
 	          	 	error : function(){
-	           			alert('ÃªÂ²ÂÃ¬ÂÂ Ã¬ÂÂÃ«ÂÂ¬');
+	           			alert('검색 에러');
 	          	 	}
 	      		});
 	      	});
 	  	});
 	</script>
 	<script type="text/javascript">
-		$('#submit').on('click',function(){ //ìë ¥í ê³¼ëª©ëª ê°ì§ê³  ì íí  ì ìê² ë§ë¤ì´ì¼í¨.(subNum ë°ìì¼í¨!)
+		$('#submit').on('click',function(){ 
 			//var checkBox =
 			var subNo = $('#hiddenAssign').val();
 
@@ -161,7 +161,7 @@
 		 	//})
 		});
 
-		//íì´ë¸ í´ë¦­íë©´ í,ì´ì ì¸ë±ì¤ ì°ì´ì¤Â
+		
 		var table = document.getElementById("tableFindSub"),rIndex,cIndex;
 
 		$('#tableFindSub').on('click', function (){

@@ -23,14 +23,13 @@ public class CompleteDao {
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession=sqlSession;
 	}
-	
 
 	public int insertComplete(HashMap<Object,Object> param) {
 		return sqlSession.insert("CompleteDao.insertComplete",param);
 	}
 	
 	public List<CompleteDto> searchComplete(HashMap<Object,Object> param) {
-		return sqlSession.selectList("CompleteDao.searchComplete",param);//ÀÌ°ÅµÎ ¹¹¿¡¿©???????
+		return sqlSession.selectList("CompleteDao.searchComplete",param);//ï¿½Ì°Åµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½???????
 	}
 	
 	public int deleteComplete(HashMap<Object, Object> param) {

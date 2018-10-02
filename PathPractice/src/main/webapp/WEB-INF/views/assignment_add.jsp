@@ -63,32 +63,32 @@
 				<hr class="m-1">
 				<form class="commonForm">
 					<div class="form-row m-3">
-						<div class="col-md-3 col-xs-3 my-2 label_input">ê³¼ëª©ëªÂ</div>
+						<div class="col-md-3 col-xs-3 my-2 label_input">과목명</div>
 						<div class="col-md-7 col-xs-7 ">
 							<input type="text"
 								class="form-control form-control-sm mt-1 mb-1  flat_input"
-								id="subjectName" title="ê³¼ëª©ëª">
+								id="subjectName" title="과목명">
 						</div>
 						<div class="col-md-2 col-xs-2 mt-1 mb-1">
 							<a class="btn btn-sm btn_icon" aria-label="Left Align"
 								href="/find_subject"> <span class="fas fa-search"></span>
 							</a>
 						</div>
-						<div class="col-md-3 col-xs-3 my-2 label_input">ì ëª©</div>
+						<div class="col-md-3 col-xs-3 my-2 label_input">제목</div>
 						<div class="col-md-7 col-xs-7">
 							<input type="text"
 								class="form-control form-control-sm mt-1 mb-1 flat_input"
-								title="ì ëª©" id="title">
+								title="제목" id="title">
 						</div>
 
-						<div class="col-md-3 col-xs-3 my-2 label_input">ë´ì©</div>
+						<div class="col-md-3 col-xs-3 my-2 label_input">내용</div>
 						<div class="col-md-7 col-xs-7">
 							<input type="text"
 								class="form-control form-control-sm mt-1 mb-1 flat_input"
-								title="ë´ì©" id="contents">
+								title="내용" id="contents">
 						</div>
 
-						<div class="col-md-3 col-xs-3 my-2 label_input">ì¤ìëÂÂ</div>
+						<div class="col-md-3 col-xs-3 my-2 label_input">중요도</div>
 						<span class="star-input col-md-7 col-xs-7 "> <span class="input">
 						<input type="radio" name="star-input" value="1" id="p1"> <label for="p1">1</label>
 						<input type="radio" name="star-input" value="2" id="p2"> <label for="p2">2</label>
@@ -97,7 +97,7 @@
 						<input type="radio" name="star-input" value="5" id="p5"> <label for="p5">5</label>
 						</span></span>
 
-						<div class="col-md-3 col-xs-3 my-2 label_input">ë§ê°ì¼</div>
+						<div class="col-md-3 col-xs-3 my-2 label_input">중요도</div>
 						<div class="col-md-6 col-xs-6 mt-1 mb-1">
 							<form action="demo_form.asp">
 								<input type='text' id='dueDate'>
@@ -144,8 +144,8 @@ $(document).ready(function() {
 		$("#dueDate").datepicker({ 
 			changeMonth: true, 
 	        changeYear: true,
-	        dayNames: ['ì', 'í', 'ì', 'ëª©', 'ê¸', 'í ', 'ì¼'], 
-	        monthNames: ['1ì','2ì','3ì','4ì','5ì','6ì','7ì','8ì','9ì','10ì','11ì','12ì'],
+	        dayNames: ['월', '화', '수', '목', '금', '토', '일'], 
+	        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 			dateFormat : "yy/mm/dd"
 		});
 		
@@ -193,11 +193,11 @@ $(document).ready(function() {
 					if (result['result'] === '1') {
 						location.href = "/assignment";
 					} else {
-						alert('ê³¼ì  ë±ë¡ ì¤í¨');
+						alert('과제등록실패');
 					}
 				},
 				error : function() {
-					alert('ê³¼ì  ë±ë¡ ìë¬');
+					alert('과제등록에러');
 				}
 			}); 
 		});

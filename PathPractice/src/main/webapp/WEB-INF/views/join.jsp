@@ -126,7 +126,7 @@
 					success : function(result){
 						console.log(result);
 
-		            if(result["result"] === "1"){ //íìê°ì ì±ê³µ
+		            if(result["result"] === "1"){
 		            	alert('회원가입 성공');
 		            	location.href = "/";
 		            }else{

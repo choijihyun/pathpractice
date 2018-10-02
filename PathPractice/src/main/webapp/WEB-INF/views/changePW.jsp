@@ -45,7 +45,7 @@
            </div>
             <div class= "col-md-12 col-xs-12 mt-3 ">
               <button class="btn btn-md btn_submit mx-0" id="submit" >
-          		     íì¸
+          		     확인
               </button>
               <button type="button" class="btn btn-md btn_cancel mx-0" id="cancel" onclick="location.href='/mypage'">
           		      취소
@@ -57,7 +57,7 @@
             </div>
             <div class= "col-md-12 col-xs-12" >
               <a class="btn btn-lg btn-block btn_submit" id="change" style="display:none;">
-              	  ë³ê²½
+              	  변경
               </a>
             </div>
           </div>
@@ -66,7 +66,7 @@
   </div>
   <script type="text/javascript">
     $(document).ready(function() {
-      $('#submit').on('click', function() { //í´ë¹ ìì´ëì ë¹ë°ë²í¸ì ìë ¥ë ë¹ë²ì´ ê°ìì§ íì¸
+      $('#submit').on('click', function() {
         $.ajax({
           url: "/user/checkUser.json",
           type: "GET",
@@ -81,31 +81,31 @@
               $('#rePw').css('display', '');
               $('#change').css('display', '');
             } else {
-              alert("íìì ë³´ ìì");
+              alert("회원정보 없음");
             }
           },
           error: function() {
-            alert('ë¹ë°ë²í¸ ì°¾ê¸° ìë¬');
+            alert('비밀번호 찾기 에러');
           }
         });
       });
 
-      $('#change').on('click', function() {  //í´ë¹ ìì´ëì ë¹ë°ë²í¸ì ìë ¥ë ë¹ë²ì´ ê°ìì§ íì¸
+      $('#change').on('click', function() { 
         $.ajax({
           url: "http://localhost:8090/user/updatePW.json",
           type: "GET",
           data: {'stuId':$('#id').val(), 'pw':$('#rePw').val()},
           success: function(result) {
             console.log(result);
-            if (result['result'] === "1") {ÂÂ
-              alert("ë¹ë°ë²í¸ ë³ê²½ ì±ê³µ");
+            if (result['result'] === "1") {
+              alert("비밀번호 변경 실패");
               location.href = "/mypage";
-            } else {//íìì ë³´ ìì
-              alert("ë¹ë°ë²í¸ ë³ê²½ ì¤í¨");
+            } else {
+              alert("비밀번호 변경 성공");
             }
           },
           error: function() {
-            alert('ë¹ë°ë²í¸ ë³ê²½ ìë¬');
+            alert('비밀번호 변경 에러');
           }
         });
       });

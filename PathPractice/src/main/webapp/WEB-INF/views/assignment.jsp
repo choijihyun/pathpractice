@@ -34,13 +34,13 @@
 			<div class="container m-0 p-0 justify-content-md-center justify-content-xs-center">
 			<div class="login_box">
 
-				<!-- header (ìë¨ë°) class="app-header" -->
+				<!-- header  class="app-header" -->
 				<div id="header"></div>
 
-				<!-- ìë¨ë°ì íë¨ë°ë¥¼ ì ì¸í ë¶ë¶ class="main-area" -->
+				<!-- 상당바와 하단바를 제외한 부분 class="main-area" -->
 				<div class="jumbotron m-2 p-0 text-white rounded main_area">
 
-					<!--  ê°ì¸ì¸ì§ ííì¸ì§,,, ì¶ê° ë± ì¤ì  ë²í¼ë¤ ìë ìì­-->
+					<!-- 개인인지 팀플인지 추가 등 설정 버튼들 있는 곳­-->
 					<div class="row col-auto justify-content-end setting">
 						<div class= "p-0 col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4">
 							<div class="btn-group" role="group" aria-label="Basic example">
@@ -50,7 +50,7 @@
 						</div>
 						<div class= "col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4">
 						</div>
-						<!-- log-out ìì´ì½ ë²í¼ ëë¥´ë©´ assignment_add.htmlë¡ ì´ë -->
+						<!-- log-out 아이콘 버튼 누르면 assignment_add로 이동 -->
 						<div class= "col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4">
 							<a class="btn btn-lg btn_add p-0" aria-label="Left Align" href="/assignment_add">
 								<span class="fas fa-plus-square"></span>
@@ -61,11 +61,11 @@
 						</div>
 					</div>
 
-					<!-- ê³¼ì ì ì²´ ë³´ì¬ì£¼ë ìì­(ì¤í¬ë¡¤ë° í¬í¨) -->
-					<!-- ê³¼ì ê° ì¬ë¬ê° ì´ë©´ ì¤í¬ë¡¤ ìê¹ -->
+					<!-- 과제 전체 보여주는 영역(스트롤바 포함¨) -->
+					<!-- 과제가 여러개 이면 스크롤 생김 -->
 					<div style="overflow:auto; width:auto; height:300px;" class="mt-3 scrollbar scrollbar-track scrollbar-thumb" data-offset="0">
 
-						<!-- ì¤í¬ë¡¤ë° ì ì¸í ê³¼ì ë¤ ë³´ì¬ì£¼ë ìì­ -->
+						<!-- 스크롤바 제외한 과제를 보여주는 영역 -->
 						<div class="px-2 content_show_assign">
 							<!-- Modal -->
 							<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
@@ -91,7 +91,7 @@
 					</div>
 				</div>
 
-				<!-- footer íë¨ë° class="app-footer" -->
+				<!-- footer 하단바 class="app-footer" -->
 				<div id="footer"></div>
 
 			</div>
@@ -134,7 +134,7 @@
 </script>
 
 
-<!-- ê³¼ì  ì­ì  ë²í¼ í´ë¦­-->
+<!-- 과제 삭제 버튼 클릭 -->
 <script type="text/javascript">
 	$('#assignDel').on('click', function (){
 		<%
@@ -151,14 +151,14 @@
 			},
 			success : function(result){
 				if(result['result'] === "1"){
-					alert('ì­ì  ì±ê³µ');
+					alert('삭제 성공');
 					console.log(result);
 				}else{
-					alert('ì­ì  ì¤í¨');
+					alert('삭제 실패');
 				}
 			},
 			error : function(){
-				alert('ì­ì  ìë¬');
+				alert('삭제 에러');
 			}
 		});
 	});
@@ -176,9 +176,9 @@
 			},
 			success : function(result){
 				if(result['result'] === 'no data'){
-					alert('ë±ë¡ë ê³¼ì  ìì');
+					alert('불러오기 실패');
 				}else{
-					alert('ë¶ë¬ì¤ê¸° ì±ê³µ');
+					alert('불러오기 성공');
 					console.log(result);
 
 					for(var i=0 ; i<result['result'].length ; i++){
@@ -204,7 +204,7 @@
 
 			},
 			error : function(){
-				alert('ë¶ë¬ì¤ê¸° ìë¬');
+				alert('불러오기 에러');
 			}
 		});
 	});

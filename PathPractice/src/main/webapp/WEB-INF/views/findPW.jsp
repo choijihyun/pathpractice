@@ -64,9 +64,9 @@
             type : "GET",
             data : {'stuId':$('#id').val()},
             success : function(result){
-               if(result['result'] === "no data"){ //íìì ë³´ ììÂÂ
-                  alert('Ã­ÂÂÃ¬ÂÂÃ¬Â ÂÃ«Â³Â´ÃªÂ°Â Ã¬ÂÂÃ¬ÂÂµÃ«ÂÂÃ«ÂÂ¤.');
-               }else{//íìì ë³´ê° ì¡´ì¬í¨!
+               if(result['result'] === "no data"){
+                  alert('회원정보가 없습니다.');
+               }else{
                  $('#email').val(result['email']).trigger('change');
                  $('#to_pw').val(result['pw']).trigger('change');
 
@@ -75,20 +75,20 @@
                     url : "content_me.php",
                     success : function(result){
                       if(result){
-                        alert("ë©ì¼ì´ ì ì¡ëììµëë¤.");
+                        alert("메일이 전성 되었습니다.");
                       }
                       else{
-                        alert("ë©ì¼ì´ ì ì¡ëì§ ìììµëë¤.");
+                        alert("메일이 전송되지 않았습니다.");
                       }
                     },
                     error : function(){
-                      alert("phpì ì ê·¼íì§ ëª»íììµëë¤.");
+                      alert("php에 접근하지 못하였습니다.");
                     }
                   });
                }
             },
             error : function(){
-							alert('ë¹ë°ë²í¸ ì°¾ê¸° ìë¬');
+							alert('비밀번호 찾기 에러');
             }
          });
       });
