@@ -11,7 +11,7 @@ title : 과제 등록 이름
 contents : 과제 등록시 등록한 과제 내용
 subNo : 등록된 과제의 강의 번호
 success : 과제 했는지의 여부 등록
-team : 팀과제인지 개인과제인지(0:개인)
+team : 팀과제인지 개인과제인지(0:개인 그외 : 팀번호)
 
 
 Complete
@@ -49,3 +49,17 @@ TimeTable
  - 각 유저의 시간표정보를 저장하는 테이블
 stuId : 등록유저
 subjectKey : 등록된 강의
+
+Team
+ - 팀플에서의 팀 정보
+TeamNum : AI로 키값
+LeaderName : 팀장이름
+LeaderNum : 팀장 학번
+MemOneName : 팀원1 이름
+MemOneNum : 팀원1 학번
+MemTwoName : 팀원2 이름(null 허용)
+MemTwoNum : 팀원2 학번(null 허용)
+MemThreeName : 팀원3 이름(null 허용)
+MemThreeNum : 팀원3 학번(null 허용)
+MemFourName : 팀원4 이름(null 허용)
+MemFourNum : 팀원4 학번(null 허용)
