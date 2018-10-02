@@ -17,7 +17,8 @@
 	<!-- Customize CSS -->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style_assignment.css">
 
-	<!-- fontawesome Ã¬ÂÂ¼Ã«Â¡Â icon Ã¬ÂÂ¬Ã¬ÂÂ©Ã­ÂÂÃªÂ¸Â° -->
+
+	<!-- fontawesome img -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
 	<!-- Optional JavaScript -->
@@ -30,9 +31,8 @@
 <body class="text-center">
 
 	<!-- Container -->
-	<div class="container">
-		<div class="row justify-content-md-center justify-content-xs-center row justify-content-sm-center justify-content-lg-center">
-			<div class="col col-md-6 col-md-auto col-xs-6 col-xs-auto col-sm-6 col-sm-auto col-lg-6 col-lg-auto login_box ">
+			<div class="container m-0 p-0 justify-content-md-center justify-content-xs-center">
+			<div class="login_box">
 
 				<!-- header (ìë¨ë°) class="app-header" -->
 				<div id="header"></div>
@@ -95,7 +95,6 @@
 				<div id="footer"></div>
 
 			</div>
-		</div>
 	</div>
 	<input type="hidden" id="hiddenAssign" name="hide" value="" >
 </body>

@@ -30,14 +30,12 @@
 
 <body class="text-center">
   <!-- Container -->
-  <div class="container" id="content">
-    <div class="row justify-content-md-center justify-content-xs-center">
-      <div class="col-md-6 col-md-auto col-xs-6 col-xs-auto login_box ">
+  <div class="container m-0 p-0 justify-content-md-center justify-content-xs-center" id="content">
+      <div class=" login_box ">
         <h1 class="text-center wdi_red">changePW</h1>
         <hr>
         <form>
           <div class="form-row">
-
             <!-- input id, pw -->
             <div class= "col-md-12 col-xs-12">
              <input type="text" id="id" class="form-control form-control-lg flat_input" placeholder="username">
@@ -50,7 +48,7 @@
           		     íì¸
               </button>
               <button type="button" class="btn btn-md btn_cancel mx-0" id="cancel" onclick="location.href='/mypage'">
-          		      ì·¨ìÂÂ
+          		      취소
               </button>
             </div>
 
@@ -65,7 +63,6 @@
           </div>
         </form>
       </div>
-    </div>
   </div>
   <script type="text/javascript">
     $(document).ready(function() {

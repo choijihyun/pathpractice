@@ -1,7 +1,5 @@
-body{
-	/*
-	background: #dd3247;
-	padding-top: 10%;*/
+.container{
+	max-width : none;
 }
 .wdi-red{
 	color: #dd3247;
