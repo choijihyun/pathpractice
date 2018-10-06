@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- Dao2. 근데 where절(sql 문법을 절 이라고 표현한다!!)에 뭔가 집어넣어서 select 해야하면 parameterType을 넣는다  -->
 	<!-- Dao3. 그건 parameterType="map" 이라고 항상 적으면 된다  -->
     <insert id="insertHomework" parameterType="map">
-    	insert into Assignment(stuId,registerDate,dueDate,importance,title,contents,subNo,success) values ( #{stuId},Now(),#{dueDate},#{importance},#{title},#{contents},#{subNo},#{success})
+    	insert into Assignment(stuId,registerDate,dueDate,importance,title,contents,subNo,success,team) values ( #{stuId},Now(),#{dueDate},#{importance},#{title},#{contents},#{subNo},#{success},#{team})
     </insert>
     <delete id="deleteHomework" parameterType="map">
     	delete from Assignment where stuId=#{stuId} and assignNo=#{assignNo}
@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
     
     <update id="updateHomework" parameterType="map">
-    	update Assignment set dueDate=#{dueDate},importance=#{importance},title=#{title},contents=#{contents},subNo=#{subNo} where stuId=#{stuId} and assignNo=#{assignNo}
+    	update Assignment set dueDate=#{dueDate},importance=#{importance},title=#{title},contents=#{contents},subNo=#{subNo},success=#{success},team=#{team} where stuId=#{stuId} and assignNo=#{assignNo}
     </update>
      <select id="selectHomework" resultType="com.homeworkNotice.dto.HomeworkDto" parameterType="map">
     	select * from Assignment where stuId=#{stuId}

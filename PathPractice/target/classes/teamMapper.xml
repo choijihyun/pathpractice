@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+ <!-- sql 덩어리!!  dao들에서 얘네를 사용 --> <!-- 이거는 무슨 말인지 알았어요! -->
+<mapper namespace="TeamDao">
+	<!-- Dao1. 여기에 알맞은 sql을 만들고, id(sql을 구분해줄수 있는)와 resultType(반환해줄 형태)를 적는다~ -->
+	<!-- Dao2. 근데 where절(sql 문법을 절 이라고 표현한다!!)에 뭔가 집어넣어서 select 해야하면 parameterType을 넣는다  -->
+	<!-- Dao3. 그건 parameterType="map" 이라고 항상 적으면 된다  -->
+    <insert id="insertTeam" parameterType="map">
+    	insert into Team(leaderName,leaderNum,memOneName,memOneNum,memTwoName,memTwoNum,memThreeName,memThreeNum,memFourName,memFourNum) values ( #{leaderName],#{leaderNum},#{memOneName},#{memOneNum},#{memTwoName},#{memThreeName},#{memFourName},#{memFourNum})
+    </insert>
+    <delete id="deleteTeam" parameterType="map">
+    	delete from Team where teamNum=#{teamNum}
+    </delete>
+    
+    
+    <update id="updateTeam" parameterType="map">
+    	update Team set leaderName=#{leaderName},leaderNum=#{leaderNum},memOneName=#{memOneName},memOneNum=#{memOneNum},memTwoName=#{memTwoName},memTwoNum=#{memTwoNum},memThreeName=#{memThreeName},memThreeNum=#{memThreeNum},memFourName=#{memFourName},memFourNum=#{memFourNum}
+    </update>
+   
+     <select id="searchTeam" resultType="com.homeworkNotice.dto.TeamDto" parameterType="map">
+    	select * from Team where teamNum=#{teamNum}
+    </select>
+    
+    <!-- 
+     <select id="searchDirSubject" resultType="com.homeworkNotice.dto.SubjectDto" parameterType="map">
+    	select * from Subject where add=#{add}
+    </select>
+    
+   <insert id="insertSubject" parameterType="map">
+    	insert into Subject(subNo,class,subName,day,classRoom,profName,startHour,endHour,add) values ( #{subNo},#{class},#{subName},#{day},#{classRoom},#{profName},#{startHour},#{endHour},#{add})
+    </insert>
+    
+    <delete id="deleteSubject" parameterType="map">
+    	delete from Subject where add=#{add}
+    </delete>
+    -->
+</mapper>

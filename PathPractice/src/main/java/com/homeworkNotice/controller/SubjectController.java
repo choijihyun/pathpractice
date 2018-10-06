@@ -31,14 +31,14 @@ public class SubjectController {
 	
 	
 
-	//°ú¸ñ¸í insert
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ insert
 	@ResponseBody
-	@RequestMapping(value = "/subject/insertSubject", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//¿ä ºÎºÐÀÌ url //get¹æ½ÄÀ¸·Î Àú /user/getUserPwdInfo.jsonÀÌ¶ó´Â url·Î µé¾î¿Í¼­ °ªÀ» È®ÀÎ ÇÒ ¼ö ÀÖ´Ù.
-	public String insertSubject(//url¿¡ ¸ÊÇÎ(¿¬°á)µÈ ÇÔ¼ö
-			Locale locale, //¾Èµå·ÎÀÌµå¿¡¼­ ¹ÞÀ» ÆÄ¶ó¹ÌÅÍ
-			Model model, //¾Èµå·ÎÀÌµå¿¡¼­ ¹ÞÀ» ÆÄ¶ó¹ÌÅÍ
+	@RequestMapping(value = "/subject/insertSubject", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ url //getï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ /user/getUserPwdInfo.jsonï¿½Ì¶ï¿½ï¿½ urlï¿½ï¿½ ï¿½ï¿½ï¿½Í¼ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.
+	public String insertSubject(//urlï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ ï¿½Ô¼ï¿½
+			Locale locale, //ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½
+			Model model, //ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½
 			@RequestParam(value = "subNo", required=false) String subNo,
-			@RequestParam(value = "class", required=false) String clas, //class ¾²¸é ¿À·ù³ª¼­ ÀÌ·¸°Ô ¾´°Å ! ¿ÀÅ¸¾Æ´Ô
+			@RequestParam(value = "class", required=false) String clas, //class ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ! ï¿½ï¿½Å¸ï¿½Æ´ï¿½
 			@RequestParam(value = "subName", required=true) String subName,
 			@RequestParam(value = "day", required=true) String day,
 			@RequestParam(value = "classRoom", required=false) String classRoom,
@@ -47,7 +47,7 @@ public class SubjectController {
 			@RequestParam(value = "endHour", required=false) String endHour,
 			@RequestParam(value = "add", required=false) String add
 			){
-		//add¿¡´Â ÇÐ¹ø
+		//addï¿½ï¿½ï¿½ï¿½ ï¿½Ð¹ï¿½
 		
 		HashMap<Object, Object> param=new HashMap<Object, Object>();
 		
@@ -73,9 +73,9 @@ public class SubjectController {
 
 		System.out.println(result);
     	JSONObject jSONObject = new JSONObject();
-    	//±×·¡¼­ ¿©±â¼­ ¼º°ø or ½ÇÆÐ ±¸ºÐÇØ¼­ ¾Èµå·ÎÀÌµå¿¡ json µ¥ÀÌÅÍ¸¦ °á°ú·Î Àü´ÞÇØÁÙ°Å¾ß
+    	//ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¼­ ï¿½ï¿½ï¿½ï¿½ or ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ json ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù°Å¾ï¿½
     	if(result==1) {
-    		jSONObject.put("result", "1");//¼º°ø    		
+    		jSONObject.put("result", "1");//ï¿½ï¿½ï¿½ï¿½    		
     	}
     	else {
     		jSONObject.put("result", "0");
@@ -98,7 +98,7 @@ public class SubjectController {
     	
     	JSONArray jSONArray=new JSONArray();
     	List<JSONObject> jsonList=new ArrayList<JSONObject>();
-        if(!subjectDtoList.isEmpty()) {//¹ÝÈ¯¹ÞÀº µ¥ÀÌÅÍ°¡ À¯È¿ÇÏ¸é(db¿¡ ÀÖÀ¸¸é) ºê¶ó¿ìÀú È­¸é¿¡ °á°ú¸¦ »Ñ·ÁÁØ´Ù
+        if(!subjectDtoList.isEmpty()) {//ï¿½ï¿½È¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½È¿ï¿½Ï¸ï¿½(dbï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È­ï¿½é¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ·ï¿½ï¿½Ø´ï¿½
         	for(int i=0;i<subjectDtoList.size();i++) {
         		JSONObject jSONObject = new JSONObject();
         		jSONObject.put("add",subjectDtoList.get(i).getAdd());
@@ -121,7 +121,7 @@ public class SubjectController {
 
             return jsObject.toString();
         } 
-        else {//¾øÀ¸¸é ¿¡·¯¶ó°í ºê¶ó¿ìÀú¿¡ »Ñ·ÁÁØ´Ù
+        else {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ·ï¿½ï¿½Ø´ï¿½
 
     		JSONObject jSONObject = new JSONObject();
         	jSONObject.put("result", "no data");
@@ -133,11 +133,11 @@ public class SubjectController {
 	
 	//search
 	@ResponseBody
-	@RequestMapping(value = "/subject/searchSubject.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//¿ä ºÎºÐÀÌ url //get¹æ½ÄÀ¸·Î Àú /user/getUserPwdInfo.jsonÀÌ¶ó´Â url·Î µé¾î¿Í¼­ °ªÀ» È®ÀÎ ÇÒ ¼ö ÀÖ´Ù.
+	@RequestMapping(value = "/subject/searchSubject.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ url //getï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ /user/getUserPwdInfo.jsonï¿½Ì¶ï¿½ï¿½ urlï¿½ï¿½ ï¿½ï¿½ï¿½Í¼ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.
 
-	public String searchSubject(//url¿¡ ¸ÊÇÎ(¿¬°á)µÈ ÇÔ¼ö
-			Locale locale, //¾Èµå·ÎÀÌµå¿¡¼­ ¹ÞÀ» ÆÄ¶ó¹ÌÅÍ
-			Model model, //¾Èµå·ÎÀÌµå¿¡¼­ ¹ÞÀ» ÆÄ¶ó¹ÌÅÍ
+	public String searchSubject(//urlï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ ï¿½Ô¼ï¿½
+			Locale locale, //ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½
+			Model model, //ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½
 			@RequestParam(value = "word", required=true) String word){
 
 		
@@ -151,11 +151,12 @@ public class SubjectController {
     	JSONArray jSONArray=new JSONArray();
     	List<JSONObject> jsonList=new ArrayList<JSONObject>();
 		
-    	if(!subjectDtoList.isEmpty()) {//¹ÝÈ¯¹ÞÀº µ¥ÀÌÅÍ°¡ À¯È¿ÇÏ¸é(db¿¡ ÀÖÀ¸¸é) ºê¶ó¿ìÀú È­¸é¿¡ °á°ú¸¦ »Ñ·ÁÁØ´Ù
+    	if(!subjectDtoList.isEmpty()) {//ï¿½ï¿½È¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½È¿ï¿½Ï¸ï¿½(dbï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È­ï¿½é¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ·ï¿½ï¿½Ø´ï¿½
         	for(int i=0;i<subjectDtoList.size();i++) {
 
         		JSONObject jSONObject = new JSONObject();
-        		if(subjectDtoList.get(i).getAdd().equals(0)) {
+        		if(subjectDtoList.get(i).getAdd().equals("0")) {
+        			
         		jSONObject.put("subNo",subjectDtoList.get(i).getSubNo());
         		jSONObject.put("class",subjectDtoList.get(i).getClass());
         		jSONObject.put("subName",subjectDtoList.get(i).getSubName());
@@ -210,7 +211,7 @@ public class SubjectController {
         	
             return jsObject.toString();
         } 
-        else {//¾øÀ¸¸é ¿¡·¯¶ó°í ºê¶ó¿ìÀú¿¡ »Ñ·ÁÁØ´Ù
+        else {
 
     		JSONObject jSONObject = new JSONObject();
         	jSONObject.put("result", "no data");
@@ -221,19 +222,19 @@ public class SubjectController {
 	
 
 	@ResponseBody
-    @RequestMapping(value = "/subject/deleteSubject.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value¶ó´Â °ª¿¡ ¸ÅÇÎ, get¹æ½Ä »ç¿ë
+    @RequestMapping(value = "/subject/deleteSubject.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// valueï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, getï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     public String deleteSubject(
     			Model model,
-    			@RequestParam(value = "add", required=true) String add) { // ÀÌ·¸°Ô 5°³ÀÇ ÆÄ¶ó¹ÌÅÍ¸¦ ¹Þ¾Æ¿À°í ³»¿ë ¾È¾²¸é x
-		HashMap<Object, Object> param=new HashMap<Object, Object>(); //°¢°¢ÀÇ id¸¶´Ù hashmap ¸¸µé¾îÁÖ´Ï±î »ý¼ºÀ» ÇØÁÜ
+    			@RequestParam(value = "add", required=true) String add) { // ï¿½Ì·ï¿½ï¿½ï¿½ 5ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½È¾ï¿½ï¿½ï¿½ x
+		HashMap<Object, Object> param=new HashMap<Object, Object>(); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ idï¿½ï¿½ï¿½ï¿½ hashmap ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     			
 		param.put("add",add);	
 		//
 		System.out.println(param);
 		
-		//ÀÌ ÇÔ¼ö(url)Àº È¸¿ø°¡ÀÔÀÌ ÁÖ ¸ñÀûÀÌ±â ¶§¹®¿¡
-		//°á°ú·Î ¼º°ø or ½ÇÆÐ¸¸ ¾Ë·Á ÁÖ¸é µÅ
-		//int °ªÀ¸·Î ¹ÝÈ¯ÀÌ µÇ´Âµ¥ 1ÀÌ¸é ¼º°ø ³ª¸ÓÁö °ªÀÌ¸é ½ÇÆÐ!!
+		//ï¿½ï¿½ ï¿½Ô¼ï¿½(url)ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ or ï¿½ï¿½ï¿½Ð¸ï¿½ ï¿½Ë·ï¿½ ï¿½Ö¸ï¿½ ï¿½ï¿½
+		//int ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ ï¿½Ç´Âµï¿½ 1ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½!!
 		int result=0;
 		try {
 			result=subjectDao.deleteSubject(param);
@@ -245,9 +246,9 @@ public class SubjectController {
 
 		System.out.println(result);
     	JSONObject jSONObject = new JSONObject();
-    	//±×·¡¼­ ¿©±â¼­ ¼º°ø or ½ÇÆÐ ±¸ºÐÇØ¼­ ¾Èµå·ÎÀÌµå¿¡ json µ¥ÀÌÅÍ¸¦ °á°ú·Î Àü´ÞÇØÁÙ°Å¾ß
+    	//ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¼­ ï¿½ï¿½ï¿½ï¿½ or ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ json ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù°Å¾ï¿½
     	if(result==1) {
-    		jSONObject.put("result", "1");//¼º°ø     		
+    		jSONObject.put("result", "1");//ï¿½ï¿½ï¿½ï¿½     		
     	}
     	else {
     		jSONObject.put("result", "0");

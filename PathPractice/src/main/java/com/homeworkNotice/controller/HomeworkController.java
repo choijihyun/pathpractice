@@ -26,7 +26,7 @@ public class HomeworkController {
 	
 	//insert
 	@ResponseBody
-    @RequestMapping(value = "/homework/insertHomework.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value¶ó´Â °ª¿¡ ¸ÅÇÎ, get¹æ½Ä »ç¿ë
+    @RequestMapping(value = "/homework/insertHomework.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// valueï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, getï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     public String insertUser(
     			Model model,
 
@@ -36,8 +36,9 @@ public class HomeworkController {
     			@RequestParam(value = "title", required=true) String title,
     			@RequestParam(value = "contents", required=true) String contents,
     			@RequestParam(value = "subNo", required=true) String subNo,
-    			@RequestParam(value = "success", required=true) final int success) { // ÀÌ·¸°Ô 5°³ÀÇ ÆÄ¶ó¹ÌÅÍ¸¦ ¹Þ¾Æ¿À°í ³»¿ë ¾È¾²¸é x
-		HashMap<Object, Object> param=new HashMap<Object, Object>(); //°¢°¢ÀÇ id¸¶´Ù hashmap ¸¸µé¾îÁÖ´Ï±î »ý¼ºÀ» ÇØÁÜ
+    			@RequestParam(value = "success", required=true) final int success,
+    			@RequestParam(value = "team",required=false) String team) { // ï¿½Ì·ï¿½ï¿½ï¿½ 5ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½È¾ï¿½ï¿½ï¿½ x
+		HashMap<Object, Object> param=new HashMap<Object, Object>(); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ idï¿½ï¿½ï¿½ï¿½ hashmap ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		
 		param.put("stuId",stuId);			
 		param.put("dueDate",dueDate);		
@@ -46,12 +47,8 @@ public class HomeworkController {
 		param.put("contents",contents);
 		param.put("subNo",subNo);
 		param.put("success",success);
+		param.put("team", team);
 		
-		//
-		
-		//ÀÌ ÇÔ¼ö(url)Àº È¸¿ø°¡ÀÔÀÌ ÁÖ ¸ñÀûÀÌ±â ¶§¹®¿¡
-		//°á°ú·Î ¼º°ø or ½ÇÆÐ¸¸ ¾Ë·Á ÁÖ¸é µÅ
-		//int °ªÀ¸·Î ¹ÝÈ¯ÀÌ µÇ´Âµ¥ 1ÀÌ¸é ¼º°ø ³ª¸ÓÁö °ªÀÌ¸é ½ÇÆÐ!!
 		int result=0;
 		try {
 			result=homeworkDao.insertHomework(param);
@@ -63,9 +60,9 @@ public class HomeworkController {
 
 
     	JSONObject jSONObject = new JSONObject();
-    	//±×·¡¼­ ¿©±â¼­ ¼º°ø or ½ÇÆÐ ±¸ºÐÇØ¼­ ¾Èµå·ÎÀÌµå¿¡ json µ¥ÀÌÅÍ¸¦ °á°ú·Î Àü´ÞÇØÁÙ°Å¾ß
+    	//ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¼­ ï¿½ï¿½ï¿½ï¿½ or ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ json ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù°Å¾ï¿½
     	if(result==1) {
-    		jSONObject.put("result", "1");//¼º°ø    		
+    		jSONObject.put("result", "1");//ï¿½ï¿½ï¿½ï¿½    		
     	}
     	else {
     		jSONObject.put("result", "0");
@@ -76,10 +73,10 @@ public class HomeworkController {
 
 	//delete
 	@ResponseBody
-	@RequestMapping(value = "/homework/deleteAllHomework.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//¿ä ºÎºÐÀÌ url //get¹æ½ÄÀ¸·Î Àú /user/getUserPwdInfo.jsonÀÌ¶ó´Â url·Î µé¾î¿Í¼­ °ªÀ» È®ÀÎ ÇÒ ¼ö ÀÖ´Ù.
-	public String deleteAllHomework(//url¿¡ ¸ÊÇÎ(¿¬°á)µÈ ÇÔ¼ö
-			Locale locale, //¾Èµå·ÎÀÌµå¿¡¼­ ¹ÞÀ» ÆÄ¶ó¹ÌÅÍ
-			Model model, //¾Èµå·ÎÀÌµå¿¡¼­ ¹ÞÀ» ÆÄ¶ó¹ÌÅÍ
+	@RequestMapping(value = "/homework/deleteAllHomework.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ url //getï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ /user/getUserPwdInfo.jsonï¿½Ì¶ï¿½ï¿½ urlï¿½ï¿½ ï¿½ï¿½ï¿½Í¼ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.
+	public String deleteAllHomework(//urlï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ ï¿½Ô¼ï¿½
+			Locale locale, //ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½
+			Model model, //ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½
 			@RequestParam(value = "stuId", required=true) String stuId) {
 		
 		HashMap<Object, Object> param=new HashMap<Object, Object>();
@@ -89,22 +86,22 @@ public class HomeworkController {
 		int result=homeworkDao.deleteAllHomework(param);
 		
 		JSONObject jSONObject = new JSONObject();
-		if(result==1) {//¹ÝÈ¯¹ÞÀº µ¥ÀÌÅÍ°¡ À¯È¿ÇÏ¸é(db¿¡ ÀÖÀ¸¸é) ºê¶ó¿ìÀú È­¸é¿¡ °á°ú¸¦ »Ñ·ÁÁØ´Ù
-				jSONObject.put("result","1");//idµµ Á¸ÀçÇÏ°í ºñ¹øµµ ¸Â´Â °æ¿ì
+		if(result==1) {//ï¿½ï¿½È¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½È¿ï¿½Ï¸ï¿½(dbï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È­ï¿½é¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ·ï¿½ï¿½Ø´ï¿½
+				jSONObject.put("result","1");//idï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Â´ï¿½ ï¿½ï¿½ï¿½
 		}
-		else {//¾øÀ¸¸é ¿¡·¯¶ó°í ºê¶ó¿ìÀú¿¡ »Ñ·ÁÁØ´Ù
-			jSONObject.put("result", "0"); //id°¡ Á¸ÀçÇÏÁö ¾Ê´Â°æ¿ì
+		else {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ·ï¿½ï¿½Ø´ï¿½
+			jSONObject.put("result", "0"); //idï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â°ï¿½ï¿½
 		}
-		return jSONObject.toString();//¿äÃ»ÇÑ ³»¿ëµéÀ» ¹ÝÈ¯ÇØÁØ´Ù.
+		return jSONObject.toString();//ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ï¿½Ø´ï¿½.
 	}
 
 	
 	//delete
 	@ResponseBody
-	@RequestMapping(value = "/homework/deleteHomework.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//¿ä ºÎºÐÀÌ url //get¹æ½ÄÀ¸·Î Àú /user/getUserPwdInfo.jsonÀÌ¶ó´Â url·Î µé¾î¿Í¼­ °ªÀ» È®ÀÎ ÇÒ ¼ö ÀÖ´Ù.
-	public String deleteHomework(//url¿¡ ¸ÊÇÎ(¿¬°á)µÈ ÇÔ¼ö
-			Locale locale, //¾Èµå·ÎÀÌµå¿¡¼­ ¹ÞÀ» ÆÄ¶ó¹ÌÅÍ
-			Model model, //¾Èµå·ÎÀÌµå¿¡¼­ ¹ÞÀ» ÆÄ¶ó¹ÌÅÍ
+	@RequestMapping(value = "/homework/deleteHomework.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ url //getï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ /user/getUserPwdInfo.jsonï¿½Ì¶ï¿½ï¿½ urlï¿½ï¿½ ï¿½ï¿½ï¿½Í¼ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.
+	public String deleteHomework(//urlï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ ï¿½Ô¼ï¿½
+			Locale locale, //ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½
+			Model model, //ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½
 			@RequestParam(value = "stuId", required=true) String stuId,
 			@RequestParam(value="assignNo",required=true) final int assignNo) {
 		
@@ -118,19 +115,19 @@ public class HomeworkController {
 	
 		
 		JSONObject jSONObject = new JSONObject();
-		if(result==1) {//¹ÝÈ¯¹ÞÀº µ¥ÀÌÅÍ°¡ À¯È¿ÇÏ¸é(db¿¡ ÀÖÀ¸¸é) ºê¶ó¿ìÀú È­¸é¿¡ °á°ú¸¦ »Ñ·ÁÁØ´Ù
-				jSONObject.put("result","1");//idµµ Á¸ÀçÇÏ°í ºñ¹øµµ ¸Â´Â °æ¿ì
+		if(result==1) {//ï¿½ï¿½È¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½È¿ï¿½Ï¸ï¿½(dbï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È­ï¿½é¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ·ï¿½ï¿½Ø´ï¿½
+				jSONObject.put("result","1");//idï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Â´ï¿½ ï¿½ï¿½ï¿½
 		}
-		else {//¾øÀ¸¸é ¿¡·¯¶ó°í ºê¶ó¿ìÀú¿¡ »Ñ·ÁÁØ´Ù
-			jSONObject.put("result", "0"); //id°¡ Á¸ÀçÇÏÁö ¾Ê´Â°æ¿ì
+		else {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ·ï¿½ï¿½Ø´ï¿½
+			jSONObject.put("result", "0"); //idï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â°ï¿½ï¿½
 		}
-		return jSONObject.toString();//¿äÃ»ÇÑ ³»¿ëµéÀ» ¹ÝÈ¯ÇØÁØ´Ù.
+		return jSONObject.toString();//ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ï¿½Ø´ï¿½.
 	}
 
 	
 	//update
 	@ResponseBody
-    @RequestMapping(value = "/homework/updateHomework.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value¶ó´Â °ª¿¡ ¸ÅÇÎ, get¹æ½Ä »ç¿ë
+    @RequestMapping(value = "/homework/updateHomework.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// valueï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, getï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     public String updateUser(
     			Model model,
 
@@ -140,8 +137,11 @@ public class HomeworkController {
     			@RequestParam(value = "contents", required=true) String contents,
     			@RequestParam(value = "subNo", required=true) String subNo,
     			@RequestParam(value = "stuId", required=true) String stuId,
-    			@RequestParam(value = "assignNo", required=true) final int assignNo) { // ÀÌ·¸°Ô 5°³ÀÇ ÆÄ¶ó¹ÌÅÍ¸¦ ¹Þ¾Æ¿À°í ³»¿ë ¾È¾²¸é x
-		HashMap<Object, Object> param=new HashMap<Object, Object>(); //°¢°¢ÀÇ id¸¶´Ù hashmap ¸¸µé¾îÁÖ´Ï±î »ý¼ºÀ» ÇØÁÜ
+    			@RequestParam(value = "assignNo", required=true) final int assignNo,
+    			@RequestParam(value = "success", required=true) final int success,
+    			@RequestParam(value = "team",required=true) String team) {
+		
+		HashMap<Object, Object> param=new HashMap<Object, Object>(); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ idï¿½ï¿½ï¿½ï¿½ hashmap ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 					
 		param.put("dueDate",dueDate);		
 		param.put("importance",importance);		
@@ -150,10 +150,9 @@ public class HomeworkController {
 		param.put("subNo",subNo);
 		param.put("stuId",stuId);
 		param.put("assignNo", assignNo);
+		param.put("success",success);
+		param.put("team",team);
 		
-		//ÀÌ ÇÔ¼ö(url)Àº È¸¿ø°¡ÀÔÀÌ ÁÖ ¸ñÀûÀÌ±â ¶§¹®¿¡
-		//°á°ú·Î ¼º°ø or ½ÇÆÐ¸¸ ¾Ë·Á ÁÖ¸é µÅ
-		//int °ªÀ¸·Î ¹ÝÈ¯ÀÌ µÇ´Âµ¥ 1ÀÌ¸é ¼º°ø ³ª¸ÓÁö °ªÀÌ¸é ½ÇÆÐ!!
 		int result=0;
 		try {
 			result=homeworkDao.updateHomework(param);
@@ -165,9 +164,8 @@ public class HomeworkController {
 
 
     	JSONObject jSONObject = new JSONObject();
-    	//±×·¡¼­ ¿©±â¼­ ¼º°ø or ½ÇÆÐ ±¸ºÐÇØ¼­ ¾Èµå·ÎÀÌµå¿¡ json µ¥ÀÌÅÍ¸¦ °á°ú·Î Àü´ÞÇØÁÙ°Å¾ß
     	if(result==1) {
-    		jSONObject.put("result", "1");//¼º°ø    		
+    		jSONObject.put("result", "1");//ï¿½ï¿½ï¿½ï¿½    		
     	}
     	else {
     		jSONObject.put("result", "0");
@@ -180,10 +178,10 @@ public class HomeworkController {
 	
 	//select
 		@ResponseBody
-		@RequestMapping(value = "/homework/selectHomework.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//¿ä ºÎºÐÀÌ url //get¹æ½ÄÀ¸·Î Àú /user/getUserPwdInfo.jsonÀÌ¶ó´Â url·Î µé¾î¿Í¼­ °ªÀ» È®ÀÎ ÇÒ ¼ö ÀÖ´Ù.
-		public String selectHomework(//url¿¡ ¸ÊÇÎ(¿¬°á)µÈ ÇÔ¼ö
-				Locale locale, //¾Èµå·ÎÀÌµå¿¡¼­ ¹ÞÀ» ÆÄ¶ó¹ÌÅÍ
-				Model model, //¾Èµå·ÎÀÌµå¿¡¼­ ¹ÞÀ» ÆÄ¶ó¹ÌÅÍ
+		@RequestMapping(value = "/homework/selectHomework.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ url //getï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ /user/getUserPwdInfo.jsonï¿½Ì¶ï¿½ï¿½ urlï¿½ï¿½ ï¿½ï¿½ï¿½Í¼ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½.
+		public String selectHomework(//urlï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ ï¿½Ô¼ï¿½
+				Locale locale, //ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½
+				Model model, //ï¿½Èµï¿½ï¿½ï¿½Ìµå¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½
 				@RequestParam(value = "stuId", required=true) String stuId,
 				@RequestParam(value = "select", required=true) final int select) {
 			
@@ -196,7 +194,7 @@ public class HomeworkController {
 	    	JSONArray jSONArray=new JSONArray();
 	    	List<JSONObject> jsonList=new ArrayList<JSONObject>();
 			
-	    	if(!homeworkDtoList.isEmpty()) {//¹ÝÈ¯¹ÞÀº µ¥ÀÌÅÍ°¡ À¯È¿ÇÏ¸é(db¿¡ ÀÖÀ¸¸é) ºê¶ó¿ìÀú È­¸é¿¡ °á°ú¸¦ »Ñ·ÁÁØ´Ù
+	    	if(!homeworkDtoList.isEmpty()) {//ï¿½ï¿½È¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½È¿ï¿½Ï¸ï¿½(dbï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È­ï¿½é¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ·ï¿½ï¿½Ø´ï¿½
 	        	for(int i=0;i<homeworkDtoList.size();i++) {
 	        		JSONObject jSONObject = new JSONObject();
 	        		jSONObject.put("assignNo",homeworkDtoList.get(i).getAssignNo());
@@ -239,7 +237,7 @@ public class HomeworkController {
 
 	            return jsObject.toString();
 	        } 
-	        else {//¾øÀ¸¸é ¿¡·¯¶ó°í ºê¶ó¿ìÀú¿¡ »Ñ·ÁÁØ´Ù
+	        else {//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ·ï¿½ï¿½Ø´ï¿½
 
 	    		JSONObject jSONObject = new JSONObject();
 	        	jSONObject.put("result", "no data");

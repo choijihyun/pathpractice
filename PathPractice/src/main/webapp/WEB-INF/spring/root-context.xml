@@ -58,6 +58,9 @@
 	<bean id="completeDao" class="com.homeworkNotice.dao.CompleteDao">
 		<property name="sqlSession" ref="SqlSessionTemplate"></property>
 	</bean>
+	<bean id="teamDao" class="com.homeworkNotice.dao.TeamDao">
+		<property name="sqlSession" ref="SqlSessionTemplate"></property>
+	</bean>
 	
 
 </beans>
