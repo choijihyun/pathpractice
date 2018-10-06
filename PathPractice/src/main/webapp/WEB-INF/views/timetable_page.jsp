@@ -57,11 +57,11 @@
 								type="button" data-toggle="collapse"
 								data-target="#collapseDirect" aria-expanded="false"
 								aria-controls="collapseDirect">직접 추가하기</button>
-							<button id="addBySearching"
+							<!-- <button id="addBySearching"
 								class="btn p-1 btn-sm list-group-item" type="button"
 								data-toggle="collapse" data-target="#collapseSearching"
 								aria-expanded="false" aria-controls="collapseSearching"
-								href="/find_subject">검색하기</button>
+								href="/find_subject">검색하기</button> -->
 							<button type="button" id="btnUndo2"
 								class="p-1 btn-sm list-group-item">취소하기</button>
 						</div>
@@ -72,8 +72,11 @@
 								<form class="commonForm">
 									<div class="form-group m-0">
 										<label for="subjectName" class="col-12 label_input">과목명</label>
-										<input type="text" class="form-control input" title="과목명"
-											id="subjectName">
+										<input type="text" class="col-10 m-0 form-control input" title="과목명"
+											id="subjectName" style="display:inline-block;">
+										<a class="btn btn-sm btn_icon" aria-label="Left Align" href="/find_subject"> 
+											<span class="fas fa-search"></span>
+										</a>
 									</div>
 									<div class="form-group m-0">
 										<label for="professorName" class="col-12 label_input">교수명</label>
@@ -172,6 +175,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/common/timetable.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common/footer.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common/func_check_input.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/func_cookie.js"></script>
 
 <!-- 취소하기 버튼 클릭 시 다시 창 닫기 -->
 <script type="text/javascript">
@@ -190,9 +194,40 @@
 	});
 </script>
 
+<script type="text/javascript">
+	var userInputId = getCookie("userInputId");
+	console.log(userInputId);
+	<%
+	System.out.println("timetable session : " + session.getAttribute("id"));
+	%>
+</script>
+
 <!--select box 선택 값 가져오기 -->
 <script>
 	$('#btnSuccess').on('click', function () {
+		<%
+		String id = (String) session.getAttribute("id");
+		%>
+		 $.ajax({
+			url : "/timeTable/insertTimeTable.json",
+			type : "GET",
+			data : {
+				'stuId' : <%=id%>,
+				'subjectKey' : '1'//find_subject해서 url parameter로 가져와야함
+			},
+			success : function(result) {
+				console.log(result);
+				if (result['result'] === '1') {
+					alert('과제등록성공');
+				} else {
+					alert('과제등록실패');
+				}
+			},
+			error : function() {
+				alert('과제등록에러');
+			}
+		}); 
+
 		if( !chkInput() ) return;
 		var shour = document.getElementById("sHour");
 		var val_shour = shour.options[shour.selectedIndex].value;

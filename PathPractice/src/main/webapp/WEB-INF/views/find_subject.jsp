@@ -128,7 +128,8 @@
 	               				cell[3].innerHTML = result['result'][i]['startHour'];
 								cell[4].innerHTML = result['result'][i]['classroom'];
 	               				cell[5].innerHTML = result['result'][i]['profName'];
-
+								
+	               				console.log()
 	              	 			$(newRow).addClass("stripe_border_top");
 								$(newRow).addClass("add_row");
 	               				for(var j=0 ; j<6 ; j++)
@@ -174,7 +175,7 @@
 						console.log("ROW:" +rIndex+ ", Cell:" +cIndex);
 
 						$('input:radio[id="radio'+rIndex+'"]:radio[name="select"]').prop("checked", true);
-						var subNo = $("#radio"+rIndex).data('subNo')
+						var subNo = $("#radio"+rIndex).data('subNo');
 
 						$('#hiddenAssign').val(subNo).trigger('change');
 					}

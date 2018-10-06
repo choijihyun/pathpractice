@@ -97,7 +97,7 @@
 						<input type="radio" name="star-input" value="5" id="p5"> <label for="p5">5</label>
 						</span></span>
 
-						<div class="col-md-3 col-xs-3 my-2 label_input">중요도</div>
+						<div class="col-md-3 col-xs-3 my-2 label_input">마감일</div>
 						<div class="col-md-6 col-xs-6 mt-1 mb-1">
 							<form action="demo_form.asp">
 								<input type='text' id='dueDate'>
@@ -119,12 +119,20 @@
 
 				</form>
 			</div>
-	
 	</div>
 </body>
 </html>
 
 <script src="${pageContext.request.contextPath}/resources/js/common/func_check_input.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/func_cookie.js"></script>
+
+<script type="text/javascript">
+	var userInputId = getCookie("userInputId");
+	console.log(userInputId);
+	<%
+	System.out.println("assignment_add session : " + session.getAttribute("id"));
+	%>
+</script>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -162,7 +170,9 @@ $(document).ready(function() {
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#submit').on('click', function() {
-
+			<%
+			String id = (String) session.getAttribute("id");
+			%>
 			if (!chkInput())
 				return;
 
@@ -175,12 +185,12 @@ $(document).ready(function() {
 			
  			due = due.replace('/','-');
 			due = due.replace('/','-'); 
-			alert(due);
+			
 			 $.ajax({
 				url : "/homework/insertHomework.json",
 				type : "GET",
 				data : {
-					'stuId' : '16010946',
+					'stuId' : <%=id%>,
 					'importance' : radioVal,
 					'dueDate' : due,
 					'title' : $('#title').val(),

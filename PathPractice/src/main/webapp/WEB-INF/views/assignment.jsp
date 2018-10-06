@@ -110,6 +110,7 @@
 			var importance = $(this).data('importance');
 			var contents = $(this).data('contents');
 			var subNo = $(this).data('subNo');
+			var assignNo = $(this).data('assignNo');
 			
 			$('#hiddenAssign').val(assignNo).trigger('change');
 
