@@ -86,12 +86,13 @@
 		</div>
 	</div>
 	<input type="hidden" id="hiddenAssign" name="hide" value="">
+	<input type="hidden" id="hiddenTitle" name="hide" value="">
 </body>
 </html>
 
 <script type="text/javascript">
    	$('#click').on('click',function(){ 
-		$('.add_row').empty(); //  .add_row 
+		$('.add_row ').remove(); //  .add_row 
 		var checkList = [];
    		
 		$.ajax({
@@ -150,14 +151,7 @@
     });
 </script>
 	
-<script type="text/javascript">
-	/* $('#submit').on('click',function(){ 
-		//var checkBox =
-		var subNo = $('#hiddenAssign').val();
-		//여기서 해야 하는게 이제 subNo을  assignment_add.html으로 보내야함!!!!
-		//이건 내가 url parameter로 보내놓으꼐에엥
-	}); */
-	
+<script type="text/javascript">	
 	$('#tableFindSub').on('click', function (){
 		var table = document.getElementById("tableFindSub"),rIndex,cIndex;
 		for(var i = 1 ; i < table.rows.length ; i++){
@@ -170,9 +164,19 @@
 					$('input:radio[id="radio'+rIndex+'"]:radio[name="select"]').prop("checked", true);
 					var subNo = $("#radio"+rIndex).data('subNo');
 					$('#hiddenAssign').val(subNo).trigger('change');
+					$('#hiddenTitle').val("채플2").trigger('change');//
+					alert(('#hiddenTitle').value);////////////////////
 				}
 			}
 		}
-		//low cell 인덱스 ㄷ시
+	});
+
+	$('#submit').on('click', function (){
+		table.rows[i].
+		location.href="/assignment_add?title="+('#hiddenTitle').value;
+		+"&dueDate="+""
+		+"&importance="+""
+		+"&contents="+""
+		+"&subNo="+"";
 	});
 </script>

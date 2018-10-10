@@ -196,7 +196,8 @@ $(document).ready(function() {
 					'title' : $('#title').val(),
 					'contents' : $('#contents').val(),
 					'success' : 0,
-					'subNo' : '111'
+					'subNo' : '111',
+					'team' : '0'
 				},
 				success : function(result) {
 					console.log(result);
