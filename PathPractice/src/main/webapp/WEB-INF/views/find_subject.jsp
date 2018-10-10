@@ -90,97 +90,89 @@
 </html>
 
 <script type="text/javascript">
-		$(document).ready(function(){
-	     	$('#click').on('click',function(){ 
-				$('.add_row').empty(); //  .add_row 
+   	$('#click').on('click',function(){ 
+		$('.add_row').empty(); //  .add_row 
+		var checkList = [];
+   		
+		$.ajax({
+   			url:"/subject/searchSubject.json",
+   			type : "GET",
+   			data : {
+   				'word':$('#subjectName').val()
+   			},
+   			dataType : "text",
+   			success : function(result){
+           		if(result === '{"result":"no data"}'){ 
+           			alert('없는 과목입니다.');
+  					console.log(result);
+           		}else{
+          			alert('검색 성공');
+  					console.log(result);
+  					result = result.substring(10,(result.length)-1);
 
-				var checkList = [];
-
-	      		event.preventDefault();
-				$.ajax({
-	      			url:"/subject/searchSubject.json",
-	      			type : "GET",
-	      			data : {
-	      				'word':$('#subjectName').val()
-	      			},
-	      			success : function(result){
-	               		if(result['result'] === 'no data'){ 
-	               			alert('검색 실패');
-	               		}else{
-	               			alert('검색 성공');
-
-	               			var	tableLen = result['result'].length;
-	               			var table = document.getElementById("tableFindSub"),rIndex,cIndex;
-
-	               			var cell = new Array();
-	             	  		for(var i=0 ; i <tableLen ; i++){
-	               				newRow = table.insertRow(table.length),
-	               				cell[0] = newRow.insertCell(0),
-	               				cell[1] = newRow.insertCell(1),
-	               				cell[2] = newRow.insertCell(2),
-	               				cell[3] = newRow.insertCell(3),
-								cell[4] = newRow.insertCell(4),
-								cell[5] = newRow.insertCell(5),
-
-	               				cell[0].innerHTML = i+1;
-	               				cell[1].innerHTML = '<input type="radio" id="radio'+(i+1)+'" name="select" data-sub-no="'+result['result'][i]['subNo']+'">';
-	               				cell[2].innerHTML = result['result'][i]['subName'];
-	               				cell[3].innerHTML = result['result'][i]['startHour'];
-								cell[4].innerHTML = result['result'][i]['classroom'];
-	               				cell[5].innerHTML = result['result'][i]['profName'];
-								
-	               				console.log()
-	              	 			$(newRow).addClass("stripe_border_top");
-								$(newRow).addClass("add_row");
-	               				for(var j=0 ; j<6 ; j++)
-	               					$(cell[j]).css("border-right","1px solid #e5e5e5");
-	             	  		}
-	             		}
-	         	  	},
-	          	 	error : function(){
-	           			alert('검색 에러');
-	          	 	}
-	      		});
-	      	});
-	  	});
-	</script>
-	<script type="text/javascript">
-		$('#submit').on('click',function(){ 
-			//var checkBox =
-			var subNo = $('#hiddenAssign').val();
-
-			//ì¬ê¸°ì í´ì¼ëëê² ì´ì  subNoì assignment_add.htmlë¡ ë³´ë´ì¼í¨!!!!
-
-			//location.href="/assignment_add?"+
-		 	//$.ajax({
-		 	//	type : "post",
-		 	//	url : "assignment_add.html",
-		 	//	success : function(result){
-		 	//		console.log(result);
-		 	//		$('#subNo').html(result);
-		 	//	}
-		 	//})
+  					console.log(result);
+  					result = eval(result); //보안문제,,,,,
+  					
+  					console.log(result);
+    				console.log(typeof result);
+           			var	tableLen = result.length;
+           			console.log(tableLen)
+           			var table = document.getElementById("tableFindSub"),rIndex,cIndex;
+           			var cell = new Array();
+          	  		for(var i=0 ; i <tableLen ; i++){
+           				newRow = table.insertRow(table.length),
+           				cell[0] = newRow.insertCell(0),
+           				cell[1] = newRow.insertCell(1),
+           				cell[2] = newRow.insertCell(2),
+           				cell[3] = newRow.insertCell(3),
+						cell[4] = newRow.insertCell(4),
+						cell[5] = newRow.insertCell(5),
+           				cell[0].innerHTML = i+1;
+           				cell[1].innerHTML = '<input type="radio" id="radio'+(i+1)+'" name="select" data-sub-no="'+result[i]['subNo']+'">';
+           				cell[2].innerHTML = result[i]['subName'];
+           				cell[3].innerHTML = result[i]['startHour'];
+						cell[4].innerHTML = result[i]['classroom'];
+           				cell[5].innerHTML = result[i]['profName'];
+							
+           				console.log()
+          	 			$(newRow).addClass("stripe_border_top");
+						$(newRow).addClass("add_row");
+           				for(var j=0 ; j<6 ; j++)
+           					$(cell[j]).css("border-right","1px solid #e5e5e5");
+          	  		}
+           		}
+         	},
+         	error : function(request,status,error){
+        		alert('검색 에러');
+        		console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+        	}
 		});
-
-		
+    });
+</script>
+	
+<script type="text/javascript">
+	/* $('#submit').on('click',function(){ 
+		//var checkBox =
+		var subNo = $('#hiddenAssign').val();
+		//여기서 해야 하는게 이제 subNo을  assignment_add.html으로 보내야함!!!!
+		//이건 내가 url parameter로 보내놓으꼐에엥
+	}); */
+	
+	$('#tableFindSub').on('click', function (){
 		var table = document.getElementById("tableFindSub"),rIndex,cIndex;
+		for(var i = 1 ; i < table.rows.length ; i++){
+			for(var j = 0 ; j<table.rows[i].cells.length ; j++){
+				table.rows[i].cells[j].onclick = function(){
+					rIndex = this.parentElement.rowIndex;
+					cIndex = this.cellIndex;
 
-		$('#tableFindSub').on('click', function (){
-			for(var i = 1 ; i < table.rows.length ; i++){
-				for(var j = 0 ; j<table.rows[i].cells.length ; j++){
-					table.rows[i].cells[j].onclick = function(){
-						rIndex = this.parentElement.rowIndex;
-						cIndex = this.cellIndex;
-
-						console.log("ROW:" +rIndex+ ", Cell:" +cIndex);
-
-						$('input:radio[id="radio'+rIndex+'"]:radio[name="select"]').prop("checked", true);
-						var subNo = $("#radio"+rIndex).data('subNo');
-
-						$('#hiddenAssign').val(subNo).trigger('change');
-					}
+					console.log("ROW:" +rIndex+ ", Cell:" +cIndex);
+					$('input:radio[id="radio'+rIndex+'"]:radio[name="select"]').prop("checked", true);
+					var subNo = $("#radio"+rIndex).data('subNo');
+					$('#hiddenAssign').val(subNo).trigger('change');
 				}
 			}
-		});
-
-	</script>
+		}
+		//low cell 인덱스 ㄷ시
+	});
+</script>

@@ -177,11 +177,12 @@
 			},
 			success : function(result){
 				if(result['result'] === 'no data'){
-					alert('불러오기 실패');
+					alert('등록과제 없음');
 				}else{
 					alert('불러오기 성공');
 					console.log(result);
 
+    				console.log(typeof result);
 					for(var i=0 ; i<result['result'].length ; i++){
 
 						var assign_title = result['result'][i]['title'];

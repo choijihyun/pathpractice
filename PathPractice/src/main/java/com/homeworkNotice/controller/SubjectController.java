@@ -31,14 +31,14 @@ public class SubjectController {
 	
 	
 
-	//����� insert
+	//占쏙옙占쏙옙占� insert
 	@ResponseBody
-	@RequestMapping(value = "/subject/insertSubject", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//�� �κ��� url //get������� �� /user/getUserPwdInfo.json�̶�� url�� ���ͼ� ���� Ȯ�� �� �� �ִ�.
-	public String insertSubject(//url�� ����(����)�� �Լ�
-			Locale locale, //�ȵ���̵忡�� ���� �Ķ����
-			Model model, //�ȵ���̵忡�� ���� �Ķ����
+	@RequestMapping(value = "/subject/insertSubject", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//占쏙옙 占싸븝옙占쏙옙 url //get占쏙옙占쏙옙占쏙옙占� 占쏙옙 /user/getUserPwdInfo.json占싱띰옙占� url占쏙옙 占쏙옙占싶쇽옙 占쏙옙占쏙옙 확占쏙옙 占쏙옙 占쏙옙 占쌍댐옙.
+	public String insertSubject(//url占쏙옙 占쏙옙占쏙옙(占쏙옙占쏙옙)占쏙옙 占쌉쇽옙
+			Locale locale, //占싫듸옙占쏙옙絹恙∽옙占� 占쏙옙占쏙옙 占식띰옙占쏙옙占�
+			Model model, //占싫듸옙占쏙옙絹恙∽옙占� 占쏙옙占쏙옙 占식띰옙占쏙옙占�
 			@RequestParam(value = "subNo", required=false) String subNo,
-			@RequestParam(value = "class", required=false) String clas, //class ���� �������� �̷��� ���� ! ��Ÿ�ƴ�
+			@RequestParam(value = "class", required=false) String clas, //class 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占싱뤄옙占쏙옙 占쏙옙占쏙옙 ! 占쏙옙타占싣댐옙
 			@RequestParam(value = "subName", required=true) String subName,
 			@RequestParam(value = "day", required=true) String day,
 			@RequestParam(value = "classRoom", required=false) String classRoom,
@@ -47,7 +47,7 @@ public class SubjectController {
 			@RequestParam(value = "endHour", required=false) String endHour,
 			@RequestParam(value = "add", required=false) String add
 			){
-		//add���� �й�
+		//add占쏙옙占쏙옙 占싻뱄옙
 		
 		HashMap<Object, Object> param=new HashMap<Object, Object>();
 		
@@ -73,9 +73,9 @@ public class SubjectController {
 
 		System.out.println(result);
     	JSONObject jSONObject = new JSONObject();
-    	//�׷��� ���⼭ ���� or ���� �����ؼ� �ȵ���̵忡 json �����͸� ����� �������ٰž�
+    	//占쌓뤄옙占쏙옙 占쏙옙占썩서 占쏙옙占쏙옙 or 占쏙옙占쏙옙 占쏙옙占쏙옙占쌔쇽옙 占싫듸옙占쏙옙絹恙� json 占쏙옙占쏙옙占싶몌옙 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙占쌕거억옙
     	if(result==1) {
-    		jSONObject.put("result", "1");//����    		
+    		jSONObject.put("result", "1");//占쏙옙占쏙옙    		
     	}
     	else {
     		jSONObject.put("result", "0");
@@ -98,7 +98,7 @@ public class SubjectController {
     	
     	JSONArray jSONArray=new JSONArray();
     	List<JSONObject> jsonList=new ArrayList<JSONObject>();
-        if(!subjectDtoList.isEmpty()) {//��ȯ���� �����Ͱ� ��ȿ�ϸ�(db�� ������) ������ ȭ�鿡 ����� �ѷ��ش�
+        if(!subjectDtoList.isEmpty()) {//占쏙옙환占쏙옙占쏙옙 占쏙옙占쏙옙占싶곤옙 占쏙옙효占싹몌옙(db占쏙옙 占쏙옙占쏙옙占쏙옙) 占쏙옙占쏙옙占쏙옙 화占썽에 占쏙옙占쏙옙占� 占싼뤄옙占쌔댐옙
         	for(int i=0;i<subjectDtoList.size();i++) {
         		JSONObject jSONObject = new JSONObject();
         		jSONObject.put("add",subjectDtoList.get(i).getAdd());
@@ -121,7 +121,7 @@ public class SubjectController {
 
             return jsObject.toString();
         } 
-        else {//������ ������� �������� �ѷ��ش�
+        else {//占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙占쏙옙 占싼뤄옙占쌔댐옙
 
     		JSONObject jSONObject = new JSONObject();
         	jSONObject.put("result", "no data");
@@ -133,11 +133,11 @@ public class SubjectController {
 	
 	//search
 	@ResponseBody
-	@RequestMapping(value = "/subject/searchSubject.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//�� �κ��� url //get������� �� /user/getUserPwdInfo.json�̶�� url�� ���ͼ� ���� Ȯ�� �� �� �ִ�.
+	@RequestMapping(value = "/subject/searchSubject.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//占쏙옙 占싸븝옙占쏙옙 url //get占쏙옙占쏙옙占쏙옙占� 占쏙옙 /user/getUserPwdInfo.json占싱띰옙占� url占쏙옙 占쏙옙占싶쇽옙 占쏙옙占쏙옙 확占쏙옙 占쏙옙 占쏙옙 占쌍댐옙.
 
-	public String searchSubject(//url�� ����(����)�� �Լ�
-			Locale locale, //�ȵ���̵忡�� ���� �Ķ����
-			Model model, //�ȵ���̵忡�� ���� �Ķ����
+	public String searchSubject(//url占쏙옙 占쏙옙占쏙옙(占쏙옙占쏙옙)占쏙옙 占쌉쇽옙
+			Locale locale, //占싫듸옙占쏙옙絹恙∽옙占� 占쏙옙占쏙옙 占식띰옙占쏙옙占�
+			Model model, //占싫듸옙占쏙옙絹恙∽옙占� 占쏙옙占쏙옙 占식띰옙占쏙옙占�
 			@RequestParam(value = "word", required=true) String word){
 
 		
@@ -151,14 +151,15 @@ public class SubjectController {
     	JSONArray jSONArray=new JSONArray();
     	List<JSONObject> jsonList=new ArrayList<JSONObject>();
 		
-    	if(!subjectDtoList.isEmpty()) {//��ȯ���� �����Ͱ� ��ȿ�ϸ�(db�� ������) ������ ȭ�鿡 ����� �ѷ��ش�
+    	if(!subjectDtoList.isEmpty()) {//占쏙옙환占쏙옙占쏙옙 占쏙옙占쏙옙占싶곤옙 占쏙옙효占싹몌옙(db占쏙옙 占쏙옙占쏙옙占쏙옙) 占쏙옙占쏙옙占쏙옙 화占썽에 占쏙옙占쏙옙占� 占싼뤄옙占쌔댐옙
         	for(int i=0;i<subjectDtoList.size();i++) {
 
         		JSONObject jSONObject = new JSONObject();
         		if(subjectDtoList.get(i).getAdd().equals("0")) {
         			
         		jSONObject.put("subNo",subjectDtoList.get(i).getSubNo());
-        		jSONObject.put("class",subjectDtoList.get(i).getClass());
+        		//주호 : 프런트에서 string을 json배열러 바꿰야 해서 toString추가함!
+        		jSONObject.put("class",subjectDtoList.get(i).getClass().toString());
         		jSONObject.put("subName",subjectDtoList.get(i).getSubName());
         		jSONObject.put("day", subjectDtoList.get(i).getDay());
         		jSONObject.put("classroom", subjectDtoList.get(i).getClassRoom());
@@ -208,33 +209,31 @@ public class SubjectController {
         	
         	JSONObject jsObject=new JSONObject();
         	jsObject.put("result", jSONArray);
-        	
             return jsObject.toString();
         } 
         else {
 
     		JSONObject jSONObject = new JSONObject();
         	jSONObject.put("result", "no data");
-        	
         	return jSONObject.toString();
         }
 	}
 	
 
 	@ResponseBody
-    @RequestMapping(value = "/subject/deleteSubject.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value��� ���� ����, get��� ���
+    @RequestMapping(value = "/subject/deleteSubject.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value占쏙옙占� 占쏙옙占쏙옙 占쏙옙占쏙옙, get占쏙옙占� 占쏙옙占�
     public String deleteSubject(
     			Model model,
-    			@RequestParam(value = "add", required=true) String add) { // �̷��� 5���� �Ķ���͸� �޾ƿ��� ���� �Ⱦ��� x
-		HashMap<Object, Object> param=new HashMap<Object, Object>(); //������ id���� hashmap ������ִϱ� ������ ����
+    			@RequestParam(value = "add", required=true) String add) { // 占싱뤄옙占쏙옙 5占쏙옙占쏙옙 占식띰옙占쏙옙拷占� 占쌨아울옙占쏙옙 占쏙옙占쏙옙 占싫억옙占쏙옙 x
+		HashMap<Object, Object> param=new HashMap<Object, Object>(); //占쏙옙占쏙옙占쏙옙 id占쏙옙占쏙옙 hashmap 占쏙옙占쏙옙占쏙옙獵歐占� 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙
     			
 		param.put("add",add);	
 		//
 		System.out.println(param);
 		
-		//�� �Լ�(url)�� ȸ�������� �� �����̱� ������
-		//����� ���� or ���и� �˷� �ָ� ��
-		//int ������ ��ȯ�� �Ǵµ� 1�̸� ���� ������ ���̸� ����!!
+		//占쏙옙 占쌉쇽옙(url)占쏙옙 회占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙 占쏙옙占쏙옙占싱깍옙 占쏙옙占쏙옙占쏙옙
+		//占쏙옙占쏙옙占� 占쏙옙占쏙옙 or 占쏙옙占싻몌옙 占싯뤄옙 占쌍몌옙 占쏙옙
+		//int 占쏙옙占쏙옙占쏙옙 占쏙옙환占쏙옙 占실는듸옙 1占싱몌옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占싱몌옙 占쏙옙占쏙옙!!
 		int result=0;
 		try {
 			result=subjectDao.deleteSubject(param);
@@ -246,9 +245,9 @@ public class SubjectController {
 
 		System.out.println(result);
     	JSONObject jSONObject = new JSONObject();
-    	//�׷��� ���⼭ ���� or ���� �����ؼ� �ȵ���̵忡 json �����͸� ����� �������ٰž�
+    	//占쌓뤄옙占쏙옙 占쏙옙占썩서 占쏙옙占쏙옙 or 占쏙옙占쏙옙 占쏙옙占쏙옙占쌔쇽옙 占싫듸옙占쏙옙絹恙� json 占쏙옙占쏙옙占싶몌옙 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙占쌕거억옙
     	if(result==1) {
-    		jSONObject.put("result", "1");//����     		
+    		jSONObject.put("result", "1");//占쏙옙占쏙옙     		
     	}
     	else {
     		jSONObject.put("result", "0");
