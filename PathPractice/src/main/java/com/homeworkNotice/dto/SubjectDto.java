@@ -3,6 +3,7 @@ package com.homeworkNotice.dto;
 public class SubjectDto {
 	private int subjectKey;
 	private String subNo;
+	private String classNum;
 	private String subName;
 	private String day;
 	private String classRoom;
@@ -64,6 +65,12 @@ public class SubjectDto {
 	}
 	public void setAdd(String add) {
 		this.add = add;
+	}
+	public String getClassNum() {
+		return classNum;
+	}
+	public void setClassNum(String classNum) {
+		this.classNum = classNum;
 	}
 	
 }

@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
    <insert id="insertSubject" parameterType="map">
-    	insert into Subject(subNo,class,subName,day,classRoom,profName,startHour,endHour,add) values ( #{subNo},#{class},#{subName},#{day},#{classRoom},#{profName},#{startHour},#{endHour},#{add})
+    	insert into Subject(subNo,classNum,subName,day,classRoom,profName,startHour,endHour,add) values ( #{subNo},#{classNum},#{subName},#{day},#{classRoom},#{profName},#{startHour},#{endHour},#{add})
     </insert>
     
     <delete id="deleteSubject" parameterType="map">
