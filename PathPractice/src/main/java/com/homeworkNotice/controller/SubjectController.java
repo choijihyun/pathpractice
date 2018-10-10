@@ -38,7 +38,7 @@ public class SubjectController {
 			Locale locale, //占싫듸옙占쏙옙絹恙∽옙占� 占쏙옙占쏙옙 占식띰옙占쏙옙占�
 			Model model, //占싫듸옙占쏙옙絹恙∽옙占� 占쏙옙占쏙옙 占식띰옙占쏙옙占�
 			@RequestParam(value = "subNo", required=false) String subNo,
-			@RequestParam(value = "class", required=false) String clas, //class 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占싱뤄옙占쏙옙 占쏙옙占쏙옙 ! 占쏙옙타占싣댐옙
+			@RequestParam(value = "classNum", required=false) String classNum, //classNum 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占싱뤄옙占쏙옙 占쏙옙占쏙옙 ! 占쏙옙타占싣댐옙
 			@RequestParam(value = "subName", required=true) String subName,
 			@RequestParam(value = "day", required=true) String day,
 			@RequestParam(value = "classRoom", required=false) String classRoom,
@@ -52,7 +52,7 @@ public class SubjectController {
 		HashMap<Object, Object> param=new HashMap<Object, Object>();
 		
 		param.put("subNo",subNo);
-		param.put("class",clas);
+		param.put("classNum",classNum);
 		param.put("subName",subName);
 		param.put("day",day);
 		param.put("classRoom",classRoom);
@@ -159,7 +159,7 @@ public class SubjectController {
         			
         		jSONObject.put("subNo",subjectDtoList.get(i).getSubNo());
         		//주호 : 프런트에서 string을 json배열러 바꿰야 해서 toString추가함!
-        		jSONObject.put("class",subjectDtoList.get(i).getClass().toString());
+        		jSONObject.put("classNum",subjectDtoList.get(i).getClassNum());
         		jSONObject.put("subName",subjectDtoList.get(i).getSubName());
         		jSONObject.put("day", subjectDtoList.get(i).getDay());
         		jSONObject.put("classroom", subjectDtoList.get(i).getClassRoom());
