@@ -78,15 +78,13 @@
 							OK</button>
 					</div>
 					<div class="col-md-6 col-xs-6">
-						<button class="btn btn-sm btn-block btn_cancel" id="submit"
-							onclick='location.href="/assignment_add"'>CANCEL</button>
+						<button class="btn btn-sm btn-block btn_cancel" id="cancel">CANCEL</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<input type="hidden" id="hiddenAssign" name="hide" value="">
-	<input type="hidden" id="hiddenTitle" name="hide" value="">
 </body>
 </html>
 
@@ -101,23 +99,16 @@
    			data : {
    				'word':$('#subjectName').val()
    			},
-   			dataType : "text",
+   			//dataType : "text",
    			success : function(result){
-           		if(result === '{"result":"no data"}'){ 
+           		//if(result === '{"result":"no data"}'){ 
+           		if(result['result'] === "no data"){ 
            			alert('없는 과목입니다.');
   					console.log(result);
            		}else{
           			alert('검색 성공');
   					console.log(result);
-  					result = result.substring(10,(result.length)-1);
-
-  					console.log(result);
-  					result = eval(result); //보안문제,,,,,
-  					
-  					console.log(result);
-    				console.log(typeof result);
-           			var	tableLen = result.length;
-           			console.log(tableLen)
+           			var	tableLen =result['result'].length
            			var table = document.getElementById("tableFindSub"),rIndex,cIndex;
            			var cell = new Array();
           	  		for(var i=0 ; i <tableLen ; i++){
@@ -129,11 +120,11 @@
 						cell[4] = newRow.insertCell(4),
 						cell[5] = newRow.insertCell(5),
            				cell[0].innerHTML = i+1;
-           				cell[1].innerHTML = '<input type="radio" id="radio'+(i+1)+'" name="select" data-sub-no="'+result[i]['subNo']+'">';
-           				cell[2].innerHTML = result[i]['subName'];
-           				cell[3].innerHTML = result[i]['startHour'];
-						cell[4].innerHTML = result[i]['classroom'];
-           				cell[5].innerHTML = result[i]['profName'];
+           				cell[1].innerHTML = '<input type="radio" id="radio'+(i+1)+'" name="select" data-sub-no="'+result['result'][i]['subNo']+'">';
+           				cell[2].innerHTML = result['result'][i]['subName'];
+           				cell[3].innerHTML = result['result'][i]['startHour'];
+						cell[4].innerHTML = result['result'][i]['classroom'];
+           				cell[5].innerHTML = result['result'][i]['profName'];
 							
            				console.log()
           	 			$(newRow).addClass("stripe_border_top");
@@ -150,7 +141,29 @@
 		});
     });
 </script>
+
+<script type="text/javascript">	
+	href = function (){
+
+		console.log(page);
 	
+		if(page == 'assignmentAdd'){		
+			console.log(page);
+			location.href="/assignment_add?subNo="+ $('#hiddenAssign').val();
+		}
+		else if (page == 'timetablePage'){
+			console.log(page);
+			location.href="/timetable_page?&subNo="+ $('#hiddenAssign').val();
+		}
+	}
+	
+	var page = '${page}'; 
+	
+	console.log(page);
+	$('#submit').on('click', href );
+	$('#cancel').on('click', href );
+</script>
+
 <script type="text/javascript">	
 	$('#tableFindSub').on('click', function (){
 		var table = document.getElementById("tableFindSub"),rIndex,cIndex;
@@ -164,19 +177,8 @@
 					$('input:radio[id="radio'+rIndex+'"]:radio[name="select"]').prop("checked", true);
 					var subNo = $("#radio"+rIndex).data('subNo');
 					$('#hiddenAssign').val(subNo).trigger('change');
-					$('#hiddenTitle').val("채플2").trigger('change');//
-					alert(('#hiddenTitle').value);////////////////////
 				}
 			}
 		}
-	});
-
-	$('#submit').on('click', function (){
-		table.rows[i].
-		location.href="/assignment_add?title="+('#hiddenTitle').value;
-		+"&dueDate="+""
-		+"&importance="+""
-		+"&contents="+""
-		+"&subNo="+"";
-	});
+	});	
 </script>

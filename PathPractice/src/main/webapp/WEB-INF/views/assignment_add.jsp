@@ -71,7 +71,8 @@
 						</div>
 						<div class="col-md-2 col-xs-2 mt-1 mb-1">
 							<a class="btn btn-sm btn_icon" aria-label="Left Align"
-								href="/find_subject"> <span class="fas fa-search"></span>
+								id="search"> 
+								<span class="fas fa-search"></span>
 							</a>
 						</div>
 						<div class="col-md-3 col-xs-3 my-2 label_input">제목</div>
@@ -146,6 +147,7 @@ $(document).ready(function() {
 	
 	document.getElementById("title").value = title;
 	document.getElementById("contents").value = contents;
+	//assignNO으로 과목명 찾아야 함
 	
 	//setting datepicker
 	$(function() {
@@ -212,6 +214,12 @@ $(document).ready(function() {
 				}
 			}); 
 		});
+		
+		
+	});
+
+	$('#search').on('click', function() {
+		location.href="/find_subject?&page=assignmentAdd";
 	});
 </script>
 

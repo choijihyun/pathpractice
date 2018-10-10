@@ -158,7 +158,6 @@ public class SubjectController {
         		if(subjectDtoList.get(i).getAdd().equals("0")) {
         			
         		jSONObject.put("subNo",subjectDtoList.get(i).getSubNo());
-        		//주호 : 프런트에서 string을 json배열러 바꿰야 해서 toString추가함!
         		jSONObject.put("classNum",subjectDtoList.get(i).getClassNum());
         		jSONObject.put("subName",subjectDtoList.get(i).getSubName());
         		jSONObject.put("day", subjectDtoList.get(i).getDay());

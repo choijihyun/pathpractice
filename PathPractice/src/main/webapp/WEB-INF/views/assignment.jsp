@@ -97,6 +97,7 @@
 			</div>
 	</div>
 	<input type="hidden" id="hiddenAssign" name="hide" value="" >
+	<input type="hidden" id="hiddenSub" name="hide" value="" >
 </body>
 </html>
 
@@ -113,6 +114,7 @@
 			var assignNo = $(this).data('assignNo');
 			
 			$('#hiddenAssign').val(assignNo).trigger('change');
+			$('#hiddenSub').val(subNo).trigger('change');
 
 			body += 'due-date=' + dueDate;
 			body += ' , importance=' + importance;
@@ -154,6 +156,7 @@
 				if(result['result'] === "1"){
 					alert('삭제 성공');
 					console.log(result);
+					location.reload();
 				}else{
 					alert('삭제 실패');
 				}
@@ -195,6 +198,7 @@
 						str += 'data-importance= " ' + result['result'][i]['importance'] + ' " ';
 						str += 'data-title= " ' + assign_title + ' " ';
 						str += 'data-assign-no= " ' + result['result'][i]['assignNo'] + ' " ';
+						str += 'data-sub-no= " ' + result['result'][i]['subNo'] + ' " ';
 						str += 'data-contents= " ' + assign_contents + '">';
 						str += '<h6 id="assign' + (i+1) + 'Title" ';
 						str += 'style="font-weight: bold" class="mb-2">-' + assign_title + '</h6>';

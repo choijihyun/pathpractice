@@ -74,7 +74,7 @@
 										<label for="subjectName" class="col-12 label_input">과목명</label>
 										<input type="text" class="col-10 m-0 form-control input" title="과목명"
 											id="subjectName" style="display:inline-block;">
-										<a class="btn btn-sm btn_icon" aria-label="Left Align" href="/find_subject"> 
+										<a class="btn btn-sm btn_icon" aria-label="Left Align" id="search"> 
 											<span class="fas fa-search"></span>
 										</a>
 									</div>
@@ -125,7 +125,7 @@
 													<option value="30">30</option>
 												</select>
 											</div>
-											<label class="mx-auto time-label">종료시간</label>
+											<label class="mx-auto time_label">종료시간</label>
 											<div class="mx-auto">
 												<select id="eHour" class="form-control-xs">
 													<option value="">시</option>
@@ -202,33 +202,39 @@
 	%>
 </script>
 
+<script type="text/javascript">
+$('#search').on('click', function() {
+		location.href="/find_subject?&page=timetablePage";
+	});
+</script>
+
 <!--select box 선택 값 가져오기 -->
 <script>
 	$('#btnSuccess').on('click', function () {
-		<%
-		String id = (String) session.getAttribute("id");
-		%>
-		 $.ajax({
+		<% String id = (String) session.getAttribute("id"); %>
+		var subNo = '${subNo}'; 
+		
+		<%--  $.ajax({
 			url : "/timeTable/insertTimeTable.json",
 			type : "GET",
 			data : {
 				'stuId' : <%=id%>,
-				'subjectKey' : '1'//find_subject해서 url parameter로 가져와야함
+				'subjectKey' : subNo //find_subject해서 url parameter로 가져옴
 			},
 			success : function(result) {
 				console.log(result);
 				if (result['result'] === '1') {
-					alert('과제등록성공');
+					alert('시간표등록성공');
 				} else {
-					alert('과제등록실패');
+					alert('시간표등록실패');
 				}
 			},
 			error : function() {
-				alert('과제등록에러');
+				alert('시간표등록에러');
 			}
-		}); 
-
-		if( !chkInput() ) return;
+		});
+		if( !chkInput() ) return; --%>
+		
 		var shour = document.getElementById("sHour");
 		var val_shour = shour.options[shour.selectedIndex].value;
 		var sminute = document.getElementById("sMinute");

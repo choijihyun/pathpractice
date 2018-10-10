@@ -91,9 +91,11 @@ public class HomeController {
     }
     
     @RequestMapping(value = "/find_subject", method = RequestMethod.GET)
-    public String find_subject(Locale locale, Model model) {
+    public String find_subject(Locale locale, Model model,
+    		@RequestParam(value="page", required=false) String page) {
        System.out.println("find_subject!");
-        return "find_subject";
+       model.addAttribute("page", page);
+       return "find_subject";
     }
     
     @RequestMapping(value = "/findPW", method = RequestMethod.GET)
@@ -115,9 +117,13 @@ public class HomeController {
     }
     
     @RequestMapping(value = "/timetable_page", method = RequestMethod.GET)
-    public String timetable_page(Locale locale, Model model) {
-       System.out.println("timetable_page!");
-        return "timetable_page";
+    public String timetable_page(Locale locale, Model model,
+    		@RequestParam(value="subNo", required=false, defaultValue="0") int subNo) {
+       
+    	System.out.println("timetable_page!");
+       
+    	model.addAttribute("subNo", subNo);
+    	return "timetable_page";
     }
     
     @RequestMapping(value = "/update_information", method = RequestMethod.GET)
