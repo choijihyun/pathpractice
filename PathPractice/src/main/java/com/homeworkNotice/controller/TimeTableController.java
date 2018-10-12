@@ -29,7 +29,6 @@ public class TimeTableController {
 	@Autowired
 	private SubjectDao	subjectDao;
 	private UserDao userDao;
-	@Autowired
 	private TimeTableDao timeTableDao;
 
 	@ResponseBody
