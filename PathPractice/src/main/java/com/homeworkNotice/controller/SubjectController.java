@@ -1,5 +1,6 @@
 package com.homeworkNotice.controller;
 
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.homeworkNotice.dao.SubjectDao;
 import com.homeworkNotice.dto.CompleteDto;
 import com.homeworkNotice.dto.SubjectDto;
+import com.homeworkNotice.dto.UserDto;
 import com.homeworkNotice.dao.UserDao;
 
 @Controller
@@ -28,6 +30,7 @@ public class SubjectController {
 	@Autowired
 	private SubjectDao	subjectDao;
 	private UserDao userDao;
+	private UserDto	userDto;
 	
 	
 
@@ -138,22 +141,37 @@ public class SubjectController {
 	public String searchSubject(//url占쏙옙 占쏙옙占쏙옙(占쏙옙占쏙옙)占쏙옙 占쌉쇽옙
 			Locale locale, //占싫듸옙占쏙옙絹恙∽옙占� 占쏙옙占쏙옙 占식띰옙占쏙옙占�
 			Model model, //占싫듸옙占쏙옙絹恙∽옙占� 占쏙옙占쏙옙 占식띰옙占쏙옙占�
-			@RequestParam(value = "word", required=true) String word){
+			@RequestParam(value = "word", required=false) String word,
+			@RequestParam(value = "select",required=true) final int select){
 
 		
 		HashMap<Object, Object> param=new HashMap<Object, Object>();
 		
 		param.put("word",word);			
+		param.put("select",select);
 		
 		System.out.println("TTTT :::: "+word);
-		List<SubjectDto> subjectDtoList =subjectDao.searchSubject(param);	
-
+		
+		
+		List<SubjectDto> subjectDtoList;
+		switch(select){
+		case 1:	subjectDtoList =subjectDao.search1Subject(param);break;
+		case 2:subjectDtoList =subjectDao.searchSubject(param);break;
+		case 3:subjectDtoList =subjectDao.search2Subject(param);break;
+		case 4:subjectDtoList =subjectDao.search3Subject(param);break;
+		default:subjectDtoList =subjectDao.searchSubject(param);break;
+		}
+		//subNo 로 찾는 경우
+		//subName 으로 찾는 경우
+		//subjectKey 로 찾는 경우 
+		//profName 으로 찾는 경우
+		
     	JSONArray jSONArray=new JSONArray();
     	List<JSONObject> jsonList=new ArrayList<JSONObject>();
 		
     	if(!subjectDtoList.isEmpty()) {//占쏙옙환占쏙옙占쏙옙 占쏙옙占쏙옙占싶곤옙 占쏙옙효占싹몌옙(db占쏙옙 占쏙옙占쏙옙占쏙옙) 占쏙옙占쏙옙占쏙옙 화占썽에 占쏙옙占쏙옙占� 占싼뤄옙占쌔댐옙
         	for(int i=0;i<subjectDtoList.size();i++) {
-
+        		
         		JSONObject jSONObject = new JSONObject();
         		if(subjectDtoList.get(i).getAdd().equals("0")) {
         			
@@ -169,6 +187,22 @@ public class SubjectController {
         		jSONObject.put("subjectKey", subjectDtoList.get(i).getSubjectKey());
         		
         		}
+
+        		if(subjectDtoList.get(i).getAdd().equals(userDto.getStuId())) {
+        			
+        		jSONObject.put("subNo",subjectDtoList.get(i).getSubNo());
+        		jSONObject.put("classNum",subjectDtoList.get(i).getClassNum());
+        		jSONObject.put("subName",subjectDtoList.get(i).getSubName());
+        		jSONObject.put("day", subjectDtoList.get(i).getDay());
+        		jSONObject.put("classroom", subjectDtoList.get(i).getClassRoom());
+        		jSONObject.put("profName", subjectDtoList.get(i).getProfName());
+        		jSONObject.put("startHour",subjectDtoList.get(i).getStartHour());
+        		jSONObject.put("endHour",subjectDtoList.get(i).getEndHour());
+        		jSONObject.put("add",subjectDtoList.get(i).getAdd());
+        		jSONObject.put("subjectKey", subjectDtoList.get(i).getSubjectKey());
+        		
+        		}
+        		
         		jSONArray.add(jSONObject);
         		
         		jsonList.add((JSONObject)jSONArray.get(i));

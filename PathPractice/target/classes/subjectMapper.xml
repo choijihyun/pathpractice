@@ -27,6 +27,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      <select id="searchDirSubject" resultType="com.homeworkNotice.dto.SubjectDto" parameterType="map">
     	select * from Subject where add=#{add}
     </select>
+     <select id="search1Subject" resultType="com.homeworkNotice.dto.SubjectDto" parameterType="map">
+    	select * from Subject where subNo LIKE CONCAT('%',#{word},'%')
+    </select> 
+    <select id="search2Subject" resultType="com.homeworkNotice.dto.SubjectDto" parameterType="map">
+    	select * from Subject where subjectKey=#{subjectKey}
+    </select>
+     <select id="search3Subject" resultType="com.homeworkNotice.dto.SubjectDto" parameterType="map">
+    	select * from Subject where profName LIKE CONCAT('%',#{word},'%')
+    </select>
     
    <insert id="insertSubject" parameterType="map">
     	insert into Subject(subNo,classNum,subName,day,classRoom,profName,startHour,endHour,add) values ( #{subNo},#{classNum},#{subName},#{day},#{classRoom},#{profName},#{startHour},#{endHour},#{add})

@@ -27,6 +27,17 @@ public class SubjectDao {
 	public List<SubjectDto> searchDirSubject(HashMap<Object,Object> param) {
 		return sqlSession.selectList("SubjectDao.searchDirSubject", param);
 	}
+	public List<SubjectDto> search1Subject(HashMap<Object,Object> param) {
+		return sqlSession.selectList("SubjectDao.search1Subject", param);
+	}
+	public List<SubjectDto> search2Subject(HashMap<Object,Object> param) {
+		return sqlSession.selectList("SubjectDao.search2Subject", param);
+	}
+	public List<SubjectDto> search3Subject(HashMap<Object,Object> param) {
+		return sqlSession.selectList("SubjectDao.search3Subject", param);
+	}
+	
+	
 	public int insertSubject(HashMap<Object, Object> param) {
 		return sqlSession.insert("SubjectDao.insertSubject", param);		
 	}
