@@ -90,25 +90,26 @@
 											<div class="mx-auto">
 												<select id="day1" class="form-control-xs">
 													<option value="">요일</option>
-													<option value="mon">월</option>
-													<option value="tue">화</option>
-													<option value="wen">수</option>
-													<option value="thu">목</option>
-													<option value="fri">금</option>
-												</select> <select id="day2" class="form-control-xs">
+													<option value="월">월</option>
+													<option value="화">화</option>
+													<option value="수">수</option>
+													<option value="목">목</option>
+													<option value="금">금</option>
+												</select>
+												 <select id="day2" class="form-control-xs">
 													<option value="">요일</option>
-													<option value="mon">월</option>
-													<option value="tue">화</option>
-													<option value="wen">수</option>
-													<option value="thu">목</option>
-													<option value="fri">금</option>
+													<option value="월">월</option>
+													<option value="화">화</option>
+													<option value="수">수</option>
+													<option value="목">목</option>
+													<option value="금">금</option>
 												</select>
 											</div>
 											<label class="mx-auto time_label">시작시간</label>
 											<div class="mx-auto">
 												<select id="sHour" class="form-control-xs">
 													<option value="">시</option>
-													<option value="9">9</option>
+													<option value="09">09</option>
 													<option value="10">10</option>
 													<option value="11">11</option>
 													<option value="12">12</option>
@@ -118,7 +119,8 @@
 													<option value="16">16</option>
 													<option value="17">17</option>
 													<option value="18">18</option>
-												</select> <select id="sMinute" class="form-control-xs">
+												</select> 
+												<select id="sMinute" class="form-control-xs">
 													<option value="">분</option>
 													<option value="00">00</option>
 													<option value="30">30</option>
@@ -128,7 +130,7 @@
 											<div class="mx-auto">
 												<select id="eHour" class="form-control-xs">
 													<option value="">시</option>
-													<option value="9">9</option>
+													<option value="09">09</option>
 													<option value="10">10</option>
 													<option value="11">11</option>
 													<option value="12">12</option>
@@ -167,9 +169,9 @@
 			<!-- footer 하단바 class="app-footer" -->
 			<div id="footer"></div>
 		</div>
-</body>
+		<input type="hidden" id="hiddenSubKey" name="hide" value="" >
+	</body>
 </html>
-
 <script src="${pageContext.request.contextPath}/resources/js/common/header.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common/timetable.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common/footer.js"></script>
@@ -213,58 +215,69 @@ $('#search').on('click', function() {
 
 <!--select box 선택 값 가져오기 -->
 <script>
+	var subNo = '${subNo}'; 
+
+ 	if(subNo == 0){
+		subNo = 111111//?? 직접 추가할 때 subNo어떻게 하는지 물어보기//직접추가하면 교수명 과목명 시작시간 종료시간 장소 모두 입력받은걸로 찾아와서 색칠
+	}
+	$.ajax({
+			url:"/subject/searchSubject.json",
+			type : "GET",
+			data : {
+				'word':subNo, //subNO로 subjectKey랑 과목 정보들 가져오기 //find_subject해서 url parameter로 가져옴
+				'select':1
+			},
+			success : function(result){
+       		if(result['result'] === "no data"){ 
+       			alert('없는 과목입니다.');
+					console.log(result);
+       		}else{
+      			alert('검색 성공');
+					console.log(result);
+					
+					subName = result['result'][0]['subName'];
+					classroom = result['result'][0]['classroom'];
+					profName = result['result'][0]['profName'];
+					subjectKey = result['result'][0]['subjectKey'];
+					startHour = result['result'][0]['startHour'];
+					endHour = result['result'][0]['endHour'];
+					day = result['result'][0]['day'];
+					
+					day1 = day.slice(0,1);
+					day2 = day.slice(1,2);	
+					shour = startHour.slice(0,2);//앞에2개 자르기
+					sminute = startHour.slice(3,5);
+					ehour = endHour.slice(0,2);
+					eminute = endHour.slice(3,5);
+					$('#hiddenSubKey').val(subjectKey).trigger('change');
+					
+					//FUNCTION
+					displayTimetable(shour,sminute,ehour,eminute,day1,day2);//parameter로 시작 시간,종료시간,요일
+					
+					$('#plusTime').trigger('click');
+					$('#addByDirectly').trigger('click');
+					
+					$("#subjectName").val(subName);
+					$("#place").val(classroom);
+					$("#professorName").val(profName);
+					$("#day1").val(day1);
+					$("#day2").val(day2);
+					$("#sHour").val(shour);
+					$("#sMinute").val(sminute);
+					$("#eHour").val(ehour);
+					$("#eMinute").val(eminute);
+       		}
+     	},
+     	error : function(request,status,error){
+    		alert('검색 에러');
+    		console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+    	}
+	});
+	
 	$('#btnSuccess').on('click', function () {
-		alert(document.getElementById("sHour").options[shour.selectedIndex].value);
-		alert(document.getElementById("day1").options[day1.selectedIndex].value);
-		
-		<% String id = (String) session.getAttribute("id"); %>
-		var subNo = '${subNo}'; 
-		/*
-		if(subNo == 0){
-			subNo = //?? 직접 추가할 때 subNo어떻게 하는지 물어보기
-			직접추가하면 교수명 과목명 시작시간 종료시간 장소 모두 입력받은걸로 찾아와서 색칠
-		}
-		*/	
-			
-		$.ajax({
-   			url:"/subject/searchSubject.json",
-   			type : "GET",
-   			data : {
-   				'word':subNo, //subNO로 subjectKey랑 과목 정보들 가져오기 //find_subject해서 url parameter로 가져옴
-   				'select':1
-   			},
-   			success : function(result){
-           		if(result['result'] === "no data"){ 
-           			alert('없는 과목입니다.');
-  					console.log(result);
-           		}else{
-          			alert('검색 성공');
-  					console.log(result);
-  					
-  					subName = result['result'][0]['subName'];
-  					classRoom = result['result'][0]['classRoom'];
-  					profName = result['result'][0]['profName'];
-  					subjectKey = result['result'][0]['subjectKey'];
-  					startHour = result['result'][0]['startHour'];
-  					endHour = result['result'][0]['endHour'];
-  					day = result['result'][0]['day'];
-  					
-  					//FUNCTION!!!!!!!!!!!!!!!!!!
-  					insertTimetable(subjectKey);//parameter로 subjectKey
-  					displayTimetable(startHour,endHour,day);//parameter로 시작 시간,종료시간,요일
-  					
-  					document.getElementById("subjectName").value = subName;
-  					document.getElementById("place").value = classRoom;
-  					document.getElementById("professorName").value = profName;
-           		}
-         	},
-         	error : function(request,status,error){
-        		alert('검색 에러');
-        		console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
-        	}
-		});
-		
 		if( !chkInput() ) return; 
+		
+		insertTimetable( $('#hiddenSubKey').val() );//parameter로 subjectKey //hidden으로 기억
 		
 		// select box value init
 		$('select').find("option:eq(0)").prop("selected", true);
@@ -299,36 +312,9 @@ $('#search').on('click', function() {
 	});
 </script>
 
-
 <script>
-	var displayTimetable = function(String startHour,String endHour, string day) {//parameter로 시작 시간,종료시간, 
-
-/* 		var shour = document.getElementById("sHour");
-		var val_shour = shour.options[shour.selectedIndex].value;
-		var sminute = document.getElementById("sMinute");
-		var val_sminute = sminute.options[sminute.selectedIndex].value;
-		var ehour = document.getElementById("eHour");
-		var val_ehour = ehour.options[ehour.selectedIndex].value;
-		var eminute = document.getElementById("eMinute");
-		var val_eminute = eminute.options[eminute.selectedIndex].value;
-
-		var day1 = document.getElementById("day1");
-		var val_day1 = day1.options[day1.selectedIndex].value;
-		var day2 = document.getElementById("day2");
-		var val_day2 = day2.options[day2.selectedIndex].value;
-		var index_day1, index_day2;
-		var table = document.getElementById("table"), rIndex, cIndex;
-		var row_length = table.rows.length;*/
-		var new_row_len = val_ehour; 
-		
-		var val_shour = startHour.slice(0,2);//앞에2개 자르기
-		var val_sminute = startHour.slice(3,5);
-		var val_ehour = endHour.slice(0,2);
-		var val_eminute = endHour.slice(3,5);
-		var day1 = day.slice(0,1);
-		var day2 = day.slice(1,2);
-		console.log(shour,sminute,ehour,eminute,day1,day2);
-	
+	function displayTimetable(val_shour, val_sminute, val_ehour, val_eminute, val_day1, val_day2) {
+		var index_day1,index_day2;
 		var table = document.getElementById("table"), rIndex, cIndex;
 		var row_length = table.rows.length;
 		var new_row_len = val_ehour; 
@@ -368,7 +354,7 @@ $('#search').on('click', function() {
 		} else if (val_eminute == "00") {
 			val_ehour = (val_ehour - 8) * 2 - 1;
 		}
-		var days = [ 'mon', 'tue', 'wen', 'thu', 'fri' ];
+		var days = [ '월', '화', '수', '목', '금' ];
 		for (var i = 0; i < 5; i++) {
 			if (days[i] == val_day1)
 				index_day1 = i + 1;
@@ -387,15 +373,15 @@ $('#search').on('click', function() {
 		}
 	}
 	
-	
 	//subjectKey 로 시간표 db에 등록
-	var insertTimetable = function(int subjectKey){
+	function insertTimetable(subjectKey){
+		<% String id = (String) session.getAttribute("id"); %>
 		$.ajax({
 			url : "/timeTable/insertTimeTable.json",
 			type : "GET",
 			data : {
 				'stuId' : <%=id%>,
-				'subjectKey' : 1 //subjectKey
+				'subjectKey' : subjectKey
 			},success : function(result) {
 				console.log(result);
 				if (result['result'] === '1') {
@@ -409,3 +395,20 @@ $('#search').on('click', function() {
 		});
 	}
 </script>
+
+<!-- 	var shour = document.getElementById("sHour");
+		var val_shour = shour.options[shour.selectedIndex].value;
+		var sminute = document.getElementById("sMinute");
+		var val_sminute = sminute.options[sminute.selectedIndex].value;
+		var ehour = document.getElementById("eHour");
+		var val_ehour = ehour.options[ehour.selectedIndex].value;
+		var eminute = document.getElementById("eMinute");
+		var val_eminute = eminute.options[eminute.selectedIndex].value;
+
+		var day1 = document.getElementById("day1");
+		var val_day1 = day1.options[day1.selectedIndex].value;
+		var day2 = document.getElementById("day2");
+		var val_day2 = day2.options[day2.selectedIndex].value;
+		var index_day1, index_day2;
+		var table = document.getElementById("table"), rIndex, cIndex;
+		var row_length = table.rows.length; -->
