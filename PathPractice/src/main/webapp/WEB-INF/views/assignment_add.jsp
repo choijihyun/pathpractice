@@ -147,7 +147,35 @@ $(document).ready(function() {
 	
 	document.getElementById("title").value = title;
 	document.getElementById("contents").value = contents;
-	//assignNO으로 과목명 찾아야 함
+	
+	$('#subjectName').on('click', function () {
+		$('#search').trigger('click');
+	});
+	
+	$.ajax({
+   			url:"/subject/searchSubject.json",
+   			type : "GET",
+   			data : {
+   				'word':subNo,
+   				'select':1
+   			},
+   			success : function(result){
+           		if(result['result'] === "no data"){ 
+           			alert('없는 과목입니다.');
+  					console.log(result);
+           		}else{
+          			alert('검색 성공');
+  					console.log(result);
+  					subName = result['result'][0]['subName'];
+  					document.getElementById("subjectName").value = subName;
+           		}
+         	},
+         	error : function(request,status,error){
+        		alert('검색 에러');
+        		console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+        	}
+		});
+	
 	
 	//setting datepicker
 	$(function() {
@@ -170,6 +198,7 @@ $(document).ready(function() {
 </script>
 
 <script type="text/javascript">
+	var subNo = '${subNo}'; 
 	$(document).ready(function() {
 		$('#submit').on('click', function() {
 			<%
@@ -198,7 +227,7 @@ $(document).ready(function() {
 					'title' : $('#title').val(),
 					'contents' : $('#contents').val(),
 					'success' : 0,
-					'subNo' : '111',
+					'subNo' : subNo,
 					'team' : '0'
 				},
 				success : function(result) {

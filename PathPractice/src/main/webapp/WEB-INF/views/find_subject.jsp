@@ -97,11 +97,10 @@
    			url:"/subject/searchSubject.json",
    			type : "GET",
    			data : {
-   				'word':$('#subjectName').val()
+   				'word':$('#subjectName').val(),
+   				'select':0
    			},
-   			//dataType : "text",
    			success : function(result){
-           		//if(result === '{"result":"no data"}'){ 
            		if(result['result'] === "no data"){ 
            			alert('없는 과목입니다.');
   					console.log(result);
