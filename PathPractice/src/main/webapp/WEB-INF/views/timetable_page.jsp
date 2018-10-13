@@ -249,6 +249,7 @@ $('#search').on('click', function() {
 					sminute = startHour.slice(3,5);
 					ehour = endHour.slice(0,2);
 					eminute = endHour.slice(3,5);
+					context = subName+classroom;
 					$('#hiddenSubKey').val(subjectKey).trigger('change');
 					
 					$('#plusTime').trigger('click');
@@ -282,9 +283,13 @@ $('#search').on('click', function() {
 		$('#addByDirectly').trigger('click');
 		$('#plusTime').trigger('click');
 		
+		//지우고 밑에 주석 풀기
+		console.log(shour,sminute,ehour,eminute,day1,day2);
+		displayTimetable(shour,sminute,ehour,eminute,day1,day2,context);//parameter로 시작 시간,종료시간,요일
+		
 		//동적으로 table 합치기!!!!!!!!!!!!!!!!!!!!!!
-		$(".first").each(function() {
-			  var rows = $(".first:contains('" + $(this).text() + "')");
+		$(".table-time").each(function() {
+			  var rows = $(".table-time:contains('" + $(this).text() + "')");
 			  if (rows.length > 1) {
 			    rows.eq(0).attr("rowspan", rows.length);
 			    rows.not(":eq(0)").remove();
@@ -292,17 +297,11 @@ $('#search').on('click', function() {
 			});
 		
 		$('.commonForm input[type="text"]').val(""); 
-/* 		$("#day1").val('');
-		$("#day2").val('');
-		$("#sHour").val('');
-		$("#sMinute").val('');
-		$("#eHour").val('');
-		$("#eMinute").val(''); */
 	});
 </script>
 
 <!-- 테이블 클릭 시 수정 -->
-<script>
+<!-- <script>
 	var table = document.getElementById("table"),rIndex,cIndex;
 
 		$('#btnSuccess').on('click', function (){
@@ -317,7 +316,7 @@ $('#search').on('click', function() {
 		}	
 	});
 </script>
-
+ -->
 <script>
 	//subjectKey 로 시간표 db에 등록
 	function insertTimetable(subjectKey){
@@ -333,7 +332,8 @@ $('#search').on('click', function() {
 				if (result['result'] === '1') {
 					alert('시간표등록성공');
 					//FUNCTION
-					displayTimetable(shour,sminute,ehour,eminute,day1,day2);//parameter로 시작 시간,종료시간,요일
+					console.log(shour,sminute,ehour,eminute,day1,day2);
+					//displayTimetable(shour,sminute,ehour,eminute,day1,day2,context);//parameter로 시작 시간,종료시간,요일
 				} else {
 					alert('시간표등록실패');
 				}

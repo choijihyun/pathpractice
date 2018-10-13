@@ -1,4 +1,4 @@
-var displayTimetable = function (val_shour, val_sminute, val_ehour, val_eminute, val_day1, val_day2) {
+var displayTimetable = function (val_shour, val_sminute, val_ehour, val_eminute, val_day1, val_day2, context) {
 		var index_day1,index_day2;
 		var table = document.getElementById("table"), rIndex, cIndex;
 		var row_length = table.rows.length;
