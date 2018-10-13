@@ -13,6 +13,7 @@ import com.homeworkNotice.dto.TimeTableDto;
 
 @Repository
 public class TimeTableDao {
+	
 	@Autowired
     private SqlSession sqlSession;    
 	public SqlSession getSqlSession() {
@@ -23,7 +24,7 @@ public class TimeTableDao {
 	}
 
 	public int insertTimeTable(HashMap<Object, Object> param) {
-		return sqlSession.insert("TimeTableDao.insertTimeTable", param);		
+		return sqlSession.insert("TimeTableDao.insertTimeTable",param);		
 	}
 	
 	public List<TimeTableDto> searchTimeTable(HashMap<Object,Object> param) {

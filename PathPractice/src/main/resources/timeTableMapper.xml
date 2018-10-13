@@ -22,10 +22,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     -->
     
    <insert id="insertTimeTable" parameterType="map">
-    	insert into TimeTable(stuId,subjectKey) values ( #{stuId},#{subjectKey})
+    	insert into TimeTable(stuId,subjectKey) values (#{stuId},#{subjectKey})
     </insert>
-    
-    
+        
      <select id="searchTimeTable" resultType="com.homeworkNotice.dto.TimeTableDto" parameterType="map">
     	select * from TimeTable where stuId=#{stuId}
     </select>
