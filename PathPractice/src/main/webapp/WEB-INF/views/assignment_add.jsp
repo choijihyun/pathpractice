@@ -143,15 +143,16 @@ $(document).ready(function() {
 	var contents = '${contents}';
 	var subNo = '${subNo}'; 
 	
-	alert(dueDate +"=dueDate  ,"+ importance +"=importance  ,"+ contents +"=contents  ,"+title);
-	
-	document.getElementById("title").value = title;
-	document.getElementById("contents").value = contents;
+	$("#title").val(title);
+	$("#contents").val(contents);
 	
 	$('#subjectName').on('click', function () {
 		$('#search').trigger('click');
 	});
 	
+	if(subNo == 0){
+		subNo = 111111;
+	}
 	$.ajax({
    			url:"/subject/searchSubject.json",
    			type : "GET",
@@ -161,13 +162,13 @@ $(document).ready(function() {
    			},
    			success : function(result){
            		if(result['result'] === "no data"){ 
-           			alert('없는 과목입니다.');
+           			alert('검색하려는 과목 없음.');
   					console.log(result);
            		}else{
           			alert('검색 성공');
   					console.log(result);
   					subName = result['result'][0]['subName'];
-  					document.getElementById("subjectName").value = subName;
+  					$("#subjectName").val(subName);
            		}
          	},
          	error : function(request,status,error){
@@ -188,9 +189,13 @@ $(document).ready(function() {
 		});
 		
 		dueDate = dueDate.replace(/-/gi,'/');
+		alert(dueDate)
 		$("#dueDate").datepicker('setDate',dueDate);
+		
+		$("#dueDate").datepicker({defaultDate : new Date(dueDate)});
 	});
 	
+	//setting importance(star)
 	for(var i=1 ; i<=importance ; i++){
 		$('input:radio[id="p'+i+'"]:radio[name="star-input"]').prop("checked", true);
 	}
@@ -199,6 +204,8 @@ $(document).ready(function() {
 
 <script type="text/javascript">
 	var subNo = '${subNo}'; 
+
+	alert(typeof subNo);
 	$(document).ready(function() {
 		$('#submit').on('click', function() {
 			<%
@@ -216,7 +223,6 @@ $(document).ready(function() {
 			
  			due = due.replace('/','-');
 			due = due.replace('/','-'); 
-			
 			 $.ajax({
 				url : "/homework/insertHomework.json",
 				type : "GET",

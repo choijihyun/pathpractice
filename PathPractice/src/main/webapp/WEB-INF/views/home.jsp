@@ -63,6 +63,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/common/timetable.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common/footer.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common/func_cookie.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/func_timetable.js"></script>
 
 <script type="text/javascript">
 	var userInputId = getCookie("userInputId");
@@ -77,6 +78,7 @@
 	String id = (String) session.getAttribute("id");
 	%>
 	$(document).ready(function() {
+		//과제 불러오기
 		$.ajax({
 			url : "/homework/selectHomework.json",
 			type : "GET",
@@ -108,6 +110,32 @@
 			error : function() {
 				alert('과제불러오기 에러');
 			}
-		});
-	});
+		});//ajax
+		
+		//시간표 불러오기
+		$.ajax({
+			url:"/timeTable/searchTimeTable.json",
+			type : "GET",
+			data : {
+				'stuId' :<%=id%>
+			}, success : function(result){
+	   			if(result['result'] === "no data"){ 
+	   				alert('등록된 시간표가 없습니다.');
+						console.log(result);
+	   			}else{
+	  				alert('시간표 검색 성공');
+					console.log(result); 
+				
+					for (var i = 0; i < result['result'].length; i++) {
+						var subjectKey = result['result'][i]['subjectKey'];
+					}
+	   			}
+	 		}, error : function(request,status,error){
+				alert('시간표 검색 에러');
+				console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+			}
+		});//ajax
+	});//$(document).ready
+	
+
 </script>

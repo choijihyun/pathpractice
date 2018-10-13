@@ -177,6 +177,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/common/footer.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common/func_check_input.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common/func_cookie.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/func_timetable.js"></script>
 
 <!-- 취소하기 버튼 클릭 시 다시 창 닫기 -->
 <script type="text/javascript">
@@ -192,11 +193,10 @@
 	$('#btnUndo1').on('click', function () {
 		$('#addByDirectly').trigger('click');
 	});
-/* 
 	$('#subjectName').on('click', function () {
 		$('#search').trigger('click');
 	}); 
-	*/
+
 </script>
 
 <script type="text/javascript">
@@ -251,9 +251,6 @@ $('#search').on('click', function() {
 					eminute = endHour.slice(3,5);
 					$('#hiddenSubKey').val(subjectKey).trigger('change');
 					
-					//FUNCTION
-					displayTimetable(shour,sminute,ehour,eminute,day1,day2);//parameter로 시작 시간,종료시간,요일
-					
 					$('#plusTime').trigger('click');
 					$('#addByDirectly').trigger('click');
 					
@@ -277,6 +274,7 @@ $('#search').on('click', function() {
 	$('#btnSuccess').on('click', function () {
 		if( !chkInput() ) return; 
 		
+		//FUNCTION
 		insertTimetable( $('#hiddenSubKey').val() );//parameter로 subjectKey //hidden으로 기억
 		
 		// select box value init
@@ -292,6 +290,14 @@ $('#search').on('click', function() {
 			    rows.not(":eq(0)").remove();
 			  }
 			});
+		
+		$('.commonForm input[type="text"]').val(""); 
+/* 		$("#day1").val('');
+		$("#day2").val('');
+		$("#sHour").val('');
+		$("#sMinute").val('');
+		$("#eHour").val('');
+		$("#eMinute").val(''); */
 	});
 </script>
 
@@ -313,66 +319,6 @@ $('#search').on('click', function() {
 </script>
 
 <script>
-	function displayTimetable(val_shour, val_sminute, val_ehour, val_eminute, val_day1, val_day2) {
-		var index_day1,index_day2;
-		var table = document.getElementById("table"), rIndex, cIndex;
-		var row_length = table.rows.length;
-		var new_row_len = val_ehour; 
-		
-		//동적으로 테이블 조정
-		new_row_len = (new_row_len - 8) * 2;
-		if (val_eminute == '30')
-			new_row_len++;
-		var cell = new Array();
-		if (row_length < new_row_len) {
-			for (var i = row_length + 1; i < new_row_len; i++) {
-				newRow = table.insertRow(table.length), 
-				cell[0] = newRow.insertCell(0), 
-				cell[1] = newRow.insertCell(1),
-				cell[2] = newRow.insertCell(2), 
-				cell[3] = newRow.insertCell(3), 
-				cell[4] = newRow.insertCell(4),
-				cell[5] = newRow.insertCell(5),
-				time = (i % 2 == 0 ? (i / 2) + 8 : '');
-				text = '#';
-				cell[0].innerHTML = time;
-				for (var j = 1; j < 6; j++)
-					cell[j].innerHTML = text;
-				if (i % 2 == 0)
-					$(newRow).addClass("stripe-top");
-				for (var j = 0; j < 5; j++)
-					$(cell[j]).css("border-right", "1px solid #e5e5e5");
-			}
-		}
-		if (val_sminute == "30") {
-			val_shour = (val_shour - 8) * 2;
-		} else if (val_sminute == "00") {
-			val_shour = (val_shour - 8) * 2 - 1;
-		}
-		if (val_eminute == "30") {
-			val_ehour = (val_ehour - 8) * 2;
-		} else if (val_eminute == "00") {
-			val_ehour = (val_ehour - 8) * 2 - 1;
-		}
-		var days = [ '월', '화', '수', '목', '금' ];
-		for (var i = 0; i < 5; i++) {
-			if (days[i] == val_day1)
-				index_day1 = i + 1;
-			if (days[i] == val_day2)
-				index_day2 = i + 1;
-		}
-		//color random
-		var colorCode = "#" + Math.round(Math.random() * 0xFFFFFF).toString(16);
-
-		//paint time
-		for (i = val_shour; i < val_ehour; i++) {
-			$('table tr:nth-child(' + i + ') td:eq(' + index_day1 + ')').css(
-					'background-color', colorCode);
-			$('table tr:nth-child(' + i + ') td:eq(' + index_day2 + ')').css(
-					'background-color', colorCode);
-		}
-	}
-	
 	//subjectKey 로 시간표 db에 등록
 	function insertTimetable(subjectKey){
 		<% String id = (String) session.getAttribute("id"); %>
@@ -386,6 +332,8 @@ $('#search').on('click', function() {
 				console.log(result);
 				if (result['result'] === '1') {
 					alert('시간표등록성공');
+					//FUNCTION
+					displayTimetable(shour,sminute,ehour,eminute,day1,day2);//parameter로 시작 시간,종료시간,요일
 				} else {
 					alert('시간표등록실패');
 				}
