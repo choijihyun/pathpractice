@@ -8,11 +8,18 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="user" type="com.homeworkNotice.dto.UserDto"/>
 		<typeAlias alias="homework" type="com.homeworkNotice.dto.HomeworkDto"/>
 		<typeAlias alias="subject" type="com.homeworkNotice.dto.SubjectDto"/>
+		<typeAlias alias="timeTable" type="com.homeworkNotice.dto.TimeTableDto"/>
+		<typeAlias alias="team" type="com.homeworkNotice.dto.TeamDto"/>
+		<typeAlias alias="complete" type="com.homeworkNotice.dto.CompleteDto"/>
 	</typeAliases>
 	
     <mappers>
         <mapper resource ="userMapper.xml"/>
         <mapper resource ="homeworkMapper.xml"/>
         <mapper resource="subjectMapper.xml"/>
+        <mapper resource="timeTableMapper.xml"/>
+        <mapper resource="teamMapper.xml"/>
+        <mapper resource="completeMapper.xml"/>
+        
     </mappers >
 </configuration>

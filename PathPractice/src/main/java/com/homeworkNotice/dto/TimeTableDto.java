@@ -2,7 +2,7 @@ package com.homeworkNotice.dto;
 
 public class TimeTableDto {
 	private String stuId;
-	private String subjectKey;
+	private int subjectKey;
 	
 	public String getStuId() {
 		return stuId;
@@ -10,13 +10,10 @@ public class TimeTableDto {
 	public void setStuId(String stuId) {
 		this.stuId = stuId;
 	}
-	public String getSubjectKey() {
+	public int getSubjectKey() {
 		return subjectKey;
 	}
-	public void setSubjectKey(String subjectKey) {
+	public void setSubjectKey(int subjectKey) {
 		this.subjectKey = subjectKey;
 	}
-	
-	
-
 }

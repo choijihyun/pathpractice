@@ -47,11 +47,9 @@
 	<bean id="homeworkDao" class="com.homeworkNotice.dao.HomeworkDao">
 		<property name="sqlSession" ref="SqlSessionTemplate"></property>
 	</bean>
-	
 	<bean id="subjectDao" class="com.homeworkNotice.dao.SubjectDao">
 		<property name="sqlSession" ref="SqlSessionTemplate"></property>
 	</bean>
-	
 	<bean id="timeTableDao" class="com.homeworkNotice.dao.TimeTableDao">
 		<property name="sqlSession" ref="SqlSessionTemplate"></property>
 	</bean>
