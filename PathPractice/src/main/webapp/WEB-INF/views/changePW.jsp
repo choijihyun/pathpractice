@@ -77,7 +77,8 @@
           success: function(result) {
             console.log(result);
             if (result['result'] === "1") { 
-              //document.getElementById('pw').style.display="";
+              //document.getElementById('pw').style.display="";rmfo
+              alert("해당 아이디 맞음");
               $('#rePw').css('display', '');
               $('#change').css('display', '');
             } else {
@@ -87,10 +88,11 @@
           error: function() {
             alert('비밀번호 찾기 에러');
           }
-        });
-      });
+        });//ajax
+      });//submit click
 
       $('#change').on('click', function() { 
+    	  event.preventDefault();
         $.ajax({
           url: "http://localhost:8090/user/updatePW.json",
           type: "GET",
@@ -107,8 +109,8 @@
           error: function() {
             alert('비밀번호 변경 에러');
           }
-        });
-      });
+        });//ajax
+      });//change click
     });
   </script>
 </body>
