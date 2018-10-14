@@ -43,10 +43,12 @@
 					style="background: #f2f2f2;">
 					<i class="fas fa-user m-3 user_icon"></i>
 					<div class="lh-100">
-						<h6 class="mb-0 lh-100 info">이름(이름!)</h6>
 						<%
 							String id = (String) session.getAttribute("id");
+							String name = (String) session.getAttribute("name");
 						%>
+						<h6 class="mb-0 lh-100 info"><%=name%></h6>
+						
 						<small class="info"> <%=id%>님 환영합니다.
 						</small>
 
