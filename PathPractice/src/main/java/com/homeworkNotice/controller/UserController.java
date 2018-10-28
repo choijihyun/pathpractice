@@ -33,6 +33,10 @@ import com.homeworkNotice.dto.TimeTableDto;
 import com.homeworkNotice.dao.HomeworkDao;
 import com.homeworkNotice.dto.HomeworkDto;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 //C:\Users\은숙\.m2\repository
 //라이브러리 모음집
 //라이브러리들 가져오는거? 안되면 이 경로로 들어가서 안에있는 라이브러리들 다 지우고 다시 해보면 됨!
@@ -243,7 +247,38 @@ public class UserController {
 			if(pw.equals(userDtoList.get(0).getPw())) {
 				jSONObject.put("result","1");//id도 존재하고 비번도 맞는 경우
 				System.out.println("id : "+stuId);
+				
+				HashMap<Object, Object> PARAM=new HashMap<Object, Object>();
+				PARAM.put("stuId", stuId);
+				List<UserDto> user=userDao.selectUserInfo(PARAM);
+				String name = user.get(0).getName();
+				String email = user.get(0).getEmail();
+				System.out.println(name);
+				System.out.println(email);
+				session.setAttribute("name", name);
+				session.setAttribute("email", email);
 				session.setAttribute("id",stuId);
+				
+				File file = new File("C:\\Users\\USER\\Desktop\\PATH\\PathPractice\\src\\main\\webapp\\WEB-INF\\userInfo.txt");
+				FileWriter writer = null;
+				String message = stuId+"\r\n"+pw;
+				try {
+		            // 기존 파일의 내용에 이어서 쓰려면 true를, 기존 내용을 없애고 새로 쓰려면 false를 지정한다.
+		            writer = new FileWriter(file, false);
+		            writer.write(message);
+		            writer.flush();
+		            
+		            System.out.println("DONE");
+		        } catch(IOException e) {
+		            e.printStackTrace();
+		        } finally {
+		            try {
+		                if(writer != null) writer.close();
+		            } catch(IOException e) {
+		                e.printStackTrace();
+		            }
+		        }
+				
 			}
 			else {
 				jSONObject.put("result","0");//비번이 다른 경우

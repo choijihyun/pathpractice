@@ -64,12 +64,16 @@
         </form>
       </div>
   </div>
+</body>
+</html>
+
   <script type="text/javascript">
     $(document).ready(function() {
+    	
       $('#submit').on('click', function() {
         $.ajax({
           url: "/user/checkUser.json",
-          type: "GET",
+          type: "POST",
           data: {
             'stuId':$('#id').val(),
             'pw':$('#pw').val()
@@ -94,9 +98,12 @@
       $('#change').on('click', function() { 
     	  event.preventDefault();
         $.ajax({
-          url: "http://localhost:8090/user/updatePW.json",
+          url: "user/updatePW.json",
           type: "GET",
-          data: {'stuId':$('#id').val(), 'pw':$('#rePw').val()},
+          data: {
+        	  'stuId':$('#id').val(), 
+        	  'pw':$('#rePw').val()
+        	  },
           success: function(result) {
             console.log(result);
             if (result['result'] === "1") {
@@ -111,8 +118,6 @@
           }
         });//ajax
       });//change click
+      
     });
   </script>
-</body>
-
-</html>
