@@ -53,9 +53,10 @@
 					<table style="overflow: auto;" id="tableFindSub"
 						class="table table-sm table_time">
 						<colgroup>
-							<col width="10%" />
+							<col width="5%" />
 							<col width="5%" />
 							<col width="25%" />
+							<col width="5%" />
 							<col width="20%" />
 							<col width="20%" />
 							<col width="20%" />
@@ -65,7 +66,8 @@
 								<th class="text-center">NO</th>
 								<th class="text-center" style="border-left: 1px solid #e5e5e5;">CK</th>
 								<th class="text-center" style="border-left: 1px solid #e5e5e5;">과목명</th>
-								<th class="text-center" style="border-left: 1px solid #e5e5e5;">시간</th>
+								<th class="text-center" style="border-left: 1px solid #e5e5e5;">요일</th>
+								<th class="text-center" style="border-left: 1px solid #e5e5e5;">시간</th>
 								<th class="text-center" style="border-left: 1px solid #e5e5e5;">장소</th>
 								<th class="text-center" style="border-left: 1px solid #e5e5e5;">교수명</th>
 							</tr>
@@ -118,12 +120,14 @@
            				cell[3] = newRow.insertCell(3),
 						cell[4] = newRow.insertCell(4),
 						cell[5] = newRow.insertCell(5),
+						cell[6] = newRow.insertCell(6),
            				cell[0].innerHTML = i+1;
            				cell[1].innerHTML = '<input type="radio" id="radio'+(i+1)+'" name="select" data-sub-no="'+result['result'][i]['subNo']+'">';
            				cell[2].innerHTML = result['result'][i]['subName'];
-           				cell[3].innerHTML = result['result'][i]['startHour'];
-						cell[4].innerHTML = result['result'][i]['classroom'];
-           				cell[5].innerHTML = result['result'][i]['profName'];
+           				cell[3].innerHTML = result['result'][i]['day'];
+           				cell[4].innerHTML = result['result'][i]['startHour'];
+						cell[5].innerHTML = result['result'][i]['classroom'];
+           				cell[6].innerHTML = result['result'][i]['profName'];
 							
            				console.log()
           	 			$(newRow).addClass("stripe_border_top");

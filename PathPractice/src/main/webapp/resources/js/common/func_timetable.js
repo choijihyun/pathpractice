@@ -1,5 +1,6 @@
 var displayTimetable = function (val_shour, val_sminute, val_ehour, val_eminute, val_day1, val_day2, context) {
-		var index_day1,index_day2;
+		var index_day1=0
+		var index_day2=0;
 		var table = document.getElementById("table"), rIndex, cIndex;
 		var row_length = table.rows.length;
 		var new_row_len = val_ehour; 
@@ -51,10 +52,14 @@ var displayTimetable = function (val_shour, val_sminute, val_ehour, val_eminute,
 
 		//paint time
 		for (i = val_shour; i < val_ehour; i++) {
-			$('table tr:nth-child(' + i + ') td:eq(' + index_day1 + ')').css(
-					'background-color', colorCode);
-			$('table tr:nth-child(' + i + ') td:eq(' + index_day2 + ')').css(
-					'background-color', colorCode);
+			if(index_day1 != 0) {
+				$('table tr:nth-child(' + i + ') td:eq(' + index_day1 + ')').css('background-color', colorCode);
+				table.rows[i].cells[index_day1].innerHTML = context;
+			}
+			if(index_day2 != 0){
+				$('table tr:nth-child(' + i + ') td:eq(' + index_day2 + ')').css('background-color', colorCode);
+				table.rows[i].cells[index_day2].innerHTML = context;
+			}
 		}
 	}
 	

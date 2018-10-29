@@ -230,9 +230,7 @@ $('#search').on('click', function() {
 			success : function(result){
        		if(result['result'] === "no data"){ 
        			alert('없는 과목입니다.');
-					console.log(result);
        		}else{
-      			alert('검색 성공');
 					console.log(result);
 					
 					subName = result['result'][0]['subName'];
@@ -249,7 +247,7 @@ $('#search').on('click', function() {
 					sminute = startHour.slice(3,5);
 					ehour = endHour.slice(0,2);
 					eminute = endHour.slice(3,5);
-					context = subName+classroom;
+					context = subName.concat(" ",classroom);
 					$('#hiddenSubKey').val(subjectKey).trigger('change');
 					
 					$('#plusTime').trigger('click');
@@ -282,29 +280,21 @@ $('#search').on('click', function() {
 		$('select').find("option:eq(0)").prop("selected", true);
 		$('#addByDirectly').trigger('click');
 		$('#plusTime').trigger('click');
-		
-		//지우고 밑에 주석 풀기
-		console.log(shour,sminute,ehour,eminute,day1,day2);
-		displayTimetable(shour,sminute,ehour,eminute,day1,day2,context);//parameter로 시작 시간,종료시간,요일
-		
-		//동적으로 table 합치기!!!!!!!!!!!!!!!!!!!!!!
-		$(".table-time").each(function() {
-			  var rows = $(".table-time:contains('" + $(this).text() + "')");
-			  if (rows.length > 1) {
-			    rows.eq(0).attr("rowspan", rows.length);
-			    rows.not(":eq(0)").remove();
-			  }
-			});
-		
+				
 		$('.commonForm input[type="text"]').val(""); 
+		
+		
 	});
 </script>
 
-<!-- 테이블 클릭 시 수정 -->
+<!-- 처음페이지 시작, 추가 수정 삭제시 시간표 정보들 모두 불러오기 -->
+
+<!-- 테이블 클릭 시 수정할 수 있게 -->
+
 <!-- <script>
 	var table = document.getElementById("table"),rIndex,cIndex;
 
-		$('#btnSuccess').on('click', function (){
+		$('#').on('click', function (){
 		for(var i = 1 ; i < table.rows.length ; i++){				
 			for(var j = 1 ; j<table.rows[i].cells.length ; j++){
 				table.rows[i].cells[j].onclick = function(){
@@ -331,9 +321,25 @@ $('#search').on('click', function() {
 				console.log(result);
 				if (result['result'] === '1') {
 					alert('시간표등록성공');
+					
 					//FUNCTION
-					console.log(shour,sminute,ehour,eminute,day1,day2);
-					//displayTimetable(shour,sminute,ehour,eminute,day1,day2,context);//parameter로 시작 시간,종료시간,요일
+					displayTimetable(shour,sminute,ehour,eminute,day1,day2,context);//parameter로 시작 시간,종료시간,요일
+					
+					//동적으로 table 합치기!!!!!!!!!!!!!!!!!!!!!!
+					//나중에 이건 불러오기 할때 그쪽으로 뺴야함
+					
+ 					$(".content").each(function() {
+						var text = $(this).text();
+						var rows = $(".content:contains('" + text + "')"); //subjectKey로 판별할 수 있게 바꾸기
+							if( text != '#'){
+								console.log( text );
+						  		if (rows.length > 1) {
+									rows.eq(0).attr("rowspan", rows.length);
+							   		rows.not(":eq(0)").remove();
+								}
+							}
+					});//요일 두개인 과목에는 이상해!!
+					
 				} else {
 					alert('시간표등록실패');
 				}

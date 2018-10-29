@@ -128,6 +128,8 @@
 				
 					for (var i = 0; i < result['result'].length; i++) {
 						var subjectKey = result['result'][i]['subjectKey'];
+						console.log("sub = ",subjectKey);
+						//subject 키로 과목정보들 찾아와서 색칠하기
 					}
 	   			}
 	 		}, error : function(request,status,error){
