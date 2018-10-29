@@ -12,7 +12,7 @@ import com.homeworkNotice.dto.UserDto;
 /**
  * @writer      : JungHyun 
  * @createDate  : 2018. 1. 21.
- * @description : userÅ×ÀÌºíÀÇ Á¤º¸ °¡Á®¿È~
+ * @description : userï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½~
  */
 
 @Repository
@@ -27,11 +27,15 @@ public class UserDao {
 	}
 
 	public List<UserDto> selectUser(HashMap<Object, Object> param) { 
-		return sqlSession.selectList("UserDao.selectUser", param);//ÀÌ°Ç¹¹¿¡¿µ??????? 
-		//user-mapping.xml¿¡ ¸¸µé¾î³õÀº sql(¹«±â)À» userDao(Ä³¸¯ÅÍ)°¡ »ç¿ëÇÏ´Â ºÎºÐÀÌ¾ß
+		return sqlSession.selectList("UserDao.selectUser", param);//ï¿½Ì°Ç¹ï¿½ï¿½ï¿½ï¿½ï¿½??????? 
+		//user-mapping.xmlï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ sql(ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ userDao(Ä³ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Îºï¿½ï¿½Ì¾ï¿½
+	}
+	public List<UserDto> selectUserInfo(HashMap<Object, Object> param) { 
+		return sqlSession.selectList("UserDao.selectUserInfo", param);//ï¿½Ì°Ç¹ï¿½ï¿½ï¿½ï¿½ï¿½??????? 
+		//user-mapping.xmlï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ sql(ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ userDao(Ä³ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Îºï¿½ï¿½Ì¾ï¿½
 	}
 	public List<UserDto> selectAllList() {
-		return sqlSession.selectList("UserDao.selectAllUser");//ÀÌ°ÅµÎ ¹¹¿¡¿©???????
+		return sqlSession.selectList("UserDao.selectAllUser");//ï¿½Ì°Åµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½???????
 	}
 	public int insertUser(HashMap<Object, Object> param) {
 		return sqlSession.insert("UserDao.insertUser", param);		

@@ -87,6 +87,7 @@ public class TimeTableController {
         	for(int i=0;i<timeTableDtoList.size();i++) {
         		JSONObject jSONObject = new JSONObject();
         		jSONObject.put("stuId",timeTableDtoList.get(i).getStuId());
+        		jSONObject.put("subjectKey", timeTableDtoList.get(i).getSubjectKey());
         		jSONArray.add(jSONObject);
         		
         		jsonList.add((JSONObject)jSONArray.get(i));

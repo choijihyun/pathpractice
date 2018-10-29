@@ -43,10 +43,12 @@
 					style="background: #f2f2f2;">
 					<i class="fas fa-user m-3 user_icon"></i>
 					<div class="lh-100">
-						<h6 class="mb-0 lh-100 info">이름(이름!)</h6>
 						<%
 							String id = (String) session.getAttribute("id");
+							String name = (String) session.getAttribute("name");
 						%>
+						<h6 class="mb-0 lh-100 info"><%=name%></h6>
+						
 						<small class="info"> <%=id%>님 환영합니다.
 						</small>
 
@@ -60,6 +62,7 @@
 						onclick="location.href='/changePW'">비밀번호 변경</button>
 					<button class="btn p-1 btn-sm list-group-item" type="button">알림끄기</button>
 					<button class="btn p-1 btn-sm list-group-item" type="button">탈퇴</button>
+					<button class="btn p-1 btn-sm list-group-item" type="button">블렉보드</button>
 				</div>
 			</div>
 
@@ -73,3 +76,33 @@
 
 <script src="${pageContext.request.contextPath}/resources/js/common/header.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common/footer.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+    	
+      $('#blackboard').on('click', function() {
+        $.ajax({
+          url: "/user/checkUser.json",
+          type: "POST",
+          data: {
+            'stuId':$('#id').val(),
+            'pw':$('#pw').val()
+          },
+          success: function(result) {
+            console.log(result);
+            if (result['result'] === "1") { 
+              //document.getElementById('pw').style.display="";rmfo
+              alert("해당 아이디 맞음");
+              $('#rePw').css('display', '');
+              $('#change').css('display', '');
+            } else {
+              alert("회원정보 없음");
+            }
+          },
+          error: function() {
+            alert('비밀번호 찾기 에러');
+          }
+        });//ajax
+      });//blackboard click
+    });
+  </script>
