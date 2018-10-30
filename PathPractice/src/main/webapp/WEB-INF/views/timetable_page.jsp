@@ -213,7 +213,7 @@ $('#search').on('click', function() {
 	});
 </script>
 
-<!--select box 선택 값 가져오기 -->
+<!--시간표 추가 -->
 <script>
 	var subNo = '${subNo}'; 
 
@@ -287,10 +287,7 @@ $('#search').on('click', function() {
 	});
 </script>
 
-<!-- 처음페이지 시작, 추가 수정 삭제시 시간표 정보들 모두 불러오기 -->
-
 <!-- 테이블 클릭 시 수정할 수 있게 -->
-
 <!-- <script>
 	var table = document.getElementById("table"),rIndex,cIndex;
 
@@ -305,8 +302,8 @@ $('#search').on('click', function() {
 			}
 		}	
 	});
-</script>
- -->
+</script> -->
+ 
 <script>
 	//subjectKey 로 시간표 db에 등록
 	function insertTimetable(subjectKey){
@@ -324,21 +321,21 @@ $('#search').on('click', function() {
 					
 					//FUNCTION
 					displayTimetable(shour,sminute,ehour,eminute,day1,day2,context);//parameter로 시작 시간,종료시간,요일
-					
 					//동적으로 table 합치기!!!!!!!!!!!!!!!!!!!!!!
-					//나중에 이건 불러오기 할때 그쪽으로 뺴야함
+					//나중에 이건 불러오기 할때 그쪽에도 추가해야 함
 					
  					$(".content").each(function() {
 						var text = $(this).text();
 						var rows = $(".content:contains('" + text + "')"); //subjectKey로 판별할 수 있게 바꾸기
 							if( text != '#'){
-								console.log( text );
+								console.log( text, rows.length);
 						  		if (rows.length > 1) {
 									rows.eq(0).attr("rowspan", rows.length);
 							   		rows.not(":eq(0)").remove();
 								}
+						  		
 							}
-					});//요일 두개인 과목에는 이상해!!
+					});//요일 두개인 과목에는 이상해!! 
 					
 				} else {
 					alert('시간표등록실패');
@@ -350,19 +347,64 @@ $('#search').on('click', function() {
 	}
 </script>
 
-<!-- 	var shour = document.getElementById("sHour");
-		var val_shour = shour.options[shour.selectedIndex].value;
-		var sminute = document.getElementById("sMinute");
-		var val_sminute = sminute.options[sminute.selectedIndex].value;
-		var ehour = document.getElementById("eHour");
-		var val_ehour = ehour.options[ehour.selectedIndex].value;
-		var eminute = document.getElementById("eMinute");
-		var val_eminute = eminute.options[eminute.selectedIndex].value;
+<!-- 처음페이지 시작, 추가 수정 삭제시 시간표 정보들 모두 불러오기 -->
+<!-- 시작할때 시간표 불러오기 -->
+<script>
+	//subjectKey 로 시간표 db에 등록
+	$(document).ready(function(){
+		$.ajax({
+			url : "/timeTable/searchTimeTable.json",
+			type : "GET",
+			data : {
+				'stuId' : <%=id%>
+			},success : function(result) {
+				if (result['result'] === "no data") {
+					alert('시간표불러오기실패');				
+				} else {
+					alert('시간표불러오기성공');
+					console.log(result);
+					
+					$.ajax({
+						url:"/subject/searchSubject.json",
+						type : "GET",
+						data : {
+							'word':result['result'][0]['subjectKey'], //subNO로 subjectKey랑 과목 정보들 가져오기 //find_subject해서 url parameter로 가져옴
+							'select':3
+						},
+						success : function(result){
+			       		if(result['result'] === "no data"){ 
+			       			alert('없는 과목입니다.');
+			       		}else{
+								console.log(result);
+								
+								subName = result['result'][0]['subName'];
+								classroom = result['result'][0]['classroom'];
+								profName = result['result'][0]['profName'];
+								subjectKey = result['result'][0]['subjectKey'];
+								startHour = result['result'][0]['startHour'];
+								endHour = result['result'][0]['endHour'];
+								day = result['result'][0]['day'];
+								
+								day1 = day.slice(0,1);
+								day2 = day.slice(1,2);	
+								shour = startHour.slice(0,2);//앞에2개 자르기
+								sminute = startHour.slice(3,5);
+								ehour = endHour.slice(0,2);
+								eminute = endHour.slice(3,5);
+								context = subName.concat(" ",classroom);
 
-		var day1 = document.getElementById("day1");
-		var val_day1 = day1.options[day1.selectedIndex].value;
-		var day2 = document.getElementById("day2");
-		var val_day2 = day2.options[day2.selectedIndex].value;
-		var index_day1, index_day2;
-		var table = document.getElementById("table"), rIndex, cIndex;
-		var row_length = table.rows.length; -->
+								displayTimetable(shour,sminute,ehour,eminute,day1,day2,context);
+			       		}
+			     	},
+			     	error : function(request,status,error){
+			    		alert('검색 에러');
+			    		console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+			    	}
+				});
+				}
+			},error : function() {
+				alert('시간표불러오기에러');
+			}
+		});
+	});
+</script>

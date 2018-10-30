@@ -28,6 +28,7 @@ var displayTimetable = function (val_shour, val_sminute, val_ehour, val_eminute,
 					$(newRow).addClass("stripe-top");
 				for (var j = 0; j < 5; j++)
 					$(cell[j]).css("border-right", "1px solid #e5e5e5");
+					$(cell[j]).addClass("content");
 			}
 		}
 		if (val_sminute == "30") {
