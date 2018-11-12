@@ -1,0 +1,36 @@
+## 로그인한 사람의 blackboard 아이디와 비번을 받아야함
+	-> 이때 jython써야 할듯
+## 밤마다 python 돌아가게 하는 script만들어야함
+	-> 서버에 설치하면 될 듯
+## 공지사항 txt를 화면에 뿌려주는 역할까지 봐야함
+	-> DB에 따로 저장하기엔 양이 많으니까 그때그때 txt에서 읽어오는것도 괜찮을듯
+
+
+크롤링할 때 필요한거
+- chromedriver(다운받은 위치필요)
+	-> *** 스크롤링 하려면 '/Users/USER/Downloads/chromedriver' 저경로에 저거 있어야함
+- selenium(cmd다운로드)
+- beautifulsoup(cmd다운로드)
+
+pymysql 참고 : http://www.fun-coding.org/mysql_basic6.html#SQL-%ED%99%9C%EC%9A%A9
+
+##지금까지 완료된거
+- blackboard에서 데이터 긁어오기
+- 공지사항에서 내용 파싱해내기
+
+
+##python파일 설명
+- get_info.py : get_info함수 인자로 아이디와 비밀번호를 받아서 블보에서 공지사항 긁어오는 파일
+	-> pymysql사용 가능하면 아이디랑 비밀번호 db에서 긁어오면됨
+
+- announcement_parsing.py : get_announcement에서 필요한 내용만 파싱한거
+- get_announcement.py : get_info에서 긁어온 공지사항을 필요한내용 1차로 거름
+ => 이거 두개는 합쳐도 되겠다 나중에 pymysql해결하고 나서 다시 봐보기
+
+- get_subjects.py : 공지사항에 올라온 과목들 과목명 따로 빼내는 파일
+	-> 원래는 그냥 학생이 듣는 모든 과목명을 긁어오고 싶었는데 그거는 힘들거같아서
+ 		대안으로 그냥 공지사항에 올라왔던 과목들을 긁음
+
+##해야할거
+- pymysql 실행시켜야함★
+- ~일 전 이라고 써있는거 날짜로 변환해서 db에 저장해야함

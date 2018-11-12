@@ -2,7 +2,7 @@
 uid = '16011008'
 fname = uid+"assignment.txt"
 f = open(fname, 'r',encoding='utf8')
-subject=[]
+subjects=[]
 
 while True:
     line = f.readline()
@@ -16,14 +16,31 @@ while True:
             lline = line[idx+1:]
             llist = lline.split(" ")
             string = llist[1][1:]
-            if string in subject:
+            if string in subjects:
                 continue
             else:
-                subject.append(string)
+                subjects.append(string)
             
             #print(llist)
         except: 
-            print(line)
+            print("!"+line)
 
-print(subject)
+#이거를 db에 저장해야됨.
+print("subject list!")
+print(subjects)
+f.close()
+
+#공지사항에 떴던 과목들 저장
+fname = "subject.txt"
+f = open(fname, 'w', encoding='UTF8')
+try :
+    for tr in subjects:
+        print(tr)
+        f.write(tr)
+        f.write("\n")
+except Exception as e: 
+    print(e)
+finally:
+    print('finally')
+
 f.close()
