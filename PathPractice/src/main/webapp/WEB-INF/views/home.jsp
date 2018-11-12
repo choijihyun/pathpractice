@@ -37,7 +37,7 @@
 			
 			<!-- 상단바와 하단바를 제외한 부분 class="main-area" -->
 			<div class="jumbotron p-md-0 text-white main_area">
-				<div style="cursor: pointer; height: auto"
+				<div style="cursor: pointer; height: auto;"
 					onclick="location.href='/timetable_page';"
 					class="scrollbar scrollbar_track scrollbar_thumb" data-spy="scroll"
 					data-offset="0">
@@ -102,8 +102,7 @@
 					str += 'style="font-weight: bold" class="mb-2">-'+ assign_title + '</h6>';
 					str += '<p6 id="assign'+ (i + 1) + 'Context">'+ assign_contents+ '</p6>';
 					str += '</button>';
-					$('.content_preview_assignment')
-						.append(str);
+					$('.content_preview_assignment').append(str);
 					}
 				}
 			},
@@ -121,23 +120,21 @@
 			}, success : function(result){
 	   			if(result['result'] === "no data"){ 
 	   				alert('등록된 시간표가 없습니다.');
-						console.log(result);
 	   			}else{
-	  				alert('시간표 검색 성공');
+	  				alert('시간표 불러오기 성공');
 					console.log(result); 
 				
 					for (var i = 0; i < result['result'].length; i++) {
 						var subjectKey = result['result'][i]['subjectKey'];
-						console.log("sub = ",subjectKey);
 						//subject 키로 과목정보들 찾아와서 색칠하기
+						findSubjectInfo(subjectKey);
 					}
 	   			}
 	 		}, error : function(request,status,error){
-				alert('시간표 검색 에러');
+				alert('시간표 불러오기 에러');
 				console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
 			}
 		});//ajax
 	});//$(document).ready
-	
 
 </script>

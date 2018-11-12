@@ -136,6 +136,23 @@
            					$(cell[j]).css("border-right","1px solid #e5e5e5");
           	  		}
            		}
+           		
+           		var table = document.getElementById("tableFindSub"),rIndex,cIndex;
+        		
+        		for(var i = 1 ; i < table.rows.length ; i++){
+        			for(var j = 1 ; j<table.rows[i].cells.length ; j++){
+        				table.rows[i].cells[j].onclick = function(){console.log(123);
+        					rIndex = this.parentElement.rowIndex;
+        					cIndex = this.cellIndex;
+
+        					console.log("ROW:" +rIndex+ ", Cell:" +cIndex);
+        					$('input:radio[id="radio'+rIndex+'"]:radio[name="select"]').prop("checked", true);
+        					
+        					var subNo = $("#radio"+rIndex).data('subNo');
+        					$('#hiddenAssign').val(subNo).trigger('change');
+        				}
+        			}
+        		}
          	},
          	error : function(request,status,error){
         		alert('검색 에러');
@@ -146,8 +163,9 @@
 </script>
 
 <script type="text/javascript">	
-	href = function (){
 
+	href = function (){
+		var page = '${page}'; 
 		console.log(page);
 	
 		if(page == 'assignmentAdd'){		
@@ -159,29 +177,29 @@
 			location.href="/timetable_page?&subNo="+ $('#hiddenAssign').val();
 		}
 	}
-	
-	var page = '${page}'; 
-	
-	console.log(page);
+//	var page = '${page}'; 
+//	console.log(page);
 	$('#submit').on('click', href );
 	$('#cancel').on('click', href );
 </script>
 
-<script type="text/javascript">	
+<script type="text/javascript">	/*
 	$('#tableFindSub').on('click', function (){
 		var table = document.getElementById("tableFindSub"),rIndex,cIndex;
+		
 		for(var i = 1 ; i < table.rows.length ; i++){
-			for(var j = 0 ; j<table.rows[i].cells.length ; j++){
-				table.rows[i].cells[j].onclick = function(){
+			for(var j = 1 ; j<table.rows[i].cells.length ; j++){
+				table.rows[i].cells[j].onclick = function(){console.log(123);
 					rIndex = this.parentElement.rowIndex;
 					cIndex = this.cellIndex;
 
 					console.log("ROW:" +rIndex+ ", Cell:" +cIndex);
 					$('input:radio[id="radio'+rIndex+'"]:radio[name="select"]').prop("checked", true);
+					
 					var subNo = $("#radio"+rIndex).data('subNo');
 					$('#hiddenAssign').val(subNo).trigger('change');
 				}
 			}
 		}
-	});	
+	});	*/
 </script>
