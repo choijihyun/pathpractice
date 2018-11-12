@@ -187,8 +187,8 @@ public class UserController {
 	
 	
 	@ResponseBody
-    @RequestMapping(value = "/user/updatePw.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)
-    public String updatePW(
+    @RequestMapping(value = "/user/updatePw.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.POST)
+    public String updatePw(
     			Model model,
     			@RequestParam(value = "stuId", required=true) String stuId,
     			@RequestParam(value = "pw", required=true) String pw) { 
@@ -221,7 +221,7 @@ public class UserController {
 	}
 
 
-
+	//이거는 처음 로그인 할때만 쓰는 controller
 	@RequestMapping(value = "/user/checkUser.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.POST)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.
 	public @ResponseBody String checkUser(//url에 맵핑(연결)된 함수
 			HttpServletRequest request,
@@ -279,6 +279,50 @@ public class UserController {
 		            }
 		        }
 				
+			}
+			else {
+				jSONObject.put("result","0");//비번이 다른 경우
+			}
+		}
+		else {//없으면 에러라고 브라우저에 뿌려준다
+			jSONObject.put("result", "0"); //id가 존재하지 않는경우
+		}
+		//System.out.println(jSONObject.toString());
+		return jSONObject.toString();//요청한 내용들을 반환해준다.
+	}
+	
+	//이거는 비밀번호 바꿀 때 혹은 비밀번호 확인할 떄 쓰는 controller
+	@RequestMapping(value = "/user/checkUserExist.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.POST)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.
+	public @ResponseBody String checkUserExist(//url에 맵핑(연결)된 함수
+			HttpServletRequest request,
+			HttpSession session,
+			Locale locale, //안드로이드에서 받을 파라미터
+			Model model, //안드로이드에서 받을 파라미터
+			@RequestParam(value = "stuId", required=true) String stuId,
+			@RequestParam(value = "pw", required=true) String pw) {
+		
+		
+		HashMap<Object, Object> param=new HashMap<Object, Object>();
+		
+		param.put("stuId",stuId);
+		param.put("pw",pw);
+		
+		
+		System.out.println(param);
+		List<UserDto> userDtoList=userDao.selectUser(param);
+	
+		
+		JSONObject jSONObject = new JSONObject();
+		if(!userDtoList.isEmpty() && userDtoList.size()==1) {//반환받은 데이터가 유효하면(db에 있으면) 브라우저 화면에 결과를 뿌려준다
+			if(pw.equals(userDtoList.get(0).getPw())) {
+				System.out.println("checkUserExist 유저 확인됌");
+				if(stuId==session.getAttribute("Id")) {
+					jSONObject.put("result","0");//본인의 아이디가 아닌경ㅇ
+				}
+				else {
+					jSONObject.put("result","1");//id도 존재하고 비번도 맞는 경우
+				}
+				System.out.println("id : "+stuId);
 			}
 			else {
 				jSONObject.put("result","0");//비번이 다른 경우

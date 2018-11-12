@@ -56,24 +56,18 @@ def get_info(uid, upw):
         print ("no alert")
 
 
-  #공지사항 찾아가기
-    driver.get('https://blackboard.sejong.ac.kr/webapps/streamViewer/streamViewer?cmd=view&streamName=alerts&globalNavigation=false')
-    driver.implicitly_wait(5)
-
-
-
   #ipython 써서 확인하기
     sleep(10)
-    fname = stuid+"assignment.txt"
+    fname = stuid+"subject.txt"
     f = open(fname, 'w', encoding='UTF8')
 
     text = driver.page_source
     soup = BeautifulSoup(text,'html.parser')
-    rd=soup.select(".stream_item")
+    rd=soup.find("div","coursefakeclass")
 
     try :
         for tr in rd:
-            print(tr.text)
+            print(tr)
             f.write(tr.text)
             f.write("\n")
     except Exception as e: 

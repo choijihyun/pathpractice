@@ -51,7 +51,8 @@
           		      취소
               </button>
             </div>
-
+            
+			<!-- 변경할 비밀번호 입력-->
             <div class="col-md-12 col-xs-12">
               <input type="password" id="rePw" class="form-control form-control-lg flat_input" placeholder="password" style="display:none;" >
             </div>
@@ -68,11 +69,10 @@
 </html>
 
   <script type="text/javascript">
-    $(document).ready(function() {
-    	
+
       $('#submit').on('click', function() {
         $.ajax({
-          url: "/user/checkUser.json",
+          url: "/user/checkUserExist.json",
           type: "POST",
           data: {
             'stuId':$('#id').val(),
@@ -89,8 +89,10 @@
               alert("회원정보 없음");
             }
           },
-          error: function() {
+          error: function(request,status,error) {
+        	  alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             alert('비밀번호 찾기 에러');
+            location.href = "/changePW";
           }
         });//ajax
       });//submit click
@@ -98,26 +100,25 @@
       $('#change').on('click', function() { 
     	  event.preventDefault();
         $.ajax({
-          url: "user/updatePW.json",
-          type: "GET",
+          url: "/user/updatePw.json",
+          type: "POST",
           data: {
         	  'stuId':$('#id').val(), 
         	  'pw':$('#rePw').val()
         	  },
           success: function(result) {
             console.log(result);
-            if (result['result'] === "1") {
-              alert("비밀번호 변경 실패");
-              location.href = "/mypage";
-            } else {
-              alert("비밀번호 변경 성공");
-            }
+            //if (result['result'] === "1") {
+            //  alert("비밀번호 변경 실패");
+            //  location.href = "/mypage";
+            //} else {
+            //  alert("비밀번호 변경 성공");
+            //}
           },
           error: function() {
             alert('비밀번호 변경 에러');
           }
         });//ajax
       });//change click
-      
-    });
+
   </script>

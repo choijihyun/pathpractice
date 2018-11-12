@@ -38,7 +38,18 @@
 			<div id="header"></div>
 
 			<!-- 상단바와 하단바를 제외한 부분 class="main-area" -->
-			<div class="jumbotron p-md-3 text-white rounded main_area"></div>
+			<div class="jumbotron p-md-3 text-white rounded main_area">
+
+				<div class="d-flex align-items-center p-3 my-3 rounded"
+					style="background: #f2f2f2;">
+					<div class="lh-100">
+						<div style="text-align: center">
+							<strong class="info" style="text-align: center"> 공지사항 </strong>
+						</div>
+					</div>
+				</div>
+
+			</div>
 
 
 			<!-- footer 하단바 class="app-footer" -->
