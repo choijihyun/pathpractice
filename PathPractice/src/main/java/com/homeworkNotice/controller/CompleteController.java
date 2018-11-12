@@ -12,9 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.homeworkNotice.dao.HomeworkDao;
-import com.homeworkNotice.dto.HomeworkDto;
-import com.homeworkNotice.dto.UserDto;
 import com.homeworkNotice.dao.CompleteDao;
 import com.homeworkNotice.dto.CompleteDto;
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding= "UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+ <!-- sql 덩어리!!  dao들에서 얘네를 사용 --> <!-- 이거는 무슨 말인지 알았어요! -->
+<mapper namespace="blackboardDao">
+	<!-- Dao1. 여기에 알맞은 sql을 만들고, id(sql을 구분해줄수 있는)와 resultType(반환해줄 형태)를 적는다~ -->
+	<!-- Dao2. 근데 where절(sql 문법을 절 이라고 표현한다!!)에 뭔가 집어넣어서 select 해야하면 parameterType을 넣는다  -->
+	<!-- Dao3. 그건 parameterType="map" 이라고 항상 적으면 된다  -->
+
+     <select id="getAnnounce" resultType="com.homeworkNotice.dto.BlackboardDto" parameterType="map">
+    	select * from Announcement where stuId=#{stuId}
+    </select>
+</mapper>

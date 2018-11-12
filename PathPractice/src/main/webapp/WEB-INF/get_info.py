@@ -75,6 +75,7 @@ def get_info(uid, upw):
         for tr in rd:
             print(tr.text)
             f.write(tr.text)
+            f.write("\n")
     except Exception as e: 
         print(e)
     finally:

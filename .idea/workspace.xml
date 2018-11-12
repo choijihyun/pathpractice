@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="aba0af2e-da86-4dc6-84c6-c8f5c1d64967" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/build/classes/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
+=======
+    <list default="true" id="2378e13d-e36c-45b9-9e30-6cac19157ad3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/PathPractice/src/main/java/com/homeworkNotice/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PathPractice/src/main/java/com/homeworkNotice/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PathPractice/src/main/webapp/WEB-INF/views/changePW.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/PathPractice/src/main/webapp/WEB-INF/views/changePW.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PathPractice/src/main/webapp/WEB-INF/views/content_me.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PathPractice/src/main/webapp/WEB-INF/views/mypage.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/PathPractice/src/main/webapp/WEB-INF/views/mypage.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PathPractice/target/classes/com/homeworkNotice/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/PathPractice/target/classes/com/homeworkNotice/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PathPractice/target/classes/com/homeworkNotice/dao/UserDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/PathPractice/target/classes/com/homeworkNotice/dao/UserDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PathPractice/target/m2e-wtp/web-resources/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/PathPractice/target/m2e-wtp/web-resources/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PathPractice/target/m2e-wtp/web-resources/META-INF/maven/com.sample/mybatis/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/PathPractice/target/m2e-wtp/web-resources/META-INF/maven/com.sample/mybatis/pom.properties" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+>>>>>>> 313ac0d621c74924d76e22a514d6a6aa36710cb3
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
@@ -17,6 +32,19 @@
         <projects_view />
       </state>
     </system>
+=======
+  <component name="FUSProjectUsageTrigger">
+    <session id="965150585">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.16" value="1" />
+          <entry key="project.open.time.2" value="1" />
+          <entry key="project.opened" value="2" />
+        </counts>
+      </usages-collector>
+    </session>
+>>>>>>> 313ac0d621c74924d76e22a514d6a6aa36710cb3
   </component>
   <component name="FileEditorManager">
     <leaf />
@@ -25,6 +53,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GradleLocalSettings">
+<<<<<<< HEAD
     <option name="externalProjectsViewState">
       <projects_view />
     </option>
@@ -164,6 +193,57 @@
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
+=======
+    <option name="projectSyncType">
+      <map>
+        <entry key="$PROJECT_DIR$/../sejong_demo-master" value="PREVIEW" />
+      </map>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="420" />
+    <option name="width" value="981" />
+    <option name="height" value="1032" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="PATH" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PATH" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PATH" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PATH" type="462c0819:PsiDirectoryNode" />
+              <item name="PathPractice" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../NetworkProj/networkProject" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+>>>>>>> 313ac0d621c74924d76e22a514d6a6aa36710cb3
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -177,6 +257,7 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="RunManager">
     <configuration default="true" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
@@ -291,11 +372,59 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+=======
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2378e13d-e36c-45b9-9e30-6cac19157ad3" name="Default Changelist" comment="" />
+      <created>1538456684531</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1538456684531</updated>
+      <workItem from="1538456687429" duration="62000" />
+      <workItem from="1541008217940" duration="68000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="130000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12145749" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Palette&#9;" order="6" />
+      <window_info anchor="right" id="Database" order="7" />
+      <window_info anchor="right" id="Maven Projects" order="8" />
+>>>>>>> 313ac0d621c74924d76e22a514d6a6aa36710cb3
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+<<<<<<< HEAD
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
@@ -315,6 +444,13 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/PathPractice/.project">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="19" />
+>>>>>>> 313ac0d621c74924d76e22a514d6a6aa36710cb3
         </state>
       </provider>
     </entry>

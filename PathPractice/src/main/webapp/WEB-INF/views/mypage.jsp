@@ -82,7 +82,7 @@
     	
       $('#blackboard').on('click', function() {
         $.ajax({
-          url: "/user/checkUser.json",
+          url: "/user/checkUserExist.json",
           type: "POST",
           data: {
             'stuId':$('#id').val(),
