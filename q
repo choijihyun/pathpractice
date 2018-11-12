@@ -1,0 +1,852 @@
+[1mdiff --git a/PathPractice/src/main/java/com/homeworkNotice/controller/CompleteController.java b/PathPractice/src/main/java/com/homeworkNotice/controller/CompleteController.java[m
+[1mindex a50f8d5..fa4e698 100644[m
+[1m--- a/PathPractice/src/main/java/com/homeworkNotice/controller/CompleteController.java[m
+[1m+++ b/PathPractice/src/main/java/com/homeworkNotice/controller/CompleteController.java[m
+[36m@@ -12,9 +12,6 @@[m [mimport org.springframework.web.bind.annotation.RequestMethod;[m
+ import org.springframework.web.bind.annotation.RequestParam;[m
+ import org.springframework.web.bind.annotation.ResponseBody;[m
+ [m
+[31m-import com.homeworkNotice.dao.HomeworkDao;[m
+[31m-import com.homeworkNotice.dto.HomeworkDto;[m
+[31m-import com.homeworkNotice.dto.UserDto;[m
+ import com.homeworkNotice.dao.CompleteDao;[m
+ import com.homeworkNotice.dto.CompleteDto;[m
+ [m
+[1mdiff --git a/PathPractice/src/main/java/com/homeworkNotice/controller/TeamController.java b/PathPractice/src/main/java/com/homeworkNotice/controller/TeamController.java[m
+[1mindex a139bf5..8fdf32b 100644[m
+[1m--- a/PathPractice/src/main/java/com/homeworkNotice/controller/TeamController.java[m
+[1m+++ b/PathPractice/src/main/java/com/homeworkNotice/controller/TeamController.java[m
+[36m@@ -20,9 +20,6 @@[m [mimport org.springframework.web.bind.annotation.RequestParam;[m
+ import org.springframework.web.bind.annotation.ResponseBody;[m
+ [m
+ import com.homeworkNotice.dao.SubjectDao;[m
+[31m-import com.homeworkNotice.dto.CompleteDto;[m
+[31m-import com.homeworkNotice.dto.HomeworkDto;[m
+[31m-import com.homeworkNotice.dto.SubjectDto;[m
+ import com.homeworkNotice.dao.UserDao;[m
+ import com.homeworkNotice.dao.TeamDao;[m
+ import com.homeworkNotice.dto.TeamDto;[m
+[1mdiff --git a/PathPractice/src/main/java/com/homeworkNotice/dao/CompleteDao.java b/PathPractice/src/main/java/com/homeworkNotice/dao/CompleteDao.java[m
+[1mindex 5092a80..ea07f04 100644[m
+[1m--- a/PathPractice/src/main/java/com/homeworkNotice/dao/CompleteDao.java[m
+[1m+++ b/PathPractice/src/main/java/com/homeworkNotice/dao/CompleteDao.java[m
+[36m@@ -7,8 +7,6 @@[m [mimport org.apache.ibatis.session.SqlSession;[m
+ import org.springframework.beans.factory.annotation.Autowired;[m
+ import org.springframework.stereotype.Repository;[m
+ [m
+[31m-import com.homeworkNotice.dto.HomeworkDto;[m
+[31m-import com.homeworkNotice.dto.UserDto;[m
+ import com.homeworkNotice.dto.CompleteDto;[m
+ [m
+ @Repository[m
+[1mdiff --git a/PathPractice/src/main/resources/mybatis-config.xml b/PathPractice/src/main/resources/mybatis-config.xml[m
+[1mindex 89703e5..bcfb4b0 100644[m
+[1m--- a/PathPractice/src/main/resources/mybatis-config.xml[m
+[1m+++ b/PathPractice/src/main/resources/mybatis-config.xml[m
+[36m@@ -1,4 +1,4 @@[m
+[31m-<?xml version="1.0" encoding= "UTF-8" ?>[m
+[32m+[m[32m<?xml version="1.0" encoding="UTF-8" ?>[m
+ <!DOCTYPE configuration[m
+ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"[m
+ "http://mybatis.org/dtd/mybatis-3-config.dtd" >[m
+[36m@@ -11,6 +11,7 @@[m [mPUBLIC "-//mybatis.org//DTD Config 3.0//EN"[m
+ 		<typeAlias alias="timeTable" type="com.homeworkNotice.dto.TimeTableDto"/>[m
+ 		<typeAlias alias="team" type="com.homeworkNotice.dto.TeamDto"/>[m
+ 		<typeAlias alias="complete" type="com.homeworkNotice.dto.CompleteDto"/>[m
+[32m+[m		[32m<typeAlias alias="blackboard" type="com.homeworkNotice.dto.BlackboardDto"/>[m
+ 	</typeAliases>[m
+ 	[m
+     <mappers>[m
+[36m@@ -20,6 +21,7 @@[m [mPUBLIC "-//mybatis.org//DTD Config 3.0//EN"[m
+         <mapper resource="timeTableMapper.xml"/>[m
+         <mapper resource="teamMapper.xml"/>[m
+         <mapper resource="completeMapper.xml"/>[m
+[31m-        [m
+[32m+[m[32m        <mapper resource="blackboardMapper.xml"/>[m
+     </mappers >[m
+ </configuration>[m
+[41m+ [m
+\ No newline at end of file[m
+[1mdiff --git a/PathPractice/src/main/webapp/WEB-INF/16011008assignment.txt b/PathPractice/src/main/webapp/WEB-INF/16011008assignment.txt[m
+[1mindex 7a57162..b1bb084 100644[m
+[1m--- a/PathPractice/src/main/webapp/WEB-INF/16011008assignment.txt[m
+[1m+++ b/PathPractice/src/main/webapp/WEB-INF/16011008assignment.txt[m
+[36m@@ -1,127 +1,127 @@[m
+[31m-8시간 전새 항목내용 Lecture 17 (Division Rule) 확인 가능[m
+[32m+[m[32m2일 전내용 Lecture 17 (Division Rule) 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 이산수학및프로그래밍 (001)[m
+[31m-17시간 전새 항목코스 공지사항 →  이산수학및프로그래밍 (001)HW #4 Posted[m
+[32m+[m[32m3일 전코스 공지사항 →  이산수학및프로그래밍 (001)HW #4 Posted[m
+ 열기[m
+ 닫기[m
+ - Due Nov. 21 (Wed) in Class[m
+[31m-17시간 전새 항목내용 HW #4 (Due Nov. 21 (Wed) in Class) 확인 가능[m
+[32m+[m[32m3일 전내용 HW #4 (Due Nov. 21 (Wed) in Class) 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 이산수학및프로그래밍 (001)[m
+[31m-20시간 전새 항목코스 공지사항 →  컴퓨터네트워크 (004)Chapter 4. Network Layer[m
+[32m+[m[32m3일 전코스 공지사항 →  컴퓨터네트워크 (004)Chapter 4. Network Layer[m
+ 열기[m
+ 닫기[m
+ Network Layer 강의자료 입니다.[m
+ [m
+ Chapter4_network.pdf [m
+[31m-1일 전새 항목코스 공지사항 →  고급C프로그래밍및실습 (001)과제5(동적할당)이 "과제"란에 업로드 되었습니다.[m
+[32m+[m[32m3일 전코스 공지사항 →  고급C프로그래밍및실습 (001)과제5(동적할당)이 "과제"란에 업로드 되었습니다.[m
+ 열기[m
+ 닫기[m
+ [m
+[31m-1일 전새 항목내용 과제5 동적할당 확인 가능[m
+[32m+[m[32m3일 전내용 과제5 동적할당 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 고급C프로그래밍및실습 (001)[m
+[31m-1일 전새 항목코스 공지사항 →  고급C프로그래밍및실습 (001)13장 연산자함수자료형 실습문제가 "강의자료 및 학습" 10주차에 업로드 되었습니다.[m
+[32m+[m[32m4일 전코스 공지사항 →  고급C프로그래밍및실습 (001)13장 연산자함수자료형 실습문제가 "강의자료 및 학습" 10주차에 업로드 되었습니다.[m
+ 열기[m
+ 닫기[m
+ [m
+[31m-1일 전새 항목내용 13장 연산자함수자료형고급 실습문제 확인 가능[m
+[32m+[m[32m4일 전내용 13장 연산자함수자료형고급 실습문제 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 고급C프로그래밍및실습 (001)[m
+[31m-1일 전새 항목내용 15주차 학습준비 확인 가능[m
+[32m+[m[32m4일 전내용 15주차 학습준비 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 동양고전강독2 (001)[m
+[31m-1일 전새 항목내용 XIN - 15 동양고전강독2 15주차 : 양명학4_줄탁동시 / 2018-12-10 00:00 ~ 2018-12-23 23:59 확인 가능[m
+[32m+[m[32m4일 전내용 XIN - 15 동양고전강독2 15주차 : 양명학4_줄탁동시 / 2018-12-10 00:00 ~ 2018-12-23 23:59 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 동양고전강독2 (001)[m
+[31m-1일 전새 항목내용 14주차 학습준비 확인 가능[m
+[32m+[m[32m4일 전내용 14주차 학습준비 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 동양고전강독2 (001)[m
+[31m-1일 전새 항목내용 XIN - 14 동양고전강독2 14주차 : 양명학3_지행합일과 사상마련, 그리고 만물일체 / 2018-12-03 00:00 ~ 2018-12-16 23:59 확인 가능[m
+[32m+[m[32m4일 전내용 XIN - 14 동양고전강독2 14주차 : 양명학3_지행합일과 사상마련, 그리고 만물일체 / 2018-12-03 00:00 ~ 2018-12-16 23:59 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 동양고전강독2 (001)[m
+[31m-1일 전새 항목내용 13주차 학습준비 확인 가능[m
+[32m+[m[32m4일 전내용 13주차 학습준비 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 동양고전강독2 (001)[m
+[31m-1일 전새 항목내용 XIN - 13 동양고전강독2 13주차 : 양명학2_심즉리, 격물, 치양지 / 2018-11-26 00:00 ~ 2018-12-09 23:59 확인 가능[m
+[32m+[m[32m4일 전내용 XIN - 13 동양고전강독2 13주차 : 양명학2_심즉리, 격물, 치양지 / 2018-11-26 00:00 ~ 2018-12-09 23:59 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 동양고전강독2 (001)[m
+[31m-2일 전내용 Lecture 16 (Product Rule) 확인 가능[m
+[32m+[m[32m5일 전내용 Lecture 16 (Product Rule) 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 이산수학및프로그래밍 (001)[m
+[31m-2일 전내용 Week 10 확인 가능[m
+[32m+[m[32m5일 전내용 Week 10 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 이산수학및프로그래밍 (001)[m
+[31m-2일 전코스 공지사항 →  컴퓨터네트워크 (004)TCP update[m
+[32m+[m[32m5일 전코스 공지사항 →  컴퓨터네트워크 (004)TCP update[m
+ 열기[m
+ 닫기[m
+ Chapt3-transport.pdf [m
+[31m-5일 전코스 공지사항 →  고급C프로그래밍및실습 (001)13장 연산자함수자료형 강의자료가 "강의자료 및 학습" 10주차에 업로드 되었습니다.[m
+[32m+[m[32m7일 전코스 공지사항 →  고급C프로그래밍및실습 (001)13장 연산자함수자료형 강의자료가 "강의자료 및 학습" 10주차에 업로드 되었습니다.[m
+ 열기[m
+ 닫기[m
+ [m
+[31m-5일 전내용 13장 연산자함수자료형 강의자료 확인 가능[m
+[32m+[m[32m7일 전내용 13장 연산자함수자료형 강의자료 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 고급C프로그래밍및실습 (001)[m
+[31m-5일 전코스 공지사항 →  고급C프로그래밍및실습 (001)과제4(구조체) 점수가 "과제"란에 공지 되었습니다.[m
+[32m+[m[32m7일 전코스 공지사항 →  고급C프로그래밍및실습 (001)과제4(구조체) 점수가 "과제"란에 공지 되었습니다.[m
+ 열기[m
+ 닫기[m
+ [m
+[31m-5일 전내용 과제4 (구조체) 점수 확인 가능[m
+[32m+[m[32m7일 전내용 과제4 (구조체) 점수 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 고급C프로그래밍및실습 (001)[m
+[31m-6일 전HW #3의 수동 채점 업데이트됨[m
+[32m+[m[32m8일 전HW #3의 수동 채점 업데이트됨[m
+ 오픈[m
+ 닫기[m
+ 코스·조직: 이산수학및프로그래밍 (001)[m
+[31m-6일 전내용 3번째 과제 확인 가능[m
+[32m+[m[32m9일 전내용 3번째 과제 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 통신시스템 (002)[m
+[31m-7일 전내용 Lecture 15 (Asymptotic Notations) 확인 가능[m
+[32m+[m[32m9일 전내용 Lecture 15 (Asymptotic Notations) 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 이산수학및프로그래밍 (001)[m
+[31m-7일 전코스 공지사항 →  컴퓨터네트워크 (004)Transport layer missed slide[m
+[32m+[m[32m10일 전코스 공지사항 →  컴퓨터네트워크 (004)Transport layer missed slide[m
+ 열기[m
+ 닫기[m
+ 지난번에 빠진 슬라이드 첨부합니다.[m
+ 스크린샷 2018-10-31 오전 10.05.57.png [m
+[31m-8일 전코스 공지사항 →  고급C프로그래밍및실습 (001)12장 동적할당 실습문제가 "강의자료 및 학습" 9주차에 업로드 되었습니다.[m
+[32m+[m[32m11일 전코스 공지사항 →  고급C프로그래밍및실습 (001)12장 동적할당 실습문제가 "강의자료 및 학습" 9주차에 업로드 되었습니다.[m
+ 열기[m
+ 닫기[m
+ [m
+[31m-8일 전내용 12장 동적할당 실습문제 확인 가능[m
+[32m+[m[32m11일 전내용 12장 동적할당 실습문제 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 고급C프로그래밍및실습 (001)[m
+[31m-9일 전내용 Lecture 14 (Integral Sum Bound) 확인 가능[m
+[32m+[m[32m12일 전내용 Lecture 14 (Integral Sum Bound) 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 이산수학및프로그래밍 (001)[m
+[31m-9일 전코스 공지사항 →  고급C프로그래밍및실습 (001)1차 인증시험 점수가 다소 조정되었습니다. "시험"란 확인 바랍니다.[m
+[32m+[m[32m12일 전코스 공지사항 →  고급C프로그래밍및실습 (001)1차 인증시험 점수가 다소 조정되었습니다. "시험"란 확인 바랍니다.[m
+ 열기[m
+ 닫기[m
+ [m
+[31m-9일 전내용 Week 9 확인 가능[m
+[32m+[m[32m12일 전내용 Week 9 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 이산수학및프로그래밍 (001)[m
+[31m-9일 전코스 공지사항 →  이산수학및프로그래밍 (001)Midterm Exam Score/Grade Announcement (Due: Nov 02 (Fri) 11:00)[m
+[32m+[m[32m12일 전코스 공지사항 →  이산수학및프로그래밍 (001)Midterm Exam Score/Grade Announcement (Due: Nov 02 (Fri) 11:00)[m
+ 열기[m
+ 닫기[m
+ <Midterm Exam Score/Grade Announcement (Due: Nov 02 (Fri) 11:00)>[m
+[36m@@ -142,95 +142,95 @@[m [mNov. 02 (Fri), 10:00 ~ 11:00[m
+ - Standard Deviation: 21.23[m
+ - Max: 97[m
+ [m
+[31m-10일 전코스 공지사항 →  고급C프로그래밍및실습 (001)12장 동적할당 강의자료가 "주차별 학습 9주차"에 업로드되었습니다.[m
+[32m+[m[32m12일 전코스 공지사항 →  고급C프로그래밍및실습 (001)12장 동적할당 강의자료가 "주차별 학습 9주차"에 업로드되었습니다.[m
+ 열기[m
+ 닫기[m
+ [m
+[31m-10일 전내용 12장 동적할당 강의자료 확인 가능[m
+[32m+[m[32m12일 전내용 12장 동적할당 강의자료 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 고급C프로그래밍및실습 (001)[m
+[31m-10일 전코스 공지사항 →  고급C프로그래밍및실습 (001)1차 인증시험 점수가 "시험"란에 공지되었습니다.[m
+[32m+[m[32m12일 전코스 공지사항 →  고급C프로그래밍및실습 (001)1차 인증시험 점수가 "시험"란에 공지되었습니다.[m
+ 열기[m
+ 닫기[m
+ 시험 점수에 이상이 있는 학생은 실습 시간에 문의하기 바랍니다.[m
+[31m-10일 전내용 1차 인증시험 점수 - 20181029 수정 확인 가능[m
+[32m+[m[32m12일 전내용 1차 인증시험 점수 - 20181029 수정 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 고급C프로그래밍및실습 (001)[m
+[31m-13일 전2-7주 강의요약문 의 시도성적 업데이트됨[m
+[32m+[m[32m16일 전2-7주 강의요약문 의 시도성적 업데이트됨[m
+ 오픈[m
+ 닫기[m
+ 코스·조직: 동양고전강독2 (001)[m
+[31m-14일 전코스 공지사항 →  컴퓨터네트워크 (004)중간고사 시험장 율곡관 B04[m
+[32m+[m[32m17일 전코스 공지사항 →  컴퓨터네트워크 (004)중간고사 시험장 율곡관 B04[m
+ 열기[m
+ 닫기[m
+ 토요일 오전 10시에 보도록 하겠습니다.[m
+[31m-15일 전코스 공지사항 →  컴퓨터네트워크 (004)Chapter 3. Transport Layer[m
+[32m+[m[32m18일 전코스 공지사항 →  컴퓨터네트워크 (004)Chapter 3. Transport Layer[m
+ 열기[m
+ 닫기[m
+ 강의자료 입니다.[m
+ Chapter_3.pdf [m
+[31m-15일 전코스 공지사항 →  컴퓨터네트워크 (004)Review Session[m
+[32m+[m[32m18일 전코스 공지사항 →  컴퓨터네트워크 (004)Review Session[m
+ 열기[m
+ 닫기[m
+ Review session은 목요일 오후 7시에 충무관 101호에서 진행하겠습니다.[m
+ 출석은 부르지 않습니다.[m
+[31m-15일 전코스 공지사항 →  컴퓨터네트워크 (004)중간고사 (토) 오전 10시로 시간 변경하겠습니다.[m
+[32m+[m[32m18일 전코스 공지사항 →  컴퓨터네트워크 (004)중간고사 (토) 오전 10시로 시간 변경하겠습니다.[m
+ 열기[m
+ 닫기[m
+ 금주 토요일 오후에 학교안에 강의실이 없어서 시험을 볼 수 없다고 합니다.[m
+ 부득이하게 시험 시간을 토요일 오전 10시에 보도록 하겠습니다. 강의 실은 추후 공지하겠습니다.[m
+[31m-16일 전내용 중간고사 답안 확인 가능[m
+[32m+[m[32m18일 전내용 중간고사 답안 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 통신시스템 (002)[m
+[31m-16일 전내용 12주차 학습준비 확인 가능[m
+[32m+[m[32m19일 전내용 12주차 학습준비 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 동양고전강독2 (001)[m
+[31m-16일 전내용 XIN - 12 동양고전강독2 12주차 : 양명학1_용장대오와 강학 / 2018-11-19 00:00 ~ 2018-12-02 23:59 확인 가능[m
+[32m+[m[32m19일 전내용 XIN - 12 동양고전강독2 12주차 : 양명학1_용장대오와 강학 / 2018-11-19 00:00 ~ 2018-12-02 23:59 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 동양고전강독2 (001)[m
+[31m-16일 전내용 XIN - 11 동양고전강독2 11주차 : 법가3_현실적인 정치를 제안하다 / 2018-11-12 00:00 ~ 2018-11-25 23:59 확인 가능[m
+[32m+[m[32m19일 전내용 XIN - 11 동양고전강독2 11주차 : 법가3_현실적인 정치를 제안하다 / 2018-11-12 00:00 ~ 2018-11-25 23:59 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 동양고전강독2 (001)[m
+[31m-16일 전내용 11주차 학습준비 확인 가능[m
+[32m+[m[32m19일 전내용 11주차 학습준비 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 동양고전강독2 (001)[m
+[31m-16일 전코스 공지사항 →  컴퓨터네트워크 (004)HW#3 Chapter 2 연습문제[m
+[32m+[m[32m19일 전코스 공지사항 →  컴퓨터네트워크 (004)HW#3 Chapter 2 연습문제[m
+ 열기[m
+ 닫기[m
+ P4[m
+ P9[m
+ 제출할 필요는 없습니다.[m
+[31m-21일 전내용 Lecture 13 (Harmonic Sums) 확인 가능[m
+[32m+[m[32m24일 전내용 Lecture 13 (Harmonic Sums) 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 이산수학및프로그래밍 (001)[m
+[31m-21일 전코스 공지사항 →  컴퓨터네트워크 (004)HW#2 Wireshark[m
+[32m+[m[32m24일 전코스 공지사항 →  컴퓨터네트워크 (004)HW#2 Wireshark[m
+ 열기[m
+ 닫기[m
+ Please find attached wireshark lab. DO NOT use trace file provided by the author, use your OWN captured trace file. Answer all questions.[m
+ 기한: 10월 24일 (수업시간에 프린트해서 제출 바랍니다)[m
+ Wireshark_HTTP_Sept_15_2009.pdf [m
+  [m
+[31m-21일 전공지사항 2-7주 강의요약문 확인 가능[m
+[32m+[m[32m24일 전공지사항 2-7주 강의요약문 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 동양고전강독2 (001)[m
+[31m-22일 전코스 공지사항 →  고급C프로그래밍및실습 (001)11장 구조체 과제가 "과제"란에 공지되었습니다.[m
+[32m+[m[32m24일 전코스 공지사항 →  고급C프로그래밍및실습 (001)11장 구조체 과제가 "과제"란에 공지되었습니다.[m
+ 열기[m
+ 닫기[m
+ [m
+[31m-22일 전내용 11장 구조체 과제 확인 가능[m
+[32m+[m[32m24일 전내용 11장 구조체 과제 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 고급C프로그래밍및실습 (001)[m
+[31m-22일 전코스 공지사항 →  컴퓨터네트워크 (004)프로젝트 팀 - 팀구성[m
+[32m+[m[32m24일 전코스 공지사항 →  컴퓨터네트워크 (004)프로젝트 팀 - 팀구성[m
+ 열기[m
+ 닫기[m
+ 컴퓨터 네트워크 팀 구성은 다음과 같이 하였습니다. 이후 팀은 바꿀 수 없습니다.[m
+[36m@@ -262,66 +262,66 @@[m [mWireshark_HTTP_Sept_15_2009.pdf [m
+ 이주형  이상범 박재현 유승원[m
+ 이시형 이주희 윤여국[m
+ [m
+[31m-22일 전내용 홈 확인 가능[m
+[32m+[m[32m25일 전내용 홈 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 온라인학습법특강[m
+[31m-22일 전내용 동영상 보기 확인 가능[m
+[32m+[m[32m25일 전내용 동영상 보기 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 온라인학습법특강[m
+[31m-22일 전내용 동영상 보기 확인 가능[m
+[32m+[m[32m25일 전내용 동영상 보기 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 온라인학습법특강[m
+[31m-22일 전내용 동영상 보기 확인 가능[m
+[32m+[m[32m25일 전내용 동영상 보기 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 온라인학습법특강[m
+[31m-22일 전내용 동영상 보기 확인 가능[m
+[32m+[m[32m25일 전내용 동영상 보기 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 온라인학습법특강[m
+[31m-23일 전코스 공지사항 →  고급C프로그래밍및실습 (001)[모집공고] 최유경교수님 연구실 학부 연구생 모집[m
+[32m+[m[32m25일 전코스 공지사항 →  고급C프로그래밍및실습 (001)[모집공고] 최유경교수님 연구실 학부 연구생 모집[m
+ 열기[m
+ 닫기[m
+ 지능기전공학부 스마트기기전공 최유경교수님 연구실에서 학부 연구생을 모집하고 계십니다.[m
+ 관심 있는 지능기전 1학년 학생들은 아래의 첨부 파일을 참조하여 참여 바랍니다.[m
+ 학부연구생공고문_최유경교수님.pdf [m
+ Robotics and Computer Vision 연구실: http://sites.google.com/view/rcvlab[m
+[31m-23일 전코스 공지사항 →  고급C프로그래밍및실습 (001)[중요] 1차 인증시험 관련 사항이 "시험"란에 공지되었습니다.[m
+[32m+[m[32m25일 전코스 공지사항 →  고급C프로그래밍및실습 (001)[중요] 1차 인증시험 관련 사항이 "시험"란에 공지되었습니다.[m
+ 열기[m
+ 닫기[m
+ [m
+[31m-23일 전내용 1차 인증시험 공지합니다. 확인 가능[m
+[32m+[m[32m25일 전내용 1차 인증시험 공지합니다. 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 고급C프로그래밍및실습 (001)[m
+[31m-23일 전내용 1차 인증시험 강의실 배치표입니다. 확인 가능[m
+[32m+[m[32m25일 전내용 1차 인증시험 강의실 배치표입니다. 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 고급C프로그래밍및실습 (001)[m
+[31m-23일 전코스 공지사항 →  고급C프로그래밍및실습 (001)SW경시대회 신청 사이트에 접속 가능하니, 아직 신청하지 않은 학생들은 어서 신청하기 바랍니다.[m
+[32m+[m[32m25일 전코스 공지사항 →  고급C프로그래밍및실습 (001)SW경시대회 신청 사이트에 접속 가능하니, 아직 신청하지 않은 학생들은 어서 신청하기 바랍니다.[m
+ 열기[m
+ 닫기[m
+ [m
+[31m-23일 전코스 공지사항 →  고급C프로그래밍및실습 (001)11장 구조체 실습문제가 "강의자료 및 학습"의 "7주차"에 업로드 되었습니다.[m
+[32m+[m[32m25일 전코스 공지사항 →  고급C프로그래밍및실습 (001)11장 구조체 실습문제가 "강의자료 및 학습"의 "7주차"에 업로드 되었습니다.[m
+ 열기[m
+ 닫기[m
+ [m
+[31m-23일 전내용 11장 구조체 실습문제 확인 가능[m
+[32m+[m[32m25일 전내용 11장 구조체 실습문제 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 고급C프로그래밍및실습 (001)[m
+[31m-23일 전내용 Lecture 12 (Isomorphism, Tree) 확인 가능[m
+[32m+[m[32m25일 전내용 Lecture 12 (Isomorphism, Tree) 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 이산수학및프로그래밍 (001)[m
+[31m-23일 전내용 Week 7 확인 가능[m
+[32m+[m[32m26일 전내용 Week 7 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 이산수학및프로그래밍 (001)[m
+[31m-24일 전코스 공지사항 →  동양고전강독2 (001)강의 성적평가와 강의요약문에 대해[m
+[32m+[m[32m27일 전코스 공지사항 →  동양고전강독2 (001)강의 성적평가와 강의요약문에 대해[m
+ 열기[m
+ 닫기[m
+ 학우 여러분[m
+[36m@@ -337,31 +337,19 @@[m [mRobotics and Computer Vision 연구실: http://sites.google.com/view/rcvlab[m
+ 제출기한:2018년10월24일[m
+ 제출방법: 과제란에 올려주세요[m
+   [m
+[31m-25일 전코스 공지사항 →  고급C프로그래밍및실습 (001)과제2의 점수가 "과제"란에 공지되었습니다.[m
+[32m+[m[32m27일 전코스 공지사항 →  고급C프로그래밍및실습 (001)과제2의 점수가 "과제"란에 공지되었습니다.[m
+ 열기[m
+ 닫기[m
+ [m
+[31m-25일 전내용 과제2 (10장 문자열) 점수 확인 가능[m
+[32m+[m[32m27일 전내용 과제2 (10장 문자열) 점수 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 고급C프로그래밍및실습 (001)[m
+[31m-26일 전내용 3장 강의자료 확인 가능[m
+[31m-열기[m
+[31m-닫기[m
+[31m-코스·조직: 통신시스템 (002)[m
+[31m-30일 전코스 공지사항 →  고급C프로그래밍및실습 (001)11장 구조체 실습문제가 "강의자료 및 학습" 6주차에 업로드 되었습니다.[m
+[32m+[m[32m1개월 전코스 공지사항 →  고급C프로그래밍및실습 (001)11장 구조체 실습문제가 "강의자료 및 학습" 6주차에 업로드 되었습니다.[m
+ 열기[m
+ 닫기[m
+ [m
+[31m-30일 전내용 HW #3 Solution 확인 가능[m
+[31m-열기[m
+[31m-닫기[m
+[31m-코스·조직: 이산수학및프로그래밍 (001)[m
+[31m-30일 전내용 Lecture 10 (Euler's function, Digraph) 확인 가능[m
+[31m-열기[m
+[31m-닫기[m
+[31m-코스·조직: 이산수학및프로그래밍 (001)[m
+[31m-1개월 전내용 HW #2 Solution 확인 가능[m
+[32m+[m[32m1개월 전내용 Lecture 10 (Euler's function, Digraph) 확인 가능[m
+ 열기[m
+ 닫기[m
+ 코스·조직: 이산수학및프로그래밍 (001)[m
+[1mdiff --git a/PathPractice/src/main/webapp/WEB-INF/get_announcement.py b/PathPractice/src/main/webapp/WEB-INF/get_announcement.py[m
+[1mindex bf177c4..64e03e6 100644[m
+[1m--- a/PathPractice/src/main/webapp/WEB-INF/get_announcement.py[m
+[1m+++ b/PathPractice/src/main/webapp/WEB-INF/get_announcement.py[m
+[36m@@ -2,7 +2,7 @@[m
+ uid = '16011008'[m
+ fname = uid+"assignment.txt"[m
+ f = open(fname, 'r',encoding='utf8')[m
+[31m-subject=[][m
+[32m+[m[32msubjects=[][m
+ [m
+ while True:[m
+     line = f.readline()[m
+[36m@@ -16,14 +16,31 @@[m [mwhile True:[m
+             lline = line[idx+1:][m
+             llist = lline.split(" ")[m
+             string = llist[1][1:][m
+[31m-            if string in subject:[m
+[32m+[m[32m            if string in subjects:[m
+                 continue[m
+             else:[m
+[31m-                subject.append(string)[m
+[32m+[m[32m                subjects.append(string)[m
+             [m
+             #print(llist)[m
+         except: [m
+[31m-            print(line)[m
+[32m+[m[32m            print("!"+line)[m
+[32m+[m
+[32m+[m[32m#이거를 db에 저장해야됨.[m
+[32m+[m[32mprint("subject list!")[m
+[32m+[m[32mprint(subjects)[m
+[32m+[m[32mf.close()[m
+[32m+[m
+[32m+[m[32m#공지사항에 떴던 과목들 저장[m
+[32m+[m[32mfname = "subject.txt"[m
+[32m+[m[32mf = open(fname, 'w', encoding='UTF8')[m
+[32m+[m[32mtry :[m
+[32m+[m[32m    for tr in subjects:[m
+[32m+[m[32m        print(tr)[m
+[32m+[m[32m        f.write(tr)[m
+[32m+[m[32m        f.write("\n")[m
+[32m+[m[32mexcept Exception as e:[m[41m [m
+[32m+[m[32m    print(e)[m
+[32m+[m[32mfinally:[m
+[32m+[m[32m    print('finally')[m
+ [m
+[31m-print(subject)[m
+ f.close()[m
+[1mdiff --git a/PathPractice/src/main/webapp/WEB-INF/get_blackboard.py b/PathPractice/src/main/webapp/WEB-INF/get_blackboard.py[m
+[1mdeleted file mode 100644[m
+[1mindex a67ed07..0000000[m
+[1m--- a/PathPractice/src/main/webapp/WEB-INF/get_blackboard.py[m
+[1m+++ /dev/null[m
+[36m@@ -1,73 +0,0 @@[m
+[31m-from selenium import webdriver[m
+[31m-from bs4 import BeautifulSoup[m
+[31m-from selenium.webdriver.common.by import By[m
+[31m-from selenium.webdriver.support.ui import WebDriverWait[m
+[31m-from selenium.webdriver.support import expected_conditions as EC[m
+[31m-from time import sleep[m
+[31m-from selenium.webdriver.common.keys import Keys[m
+[31m-[m
+[31m-[m
+[31m-def get_info(uid, upw):[m
+[31m-  #chrome의 경우, 아까 받은 chromedriver의 위치를 지정해준다.[m
+[31m-    driver = webdriver.Chrome('/Users/USER/Downloads/chromedriver')[m
+[31m-[m
+[31m-  #암묵적으로 웹 자원 로드를 위해 3초까지 기다림[m
+[31m-[m
+[31m-    print("id"+uid)[m
+[31m-    print("pw"+upw)[m
+[31m-    [m
+[31m-    stuid =str(uid)[m
+[31m-    pw = str(upw)[m
+[31m-[m
+[31m-  #url접근[m
+[31m-    [m
+[31m-    driver.get('https://blackboard.sejong.ac.kr')[m
+[31m-    driver.implicitly_wait(3)[m
+[31m-    driver.find_element_by_id('toggle_login_form').click()[m
+[31m-[m
+[31m-    driver.find_element_by_name('user_id').send_keys(stuid)[m
+[31m-    sleep(2)[m
+[31m-    alert = driver.switch_to_alert()[m
+[31m-    alert.accept()[m
+[31m-    driver.find_element_by_name('password').send_keys(pw)[m
+[31m-[m
+[31m-    driver.implicitly_wait(3)[m
+[31m-    alert = driver.switch_to_alert()[m
+[31m-    alert.accept()[m
+[31m-    driver.find_element_by_id("entry-login").click()[m
+[31m-[m
+[31m-    alert = driver.switch_to_alert()[m
+[31m-    alert.accept()[m
+[31m-[m
+[31m-  #공지사항 찾아가기[m
+[31m-    driver.get('https://blackboard.sejong.ac.kr/webapps/streamViewer/streamViewer?cmd=view&streamName=alerts&globalNavigation=false')[m
+[31m-    driver.implicitly_wait(5)[m
+[31m-[m
+[31m-[m
+[31m-[m
+[31m-  #ipython 써서 확인하기[m
+[31m-    sleep(10)[m
+[31m-    fname = stuid+"assignment.txt"[m
+[31m-    f = open(fname, 'w', encoding='UTF8')[m
+[31m-[m
+[31m-    text = driver.page_source[m
+[31m-    soup = BeautifulSoup(text,'html.parser')[m
+[31m-    rd=soup.select(".stream_item")[m
+[31m-[m
+[31m-    try :[m
+[31m-        for tr in rd:[m
+[31m-            print(tr.text)[m
+[31m-            f.write(tr.text)[m
+[31m-    except Exception as e: [m
+[31m-        print(e)[m
+[31m-    finally:[m
+[31m-        print('finally')[m
+[31m-[m
+[31m-    f.close()[m
+[31m-    driver.quit()[m
+[31m-      [m
+[31m-[m
+[31m-        [m
+[31m-[m
+[31m-    [m
+[31m-[m
+[1mdiff --git a/PathPractice/src/main/webapp/WEB-INF/spring/root-context.xml b/PathPractice/src/main/webapp/WEB-INF/spring/root-context.xml[m
+[1mindex 229be2b..81ec3dd 100644[m
+[1m--- a/PathPractice/src/main/webapp/WEB-INF/spring/root-context.xml[m
+[1m+++ b/PathPractice/src/main/webapp/WEB-INF/spring/root-context.xml[m
+[36m@@ -59,6 +59,9 @@[m
+ 	<bean id="teamDao" class="com.homeworkNotice.dao.TeamDao">[m
+ 		<property name="sqlSession" ref="SqlSessionTemplate"></property>[m
+ 	</bean>[m
+[32m+[m	[32m<bean id="blackboardDao" class="com.homeworkNotice.dao.BlackboardDao">[m
+[32m+[m		[32m<property name="sqlSession" ref="SqlSessionTemplate"></property>[m
+[32m+[m	[32m</bean>[m
+ 	[m
+ [m
+ </beans>[m
+[1mdiff --git a/PathPractice/src/main/webapp/WEB-INF/views/menu.jsp b/PathPractice/src/main/webapp/WEB-INF/views/menu.jsp[m
+[1mindex 5432dd8..ef17ba5 100644[m
+[1m--- a/PathPractice/src/main/webapp/WEB-INF/views/menu.jsp[m
+[1m+++ b/PathPractice/src/main/webapp/WEB-INF/views/menu.jsp[m
+[36m@@ -51,6 +51,35 @@[m
+ [m
+ 			</div>[m
+ [m
+[32m+[m			[32m<!-- 과제 전체 보여주는 영역(스트롤바 포함¨) -->[m
+[32m+[m			[32m<!-- 과제가 여러개 이면 스크롤 생김 -->[m
+[32m+[m			[32m<div style="overflow:auto; width:auto; height:300px;" class="mt-3 scrollbar scrollbar-track scrollbar-thumb" data-offset="0">[m
+[32m+[m
+[32m+[m				[32m<!-- 스크롤바 제외한 과제를 보여주는 영역 -->[m
+[32m+[m				[32m<div class="px-2 content_show_assign">[m
+[32m+[m					[32m<!-- Modal -->[m
+[32m+[m					[32m<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">[m
+[32m+[m						[32m<div class="modal-dialog modal-dialog-centered modal-sm" role="document">[m
+[32m+[m							[32m<div class="modal-content">[m
+[32m+[m								[32m<div class="modal-header">[m
+[32m+[m									[32m<h5 class="modal-title"></h5>[m
+[32m+[m									[32m<button type="button" class="close" data-dismiss="modal" aria-label="Close">[m
+[32m+[m										[32m<span aria-hidden="true">&times;</span>[m
+[32m+[m									[32m</button>[m
+[32m+[m								[32m</div>[m
+[32m+[m								[32m<div class="modal-body"></div>[m
+[32m+[m
+[32m+[m								[32m<div class="modal-footer">[m
+[32m+[m									[32m<button type="button" id='assignChange' class="btn btn-sm btn-primary " aria-label="Left Align">Change</button>[m
+[32m+[m									[32m<button type="button" id='assignComplete' class="btn btn-sm btn-primary" data-dismiss="modal">Complete</button>[m
+[32m+[m									[32m<button type="button" id='assignDel' class="btn btn-sm btn-danger" data-dismiss="modal">Delete</button>[m
+[32m+[m								[32m</div>[m
+[32m+[m							[32m</div>[m
+[32m+[m						[32m</div>[m
+[32m+[m					[32m</div>[m
+[32m+[m
+[32m+[m				[32m</div>[m
+[32m+[m			[32m</div>[m
+ [m
+ 			<!-- footer 하단바 class="app-footer" -->[m
+ 			<div id="footer"></div>[m
+[36m@@ -60,5 +89,62 @@[m
+ 	</div>[m
+ </body>[m
+ </html>[m
+[32m+[m
+[32m+[m[32m<!-- modal -->[m
+[32m+[m[32m<script type="text/javascript">[m
+[32m+[m	[32m$(function(){[m
+[32m+[m		[32m$(document).on("click",'.btn_pop_assignment',function() {[m
+[32m+[m			[32mvar body = '';[m
+[32m+[m			[32mvar title = $(this).data('title');[m
+[32m+[m			[32mvar dueDate = $(this).data('dueDate');[m
+[32m+[m			[32mvar importance = $(this).data('importance');[m
+[32m+[m			[32mvar contents = $(this).data('contents');[m
+[32m+[m			[32mvar subNo = $(this).data('subNo');[m
+[32m+[m			[32mvar assignNo = $(this).data('assignNo');[m
+[32m+[m[41m			[m
+[32m+[m			[32m$('#hiddenAssign').val(assignNo).trigger('change');[m
+[32m+[m			[32m$('#hiddenSub').val(subNo).trigger('change');[m
+[32m+[m
+[32m+[m			[32mbody += 'due-date=' + dueDate;[m
+[32m+[m			[32mbody += ' , importance=' + importance;[m
+[32m+[m			[32mbody += ' , contents=' + contents;[m
+[32m+[m
+[32m+[m			[32m$('.modal-title').text(title);[m
+[32m+[m			[32m$('.modal-body').text(body);[m
+[32m+[m			[32m$('div.modal').modal();[m
+[32m+[m[41m			[m
+[32m+[m			[32m//modify assignment[m
+[32m+[m			[32m$('#assignChange').on('click', function (){[m
+[32m+[m				[32mlocation.href="/assignment_add?title="+title[m
+[32m+[m				[32m+"&dueDate="+dueDate[m
+[32m+[m				[32m+"&importance="+importance[m
+[32m+[m				[32m+"&contents="+contents[m
+[32m+[m				[32m+"&subNo="+subNo;[m
+[32m+[m			[32m});[m
+[32m+[m		[32m});[m
+[32m+[m	[32m})[m
+[32m+[m[32m</script>[m
+[32m+[m
+[32m+[m[32m<!-- 과제 가져오기? -->[m
+[32m+[m[32m<script type="text/javascript">[m
+[32m+[m	[32mvar file = document.querySelector('#getfile');[m
+[32m+[m
+[32m+[m	[32mfile.onchange = function() {[m
+[32m+[m
+[32m+[m		[32mvar fileList = file.files;[m
+[32m+[m
+[32m+[m		[32mvar reader = new FileReader();[m
+[32m+[m
+[32m+[m		[32mreader.readAsText(fileList[0]);[m
+[32m+[m
+[32m+[m		[32mreader.onload = function() {[m
+[32m+[m
+[32m+[m			[32mdocument.querySelector('#preview').textContent = reader.result;[m
+[32m+[m
+[32m+[m		[32m};[m
+[32m+[m
+[32m+[m	[32m};[m
+[32m+[m[32m</script>[m
+[32m+[m
+ <script src="${pageContext.request.contextPath}/resources/js/common/header.js"></script>[m
+ <script src="${pageContext.request.contextPath}/resources/js/common/footer.js"></script>[m
+[1mdiff --git a/PathPractice/src/main/webapp/resources/css/style_menu.css b/PathPractice/src/main/webapp/resources/css/style_menu.css[m
+[1mindex 5a34212..0e7bebe 100644[m
+[1m--- a/PathPractice/src/main/webapp/resources/css/style_menu.css[m
+[1m+++ b/PathPractice/src/main/webapp/resources/css/style_menu.css[m
+[36m@@ -17,4 +17,23 @@[m
+ .info{[m
+ 	font-weight: bold;[m
+ 	color: gray;[m
+[31m-}[m
+\ No newline at end of file[m
+[32m+[m[32m}[m
+[32m+[m[32m/*과제 하나 하나에 대한 영역*/[m
+[32m+[m[32m.assign-each{[m
+[32m+[m	[32mborder: 0;[m
+[32m+[m	[32mbackground: #f5f5f5;[m
+[32m+[m	[32mmargin: 10px;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m/*스크롤바 속성*/[m
+[32m+[m[32m.scrollbar-track::-webkit-scrollbar-track {[m
+[32m+[m	[32m-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);[m
+[32m+[m	[32mbackground-color: #F5F5F5;[m
+[32m+[m	[32mborder-radius: 10px; }[m
+[32m+[m[32m.scrollbar::-webkit-scrollbar {[m
+[32m+[m	[32mwidth: 8px;[m
+[32m+[m	[32mbackground-color: #F5F5F5; }[m
+[32m+[m[32m.scrollbar-thumb::-webkit-scrollbar-thumb {[m
+[32m+[m	[32mborder-radius: 10px;[m
+[32m+[m	[32mbackground-color : #dd3247;[m
+[32m+[m	[32m-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);}[m
+[1mdiff --git a/PathPractice/target/classes/com/homeworkNotice/controller/UserController.class b/PathPractice/target/classes/com/homeworkNotice/controller/UserController.class[m
+[1mindex 6671ed0..a1e44da 100644[m
+Binary files a/PathPractice/target/classes/com/homeworkNotice/controller/UserController.class and b/PathPractice/target/classes/com/homeworkNotice/controller/UserController.class differ
+[1mdiff --git a/PathPractice/target/classes/mybatis-config.xml b/PathPractice/target/classes/mybatis-config.xml[m
+[1mindex 89703e5..bcfb4b0 100644[m
+[1m--- a/PathPractice/target/classes/mybatis-config.xml[m
+[1m+++ b/PathPractice/target/classes/mybatis-config.xml[m
+[36m@@ -1,4 +1,4 @@[m
+[31m-<?xml version="1.0" encoding= "UTF-8" ?>[m
+[32m+[m[32m<?xml version="1.0" encoding="UTF-8" ?>[m
+ <!DOCTYPE configuration[m
+ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"[m
+ "http://mybatis.org/dtd/mybatis-3-config.dtd" >[m
+[36m@@ -11,6 +11,7 @@[m [mPUBLIC "-//mybatis.org//DTD Config 3.0//EN"[m
+ 		<typeAlias alias="timeTable" type="com.homeworkNotice.dto.TimeTableDto"/>[m
+ 		<typeAlias alias="team" type="com.homeworkNotice.dto.TeamDto"/>[m
+ 		<typeAlias alias="complete" type="com.homeworkNotice.dto.CompleteDto"/>[m
+[32m+[m		[32m<typeAlias alias="blackboard" type="com.homeworkNotice.dto.BlackboardDto"/>[m
+ 	</typeAliases>[m
+ 	[m
+     <mappers>[m
+[36m@@ -20,6 +21,7 @@[m [mPUBLIC "-//mybatis.org//DTD Config 3.0//EN"[m
+         <mapper resource="timeTableMapper.xml"/>[m
+         <mapper resource="teamMapper.xml"/>[m
+         <mapper resource="completeMapper.xml"/>[m
+[31m-        [m
+[32m+[m[32m        <mapper resource="blackboardMapper.xml"/>[m
+     </mappers >[m
+ </configuration>[m
+[41m+ [m
+\ No newline at end of file[m
+[1mdiff --git a/PathPractice/target/m2e-wtp/web-resources/META-INF/maven/com.sample/mybatis/pom.properties b/PathPractice/target/m2e-wtp/web-resources/META-INF/maven/com.sample/mybatis/pom.properties[m
+[1mindex 4d84527..7455e76 100644[m
+[1m--- a/PathPractice/target/m2e-wtp/web-resources/META-INF/maven/com.sample/mybatis/pom.properties[m
+[1m+++ b/PathPractice/target/m2e-wtp/web-resources/META-INF/maven/com.sample/mybatis/pom.properties[m
+[36m@@ -1,5 +1,5 @@[m
+ #Generated by Maven Integration for Eclipse[m
+[31m-#Thu Nov 08 01:21:22 KST 2018[m
+[32m+[m[32m#Mon Nov 12 15:08:03 KST 2018[m
+ version=1.0.0-BUILD-SNAPSHOT[m
+ groupId=com.sample[m
+ m2e.projectName=PathPractice[m
+[1mdiff --git "a/\353\270\224\353\263\264\352\263\265\354\247\200\354\202\254\355\225\255.txt" "b/\353\270\224\353\263\264\352\263\265\354\247\200\354\202\254\355\225\255.txt"[m
+[1mdeleted file mode 100644[m
+[1mindex 61b2ad6..0000000[m
+[1m--- "a/\353\270\224\353\263\264\352\263\265\354\247\200\354\202\254\355\225\255.txt"[m
+[1m+++ /dev/null[m
+[36m@@ -1,62 +0,0 @@[m
+[31m-## �α����� ����� blackboard ���̵�� ����� �޾ƾ���[m
+[31m-	-> �̶� jython��� �ҵ�[m
+[31m-## �㸶�� python ���ư��� �ϴ� script��������[m
+[31m-	-> ������ ��ġ�ϸ� �� ��[m
+[31m-## �������� txt�� ȭ�鿡 �ѷ��ִ� ���ұ��� ������[m
+[31m-	-> DB�� ���� �����ϱ⿣ ���� �����ϱ� �׶��׶� txt���� �о���°͵� ��������[m
+[31m-[m
+[31m-[m
+[31m-========================================================[m
+[31m-jsoup(�� �ڹٷ� ũ�Ѹ� �ϴ°�)[m
+[31m-- http://partnerjun.tistory.com/42[m
+[31m-- https://offbyone.tistory.com/116[m
+[31m-=> �̿��� �� �ִ� �Լ� ��������[m
+[31m-========================================================[m
+[31m-[m
+[31m-[m
+[31m-PyDev(eclipse���� python�����Ҷ� ���� ��)[m
+[31m-- https://m.blog.naver.com/PostView.nhn?blogId=spaceship00&logNo=221095855411&proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F[m
+[31m-[m
+[31m-�� jep _ https://pypi.org/project/jep/   �ù�[m
+[31m-https://blog.naver.com/phm_100/221293060189�̰��غ���[m
+[31m-- cmd : pip install jep(visual studio 2015�� �ʿ� ����)[m
+[31m-- https://m.blog.naver.com/PostView.nhn?blogId=tyboss&logNo=70047771517&proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F[m
+[31m-- http://tkyoo.tistory.com/71(�̰� ���� ��ġ�� -> �ٵ� visual 2015�ʿ��ϴٰ� ��)[m
+[31m-[m
+[31m-[m
+[31m-Jython ����[m
+[31m-maven ���� : https://mvnrepository.com/artifact/org.python/jython/2.7.0[m
+[31m-��ġ : http://egloos.zum.com/sharku/v/1326947[m
+[31m-- https://jythonbook-ko.readthedocs.io/en/latest/JythonIDE.html[m
+[31m-- https://jythonbook-ko.readthedocs.io/en/latest/JythonAndJavaIntegration.html[m
+[31m-[m
+[31m-[m
+[31m-[m
+[31m-[m
+[31m-pom.xml[m
+[31m-<!-- https://mvnrepository.com/artifact/org.python/jython-standalone -->[m
+[31m-<dependency>[m
+[31m-    <groupId>org.python</groupId>[m
+[31m-    <artifactId>jython-standalone</artifactId>[m
+[31m-    <version>2.7.0</version>[m
+[31m-</dependency>[m
+[31m-      [m
+[31m-      <!-- https://mvnrepository.com/artifact/org.python/jython -->[m
+[31m-<dependency>[m
+[31m-    <groupId>org.python</groupId>[m
+[31m-    <artifactId>jython</artifactId>[m
+[31m-    <version>2.7.0</version>[m
+[31m-</dependency>[m
+[31m-[m
+[31m-[m
+[31m-ũ�Ѹ��� �� �ʿ��Ѱ�[m
+[31m-- chromedriver(�ٿ���� ��ġ�ʿ�)[m
+[31m-- selenium(cmd�ٿ�ε�)[m
+[31m-- beautifulsoup(cmd�ٿ�ε�)[m
+[31m-[m
+[31m-##�ڹٿ��� python���� �ϰ� �ϴ� Ŭ����[m
+[31m-PythonInterpreter[m
+[31m-http://www.jython.org/downloads.html[m
+[31m-	->���⼭ �ٿ�޾Ƽ� build path�� ������ ��[m
+[31m-   (*thisisspear.tistory.com/10 ����*)[m
+[31m-[m
