@@ -31,35 +31,37 @@ public class TimeTableController {
 	private TimeTableDao timeTableDao;
 
 	@ResponseBody
-    @RequestMapping(value = "/timeTable/insertTimeTable.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value占쏙옙占� 占쏙옙占쏙옙 占쏙옙占쏙옙, get占쏙옙占� 占쏙옙占�
+    @RequestMapping(value = "/timeTable/insertTimeTable.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕, get�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝占�
     public String insertTimeTable(
     			Model model,
     			@RequestParam(value = "stuId", required=true) String stuId,
-    			@RequestParam(value = "subjectKey", required=true) final int subjectKey) { // 占싱뤄옙占쏙옙 5占쏙옙占쏙옙 占식띰옙占쏙옙拷占� 占쌨아울옙占쏙옙 占쏙옙占쏙옙 占싫억옙占쏙옙 x
-		HashMap<Object, Object> param=new HashMap<Object, Object>(); //占쏙옙占쏙옙占쏙옙 id占쏙옙占쏙옙 hashmap 占쏙옙占쏙옙占쏙옙獵歐占� 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙
+    			@RequestParam(value = "subjectKey", required=true) final int subjectKey) { // �뜝�떛琉꾩삕�뜝�룞�삕 5�뜝�룞�삕�뜝�룞�삕 �뜝�떇�씛�삕�뜝�룞�삕�떣�뜝占� �뜝�뙣�븘�슱�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕 �뜝�떕�뼲�삕�뜝�룞�삕 x
+		HashMap<Object, Object> param=new HashMap<Object, Object>(); //�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 id�뜝�룞�삕�뜝�룞�삕 hashmap �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜷閭먨뜝占� �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
 				
 		param.put("stuId",stuId);	
 		param.put("subjectKey",subjectKey);
 		
-		//
+		//subject 키가 중복이면 들어오지 않게 처리
+		
 		System.out.println(param);
-		//占쏙옙 占쌉쇽옙(url)占쏙옙 회占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙 占쏙옙占쏙옙占싱깍옙 占쏙옙占쏙옙占쏙옙
-		//占쏙옙占쏙옙占� 占쏙옙占쏙옙 or 占쏙옙占싻몌옙 占싯뤄옙 占쌍몌옙 占쏙옙
-		//int 占쏙옙占쏙옙占쏙옙 占쏙옙환占쏙옙 占실는듸옙 1占싱몌옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占싱몌옙 占쏙옙占쏙옙!!
+		//�뜝�룞�삕 �뜝�뙃�눦�삕(url)�뜝�룞�삕 �쉶�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�떛源띿삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕
+		//�뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕 or �뜝�룞�삕�뜝�떩紐뚯삕 �뜝�떙琉꾩삕 �뜝�뙇紐뚯삕 �뜝�룞�삕
+		//int �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�솚�뜝�룞�삕 �뜝�떎�뒗�벝�삕 1�뜝�떛紐뚯삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�떛紐뚯삕 �뜝�룞�삕�뜝�룞�삕!!
 		int result=0;
 		try {
 			result=timeTableDao.insertTimeTable(param);
 			System.out.println(result);
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Duplicated row!");
 			// TODO: handle exception
 		}
 
 		System.out.println(result);
     	JSONObject jSONObject = new JSONObject();
-    	//占쌓뤄옙占쏙옙 占쏙옙占썩서 占쏙옙占쏙옙 or 占쏙옙占쏙옙 占쏙옙占쏙옙占쌔쇽옙 占싫듸옙占쏙옙絹恙� json 占쏙옙占쏙옙占싶몌옙 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙占쌕거억옙
+    	//�뜝�뙎琉꾩삕�뜝�룞�삕 �뜝�룞�삕�뜝�뜦�꽌 �뜝�룞�삕�뜝�룞�삕 or �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�뙏�눦�삕 �뜝�떕�벝�삕�뜝�룞�삕永방걲占� json �뜝�룞�삕�뜝�룞�삕�뜝�떢紐뚯삕 �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝�뙐嫄곗뼲�삕
     	if(result==1) {
-    		jSONObject.put("result", "1");//占쏙옙占쏙옙    		
+    		jSONObject.put("result", "1");//�뜝�룞�삕�뜝�룞�삕    		
     	}
     	else {
     		jSONObject.put("result", "0");
@@ -83,7 +85,7 @@ public class TimeTableController {
     	
     	JSONArray jSONArray=new JSONArray();
     	List<JSONObject> jsonList=new ArrayList<JSONObject>();
-        if(!timeTableDtoList.isEmpty()) {//占쏙옙환占쏙옙占쏙옙 占쏙옙占쏙옙占싶곤옙 占쏙옙효占싹몌옙(db占쏙옙 占쏙옙占쏙옙占쏙옙) 占쏙옙占쏙옙占쏙옙 화占썽에 占쏙옙占쏙옙占� 占싼뤄옙占쌔댐옙
+        if(!timeTableDtoList.isEmpty()) {//�뜝�룞�삕�솚�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�떢怨ㅼ삕 �뜝�룞�삕�슚�뜝�떦紐뚯삕(db�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕) �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �솕�뜝�띂�뿉 �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�떬琉꾩삕�뜝�뙏�뙋�삕
         	for(int i=0;i<timeTableDtoList.size();i++) {
         		JSONObject jSONObject = new JSONObject();
         		jSONObject.put("stuId",timeTableDtoList.get(i).getStuId());
@@ -107,7 +109,7 @@ public class TimeTableController {
 
             return jsObject.toString();
         } 
-        else {//占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙占쏙옙 占싼뤄옙占쌔댐옙
+        else {//�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�떬琉꾩삕�뜝�뙏�뙋�삕
 
     		JSONObject jSONObject = new JSONObject();
         	jSONObject.put("result", "no data");
@@ -118,19 +120,19 @@ public class TimeTableController {
 
 
 	@ResponseBody
-    @RequestMapping(value = "/timeTable/deleteAllTimeTable.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value占쏙옙占� 占쏙옙占쏙옙 占쏙옙占쏙옙, get占쏙옙占� 占쏙옙占�
+    @RequestMapping(value = "/timeTable/deleteAllTimeTable.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕, get�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝占�
     public String deleteAllTimeTable(
     			Model model,
-    			@RequestParam(value = "stuId", required=true) String stuId) { // 占싱뤄옙占쏙옙 5占쏙옙占쏙옙 占식띰옙占쏙옙拷占� 占쌨아울옙占쏙옙 占쏙옙占쏙옙 占싫억옙占쏙옙 x
-		HashMap<Object, Object> param=new HashMap<Object, Object>(); //占쏙옙占쏙옙占쏙옙 id占쏙옙占쏙옙 hashmap 占쏙옙占쏙옙占쏙옙獵歐占� 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙
+    			@RequestParam(value = "stuId", required=true) String stuId) { // �뜝�떛琉꾩삕�뜝�룞�삕 5�뜝�룞�삕�뜝�룞�삕 �뜝�떇�씛�삕�뜝�룞�삕�떣�뜝占� �뜝�뙣�븘�슱�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕 �뜝�떕�뼲�삕�뜝�룞�삕 x
+		HashMap<Object, Object> param=new HashMap<Object, Object>(); //�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 id�뜝�룞�삕�뜝�룞�삕 hashmap �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜷閭먨뜝占� �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
     			
 		param.put("stuId",stuId);
 		
 		System.out.println(param);
 		
-		//占쏙옙 占쌉쇽옙(url)占쏙옙 회占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙 占쏙옙占쏙옙占싱깍옙 占쏙옙占쏙옙占쏙옙
-		//占쏙옙占쏙옙占� 占쏙옙占쏙옙 or 占쏙옙占싻몌옙 占싯뤄옙 占쌍몌옙 占쏙옙
-		//int 占쏙옙占쏙옙占쏙옙 占쏙옙환占쏙옙 占실는듸옙 1占싱몌옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占싱몌옙 占쏙옙占쏙옙!!
+		//�뜝�룞�삕 �뜝�뙃�눦�삕(url)�뜝�룞�삕 �쉶�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�떛源띿삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕
+		//�뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕 or �뜝�룞�삕�뜝�떩紐뚯삕 �뜝�떙琉꾩삕 �뜝�뙇紐뚯삕 �뜝�룞�삕
+		//int �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�솚�뜝�룞�삕 �뜝�떎�뒗�벝�삕 1�뜝�떛紐뚯삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�떛紐뚯삕 �뜝�룞�삕�뜝�룞�삕!!
 		int result=0;
 		try {
 			result=timeTableDao.deleteAllTimeTable(param);
@@ -142,9 +144,9 @@ public class TimeTableController {
 
 		System.out.println(result);
     	JSONObject jSONObject = new JSONObject();
-    	//占쌓뤄옙占쏙옙 占쏙옙占썩서 占쏙옙占쏙옙 or 占쏙옙占쏙옙 占쏙옙占쏙옙占쌔쇽옙 占싫듸옙占쏙옙絹恙� json 占쏙옙占쏙옙占싶몌옙 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙占쌕거억옙
+    	//�뜝�뙎琉꾩삕�뜝�룞�삕 �뜝�룞�삕�뜝�뜦�꽌 �뜝�룞�삕�뜝�룞�삕 or �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�뙏�눦�삕 �뜝�떕�벝�삕�뜝�룞�삕永방걲占� json �뜝�룞�삕�뜝�룞�삕�뜝�떢紐뚯삕 �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝�뙐嫄곗뼲�삕
     	if(result==1) {
-    		jSONObject.put("result", "1");//占쏙옙占쏙옙     		
+    		jSONObject.put("result", "1");//�뜝�룞�삕�뜝�룞�삕     		
     	}
     	else {
     		jSONObject.put("result", "0");
@@ -155,21 +157,21 @@ public class TimeTableController {
 	
 	
 	@ResponseBody
-    @RequestMapping(value = "/timeTable/deleteTimeTable.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value占쏙옙占� 占쏙옙占쏙옙 占쏙옙占쏙옙, get占쏙옙占� 占쏙옙占�
+    @RequestMapping(value = "/timeTable/deleteTimeTable.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕, get�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝占�
     public String deleteTimeTable(
     			Model model,
     			@RequestParam(value = "stuId", required=true) String stuId,
-    			@RequestParam(value = "subjectKey", required=true) final int subjectKey) { // 占싱뤄옙占쏙옙 5占쏙옙占쏙옙 占식띰옙占쏙옙拷占� 占쌨아울옙占쏙옙 占쏙옙占쏙옙 占싫억옙占쏙옙 x
-		HashMap<Object, Object> param=new HashMap<Object, Object>(); //占쏙옙占쏙옙占쏙옙 id占쏙옙占쏙옙 hashmap 占쏙옙占쏙옙占쏙옙獵歐占� 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙
+    			@RequestParam(value = "subjectKey", required=true) final int subjectKey) { // �뜝�떛琉꾩삕�뜝�룞�삕 5�뜝�룞�삕�뜝�룞�삕 �뜝�떇�씛�삕�뜝�룞�삕�떣�뜝占� �뜝�뙣�븘�슱�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕 �뜝�떕�뼲�삕�뜝�룞�삕 x
+		HashMap<Object, Object> param=new HashMap<Object, Object>(); //�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 id�뜝�룞�삕�뜝�룞�삕 hashmap �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜷閭먨뜝占� �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
     			
 		param.put("stuId",stuId);	
 		param.put("subjectKey",subjectKey);
 		//
 		System.out.println(param);
 		
-		//占쏙옙 占쌉쇽옙(url)占쏙옙 회占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙 占쏙옙占쏙옙占싱깍옙 占쏙옙占쏙옙占쏙옙
-		//占쏙옙占쏙옙占� 占쏙옙占쏙옙 or 占쏙옙占싻몌옙 占싯뤄옙 占쌍몌옙 占쏙옙
-		//int 占쏙옙占쏙옙占쏙옙 占쏙옙환占쏙옙 占실는듸옙 1占싱몌옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占싱몌옙 占쏙옙占쏙옙!!
+		//�뜝�룞�삕 �뜝�뙃�눦�삕(url)�뜝�룞�삕 �쉶�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�떛源띿삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕
+		//�뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕 or �뜝�룞�삕�뜝�떩紐뚯삕 �뜝�떙琉꾩삕 �뜝�뙇紐뚯삕 �뜝�룞�삕
+		//int �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�솚�뜝�룞�삕 �뜝�떎�뒗�벝�삕 1�뜝�떛紐뚯삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�떛紐뚯삕 �뜝�룞�삕�뜝�룞�삕!!
 		int result=0;
 		try {
 			result=timeTableDao.deleteTimeTable(param);
@@ -181,9 +183,9 @@ public class TimeTableController {
 
 		System.out.println(result);
     	JSONObject jSONObject = new JSONObject();
-    	//占쌓뤄옙占쏙옙 占쏙옙占썩서 占쏙옙占쏙옙 or 占쏙옙占쏙옙 占쏙옙占쏙옙占쌔쇽옙 占싫듸옙占쏙옙絹恙� json 占쏙옙占쏙옙占싶몌옙 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙占쌕거억옙
+    	//�뜝�뙎琉꾩삕�뜝�룞�삕 �뜝�룞�삕�뜝�뜦�꽌 �뜝�룞�삕�뜝�룞�삕 or �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�뙏�눦�삕 �뜝�떕�벝�삕�뜝�룞�삕永방걲占� json �뜝�룞�삕�뜝�룞�삕�뜝�떢紐뚯삕 �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝�뙐嫄곗뼲�삕
     	if(result==1) {
-    		jSONObject.put("result", "1");//占쏙옙占쏙옙     		
+    		jSONObject.put("result", "1");//�뜝�룞�삕�뜝�룞�삕     		
     	}
     	else {
     		jSONObject.put("result", "0");
