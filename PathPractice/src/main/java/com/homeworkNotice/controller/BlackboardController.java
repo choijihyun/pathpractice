@@ -23,18 +23,18 @@ public class BlackboardController {
 	private BlackboardDao blackboardDao;
 	
 	@ResponseBody
-    @RequestMapping(value = "/blackboard/getAnnounce.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value��� ���� ����, get��� ���
+    @RequestMapping(value = "/blackboard/getAnnounce.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.POST)// value��� ���� ����, get��� ���
     public String getAnnounce(
     			Locale locale, 
     			Model model,
     			@RequestParam(value = "stuId", required=true) String stuId) {
-
+		System.out.println("blackboard controller!!");
 		HashMap<Object, Object> param=new HashMap<Object, Object>();
 		
 		param.put("stuId",stuId);
 		
     	List<BlackboardDto> BlackboardDtoList=blackboardDao.getAnnounce(param);
-    	
+    	System.out.println(BlackboardDtoList);
     	JSONArray jSONArray=new JSONArray();
     	List<JSONObject> jsonList=new ArrayList<JSONObject>();
         if(!BlackboardDtoList.isEmpty()) {//占쏙옙환占쏙옙占쏙옙 占쏙옙占쏙옙占싶곤옙 占쏙옙효占싹몌옙(db占쏙옙 占쏙옙占쏙옙占쏙옙) 占쏙옙占쏙옙占쏙옙 화占썽에 占쏙옙占쏙옙占� 占싼뤄옙占쌔댐옙

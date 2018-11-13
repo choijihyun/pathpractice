@@ -23,7 +23,7 @@ public class BlackboardDao {
 	}
 
 	public List<BlackboardDto> getAnnounce(HashMap<Object,Object> param) {
-		return sqlSession.selectList("BlackboardDao.getAnnounce",param);//�̰ŵ� ������???????
+		return sqlSession.selectList("blackboardDao.getAnnounce",param);//�̰ŵ� ������???????
 	}
 
 }
