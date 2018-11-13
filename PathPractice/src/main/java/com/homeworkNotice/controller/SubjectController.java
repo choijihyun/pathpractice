@@ -34,14 +34,14 @@ public class SubjectController {
 	
 	
 
-	//占쏙옙占쏙옙占� insert
+	//�뜝�룞�삕�뜝�룞�삕�뜝占� insert
 	@ResponseBody
-	@RequestMapping(value = "/subject/insertSubject", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//占쏙옙 占싸븝옙占쏙옙 url //get占쏙옙占쏙옙占쏙옙占� 占쏙옙 /user/getUserPwdInfo.json占싱띰옙占� url占쏙옙 占쏙옙占싶쇽옙 占쏙옙占쏙옙 확占쏙옙 占쏙옙 占쏙옙 占쌍댐옙.
-	public String insertSubject(//url占쏙옙 占쏙옙占쏙옙(占쏙옙占쏙옙)占쏙옙 占쌉쇽옙
-			Locale locale, //占싫듸옙占쏙옙絹恙∽옙占� 占쏙옙占쏙옙 占식띰옙占쏙옙占�
-			Model model, //占싫듸옙占쏙옙絹恙∽옙占� 占쏙옙占쏙옙 占식띰옙占쏙옙占�
+	@RequestMapping(value = "/subject/insertSubject", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//�뜝�룞�삕 �뜝�떥釉앹삕�뜝�룞�삕 url //get�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕 /user/getUserPwdInfo.json�뜝�떛�씛�삕�뜝占� url�뜝�룞�삕 �뜝�룞�삕�뜝�떢�눦�삕 �뜝�룞�삕�뜝�룞�삕 �솗�뜝�룞�삕 �뜝�룞�삕 �뜝�룞�삕 �뜝�뙇�뙋�삕.
+	public String insertSubject(//url�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕(�뜝�룞�삕�뜝�룞�삕)�뜝�룞�삕 �뜝�뙃�눦�삕
+			Locale locale, //�뜝�떕�벝�삕�뜝�룞�삕永방걲�댙�삕�뜝占� �뜝�룞�삕�뜝�룞�삕 �뜝�떇�씛�삕�뜝�룞�삕�뜝占�
+			Model model, //�뜝�떕�벝�삕�뜝�룞�삕永방걲�댙�삕�뜝占� �뜝�룞�삕�뜝�룞�삕 �뜝�떇�씛�삕�뜝�룞�삕�뜝占�
 			@RequestParam(value = "subNo", required=false) String subNo,
-			@RequestParam(value = "classNum", required=false) String classNum, //classNum 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙 占싱뤄옙占쏙옙 占쏙옙占쏙옙 ! 占쏙옙타占싣댐옙
+			@RequestParam(value = "classNum", required=false) String classNum, //classNum �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�떛琉꾩삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕 ! �뜝�룞�삕���뜝�떍�뙋�삕
 			@RequestParam(value = "subName", required=true) String subName,
 			@RequestParam(value = "day", required=true) String day,
 			@RequestParam(value = "classRoom", required=false) String classRoom,
@@ -50,7 +50,7 @@ public class SubjectController {
 			@RequestParam(value = "endHour", required=false) String endHour,
 			@RequestParam(value = "add", required=false) String add
 			){
-		//add占쏙옙占쏙옙 占싻뱄옙
+		//add�뜝�룞�삕�뜝�룞�삕 �뜝�떩諭꾩삕
 		
 		HashMap<Object, Object> param=new HashMap<Object, Object>();
 		
@@ -76,9 +76,9 @@ public class SubjectController {
 
 		System.out.println(result);
     	JSONObject jSONObject = new JSONObject();
-    	//占쌓뤄옙占쏙옙 占쏙옙占썩서 占쏙옙占쏙옙 or 占쏙옙占쏙옙 占쏙옙占쏙옙占쌔쇽옙 占싫듸옙占쏙옙絹恙� json 占쏙옙占쏙옙占싶몌옙 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙占쌕거억옙
+    	//�뜝�뙎琉꾩삕�뜝�룞�삕 �뜝�룞�삕�뜝�뜦�꽌 �뜝�룞�삕�뜝�룞�삕 or �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�뙏�눦�삕 �뜝�떕�벝�삕�뜝�룞�삕永방걲占� json �뜝�룞�삕�뜝�룞�삕�뜝�떢紐뚯삕 �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝�뙐嫄곗뼲�삕
     	if(result==1) {
-    		jSONObject.put("result", "1");//占쏙옙占쏙옙    		
+    		jSONObject.put("result", "1");//�뜝�룞�삕�뜝�룞�삕    		
     	}
     	else {
     		jSONObject.put("result", "0");
@@ -101,7 +101,7 @@ public class SubjectController {
     	
     	JSONArray jSONArray=new JSONArray();
     	List<JSONObject> jsonList=new ArrayList<JSONObject>();
-        if(!subjectDtoList.isEmpty()) {//占쏙옙환占쏙옙占쏙옙 占쏙옙占쏙옙占싶곤옙 占쏙옙효占싹몌옙(db占쏙옙 占쏙옙占쏙옙占쏙옙) 占쏙옙占쏙옙占쏙옙 화占썽에 占쏙옙占쏙옙占� 占싼뤄옙占쌔댐옙
+        if(!subjectDtoList.isEmpty()) {//�뜝�룞�삕�솚�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�떢怨ㅼ삕 �뜝�룞�삕�슚�뜝�떦紐뚯삕(db�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕) �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �솕�뜝�띂�뿉 �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�떬琉꾩삕�뜝�뙏�뙋�삕
         	for(int i=0;i<subjectDtoList.size();i++) {
         		JSONObject jSONObject = new JSONObject();
         		jSONObject.put("add",subjectDtoList.get(i).getAdd());
@@ -124,7 +124,7 @@ public class SubjectController {
 
             return jsObject.toString();
         } 
-        else {//占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙占쏙옙 占싼뤄옙占쌔댐옙
+        else {//�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�떬琉꾩삕�뜝�뙏�뙋�삕
 
     		JSONObject jSONObject = new JSONObject();
         	jSONObject.put("result", "no data");
@@ -136,42 +136,47 @@ public class SubjectController {
 	
 	//search
 	@ResponseBody
-	@RequestMapping(value = "/subject/searchSubject.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//占쏙옙 占싸븝옙占쏙옙 url //get占쏙옙占쏙옙占쏙옙占� 占쏙옙 /user/getUserPwdInfo.json占싱띰옙占� url占쏙옙 占쏙옙占싶쇽옙 占쏙옙占쏙옙 확占쏙옙 占쏙옙 占쏙옙 占쌍댐옙.
-	public String searchSubject(//url占쏙옙 占쏙옙占쏙옙(占쏙옙占쏙옙)占쏙옙 占쌉쇽옙
-			Locale locale, //占싫듸옙占쏙옙絹恙∽옙占� 占쏙옙占쏙옙 占식띰옙占쏙옙占�
-			Model model, //占싫듸옙占쏙옙絹恙∽옙占� 占쏙옙占쏙옙 占식띰옙占쏙옙占�
+	@RequestMapping(value = "/subject/searchSubject.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//�뜝�룞�삕 �뜝�떥釉앹삕�뜝�룞�삕 url //get�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕 /user/getUserPwdInfo.json�뜝�떛�씛�삕�뜝占� url�뜝�룞�삕 �뜝�룞�삕�뜝�떢�눦�삕 �뜝�룞�삕�뜝�룞�삕 �솗�뜝�룞�삕 �뜝�룞�삕 �뜝�룞�삕 �뜝�뙇�뙋�삕.
+	public String searchSubject(//url�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕(�뜝�룞�삕�뜝�룞�삕)�뜝�룞�삕 �뜝�뙃�눦�삕
+			Locale locale, //�뜝�떕�벝�삕�뜝�룞�삕永방걲�댙�삕�뜝占� �뜝�룞�삕�뜝�룞�삕 �뜝�떇�씛�삕�뜝�룞�삕�뜝占�
+			Model model, //�뜝�떕�벝�삕�뜝�룞�삕永방걲�댙�삕�뜝占� �뜝�룞�삕�뜝�룞�삕 �뜝�떇�씛�삕�뜝�룞�삕�뜝占�
 			@RequestParam(value = "word", required=false) String word,
 			@RequestParam(value = "select",required=true) final int select){
-
 		
 		HashMap<Object, Object> param=new HashMap<Object, Object>();
 		
+		int word1=0;
+		
+		if(select==3) {
+			word1 = Integer.parseInt(word);
+			param.put("word", word1);
+			param.put("select",select);
+		}
+		else {
 		param.put("word",word);			
 		param.put("select",select);
-		
-		System.out.println("TTTT :::: "+word);
-		
+		}
 		
 		List<SubjectDto> subjectDtoList;
 		
 		switch(select){
-		case 1:	subjectDtoList =subjectDao.search1Subject(param);break;
-		case 2:subjectDtoList =subjectDao.searchSubject(param);System.out.println("run");break;
-		case 3:subjectDtoList =subjectDao.search2Subject(param);break;
-		case 4:subjectDtoList =subjectDao.search3Subject(param);break;
+		case 1:	subjectDtoList =subjectDao.search1Subject(param);break; //subno
+		case 2:subjectDtoList =subjectDao.searchSubject(param);break;//subname
+		case 3:subjectDtoList =subjectDao.search2Subject(param);System.out.println("run");break;//subjectKey
+		case 4:subjectDtoList =subjectDao.search3Subject(param);break;//profname
 		default:subjectDtoList =subjectDao.searchSubject(param);break;
 		}
-		//subNo 로 찾는 경우
-		//subName 으로 찾는 경우
-		//subjectKey 로 찾는 경우 
-		//profName 으로 찾는 경우
+		//subNo 濡� 李얜뒗 寃쎌슦
+		//subName �쑝濡� 李얜뒗 寃쎌슦
+		//subjectKey 濡� 李얜뒗 寃쎌슦 
+		//profName �쑝濡� 李얜뒗 寃쎌슦
 		
     	JSONArray jSONArray=new JSONArray();
     	List<JSONObject> jsonList=new ArrayList<JSONObject>();
     	
     	System.out.println(subjectDtoList);
 		
-    	if(!subjectDtoList.isEmpty()) {//占쏙옙환占쏙옙占쏙옙 占쏙옙占쏙옙占싶곤옙 占쏙옙효占싹몌옙(db占쏙옙 占쏙옙占쏙옙占쏙옙) 占쏙옙占쏙옙占쏙옙 화占썽에 占쏙옙占쏙옙占� 占싼뤄옙占쌔댐옙
+    	if(!subjectDtoList.isEmpty()) {//�뜝�룞�삕�솚�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�떢怨ㅼ삕 �뜝�룞�삕�슚�뜝�떦紐뚯삕(db�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕) �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �솕�뜝�띂�뿉 �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�떬琉꾩삕�뜝�뙏�뙋�삕
         	for(int i=0;i<subjectDtoList.size();i++) {
         		
         		JSONObject jSONObject = new JSONObject();
@@ -242,19 +247,19 @@ public class SubjectController {
 	
 
 	@ResponseBody
-    @RequestMapping(value = "/subject/deleteSubject.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value占쏙옙占� 占쏙옙占쏙옙 占쏙옙占쏙옙, get占쏙옙占� 占쏙옙占�
+    @RequestMapping(value = "/subject/deleteSubject.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕, get�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝占�
     public String deleteSubject(
     			Model model,
-    			@RequestParam(value = "add", required=true) String add) { // 占싱뤄옙占쏙옙 5占쏙옙占쏙옙 占식띰옙占쏙옙拷占� 占쌨아울옙占쏙옙 占쏙옙占쏙옙 占싫억옙占쏙옙 x
-		HashMap<Object, Object> param=new HashMap<Object, Object>(); //占쏙옙占쏙옙占쏙옙 id占쏙옙占쏙옙 hashmap 占쏙옙占쏙옙占쏙옙獵歐占� 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙
+    			@RequestParam(value = "add", required=true) String add) { // �뜝�떛琉꾩삕�뜝�룞�삕 5�뜝�룞�삕�뜝�룞�삕 �뜝�떇�씛�삕�뜝�룞�삕�떣�뜝占� �뜝�뙣�븘�슱�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕 �뜝�떕�뼲�삕�뜝�룞�삕 x
+		HashMap<Object, Object> param=new HashMap<Object, Object>(); //�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 id�뜝�룞�삕�뜝�룞�삕 hashmap �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜷閭먨뜝占� �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕
     			
 		param.put("add",add);	
 		//
 		System.out.println(param);
 		
-		//占쏙옙 占쌉쇽옙(url)占쏙옙 회占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙 占쏙옙占쏙옙占싱깍옙 占쏙옙占쏙옙占쏙옙
-		//占쏙옙占쏙옙占� 占쏙옙占쏙옙 or 占쏙옙占싻몌옙 占싯뤄옙 占쌍몌옙 占쏙옙
-		//int 占쏙옙占쏙옙占쏙옙 占쏙옙환占쏙옙 占실는듸옙 1占싱몌옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占싱몌옙 占쏙옙占쏙옙!!
+		//�뜝�룞�삕 �뜝�뙃�눦�삕(url)�뜝�룞�삕 �쉶�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�떛源띿삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕
+		//�뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕 or �뜝�룞�삕�뜝�떩紐뚯삕 �뜝�떙琉꾩삕 �뜝�뙇紐뚯삕 �뜝�룞�삕
+		//int �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�솚�뜝�룞�삕 �뜝�떎�뒗�벝�삕 1�뜝�떛紐뚯삕 �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�떛紐뚯삕 �뜝�룞�삕�뜝�룞�삕!!
 		int result=0;
 		try {
 			result=subjectDao.deleteSubject(param);
@@ -266,9 +271,9 @@ public class SubjectController {
 
 		System.out.println(result);
     	JSONObject jSONObject = new JSONObject();
-    	//占쌓뤄옙占쏙옙 占쏙옙占썩서 占쏙옙占쏙옙 or 占쏙옙占쏙옙 占쏙옙占쏙옙占쌔쇽옙 占싫듸옙占쏙옙絹恙� json 占쏙옙占쏙옙占싶몌옙 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙占쌕거억옙
+    	//�뜝�뙎琉꾩삕�뜝�룞�삕 �뜝�룞�삕�뜝�뜦�꽌 �뜝�룞�삕�뜝�룞�삕 or �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�뙏�눦�삕 �뜝�떕�벝�삕�뜝�룞�삕永방걲占� json �뜝�룞�삕�뜝�룞�삕�뜝�떢紐뚯삕 �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝�뙐嫄곗뼲�삕
     	if(result==1) {
-    		jSONObject.put("result", "1");//占쏙옙占쏙옙     		
+    		jSONObject.put("result", "1");//�뜝�룞�삕�뜝�룞�삕     		
     	}
     	else {
     		jSONObject.put("result", "0");
