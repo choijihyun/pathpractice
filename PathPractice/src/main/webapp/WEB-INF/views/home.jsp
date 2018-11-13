@@ -121,7 +121,8 @@
 	   			if(result['result'] === "no data"){ 
 	   				alert('등록된 시간표가 없습니다.');
 	   			}else{
-	  				alert('시간표 불러오기 성공');
+	  				alert('시간표 불러오기 성공??????');
+	  				console.log("123123123123");
 					console.log(result); 
 				
 					for (var i = 0; i < result['result'].length; i++) {

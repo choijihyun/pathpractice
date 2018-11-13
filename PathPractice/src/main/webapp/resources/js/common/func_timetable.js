@@ -11,6 +11,7 @@ var findSubjectInfo = function (subjectKey) {
    		if(result['result'] === "no data"){ 
 //   			alert('없는 과목입니다.');
  		}else{
+ 			alert('없는 과목입니다.');
 				console.log(result);
 				
 				subName = result['result'][0]['subName'];

@@ -44,8 +44,9 @@
 					<div class="row col-auto justify-content-end setting">
 						<div class= "p-0 col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4">
 							<div class="btn-group" role="group" aria-label="Basic example">
-								<button type="button" class="btn btn-sm btn_assign_type">Team</button>
 								<button type="button" class="btn btn-sm btn_assign_type">Non</button>
+								<button type="button" class="btn btn-sm btn_assign_type">Team</button>
+								<button type="button" class="btn btn-sm btn_assign_type">Complete</button>
 							</div>
 						</div>
 						<div class= "col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4">
@@ -104,6 +105,10 @@
 
 <!-- modal-->
 <script type="text/javascript">
+	<%
+	String id = (String)session.getAttribute("id");
+	%>
+
 	$(function(){
 		$(document).on("click",'.btn_pop_assignment',function() {
 			var body = '';
@@ -113,6 +118,7 @@
 			var contents = $(this).data('contents');
 			var subNo = $(this).data('subNo');
 			var assignNo = $(this).data('assignNo');
+			//var team = $(this).data('team');
 			
 			$('#hiddenAssign').val(assignNo).trigger('change');
 			$('#hiddenSub').val(subNo).trigger('change');
@@ -124,52 +130,84 @@
 			$('.modal-title').text(title);
 			$('.modal-body').text(body);
 			$('div.modal').modal();
+		
 			
-			//modify assignment
+			//과제 삭제 버튼 클릭 
+			$('#assignDel').on('click', function (){
+				var assignNo = $('#hiddenAssign').val();
+				event.preventDefault();
+				$.ajax({
+					url:"/homework/deleteHomework.json",
+					type : "GET",
+					data : {
+						'stuId':<%=id%>,
+						'assignNo': assignNo
+					},
+					success : function(result){
+						if(result['result'] === "1"){
+							alert('삭제 성공');
+							console.log(result);
+							location.reload();
+						}else{
+							alert('삭제 실패');
+						}
+					},
+					error : function(){
+						alert('삭제 에러');
+					}
+				});//ajax
+			});//assignDel Cllick
+
+			//과제 수정버튼 클릭
 			$('#assignChange').on('click', function (){
 				location.href="/assignment_add?title="+title
 				+"&dueDate="+dueDate
 				+"&importance="+importance
 				+"&contents="+contents
+				+"&assignNo="+assignNo
 				+"&subNo="+subNo;
-			});
-		});
-	})
+			});//assignChange Cllick
+			
+			//과제 완료버튼 클릭
+			$('#assignComplete').on('click', function (){
+				
+				event.preventDefault();
+				$.ajax({
+					url:"/homework/updateHomework.json",
+					type : "GET",
+					data : {
+						'dueDate': dueDate,
+						'importance': importance,
+						'title': title,
+						'contents': contents,
+						'subNo': subNo,
+						'stuId': <%=id%>,
+						'assignNo': assignNo,
+						'success': 1,
+						'team': 0
+						//team 이거 언니가 추가해주면 바꾸기
+					},
+					success : function(result){
+						if(result['result'] === "1"){
+							alert('과제완료 성공');
+							console.log(result);
+							location.reload();
+						}else{
+							alert('과제완료 실패');
+						}
+					},
+					error : function(){
+						alert('과제완료 에러');
+					}
+				});//ajax
+			});//assignComplete Click
+			
+		});//btn_pop_assignment Click
+	})//function
 </script>
 
 
-<!-- 과제 삭제 버튼 클릭 -->
-<script type="text/javascript">
-	$('#assignDel').on('click', function (){
-		<%
-			String id = (String)session.getAttribute("id");
-		%>
-		var assignNo = $('#hiddenAssign').val();
-		event.preventDefault();
-		$.ajax({
-			url:"/homework/deleteHomework.json",
-			type : "GET",
-			data : {
-				'stuId':<%=id%>,
-				'assignNo': assignNo
-			},
-			success : function(result){
-				if(result['result'] === "1"){
-					alert('삭제 성공');
-					console.log(result);
-					location.reload();
-				}else{
-					alert('삭제 실패');
-				}
-			},
-			error : function(){
-				alert('삭제 에러');
-			}
-		});
-	});
-</script>
-
-<!-- íë©´ì ê³¼ì  íì -->
+<!-- 모든 과제 불러오기,띄우기 -->
 <script type="text/javascript">
 	$(document).ready(function(){
 		$.ajax({
@@ -200,6 +238,7 @@
 						str += 'data-title= " ' + assign_title + ' " ';
 						str += 'data-assign-no= " ' + result['result'][i]['assignNo'] + ' " ';
 						str += 'data-sub-no= " ' + result['result'][i]['subNo'] + ' " ';
+						//str += 'data-team= " ' + result['result'][i]['team'] + ' " ';
 						str += 'data-contents= " ' + assign_contents + '">';
 						str += '<h6 id="assign' + (i+1) + 'Title" ';
 						str += 'style="font-weight: bold" class="mb-2">-' + assign_title + '</h6>';
