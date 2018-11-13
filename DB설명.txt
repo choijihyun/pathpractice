@@ -10,7 +10,7 @@ importance : 과제 중요도
 title : 과제 등록 이름
 contents : 과제 등록시 등록한 과제 내용
 subNo : 등록된 과제의 강의 번호
-success : 과제 했는지의 여부 등록
+success : 과제 했는지의 여부 등록(1: 과제함 0: 과제안함)
 team : 팀과제인지 개인과제인지(0:개인 그외 : 팀번호)
 
 
@@ -63,3 +63,10 @@ MemThreeName : 팀원3 이름(null 허용)
 MemThreeNum : 팀원3 학번(null 허용)
 MemFourName : 팀원4 이름(null 허용)
 MemFourNum : 팀원4 학번(null 허용)
+
+Annoucement
+- 블랙보드 공지사항 긁어온거 저장하는 곳
+stuId : 학생 학번
+date : 공지사항이 올라온날짜!
+subject : 공지사항 올라온 과목
+content : 공지사항 내용

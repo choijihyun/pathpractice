@@ -11,6 +11,7 @@
 	-> *** 스크롤링 하려면 '/Users/USER/Downloads/chromedriver' 저경로에 저거 있어야함
 - selenium(cmd다운로드)
 - beautifulsoup(cmd다운로드)
+- pymysql (pip install pymysql)
 
 pymysql 참고 : http://www.fun-coding.org/mysql_basic6.html#SQL-%ED%99%9C%EC%9A%A9
 
