@@ -63,3 +63,10 @@ MemThreeName : 팀원3 이름(null 허용)
 MemThreeNum : 팀원3 학번(null 허용)
 MemFourName : 팀원4 이름(null 허용)
 MemFourNum : 팀원4 학번(null 허용)
+
+Annoucement
+- 블랙보드 공지사항 긁어온거 저장하는 곳
+stuId : 학생 학번
+date : 공지사항이 올라온날짜!
+subject : 공지사항 올라온 과목
+content : 공지사항 내용
