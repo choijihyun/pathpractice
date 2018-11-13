@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	select * from Subject where subNo LIKE CONCAT('%',#{word},'%')
     </select> 
     <select id="search2Subject" resultType="com.homeworkNotice.dto.SubjectDto" parameterType="map">
-    	select * from Subject where subjectKey=#{subjectKey}
+    	select * from Subject where subjectKey=#{word}
     </select>
      <select id="search3Subject" resultType="com.homeworkNotice.dto.SubjectDto" parameterType="map">
     	select * from Subject where profName LIKE CONCAT('%',#{word},'%')
