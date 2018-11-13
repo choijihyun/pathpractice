@@ -44,6 +44,7 @@
 					<div class="row col-auto justify-content-end setting">
 						<div class= "p-0 col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4">
 							<div class="btn-group" role="group" aria-label="Basic example">
+								<button type="button" class="btn btn-sm btn_assign_type">ALL</button>
 								<button type="button" class="btn btn-sm btn_assign_type">Non</button>
 								<button type="button" class="btn btn-sm btn_assign_type">Team</button>
 								<button type="button" class="btn btn-sm btn_assign_type">Complete</button>
