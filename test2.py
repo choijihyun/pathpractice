@@ -1,3 +1,5 @@
+##이거는 아이디 비번 지정해놓고 직므 테스트 용으로 하는 중
+
 # -*- coding: utf-8 -*-
 # UTF-8 encoding when using korean
 from selenium import webdriver
@@ -9,59 +11,22 @@ from time import sleep
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.alert import Alert
 #db랑 python 연결
-import pymysql
+import re
+#문자열 같은지 비교
+from operator import eq
 #현재 시간 가져오는 모듈
 from datetime import datetime
-import re
-
-
-#datetime 얻어내는 함수
-def get_time(line):
-    var=0 #일수 기준
-    if " 전" in line:
-        if "시간" in line:
-            var = 0
-        if "일" in line:
-            idx = line.index("전")
-            time = line[:idx-2]
-            var = int(re.findall('\d+', time)[0])
-
-        mm=(datetime.today().month)
-        
-        dd=datetime.today().day - var
-        if dd <= 0:
-            if mm == 12:
-                mm = 1
-            else :
-                mm-=1
-
-            if mm==0:
-                mm=12
-            if mm==3 or mm==5 or mm==7 or mm==8 or mm==10 or mm==12:
-                dd = 31+dd
-            elif mm==4 or mm==6 or mm==9 or mm==11:
-                dd = 30+dd
-
-        dd = str(dd)
-        if len(dd)==1:
-            dd="0"+dd
-        mm = str(mm)
-        if len(mm)==1:
-            mm="0"+mm
-        return (str(datetime.today().year)+"-"+mm+"-"+dd)
 
 
 
-#blackboard 스크롤링 함수
-def get_info(uid, upw):
+def get_info():
   #chrome의 경우, 아까 받은 chromedriver의 위치를 지정해준다.
     driver = webdriver.Chrome('/Users/USER/Downloads/chromedriver')
 
   #암묵적으로 웹 자원 로드를 위해 3초까지 기다림
-    
-    stuid =str(uid)
-    pw = str(upw)
 
+    stuid ='1'
+    pw = '1'
   #url접근
     
     driver.get('https://blackboard.sejong.ac.kr')
@@ -106,7 +71,8 @@ def get_info(uid, upw):
     driver.implicitly_wait(5)
 
 
-    #ipython으로 한단계 한단계 확인할 수 있음
+
+  #ipython 써서 확인하기
     sleep(10)
 
     text = driver.page_source
@@ -127,7 +93,7 @@ def get_info(uid, upw):
                     continue
                 if "닫기" in line:
                     continue
-                if "오픈" in line:
+                if "오" in line:
                     continue
                 if " 전" in line and eq(line,lines[0]):
                     idx = line.index("전")
@@ -154,6 +120,8 @@ def get_info(uid, upw):
     return (announcements)
 
 
+
+
 # 시간 내용 과목 리스트 형식으로 나뉜거 받아서 파싱하는 함수
 def get_subject(lists):
     subjects=[]
@@ -175,6 +143,43 @@ def get_subject(lists):
                 except: 
                     print("!"+line)
     return (subjects)
+
+
+#datetime 얻어내는 함수
+def get_time(line):
+    var=0 #일수 기준
+    if " 전" in line:
+        if "시간" in line:
+            var = 0
+        if "일" in line:
+            idx = line.index("전")
+            time = line[:idx-2]
+            var = int(re.findall('\d+', time)[0])
+
+        mm=(datetime.today().month)
+        
+        dd=datetime.today().day - var
+        if dd <= 0:
+            if mm == 12:
+                mm = 1
+            else :
+                mm-=1
+
+            if mm==0:
+                mm=12
+            if mm==3 or mm==5 or mm==7 or mm==8 or mm==10 or mm==12:
+                dd = 31+dd
+            elif mm==4 or mm==6 or mm==9 or mm==11:
+                dd = 30+dd
+
+        dd = str(dd)
+        if len(dd)==1:
+            dd="0"+dd
+        mm = str(mm)
+        if len(mm)==1:
+            mm="0"+mm
+        return (str(datetime.today().year)+"-"+mm+"-"+dd)
+
 
 # 시간 과목 내용 파싱
 def parsing(announcement,subjects):
@@ -213,36 +218,24 @@ def parsing(announcement,subjects):
         PARSE.append(parse)
 
     return (PARSE)
+            
+            
 
-#####################################################################
-
-#MySQL Connection 연결
-conn = pymysql.connect(host='203.250.148.53',
-                       port=3306,
-                       user='jihyun',
-                       passwd='root',
-                       db='PATH')
-
-#connectino으로 부터 cursor 생성
-curs = conn.cursor()
-
-#sql문 실행
-sql = "select stuId, pw from Student"
-curs.execute(sql)
-
-#data fetch
-rows = curs.fetchall()
-print(rows)
-
-for stu in rows:
-    lists=get_info(stu[0], stu[1])
-    if lists == False :
-        break
-    #lists = get_info(16011008,sechljigusjong98)
-    for line in lists:
-        print(line)
+lists = get_info()
+if lists == False:
+    print("반환 됌")
+for i in lists:
+    for j in i:
+        print(j)
+print("start")
+subjects = get_subject(lists)
 
 
-    
-f.close()
-conn.close()
+print("===parsing===")
+content = parsing(lists, subjects)
+for i in content:
+    print("date : "+i[0])
+    print("subject : "+i[1])
+    print("content : "+i[2])
+
+        

@@ -21,7 +21,6 @@ while True:
             else:
                 subjects.append(string)
             
-            #print(llist)
         except: 
             print("!"+line)
 
