@@ -229,7 +229,7 @@ $('#search').on('click', function() {
 			},
 			success : function(result){
        		if(result['result'] === "no data"){ 
-       			alert('없는 과목입니다.');
+       			alert('없는 과목입니다.timetable.jsp');
        		}else{
 					console.log(result);
 					
@@ -327,32 +327,8 @@ $('#search').on('click', function() {
 				console.log(result);
 				if (result['result'] === '1') {
 					alert('시간표등록성공');
-					
-					//FUNCTION
-					displayTimetable(shour,sminute,ehour,eminute,day1,day2,context);//parameter로 시작 시간,종료시간,요일
-					//동적으로 table 합치기!!!!!!!!!!!!!!!!!!!!!!
-					
-					//나중에 이건 불러오기 할때 그쪽에도 추가해야 함
-					for(var i=1 ; i<=5 ; i++){
-	 					$(".content"+i).each(function() {
-							var text = $(this).text();
-							var cnt=0;
-							console.log("내용="+text);
-							if( text != '#'){
-								var rows = $(".content"+i+":contains('" + text + "')"); //subjectKey로 판별할 수 있게 바꾸기
-								console.log( text,rows.length);
-								//행열 찍어보기
-								if (rows.length > 1) {
-									rows.eq(0).attr("rowspan", rows.length);
-									rows.not(":eq(0)").remove();
-									console.log( "ater: "+rows.length);
-								}
-				 				cnt++;
-							}
-			 				console.log("cnt=",cnt);
-						});//요일 두개인 과목에는 이상해!! 
-					}
-			
+					location.reload();					
+					//동적으로 table 합치기!!!!!!!!!!!!!!!!!!!!!!			
 				} else {
 					alert('시간표등록실패');
 				}
@@ -366,7 +342,6 @@ $('#search').on('click', function() {
 <!-- 처음페이지 시작, 추가 수정 삭제시 시간표 정보들 모두 불러오기 -->
 <!-- 시작할때 시간표 불러오기 -->
 <script>
-	//subjectKey 로 시간표 db에 등록
 	$(document).ready(function(){
 		$.ajax({
 			url : "/timeTable/searchTimeTable.json",
@@ -378,13 +353,26 @@ $('#search').on('click', function() {
 					alert('등록된 시간표가 없습니다.');				
 				} else {
 					alert('시간표 불러오기 성공');
-					console.log(result);
 					
 					for (var i = 0; i < result['result'].length; i++) {
 						var subjectKey = result['result'][i]['subjectKey'];
-						console.log("sub = ",subjectKey);
-						//subject 키로 과목정보들 찾아와서 색칠하기
 						findSubjectInfo(subjectKey);
+					}
+					
+					for(var i=1 ; i<6 ; i++){
+						$(".content"+i).each(function() {
+							var text = $(this).text();
+							console.log("내용!!!="+text,this);
+							if( text != '#'){
+								console.log("내용???="+text);
+								var rows = $(".content"+i+":contains('" + text + "')"); //subjectKey로 판별할 수 있게 바꾸기
+								//console.log( text,rows.length);
+								if (rows.length > 1) {
+									rows.eq(0).attr("rowspan", rows.length);
+									rows.not(":eq(0)").remove();
+								}
+							}
+						});//요일 두개인 과목에는 이상해!! 
 					}
 				}
 			},error : function() {
@@ -392,4 +380,8 @@ $('#search').on('click', function() {
 			}
 		});
 	});
+	
+	
+
+	
 </script>

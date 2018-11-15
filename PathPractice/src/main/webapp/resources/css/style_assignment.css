@@ -36,11 +36,11 @@
 	color: #fff;
 	background: #dd3247;
 }
-.btn_assign_type:active{
+.btn_assign_type:focus{
 	border:0;
 	max-width: 60px;
 	max-height: 30px;
-	color: #fff;
+	color: #dd3247;
 	background: #fff;
 }
 /*濡쒓렇�븘�썐 踰꾪듉*/

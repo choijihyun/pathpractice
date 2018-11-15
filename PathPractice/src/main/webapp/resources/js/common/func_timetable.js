@@ -8,10 +8,9 @@ var findSubjectInfo = function (subjectKey) {
 			'select':3
 		},
 		success : function(result){
-   		if(result['result'] === "no data"){ 
-//   			alert('없는 과목입니다.');
- 		}else{
- 			alert('없는 과목입니다.');
+	   		if(result['result'] === "no data"){ 
+	 			alert('없는 과목입니다.func_timetable.js');
+	 		}else{
 				console.log(result);
 				
 				subName = result['result'][0]['subName'];
@@ -31,13 +30,14 @@ var findSubjectInfo = function (subjectKey) {
 				context = subName.concat(" ",classroom);
 
 				displayTimetable(shour,sminute,ehour,eminute,day1,day2,context);
-   		}
- 	},
- 	error : function(request,status,error){
-		alert('검색 에러');
-		console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
-	}
-});
+				
+	   		}
+	 	},
+	 	error : function(request,status,error){
+			alert('검색 에러');
+			console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+		}
+	});
 
 }
 var displayTimetable = function (val_shour, val_sminute, val_ehour, val_eminute, val_day1, val_day2, context) {
@@ -47,7 +47,7 @@ var displayTimetable = function (val_shour, val_sminute, val_ehour, val_eminute,
 	var row_length = table.rows.length;
 	var new_row_len = val_ehour; 
 	
-	//동적으로 테이블 조정
+	//동적으로 테이블 추가
 	new_row_len = (new_row_len - 8) * 2;
 	if (val_eminute == '30')
 		new_row_len++;
@@ -92,7 +92,7 @@ var displayTimetable = function (val_shour, val_sminute, val_ehour, val_eminute,
 			index_day2 = i + 1;
 	}
 	//color random
-	var colorCode = "#" + Math.round(Math.random() * 0xFFFFFF).toString(16);
+	var colorCode = "#" + Math.round((Math.random()*100 +100) * 0xFFFFFF).toString(16);
 
 	//paint time
 	for (i = val_shour; i < val_ehour; i++) {
@@ -105,4 +105,6 @@ var displayTimetable = function (val_shour, val_sminute, val_ehour, val_eminute,
 			table.rows[i].cells[index_day2].innerHTML = context;
 		}
 	}
+
+
 }
