@@ -40,7 +40,7 @@ f=open(fname,"w",encoding='utf8')
 for i in announcements:
     for j in i:
         f.write(j)
-        #f.write("\n")
+        f.write("\n")
     f.write("\n")
     
 
