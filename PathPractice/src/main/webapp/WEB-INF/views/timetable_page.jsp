@@ -215,84 +215,25 @@ $('#search').on('click', function() {
 
 <!--시간표 추가 -->
 <script>
-	var subNo = '${subNo}'; 
+	var subjectKey = '${subjectKey}'; 
 
- 	if(subNo == 0){
-		subNo = 111111//?? 직접 추가할 때 subNo어떻게 하는지 물어보기//직접추가하면 교수명 과목명 시작시간 종료시간 장소 모두 입력받은걸로 찾아와서 색칠
+ 	if(subjectKey == 0){
+ 		subjectKey = 111111//?? 직접 추가할 때 subNo어떻게 하는지 물어보기//직접추가하면 교수명 과목명 시작시간 종료시간 장소 모두 입력받은걸로 찾아와서 색칠
 	}
-	$.ajax({
-			url:"/subject/searchSubject.json",
-			type : "GET",
-			data : {
-				'word':subNo, //subNO로 subjectKey랑 과목 정보들 가져오기 //find_subject해서 url parameter로 가져옴
-				'select':1
-			},
-			success : function(result){
-       		if(result['result'] === "no data"){ 
-       			alert('없는 과목입니다.timetable.jsp');
-       		}else{
-					console.log(result);
-					
-					subName = result['result'][0]['subName'];
-					classroom = result['result'][0]['classroom'];
-					profName = result['result'][0]['profName'];
-					subjectKey = result['result'][0]['subjectKey'];
-					startHour = result['result'][0]['startHour'];
-					endHour = result['result'][0]['endHour'];
-					day = result['result'][0]['day'];
-					
-					if(day != null){
-						day1 = day.slice(0,1);
-						day2 = day.slice(1,2);	
-						shour = startHour.slice(0,2);//앞에2개 자르기
-						sminute = startHour.slice(3,5);
-						ehour = endHour.slice(0,2);
-						eminute = endHour.slice(3,5);
-					}
-					else{
-						day1 = day2 = null;
-						shour = sminute = ehour = eminute = null;
-						alert("사이버 강의 입니다. 요일과 장소,시간을 직접 등록 해 주세요. ");
-						//싸강도 할꺼야???
-					}
-
-					context = subName.concat(" ",classroom);
-					$('#hiddenSubKey').val(subjectKey).trigger('change');
-					
-					$('#plusTime').trigger('click');
-					$('#addByDirectly').trigger('click');
-					
-					$("#subjectName").val(subName);
-					$("#place").val(classroom);
-					$("#professorName").val(profName);
-					$("#day1").val(day1);
-					$("#day2").val(day2);
-					$("#sHour").val(shour);
-					$("#sMinute").val(sminute);
-					$("#eHour").val(ehour);
-					$("#eMinute").val(eminute);
-       		}
-     	},
-     	error : function(request,status,error){
-    		alert('검색 에러');
-    		console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
-    	}
-	});
+ 	
+ 	fillInfomation(subjectKey,3);
 	
 	$('#btnSuccess').on('click', function () {
 		if( !chkInput() ) return; 
 		
-		//FUNCTION
-		insertTimetable( $('#hiddenSubKey').val() );//parameter로 subjectKey //hidden으로 기억
+		insertTimetable( $('#hiddenSubKey').val() );
 		
 		// select box value init
 		$('select').find("option:eq(0)").prop("selected", true);
 		$('#addByDirectly').trigger('click');
 		$('#plusTime').trigger('click');
 				
-		$('.commonForm input[type="text"]').val(""); 
-		
-		
+		$('.commonForm input[type="text"]').val(""); 	
 	});
 </script>
 
@@ -325,9 +266,9 @@ $('#search').on('click', function() {
 				'subjectKey' : subjectKey
 			},success : function(result) {
 				console.log(result);
-				if (result['result'] === '1') {
-					location.reload();	
-					
+				if (result['result'] === '1') { 
+					location.reload();
+					//$(location).attr('/timetable_page?');
 					//동적으로 table 합치기!!!!!!!!!!!!!!!!!!!!!!			
 				} else {
 					alert('시간표등록실패');
@@ -343,43 +284,6 @@ $('#search').on('click', function() {
 <!-- 시작할때 시간표 불러오기 -->
 <script>
 	$(document).ready(function(){
-		$.ajax({
-			url : "/timeTable/searchTimeTable.json",
-			type : "GET",
-			data : {
-				'stuId' : <%=id%>
-			},success : function(result) {
-				if (result['result'] === "no data") {
-					alert('등록된 시간표가 없습니다.');				
-				} else {
-					for (var i = 0; i < result['result'].length; i++) {
-						var subjectKey = result['result'][i]['subjectKey'];
-						findSubjectInfo(subjectKey);
-					}
-					
-					for(var i=1 ; i<6 ; i++){
-						$(".content"+i).each(function() {
-							var text = $(this).text();
-							console.log("내용!!!="+text,this);
-							if( text != '#'){
-								console.log("내용???="+text);
-								var rows = $(".content"+i+":contains('" + text + "')"); //subjectKey로 판별할 수 있게 바꾸기
-								//console.log( text,rows.length);
-								if (rows.length > 1) {
-									rows.eq(0).attr("rowspan", rows.length);
-									rows.not(":eq(0)").remove();
-								}
-							}
-						});//요일 두개인 과목에는 이상해!! 
-					}
-				}
-			},error : function() {
-				alert('시간표 불러오기 에러');
-			}
-		});
+		showAllTimetable(<%=id%>); 
 	});
-	
-	
-
-	
 </script>

@@ -60,6 +60,7 @@
 							<col width="20%" />
 							<col width="20%" />
 							<col width="20%" />
+							<col width="0%" />
 						</colgroup>
 						<thead>
 							<tr>
@@ -70,6 +71,7 @@
 								<th class="text-center" style="border-left: 1px solid #e5e5e5;">시간</th>
 								<th class="text-center" style="border-left: 1px solid #e5e5e5;">장소</th>
 								<th class="text-center" style="border-left: 1px solid #e5e5e5;">교수명</th>
+								<th class="text-center" style="border-left: 1px solid #e5e5e5;">key</th>
 							</tr>
 						</thead>
 						<tbody></tbody>
@@ -87,6 +89,7 @@
 		</div>
 	</div>
 	<input type="hidden" id="hiddenAssign" name="hide" value="">
+	<input type="hidden" id="hiddenSubjectKey" name="hide" value="">
 </body>
 </html>
 
@@ -120,18 +123,20 @@
 						cell[4] = newRow.insertCell(4),
 						cell[5] = newRow.insertCell(5),
 						cell[6] = newRow.insertCell(6),
+						cell[7] = newRow.insertCell(7),
            				cell[0].innerHTML = i+1;
-           				cell[1].innerHTML = '<input type="radio" id="radio'+(i+1)+'" name="select" data-sub-no="'+result['result'][i]['subNo']+'">';
+           				cell[1].innerHTML = '<input type="radio" id="radio'+(i+1)+'" name="select" data-sub-no="'+result['result'][i]['subNo']+'" data-subject-key="'+result['result'][i]['subjectKey']+'">';
            				cell[2].innerHTML = result['result'][i]['subName'];
            				cell[3].innerHTML = result['result'][i]['day'];
            				cell[4].innerHTML = result['result'][i]['startHour'];
 						cell[5].innerHTML = result['result'][i]['classroom'];
            				cell[6].innerHTML = result['result'][i]['profName'];
+           				cell[7].innerHTML = result['result'][i]['subjectKey'];
 							
            				console.log()
           	 			$(newRow).addClass("stripe_border_top");
 						$(newRow).addClass("add_row");
-           				for(var j=0 ; j<6 ; j++)
+           				for(var j=0 ; j<7 ; j++)
            					$(cell[j]).css("border-right","1px solid #e5e5e5");
           	  		}
            		}
@@ -140,7 +145,8 @@
         		
         		for(var i = 1 ; i < table.rows.length ; i++){
         			for(var j = 1 ; j<table.rows[i].cells.length ; j++){
-        				table.rows[i].cells[j].onclick = function(){console.log(123);
+        				table.rows[i].cells[j].onclick = function(){
+        					console.log(123);
         					rIndex = this.parentElement.rowIndex;
         					cIndex = this.cellIndex;
 
@@ -148,7 +154,9 @@
         					$('input:radio[id="radio'+rIndex+'"]:radio[name="select"]').prop("checked", true);
         					
         					var subNo = $("#radio"+rIndex).data('subNo');
+        					var subjectKey = $("#radio"+rIndex).data('subjectKey');
         					$('#hiddenAssign').val(subNo).trigger('change');
+        					$('#hiddenSubjectKey').val(subjectKey).trigger('change');
         				}
         			}
         		}
@@ -168,17 +176,18 @@
 		console.log(page);
 	
 		if(page == 'assignmentAdd'){
-			location.href="/assignment_add?subNo="+ $('#hiddenAssign').val();
+			location.href="/assignment_add?subNo="+ $('#hiddenAssign').val()
+					+"&subjectKey="+$('#hiddenSubjectKey').val();
 		}
 		else if (page == 'timetablePage'){
-			location.href="/timetable_page?subNo="+ $('#hiddenAssign').val();
+			location.href="/timetable_page?subjectKey="+ $('#hiddenSubjectKey').val();
 		}
 		else if (page == 'assignmentAddTeam'){
-			location.href="/assignment_add_team?subNo="+ $('#hiddenAssign').val();
+			location.href="/assignment_add_team?subNo="+ $('#hiddenAssign').val()
+					+"&subjectKey="+$('#hiddenSubjectKey').val();
 		}
 	}
-//	var page = '${page}'; 
-//	console.log(page);
+
 	$('#submit').on('click', href );
 	$('#cancel').on('click', href );
 </script>

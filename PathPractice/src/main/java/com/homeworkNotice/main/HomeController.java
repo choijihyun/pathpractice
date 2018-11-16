@@ -67,7 +67,8 @@ public class HomeController {
     		@RequestParam(value="importance", required=false, defaultValue="0") int importance,
     		@RequestParam(value="contents", required=false) String contents,
     		@RequestParam(value="assignNo", required=false, defaultValue="0") int assignNo,
-    		@RequestParam(value="subNo", required=false, defaultValue="0") int subNo) {
+    		@RequestParam(value="subNo", required=false, defaultValue="0") int subNo,
+    		@RequestParam(value="subjectKey", required=false, defaultValue="0") int subjectKey) {
   
     	System.out.println("assignment_add! ");
     	
@@ -77,6 +78,7 @@ public class HomeController {
     	model.addAttribute("contents", contents);
     	model.addAttribute("assignNo", assignNo);
     	model.addAttribute("subNo", subNo);
+    	model.addAttribute("subjectKey", subjectKey);
         return "assignment_add";
     }
     
@@ -87,7 +89,8 @@ public class HomeController {
     		@RequestParam(value="importance", required=false, defaultValue="0") int importance,
     		@RequestParam(value="contents", required=false) String contents,
     		@RequestParam(value="assignNo", required=false, defaultValue="0") int assignNo,
-    		@RequestParam(value="subNo", required=false, defaultValue="0") int subNo) {
+    		@RequestParam(value="subNo", required=false, defaultValue="0") int subNo,
+    		@RequestParam(value="subjectKey", required=false, defaultValue="0") int subjectKey) {
   
     	System.out.println("assignment_add_team! ");
     	
@@ -97,6 +100,7 @@ public class HomeController {
     	model.addAttribute("contents", contents);
     	model.addAttribute("assignNo", assignNo);
     	model.addAttribute("subNo", subNo);
+    	model.addAttribute("subjectKey", subjectKey);
         return "assignment_add_team";
     }
     
@@ -140,11 +144,11 @@ public class HomeController {
     
     @RequestMapping(value = "/timetable_page", method = RequestMethod.GET)
     public String timetable_page(Locale locale, Model model,
-    		@RequestParam(value="subNo", required=false, defaultValue="0") int subNo) {
+    		@RequestParam(value="subjectKey", required=false, defaultValue="0") int subjectKey) {
        
     	System.out.println("timetable_page!");
        
-    	model.addAttribute("subNo", subNo);
+    	model.addAttribute("subjectKey", subjectKey);
     	return "timetable_page";
     }
     

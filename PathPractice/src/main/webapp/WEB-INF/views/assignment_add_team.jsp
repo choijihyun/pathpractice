@@ -148,7 +148,7 @@ $(document).ready(function() {
  	var dueDate = '${dueDate}';
 	var importance = '${importance}';
 	var contents = '${contents}';
-	var subNo = '${subNo}'; 
+	var subjectKey = '${subjectKey}'; 
 	
 	if( title!=" " && dueDate!=" " && importance!="" && contents!="")
 		$('#hiddenIsNew').val("update").trigger('change');
@@ -160,12 +160,12 @@ $(document).ready(function() {
 		$('#search').trigger('click');
 	});
 	
-	if(subNo == 0){
-		subNo = 111111;
+	if(subjectKey == 0){
+		subjectKey = 111111;
 		//이런 경우가 언제였지??
 	}
 	
-	fillInfomation(subNo,1,title,contents);
+	fillInfomation(subjectKey,3,title,contents);
 
 	//setting datepicker
 	$(function() {
