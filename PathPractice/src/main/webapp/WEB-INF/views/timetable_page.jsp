@@ -326,8 +326,8 @@ $('#search').on('click', function() {
 			},success : function(result) {
 				console.log(result);
 				if (result['result'] === '1') {
-					alert('시간표등록성공');
-					location.reload();					
+					location.reload();	
+					
 					//동적으로 table 합치기!!!!!!!!!!!!!!!!!!!!!!			
 				} else {
 					alert('시간표등록실패');
@@ -352,8 +352,6 @@ $('#search').on('click', function() {
 				if (result['result'] === "no data") {
 					alert('등록된 시간표가 없습니다.');				
 				} else {
-					alert('시간표 불러오기 성공');
-					
 					for (var i = 0; i < result['result'].length; i++) {
 						var subjectKey = result['result'][i]['subjectKey'];
 						findSubjectInfo(subjectKey);

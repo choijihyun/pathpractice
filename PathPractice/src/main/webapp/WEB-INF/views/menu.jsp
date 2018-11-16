@@ -80,9 +80,8 @@
 			}, 
 			success : function(result) {
 				if (result['result'] === 'no data') {
-					alert('등록된 공지사항 없음');
-				} else {
-					alert('공지사항 불러오기 성공');
+					//alert('등록된 공지사항 없음');
+				} else { 
 					console.log(result);
 				for (var i = 0; i < result['result'].length; i++) {
 					var date = result['result'][i]['date'];
@@ -101,7 +100,7 @@
 				}
 			},
 			error : function() {
-				alert('공지사항 불러오기 에러');
+				//alert('공지사항 불러오기 에러');
 			}
 		});//ajax
 	});//$(document).ready

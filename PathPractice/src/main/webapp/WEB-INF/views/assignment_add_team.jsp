@@ -31,7 +31,7 @@
 </style>
 
 <head>
-<title>ADD ASSINGMENT</title>
+<title>ADD ASSINGMENT TEAM</title>
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -59,38 +59,42 @@
 	<!-- Container -->
 	<div class="container m-0 p-0 row justify-content-md-center justify-content-xs-center" data-spy="scroll">
 			<div class="login_box">
-				<h2 class="text-center wdi_red mt-1">ADD ASSINGMENT</h2>
+				<h2 class="text-center wdi_red mt-1">ADD TEAM ASSINGMENT</h2>
 				<hr class="m-1">
 				<form class="commonForm">
 					<div class="form-row m-3">
 						<div class="col-md-3 col-xs-3 my-2 label_input">과목명</div>
 						<div class="col-md-7 col-xs-7 ">
-							<input type="text"
-								class="form-control form-control-sm mt-1 mb-1  flat_input"
-								id="subjectName" title="과목명">
+							<input type="text" class="form-control form-control-sm mt-1 mb-1  flat_input" id="subjectName" title="과목명">
 						</div>
 						<div class="col-md-2 col-xs-2 mt-1 mb-1">
-							<a class="btn btn-sm btn_icon" aria-label="Left Align"
-								id="search"> 
+							<a class="btn btn-sm btn_icon" aria-label="Left Align" id="search"> 
 								<span class="fas fa-search"></span>
 							</a>
 						</div>
 						<div class="col-md-3 col-xs-3 my-2 label_input">제목</div>
 						<div class="col-md-7 col-xs-7">
-							<input type="text"
-								class="form-control form-control-sm mt-1 mb-1 flat_input"
-								title="제목" id="title">
+							<input type="text" class="form-control form-control-sm mt-1 mb-1 flat_input" title="제목" id="title">
 						</div>
 
 						<div class="col-md-3 col-xs-3 my-2 label_input">내용</div>
 						<div class="col-md-7 col-xs-7">
-							<input type="text"
-								class="form-control form-control-sm mt-1 mb-1 flat_input"
-								title="내용" id="contents">
+							<input type="text" class="form-control form-control-sm mt-1 mb-1 flat_input" title="내용" id="contents">
 						</div>
-
+						
+						<div class="col-md-3 col-xs-3 my-3 label_input">팀원</div>
+						<div class="col-md-7 col-xs-7 my-2" id="member"> 
+							<div class="input-group">
+								<div class="input-group-prepend">
+							    	<button class="btn btn-sm btn-outline-danger block" type="button" id="btn_add_member">ADD</button>
+							  	</div>
+								<input type="text" class="form-control form-control-sm flat_input m-0" aria-describedby="btn_add_member">
+							</div>
+							
+						</div>
+						
 						<div class="col-md-3 col-xs-3 my-2 label_input">중요도</div>
-						<span class="star-input col-md-7 col-xs-7 "> <span class="input">
+						<span class="star-input col-md-7 col-xs-7 my-2"> <span class="input">
 						<input type="radio" name="star-input" value="1" id="p1"> <label for="p1">1</label>
 						<input type="radio" name="star-input" value="2" id="p2"> <label for="p2">2</label>
 						<input type="radio" name="star-input" value="3" id="p3"> <label for="p3">3</label> 
@@ -99,12 +103,12 @@
 						</span></span>
 
 						<div class="col-md-3 col-xs-3 my-2 label_input">마감일</div>
-						<div class="col-md-6 col-xs-6 mt-1 mb-1">
+						<div class="col-md-6 col-xs-6 my-2"">
 							<form action="demo_form.asp">
 								<input type='text' id='dueDate'>
 							</form>
 						</div>
-						<div class="col-md-3 col-xs-3 mt-1 mb-1"></div>
+						<div class="col-md-3 col-xs-3 my-2""></div>
 
 						<!--join/cancel button -->
 						<div class="col-md-6 col-xs-6">
@@ -127,6 +131,7 @@
 
 <script src="${pageContext.request.contextPath}/resources/js/common/func_check_input.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common/func_cookie.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/func_assignment.js"></script>
 
 <script type="text/javascript">
 	var userInputId = getCookie("userInputId");
@@ -150,8 +155,7 @@ $(document).ready(function() {
 	else
 		$('#hiddenIsNew').val("new").trigger('change');
 	
-	$("#title").val(title);
-	$("#contents").val(contents);
+
 	$('#subjectName').on('click', function () {
 		$('#search').trigger('click');
 	});
@@ -161,29 +165,8 @@ $(document).ready(function() {
 		//이런 경우가 언제였지??
 	}
 	
-	//subNo 으로 과목명 검색해서 textfield에 띄워주기
-	$.ajax({
-   			url:"/subject/searchSubject.json",
-   			type : "GET",
-   			data : {
-   				'word':subNo,
-   				'select':1
-   			},
-   			success : function(result){
-           		if(result['result'] === "no data"){ 
-           			alert('검색하려는 과목 없음.');
-           		}else{
-  					subName = result['result'][0]['subName'];
-  					$("#subjectName").val(subName);
-           		}
-         	},
-         	error : function(request,status,error){
-        		alert('검색 에러');
-        		console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
-        	}
-		});
-	
-	
+	fillInfomation(subNo,1,title,contents);
+
 	//setting datepicker
 	$(function() {
 		$("#dueDate").datepicker({ 
@@ -199,10 +182,10 @@ $(document).ready(function() {
 		$("#dueDate").datepicker('setDate',realDate);
 	});
 	
-	//setting importance(star)
+ 	//setting importance(star)
 	for(var i=1 ; i<=importance ; i++){
 		$('input:radio[id="p'+i+'"]:radio[name="star-input"]').prop("checked", true);
-	}
+	} 
 });
 </script>
 
@@ -239,7 +222,7 @@ $(document).ready(function() {
 						'contents' : $('#contents').val(),
 						'success' : 0,
 						'subNo' : subNo,
-						'team' : 0
+						'team' : 1
 					},
 					success : function(result) {
 						console.log(result);
@@ -268,7 +251,8 @@ $(document).ready(function() {
 						'stuId': <%=id%>,
 						'assignNo': assignNo,
 						'success': 0,
-						'team': 0
+						'team': 1
+						//team 이거 언니가 추가해주면 바꾸기
 					},
 					success : function(result) {
 						console.log(result);
@@ -290,10 +274,18 @@ $(document).ready(function() {
 	});//function
 
 	$('#search').on('click', function() {
-		location.href="/find_subject?&page=assignmentAdd";
+		location.href="/find_subject?&page=assignmentAddTeam";
 	});
 </script>
 
+<!-- <script>
+<div class="input-group-prepend">
+<button class="btn btn-sm btn-outline-danger block" type="button" id="btn_add_member">ADD</button>
+</div>
+<input type="text" class="form-control form-control-sm flat_input m-0" aria-describedby="btn_add_member">
+<input type="text" class="form-control form-control-sm flat_input m-0" aria-describedby="btn_add_member">
 
+</script>
+ -->
 
 

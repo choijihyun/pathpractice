@@ -115,11 +115,11 @@
 					if (result.result === "1") {
 						location.href = "/home";
 					} else {
-						alert('로그인 실패');
+						//alert('로그인 실패');
 					}
 				},
 				error : function() {
-					alert('로그인 에러');
+					//alert('로그인 에러');
 				}
 			});
 		});

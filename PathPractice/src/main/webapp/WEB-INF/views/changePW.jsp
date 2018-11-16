@@ -81,44 +81,42 @@
           success: function(result) {
             console.log(result);
             if (result['result'] === "1") { 
-              //document.getElementById('pw').style.display="";rmfo
-              alert("해당 아이디 맞음");
+              //document.getElementById('pw').style.display="";rmfo 
               $('#rePw').css('display', '');
               $('#change').css('display', '');
             } else {
-              alert("회원정보 없음");
+              //alert("회원정보 없음");
             }
           },
           error: function(request,status,error) {
-        	  alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-            alert('비밀번호 찾기 에러');
+        	//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            //alert('비밀번호 찾기 에러');
             location.href = "/changePW";
           }
         });//ajax
       });//submit click
-
-      $('#change').on('click', function() { 
-    	  event.preventDefault();
-        $.ajax({
-          url: "/user/updatePw.json",
-          type: "POST",
-          data: {
-        	  'stuId':$('#id').val(), 
-        	  'pw':$('#rePw').val()
-        	  },
-          success: function(result) {
-            console.log(result);
-            //if (result['result'] === "1") {
-            //  alert("비밀번호 변경 실패");
-            //  location.href = "/mypage";
-            //} else {
-            //  alert("비밀번호 변경 성공");
-            //}
-          },
-          error: function() {
-            alert('비밀번호 변경 에러');
-          }
-        });//ajax
-      });//change click
+	
+	      $('#change').on('click', function() { 
+	    	  event.preventDefault();
+	        $.ajax({
+	          url: "/user/updatePw.json",
+	          type: "POST",
+	          data: {
+	          'stuId':$('#id').val(), 
+	          'pw':$('#rePw').val()
+	          },
+			success: function(result) {
+	           console.log(result);
+	            //if (result['result'] === "1") {
+	            //  alert("비밀번호 변경 실패");
+	            //  location.href = "/mypage";
+	            //} else { 
+	            //}
+	          },
+	          error: function() {
+	            //alert('비밀번호 변경 에러');
+	          }
+	        });//ajax
+	      });//change click
 
   </script>

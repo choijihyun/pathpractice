@@ -106,8 +106,7 @@
            		if(result['result'] === "no data"){ 
            			alert('없는 과목입니다.');
   					console.log(result);
-           		}else{
-          			alert('검색 성공');
+           		}else{ 
   					console.log(result);
            			var	tableLen =result['result'].length
            			var table = document.getElementById("tableFindSub"),rIndex,cIndex;
@@ -168,13 +167,14 @@
 		var page = '${page}'; 
 		console.log(page);
 	
-		if(page == 'assignmentAdd'){		
-			console.log(page);
+		if(page == 'assignmentAdd'){
 			location.href="/assignment_add?subNo="+ $('#hiddenAssign').val();
 		}
 		else if (page == 'timetablePage'){
-			console.log(page);
-			location.href="/timetable_page?&subNo="+ $('#hiddenAssign').val();
+			location.href="/timetable_page?subNo="+ $('#hiddenAssign').val();
+		}
+		else if (page == 'assignmentAddTeam'){
+			location.href="/assignment_add_team?subNo="+ $('#hiddenAssign').val();
 		}
 	}
 //	var page = '${page}'; 

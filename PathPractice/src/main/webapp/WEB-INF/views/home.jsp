@@ -84,13 +84,12 @@
 			type : "GET",
 			data : {
 			'stuId' :<%=id%>,
-			'select' : 1
+			//'select' : 1
 			}, 
 			success : function(result) {
 				if (result['result'] === 'no data') {
-					alert('등록된 과제 없음');
-				} else {
-					alert('과제 불러오기 성공');
+					//alert('등록된 과제 없음');
+				} else { 
 					console.log(result);
 				for (var i = 0; i < result['result'].length; i++) {
 					var assign_title = result['result'][i]['title'];
@@ -107,7 +106,7 @@
 				}
 			},
 			error : function() {
-				alert('과제불러오기 에러');
+				//alert('과제불러오기 에러');
 			}
 		});//ajax
 		
@@ -119,9 +118,8 @@
 				'stuId' :<%=id%>
 			}, success : function(result){
 	   			if(result['result'] === "no data"){ 
-	   				alert('등록된 시간표가 없습니다.');
-	   			}else{
-	  				alert('시간표 불러오기 성공??????');
+	   				//alert('등록된 시간표가 없습니다.');
+	   			}else{ 
 	  				console.log("123123123123");
 					console.log(result); 
 				
@@ -132,7 +130,7 @@
 					}
 	   			}
 	 		}, error : function(request,status,error){
-				alert('시간표 불러오기 에러');
+				//alert('시간표 불러오기 에러');
 				console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
 			}
 		});//ajax

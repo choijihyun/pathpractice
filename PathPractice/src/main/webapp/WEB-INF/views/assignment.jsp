@@ -2,11 +2,28 @@
 	pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="kr">
-<head>
 <%
 	if(session.getAttribute("id")==null)
 		response.sendRedirect("/");
 %>
+<style>
+.star-input>.input,
+.star-input>.input>input:checked+label{display: inline-block;vertical-align:top;background:url('${pageContext.request.contextPath}/resources/img/grade_img.png')no-repeat;}
+.star-input{display:inline-block; white-space:nowrap;width:225px;height:20px;line-height:10px;}
+.star-input>.input{display:inline-block;width:150px;background-size:150px;height:28px;white-space:nowrap;overflow:hidden;position: relative;}
+.star-input>.input>input{position:absolute;width:1px;height:1px;opacity:0;}
+.star-input>.input>label{width:30px;height:0;padding:28px 0 0 0;overflow: hidden;float:left;position: absolute;top: 0;left: 0;}
+.star-input>.input>input:checked+label{background-size: 150px;background-position: 0 bottom;}
+.star-input>.input>label[for="p1"]{width:30px;z-index:5;}
+.star-input>.input>label[for="p2"]{width:60px;z-index:4;}
+.star-input>.input>label[for="p3"]{width:90px;z-index:3;}
+.star-input>.input>label[for="p4"]{width:120px;z-index:2;}
+.star-input>.input>label[for="p5"]{width:150px;z-index:1;}
+.star-input>output{display:inline-block;width:60px; font-size:18px;text-align:right; vertical-align:middle;}
+.form-row>.col, .form-row>[class*=col-]{padding-top : 5px;}
+</style>
+
+<head>
 	<title>assignment</title>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
@@ -44,22 +61,40 @@
 					<div class="row col-auto justify-content-end setting">
 						<div class= "p-0 col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4">
 							<div class="btn-group" role="group" aria-label="Basic example">
-								<button type="button" class="btn btn-sm btn_assign_type">ALL</button>
-								<button type="button" class="btn btn-sm btn_assign_type">Non</button>
-								<button type="button" class="btn btn-sm btn_assign_type">Team</button>
-								<button type="button" class="btn btn-sm btn_assign_type">Complete</button>
+								<button type="button" class="btn  btn_assign_type">ALL</button>
+								<button type="button" class="btn  btn_assign_type">None</button>
+								<button type="button" class="btn  btn_assign_type">Team</button>
+								<button type="button" class="btn  btn_assign_type">Done</button>
 							</div>
 						</div>
-						<div class= "col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4">
+						<div class= "col-6 col-xs-6 col-sm-6 col-lg-6 col-md-6">
 						</div>
 						<!-- log-out 아이콘 버튼 누르면 assignment_add로 이동 -->
-						<div class= "col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4">
-							<a class="btn btn-lg btn_add p-0" aria-label="Left Align" href="/assignment_add">
+						<div class= "col-2 col-xs-2 col-sm-2 col-lg-2 col-md-2">
+							<button class="btn btn-lg btn_add p-0" aria-label="Left Align" >
 								<span class="fas fa-plus-square"></span>
-							</a>
-							<button class="btn btn-lg btn_add p-0" aria-label="Left Align">
-								<span class="fas fa-minus-square"></span>
 							</button>
+							
+							
+							<!-- Modal_addBtn -->
+								<div class="modal btn_modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title btn-modal-title"> CHOOSE </h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body btn-modal-body">
+												<button type="button" id='defaultAssign' class="btn btn-sm btn-primary " aria-label="Left Align">assign</button>
+												<button type="button" id='teamAssign' class="btn btn-sm btn-info" data-dismiss="modal">team assign</button>
+											</div>
+	
+										<!-- 	<div class="modal-footer"> </div> -->
+										</div>
+									</div>
+								</div>
 						</div>
 					</div>
 
@@ -70,19 +105,39 @@
 						<!-- 스크롤바 제외한 과제를 보여주는 영역 -->
 						<div class="px-2 content_show_assign">
 							<!-- Modal -->
-							<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-								<div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+							<div class="modal assign_modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 									<div class="modal-content">
 										<div class="modal-header">
-											<h5 class="modal-title"></h5>
+											<h5 class="modal-title assign-modal-title"></h5>
 											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 												<span aria-hidden="true">&times;</span>
 											</button>
 										</div>
-										<div class="modal-body"></div>
+										<div class="modal-body assign-modal-body row">
+					
+											<div class="col-md-3 col-xs-3 my-2 label_input">내용</div>
+											<div class="col-md-7 col-xs-7">
+												<input type="text" class="form-control form-control-sm mt-1 mb-1 flat_input" title="내용" id="contents"  disabled="true">
+											</div>
+											
+											<div class="col-md-3 col-xs-3 my-2 label_input">마감일</div>
+											<div class="col-md-7 col-xs-7">
+												<input type="text" class="form-control form-control-sm mt-1 mb-1 flat_input" title="마감일" id="dueDate"  disabled="true">
+											</div>
+											
+											<div class="col-md-3 col-xs-3 m-0 label_input my-2">중요도</div>
+											<span class="star-input col-md-7 col-xs-7 my-2"> <span class="input">
+											<input type="radio" name="star-input" value="1" id="p1" disabled="true"> <label for="p1">1</label>
+											<input type="radio" name="star-input" value="2" id="p2" disabled="true"> <label for="p2">2</label>
+											<input type="radio" name="star-input" value="3" id="p3" disabled="true"> <label for="p3">3</label> 
+											<input type="radio" name="star-input" value="4" id="p4" disabled="true"> <label for="p4">4</label> 
+											<input type="radio" name="star-input" value="5" id="p5" disabled="true"> <label for="p5">5</label>
+											
+										</div>
 
 										<div class="modal-footer">
-											<button type="button" id='assignChange' class="btn btn-sm btn-primary " aria-label="Left Align">Change</button>
+											<button type="button" id='assignChange' class="btn btn-sm btn-info"  data-dismiss="modal">Change</button>
 											<button type="button" id='assignComplete' class="btn btn-sm btn-primary" data-dismiss="modal">Complete</button>
 											<button type="button" id='assignDel' class="btn btn-sm btn-danger" data-dismiss="modal">Delete</button>
 										</div>
@@ -104,159 +159,109 @@
 </body>
 </html>
 
+<script src="${pageContext.request.contextPath}/resources/js/common/header.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/footer.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/func_assignment.js"></script>
+
 <!-- modal-->
 <script type="text/javascript">
-	<%
-	String id = (String)session.getAttribute("id");
-	%>
+	$(function(){
+		$(document).on("click",'.btn_add',function() {		
+			$('div.btn_modal').modal();
+			
+			$('#defaultAssign').on('click', function (){
+				location.href="/assignment_add";
+			});//defaultAssign Cllick
+			
+			$('#teamAssign').on('click', function (){
+				location.href="/assignment_add_team";
+			});//defaultAssign Cllick
+
+		});//btn_pop_assignment Click
+	})//function
+</script>
+
+<!-- modal-->
+<script type="text/javascript">
+	<% String id = (String)session.getAttribute("id"); %>
 
 	$(function(){
 		$(document).on("click",'.btn_pop_assignment',function() {
 			var body = '';
+			var location='';
 			var title = $(this).data('title');
 			var dueDate = $(this).data('dueDate');
 			var importance = $(this).data('importance');
 			var contents = $(this).data('contents');
 			var subNo = $(this).data('subNo');
 			var assignNo = $(this).data('assignNo');
-			//var team = $(this).data('team');
+			var team = $(this).data('team');
 			
 			$('#hiddenAssign').val(assignNo).trigger('change');
 			$('#hiddenSub').val(subNo).trigger('change');
 
-			body += 'due-date=' + dueDate;
-			body += ' , importance=' + importance;
-			body += ' , contents=' + contents;
-
-			$('.modal-title').text(title);
-			$('.modal-body').text(body);
-			$('div.modal').modal();
-		
+			$("#dueDate").val(dueDate)
+			$("#contents").val(contents);
+			$('.assign-modal-title').text(title);
+			$('div.assign_modal').modal();
 			
+			//중요도 색칠
+			for(var i=1 ; i<=importance ; i++)
+			 $('input:radio[id="p'+i+'"]:radio[name="star-input"]').prop("checked", true);
+
+			 
 			//과제 삭제 버튼 클릭 
 			$('#assignDel').on('click', function (){
 				var assignNo = $('#hiddenAssign').val();
 				event.preventDefault();
-				$.ajax({
-					url:"/homework/deleteHomework.json",
-					type : "GET",
-					data : {
-						'stuId':<%=id%>,
-						'assignNo': assignNo
-					},
-					success : function(result){
-						if(result['result'] === "1"){
-							alert('삭제 성공');
-							console.log(result);
-							location.reload();
-						}else{
-							alert('삭제 실패');
-						}
-					},
-					error : function(){
-						alert('삭제 에러');
-					}
-				});//ajax
+				deleteAssign(assignNo,<%=id%>);
 			});//assignDel Cllick
+
+			//과제 완료버튼 클릭
+			$('#assignComplete').on('click', function (){
+				event.preventDefault();
+				completeAssign(dueDate,importance,title,contents,subNo,<%=id%>,assignNo,1,team); 
+			});//assignComplete Click
 
 			//과제 수정버튼 클릭
 			$('#assignChange').on('click', function (){
-				location.href="/assignment_add?title="+title
-				+"&dueDate="+dueDate
-				+"&importance="+importance
-				+"&contents="+contents
-				+"&assignNo="+assignNo
-				+"&subNo="+subNo;
+				//location.href="/assignment_add?title='wer'&dueDate='2018-02-03'&importance=2&contents='123'";
+			
+				 if(team == 0){
+					location = "/assignment_add"; 
+					location.href=location+"?title="+title
+					+"&dueDate="+dueDate
+					+"&importance="+importance
+					+"&contents="+contents
+					+"&assignNo="+assignNo
+					+"&subNo="+subNo;
+				 }
+				else {
+					location = "/assignment_add_team"; 
+					location.href=location+"?title="+title
+					+"&dueDate="+dueDate
+					+"&importance="+importance
+					+"&contents="+contents
+					+"&assignNo="+assignNo
+					+"&subNo="+subNo;
+				}  
+				 console.log(location+"?title="+title
+						+"&dueDate="+dueDate
+						+"&importance="+importance
+						+"&contents="+contents
+						+"&assignNo="+assignNo
+						+"&subNo="+subNo);
+				//updateAssign(location,title,dueDate,importance,contents,assignNo,subNo);
 			});//assignChange Cllick
 			
-			//과제 완료버튼 클릭
-			$('#assignComplete').on('click', function (){
-				
-				event.preventDefault();
-				$.ajax({
-					url:"/homework/updateHomework.json",
-					type : "GET",
-					data : {
-						'dueDate': dueDate,
-						'importance': importance,
-						'title': title,
-						'contents': contents,
-						'subNo': subNo,
-						'stuId': <%=id%>,
-						'assignNo': assignNo,
-						'success': 1,
-						'team': 0
-						//team 이거 언니가 추가해주면 바꾸기
-					},
-					success : function(result){
-						if(result['result'] === "1"){
-							alert('과제완료 성공');
-							console.log(result);
-							location.reload();
-						}else{
-							alert('과제완료 실패');
-						}
-					},
-					error : function(){
-						alert('과제완료 에러');
-					}
-				});//ajax
-			});//assignComplete Click
-			
 		});//btn_pop_assignment Click
-	})//function
+	});//function
 </script>
 
 
 <!-- 모든 과제 불러오기,띄우기 -->
 <script type="text/javascript">
 	$(document).ready(function(){
-		$.ajax({
-			url:"/homework/selectHomework.json",
-			type : "GET",
-			data : {
-				'stuId':<%=id%>,
-				'select':1
-			},
-			success : function(result){
-				if(result['result'] === 'no data'){
-					alert('등록과제 없음');
-				}else{
-					alert('불러오기 성공');
-					console.log(result);
-
-    				console.log(typeof result);
-					for(var i=0 ; i<result['result'].length ; i++){
-
-						var assign_title = result['result'][i]['title'];
-						var assign_contents = result['result'][i]['contents'];
-
-						var str = '';
-						str += '<button type="button" ';
-						str += 'class="btn btn-lg btn-block btn-outline-danger btn_pop_assignment" ';
-						str += 'data-due-date= " ' + result['result'][i]['dueDate'] + ' " ';
-						str += 'data-importance= " ' + result['result'][i]['importance'] + ' " ';
-						str += 'data-title= " ' + assign_title + ' " ';
-						str += 'data-assign-no= " ' + result['result'][i]['assignNo'] + ' " ';
-						str += 'data-sub-no= " ' + result['result'][i]['subNo'] + ' " ';
-						//str += 'data-team= " ' + result['result'][i]['team'] + ' " ';
-						str += 'data-contents= " ' + assign_contents + '">';
-						str += '<h6 id="assign' + (i+1) + 'Title" ';
-						str += 'style="font-weight: bold" class="mb-2">-' + assign_title + '</h6>';
-						str += '<p6 id="assign' + (i+1) + 'Context">' + assign_contents + '</p6>';
-						str += '</button>';
-						$('.content_show_assign').append(str);
-					}
-				}
-
-			},
-			error : function(){
-				alert('불러오기 에러');
-			}
-		});
+		showAllAsignment(<%=id%>);
 	});
 </script>
-
-
-<script src="${pageContext.request.contextPath}/resources/js/common/header.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/common/footer.js"></script>
