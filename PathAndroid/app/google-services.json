@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "342497878293",
+    "firebase_url": "https://path-practice.firebaseio.com",
+    "project_id": "path-practice",
+    "storage_bucket": "path-practice.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:342497878293:android:1c0f84996c322fbd",
+        "android_client_info": {
+          "package_name": "org.androidtwon.pathandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "342497878293-ijtcqc9sefnheeip8lgf2piep6nifr8o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6YoDJKfQ_Cxtk8rla7WD3WNkbRAebtwI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

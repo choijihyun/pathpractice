@@ -61,10 +61,10 @@
 					<div class="row col-auto justify-content-end setting">
 						<div class= "p-0 col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4">
 							<div class="btn-group" role="group" aria-label="Basic example">
-								<button type="button" class="btn  btn_assign_type">ALL</button>
-								<button type="button" class="btn  btn_assign_type">None</button>
-								<button type="button" class="btn  btn_assign_type">Team</button>
-								<button type="button" class="btn  btn_assign_type">Done</button>
+								<button type="button" class="btn  btn_assign_type" id="all">ALL</button>
+								<button type="button" class="btn  btn_assign_type" id="none">None</button>
+								<button type="button" class="btn  btn_assign_type" id="team">Team</button>
+								<button type="button" class="btn  btn_assign_type" id="done">Done</button>
 							</div>
 						</div>
 						<div class= "col-6 col-xs-6 col-sm-6 col-lg-6 col-md-6">
@@ -127,7 +127,7 @@
 											</div>
 											
 											<div class="col-md-3 col-xs-3 m-0 label_input my-2">중요도</div>
-											<span class="star-input col-md-7 col-xs-7 my-2"> <span class="input">
+											<span class="star-input col-md-7 col-xs-7 my-2" id="importance"> <span class="input">
 											<input type="radio" name="star-input" value="1" id="p1" disabled="true"> <label for="p1">1</label>
 											<input type="radio" name="star-input" value="2" id="p2" disabled="true"> <label for="p2">2</label>
 											<input type="radio" name="star-input" value="3" id="p3" disabled="true"> <label for="p3">3</label> 
@@ -163,6 +163,19 @@
 <script src="${pageContext.request.contextPath}/resources/js/common/footer.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common/func_assignment.js"></script>
 
+<script type="text/javascript">
+	$('#all').on('click', function (){
+		//location.href="/assignment_show_all";
+	});//처음에는 완료한거 빼고 모두 보여줌, 그리고 본문 창은 싹 비우고 carousel로 창 넘기기
+	$('#team').on('click', function (){ 
+	});
+	$('#none').on('click', function (){ 
+	});
+	$('#done').on('click', function (){ 
+	});
+	
+</script>
+
 <!-- modal-->
 <script type="text/javascript">
 	$(function(){
@@ -171,11 +184,11 @@
 			
 			$('#defaultAssign').on('click', function (){
 				location.href="/assignment_add";
-			});//defaultAssign Cllick
+			}); 
 			
 			$('#teamAssign').on('click', function (){
 				location.href="/assignment_add_team";
-			});//defaultAssign Cllick
+			}); 
 
 		});//btn_pop_assignment Click
 	})//function
@@ -185,79 +198,65 @@
 <script type="text/javascript">
 	<% String id = (String)session.getAttribute("id"); %>
 
-	$(function(){
-		$(document).on("click",'.btn_pop_assignment',function() {
-			var body = '';
-			var location='';
-			var title = $(this).data('title');
-			var dueDate = $(this).data('dueDate');
-			var importance = $(this).data('importance');
-			var contents = $(this).data('contents');
-			var subNo = $(this).data('subNo');
-			var assignNo = $(this).data('assignNo');
-			var team = $(this).data('team');
+	$(document).on("click",'.btn_pop_assignment',function() {
+		var body = '';
+		var location='';
+		var title = $(this).data('title');
+		var dueDate = $(this).data('dueDate');
+		var importance = $(this).data('importance');
+		var contents = $(this).data('contents');
+		var subNo = $(this).data('subNo');
+		var assignNo = $(this).data('assignNo');
+		var team = $(this).data('team');
 			
-			$('#hiddenAssign').val(assignNo).trigger('change');
-			$('#hiddenSub').val(subNo).trigger('change');
+		$('#hiddenAssign').val(assignNo).trigger('change');
+		$('#hiddenSub').val(subNo).trigger('change');
 
-			$("#dueDate").val(dueDate)
-			$("#contents").val(contents);
-			$('.assign-modal-title').text(title);
-			$('div.assign_modal').modal();
+		$("#dueDate").val(dueDate)
+		$("#contents").val(contents);
+		$('.assign-modal-title').text(title);
+		$('div.assign_modal').modal();
 			
-			//중요도 색칠
-			for(var i=1 ; i<=importance ; i++)
-			 $('input:radio[id="p'+i+'"]:radio[name="star-input"]').prop("checked", true);
-
+		//중요도 색칠
+		for(var i=1 ; i<=importance ; i++)
+		 $('input:radio[id="p'+i+'"]:radio[name="star-input"]').prop("checked", true);
 			 
-			//과제 삭제 버튼 클릭 
-			$('#assignDel').on('click', function (){
-				var assignNo = $('#hiddenAssign').val();
-				event.preventDefault();
-				deleteAssign(assignNo,<%=id%>);
-			});//assignDel Cllick
+		//과제 삭제 버튼 클릭 
+		//event.preventDefault();
+		$('#assignDel').on('click', function (){
+			var assignNo = $('#hiddenAssign').val();
+			deleteAssign(assignNo,<%=id%>);
+		});//assignDel Cllick
 
-			//과제 완료버튼 클릭
-			$('#assignComplete').on('click', function (){
-				event.preventDefault();
-				completeAssign(dueDate,importance,title,contents,subNo,<%=id%>,assignNo,1,team); 
-			});//assignComplete Click
+		//과제 완료버튼 클릭
+		//event.preventDefault();
+		$('#assignComplete').on('click', function (){ 
+			completeAssign(dueDate,importance,title,contents,subNo,<%=id%>,assignNo,1,team); 
+		});//assignComplete Click
 
-			//과제 수정버튼 클릭
-			$('#assignChange').on('click', function (){
-				//location.href="/assignment_add?title='wer'&dueDate='2018-02-03'&importance=2&contents='123'";
+		//과제 수정버튼 클릭
+		event.preventDefault();
+		$('#assignChange').on('click', function (){ 
+			/* $('dueDate').prop( 'disabled', false );
+			$('importance').prop( 'disabled', false );
+			$('contents').prop( 'disabled', false ); */
+			 if(team == 0){
+				//location = "/assignment_add"; 
+				location.href="/assignment_add?title="+title +"&dueDate="+dueDate +"&importance="+importance
+				+"&contents="+contents +"&assignNo="+assignNo +"&subNo="+subNo;
+			 }
+			else {
+				//location = "/assignment_add_team"; 
+				location.href="/assignment_add_team?title="+title +"&dueDate="+dueDate +"&importance="+importance 
+				+"&contents="+contents +"&assignNo="+assignNo +"&subNo="+subNo;
+			}  
+			 console.log(location+"?title="+title +"&dueDate="+dueDate +"&importance="+importance
+					+"&contents="+contents +"&assignNo="+assignNo +"&subNo="+subNo);
+			//updateAssign(location,title,dueDate,importance,contents,assignNo,subNo);
+		});//assignChange Cllick
 			
-				 if(team == 0){
-					location = "/assignment_add"; 
-					location.href=location+"?title="+title
-					+"&dueDate="+dueDate
-					+"&importance="+importance
-					+"&contents="+contents
-					+"&assignNo="+assignNo
-					+"&subNo="+subNo;
-				 }
-				else {
-					location = "/assignment_add_team"; 
-					location.href=location+"?title="+title
-					+"&dueDate="+dueDate
-					+"&importance="+importance
-					+"&contents="+contents
-					+"&assignNo="+assignNo
-					+"&subNo="+subNo;
-				}  
-				 console.log(location+"?title="+title
-						+"&dueDate="+dueDate
-						+"&importance="+importance
-						+"&contents="+contents
-						+"&assignNo="+assignNo
-						+"&subNo="+subNo);
-				//updateAssign(location,title,dueDate,importance,contents,assignNo,subNo);
-			});//assignChange Cllick
-			
-		});//btn_pop_assignment Click
-	});//function
+	});//btn_pop_assignment Click
 </script>
-
 
 <!-- 모든 과제 불러오기,띄우기 -->
 <script type="text/javascript">
