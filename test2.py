@@ -67,7 +67,7 @@ def get_info():
             #return False
     except:
         print("블랙보드 유저가 아님")
-        #driver.quit()
+        driver.quit()
         #return False
         
 
@@ -140,7 +140,7 @@ def get_subject(lists):
                         idx2 = lline.index("(")
                     except:
                         print("인덱스 못가져옴")
-                    string = lline[:idx2]
+                    string = lline[:idx2-1]
                     if string in subjects:
                         continue
                     else:
@@ -155,7 +155,7 @@ def get_subject(lists):
                     idx2 = lline.index("(")
                 except:
                     print("인덱스 못가져옴")
-                string = lline[:idx2]
+                string = lline[:idx2-1]
                 if string in subjects:
                     continue
                 else:
@@ -251,23 +251,12 @@ if lists == False:
     #exit()
     #sys.exit(1)
     print("false 반")
-#for i in lists:
-#    for j in i:
-#        print(j)
-#print("start")
+
+#과목 불러와서 subjects list에 저장함
 subjects = get_subject(lists)
-print("subject!!!!")
-for i in subjects:
-    print(i)
 
-
-print("===parsing===")
+#parsing한 내용 content list에 저장
 content = parsing(lists, subjects)
-for i in content:
-    print("date : "+i[0])
-    print("subject : "+i[1])
-    print("content : "+i[2])
-
 
 #MySQL Connection 연결
 conn = pymysql.connect(host='203.250.148.53',
@@ -278,16 +267,26 @@ conn = pymysql.connect(host='203.250.148.53',
 
 #connectino으로 부터 cursor 생성
 curs = conn.cursor()
-
-#sql문 실행
-sql = """insert into Announcement(stuId,date,subject,contest)
-         values (%s,%s, %s, %s)"""
-
 for i in content:
     if eq(i,content[0]):
         continue
-    curs.execute(sql,('16011008',i[0],i[1],i[2]))
-
+    if "'" in i[2]:
+        contest = '"'+i[2]+'"'
+    else :
+        contest = "'"+i[2]+"'"
+    date = "'"+i[0]+"'"
+    subject = "'"+i[1]+"'"
+    
+    sql="insert into Announcement(stuId,date,subject,contest) values (16011008,"+date+","+subject+","+contest+")"
+    curs.execute(sql)
+    conn.commit()
+    
+sql = "select * from Announcement"
+curs.execute(sql)
+rows = curs.fetchall()
+for row in rows:
+    print("================")
+    print(row)
 
 conn.close()
 
