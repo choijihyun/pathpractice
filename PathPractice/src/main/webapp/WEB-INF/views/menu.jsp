@@ -42,20 +42,21 @@
 			<div class="jumbotron p-md-3 text-white rounded main_area">
 
 				<div class="d-flex align-items-center p-3 my-3 rounded"
-					style="background: #f2f2f2;">
+					style="background: #f2f2f2;margin-top: 0px;">
 					<div class="lh-100">
 						<div style="text-align: center">
 							<strong class="info" style="text-align: center"> 공지사항 </strong>
 						</div>
 					</div>
 				</div>
-
-			</div>
-			
-			<!-- 등록된 과제를 보여주는 scroll창 -->
+							<!-- 등록된 과제를 보여주는 scroll창 -->
 				<div style="overflow: auto; width: auto; height: 130px;"
 					class="mt-3 content_preview_assignment scrollbar scrollbar_track scrollbar_thumb"
 					data-spy="scroll" data-offset="0"></div>
+
+			</div>
+			
+
 
 			<!-- footer 하단바 class="app-footer" -->
 			<div id="footer"></div>
@@ -84,14 +85,19 @@
 				} else { 
 					console.log(result);
 				var str = '';
+				var subject='';
 				str += '<div class="list-group">';
+				console.log(result['result'].length);
 				for (var i = 0; i < result['result'].length; i++) {
-					var subject = result['result'][i]['subject'];
+					subject = result['result'][i]['subject'];
+					if(subject=="")continue;
 					
 					str += '<button class="btn p-1 btn-sm list-group-item" type="button">';
 					str += subject;
 					str += '</button>';
-					$('.content_preview_assignment').append(str);
+					$('.scrollbar_track').append(str);
+					str='';
+					str += '<div class="list-group">'
 					}
 				}
 			},

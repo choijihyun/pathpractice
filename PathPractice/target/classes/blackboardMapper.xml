@@ -10,10 +10,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- Dao3. 그건 parameterType="map" 이라고 항상 적으면 된다  -->
 
      <select id="getAnnounce" resultType="com.homeworkNotice.dto.BlackboardDto" parameterType="map">
-    	select date,subject, contest from Announcement where stuId=#{stuId}
+    	select date,subject,contest from Announcement where stuId=#{stuId}
     </select>
     <select id="getSubject" resultType="com.homeworkNotice.dto.BlackboardDto" parameterType="map">
-    	select distance(subject) from Announcement where stuId=#{stuId}
+    	select distinct(subject) from Announcement where stuId=#{stuId}
     </select>
     
 </mapper>

@@ -84,19 +84,18 @@ public class BlackboardController {
 		
 		param.put("stuId",stuId);
 		
-    	List<BlackboardDto> BlackboardDtoList=blackboardDao.getAnnounce(param);
+    	List<BlackboardDto> BlackboardDtoList=blackboardDao.getSubject(param);
     	
     	JSONArray jSONArray=new JSONArray();
     	List<JSONObject> jsonList=new ArrayList<JSONObject>();
         if(!BlackboardDtoList.isEmpty()) {//占쏙옙환占쏙옙占쏙옙 占쏙옙占쏙옙占싶곤옙 占쏙옙효占싹몌옙(db占쏙옙 占쏙옙占쏙옙占쏙옙) 占쏙옙占쏙옙占쏙옙 화占썽에 占쏙옙占쏙옙占� 占싼뤄옙占쌔댐옙
         	for(int i=0;i<BlackboardDtoList.size();i++) {
         		JSONObject jSONObject = new JSONObject();
-        		jSONObject.put("subject",BlackboardDtoList.get(i).getsubject());
-        		jSONArray.add(jSONObject);
-        		
-        		jsonList.add((JSONObject)jSONArray.get(i));
-        		
-        		System.out.println(jsonList);
+        		if(BlackboardDtoList.get(i).getsubject()!="") {
+        			jSONObject.put("subject",BlackboardDtoList.get(i).getsubject());        			
+        			jSONArray.add(jSONObject);
+        			jsonList.add((JSONObject)jSONArray.get(i));
+        		}
         	}
         	
         	System.out.println(jsonList);
