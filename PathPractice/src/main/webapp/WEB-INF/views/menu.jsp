@@ -73,7 +73,7 @@
 	$(document).ready(function() {
 	//과제 불러오기
 		$.ajax({
-			url : "/blackboard/getAnnounce.json",
+			url : "/blackboard/getSubject.json",
 			type : "POST",
 			data : {
 			'stuId' :<%=id%>
@@ -83,17 +83,13 @@
 					//alert('등록된 공지사항 없음');
 				} else { 
 					console.log(result);
+				var str = '';
+				str += '<div class="list-group">';
 				for (var i = 0; i < result['result'].length; i++) {
-					var date = result['result'][i]['date'];
 					var subject = result['result'][i]['subject'];
-					var contents = result['result'][i]['content'];
-					var str = '';
-					str += '<button type="button" ';
-					str += 'class="btn btn-lg btn-block btn-outline-danger">';
-					str += '<h6 id="assign'+ (i + 1) + 'Subject" ';
-					str += 'style="font-weight: bold" class="mb-2">-'+ subject + '</h6>';
-					str += '<p6 id="assign'+ (i + 1) + 'Context">'+ contents+ '</p6>';
-					str += '<p6 id="assign'+ (i + 1) + 'Date">'+ date+ '</p6>';
+					
+					str += '<button class="btn p-1 btn-sm list-group-item" type="button">';
+					str += subject;
 					str += '</button>';
 					$('.content_preview_assignment').append(str);
 					}
