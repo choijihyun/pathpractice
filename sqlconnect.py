@@ -18,7 +18,6 @@ from operator import eq
 from datetime import datetime
 #db랑 python 연결
 import pymysql
-import sys
 
 
 def get_info():
@@ -62,13 +61,10 @@ def get_info():
             print ("alert accepted")
         except:
             print ("no alert")
-            #print("블랙보드 유저가 아님")
-            #driver.quit()
-            #return False
     except:
         print("블랙보드 유저가 아님")
-        #driver.quit()
-        #return False
+        driver.quit()
+        return False
         
 
   #공지사항 찾아가기
@@ -148,21 +144,6 @@ def get_subject(lists):
                 except: 
                     print("!"+line)
 
-            if "코스·조직" in line:
-                idx = line.index(":")
-                lline = line[idx+2:]
-                try:
-                    idx2 = lline.index("(")
-                except:
-                    print("인덱스 못가져옴")
-                string = lline[:idx2]
-                if string in subjects:
-                    continue
-                else:
-                    subjects.append(string)
-                
-                
-
     return (subjects)
 
 
@@ -227,9 +208,9 @@ def parsing(announcement,subjects):
                     context = j[idx+1:] # 내용 저장
                     context += "\n"
                 elif "코스·조직" in j:
-                    for subject in subjects:
-                        if subject in j:
-                            subject_name = subject
+                    idx = j.index(":")
+                    idx2 = j.index("(")
+                    subject_name = j[idx+2:idx2]
 
                 else :
                     if "내용" in j:
@@ -248,9 +229,7 @@ def parsing(announcement,subjects):
 
 lists = get_info()
 if lists == False:
-    #exit()
-    #sys.exit(1)
-    print("false 반")
+    print("반환 됌")
 #for i in lists:
 #    for j in i:
 #        print(j)
