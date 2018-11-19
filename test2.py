@@ -276,7 +276,14 @@ for i in content:
         contest = "'"+i[2]+"'"
     date = "'"+i[0]+"'"
     subject = "'"+i[1]+"'"
-    
+    sql = "SELECT count(*) FROM `Announcement` WHERE contest like"+ contest
+    curs.execute(sql)
+    row = curs.fetchall()
+    row = str(row)
+    i = int(re.findall('\d+', row)[0])
+    if i > 0:
+        print("이미 존재하는 데이터")
+        continue
     sql="insert into Announcement(stuId,date,subject,contest) values (16011008,"+date+","+subject+","+contest+")"
     curs.execute(sql)
     conn.commit()

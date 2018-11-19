@@ -9,10 +9,14 @@ from time import sleep
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.alert import Alert
 #db랑 python 연결
-import pymysql
+import re
+#문자열 같은지 비교
+from operator import eq
 #현재 시간 가져오는 모듈
 from datetime import datetime
-import re
+#db랑 python 연결
+import pymysql
+import sys
 
 
 #datetime 얻어내는 함수
@@ -127,7 +131,7 @@ def get_info(uid, upw):
                     continue
                 if "닫기" in line:
                     continue
-                if "오픈" in line:
+                if "오" in line:
                     continue
                 if " 전" in line and eq(line,lines[0]):
                     idx = line.index("전")
@@ -162,33 +166,52 @@ def get_subject(lists):
             if "공지사항" in line:
                 try :
                     idx = line.index("→")
-                    lline = line[idx+1:]
+                    lline = line[idx+3:]
                     try:
                         idx2 = lline.index("(")
                     except:
                         print("인덱스 못가져옴")
-                    string = lline[:idx2]
+                    string = lline[:idx2-1]
                     if string in subjects:
                         continue
                     else:
                         subjects.append(string)
                 except: 
                     print("!"+line)
+
+            if "코스·조직" in line:
+                idx = line.index(":")
+                lline = line[idx+2:]
+                try:
+                    idx2 = lline.index("(")
+                except:
+                    print("인덱스 못가져옴")
+                string = lline[:idx2-1]
+                if string in subjects:
+                    continue
+                else:
+                    subjects.append(string)
+                
+                
+
     return (subjects)
 
 # 시간 과목 내용 파싱
 def parsing(announcement,subjects):
+    flag=0
     nalzza ="0"
     subject_name = "0"
     context = "0"
     PARSE=[]
     parse=[]
     for line in announcement:
+        flag=0
         parse=[]
+        context=""
+        subject_name=""
         for j in line:
             if eq(j,line[0]): #처음줄은 무조건 날짜나옴
                 nalzza = get_time(j)
-                context=""
             else:
                 if "코스 공지사항" in j:
                     for subject in subjects:
@@ -201,7 +224,8 @@ def parsing(announcement,subjects):
                     for subject in subjects:
                         if subject in j:
                             subject_name = subject
-                else:
+
+                else :
                     if "내용" in j:
                         j.replace("내용","")
                     context += j
@@ -227,7 +251,7 @@ conn = pymysql.connect(host='203.250.148.53',
 curs = conn.cursor()
 
 #sql문 실행
-sql = "select stuId, pw from Student"
+sql = "select stuId, pw from Student where flag=1"
 curs.execute(sql)
 
 #data fetch
@@ -238,11 +262,33 @@ for stu in rows:
     lists=get_info(stu[0], stu[1])
     if lists == False :
         break
-    #lists = get_info(16011008,sechljigusjong98)
-    for line in lists:
-        print(line)
+
+    #과목 불러와서 subjects list에 저장함
+    subjects = get_subject(lists)
+
+    #parsing한 내용 content list에 저장
+    content = parsing(lists, subjects)
+
+    for i in content:
+        if eq(i,content[0]):
+            continue
+        if "'" in i[2]:
+            contest = '"'+i[2]+'"'
+        else :
+            contest = "'"+i[2]+"'"
+        date = "'"+i[0]+"'"
+        subject = "'"+i[1]+"'"
+        sql = "SELECT count(*) FROM `Announcement` WHERE contest like"+ contest
+        curs.execute(sql)
+        row = curs.fetchall()
+        row = str(row)
+        i = int(re.findall('\d+', row)[0])
+        if i > 0:
+            print("이미 존재하는 데이터")
+            continue
+        sql="insert into Announcement(stuId,date,subject,contest) values ("+stu[0]+","+date+","+subject+","+contest+")"
+        curs.execute(sql)
+        conn.commit()
 
 
-    
-f.close()
 conn.close()
