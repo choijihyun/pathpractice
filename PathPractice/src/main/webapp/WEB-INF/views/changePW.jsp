@@ -54,12 +54,12 @@
             
 			<!-- 변경할 비밀번호 입력-->
             <div class="col-md-12 col-xs-12">
-              <input type="password" id="rePw" class="form-control form-control-lg flat_input" placeholder="password" style="display:none;" >
+              <input type="password" id="rePw" class="form-control form-control-lg flat_input" placeholder="new_password" style="display:hidden;" >
             </div>
-            <div class= "col-md-12 col-xs-12" >
-              <a class="btn btn-lg btn-block btn_submit" id="change" style="display:none;">
+            <div class= "col-md-12 col-xs-12 mt-3 " >
+              <button class="btn btn-md btn_submit mx-0"  id="change" style="display:hidden;">
               	  변경
-              </a>
+              </button>
             </div>
           </div>
         </form>
@@ -81,16 +81,16 @@
           success: function(result) {
             console.log(result);
             if (result['result'] === "1") { 
-              //document.getElementById('pw').style.display="";rmfo 
-              $('#rePw').css('display', '');
-              $('#change').css('display', '');
+              document.getElementById('pw').style.display="hidden";
+              $('#rePw').css('display', 'visible');
+              $('#change').css('display', 'visible');
             } else {
-              //alert("회원정보 없음");
+              alert("회원정보 없음");
             }
           },
           error: function(request,status,error) {
-        	//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-            //alert('비밀번호 찾기 에러');
+        	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            alert('비밀번호 찾기 에러');
             location.href = "/changePW";
           }
         });//ajax
@@ -107,14 +107,15 @@
 	          },
 			success: function(result) {
 	           console.log(result);
-	            //if (result['result'] === "1") {
-	            //  alert("비밀번호 변경 실패");
-	            //  location.href = "/mypage";
-	            //} else { 
-	            //}
+	            if (result['result'] == "1") {
+	              alert("비밀번호 변경 실패");
+	              location.href = "/mypage";
+	            } else { 
+	            	alert("흠?");
+	            }
 	          },
 	          error: function() {
-	            //alert('비밀번호 변경 에러');
+	            alert('비밀번호 변경 에러');
 	          }
 	        });//ajax
 	      });//change click

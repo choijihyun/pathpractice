@@ -120,8 +120,6 @@
 	   			if(result['result'] === "no data"){ 
 	   				//alert('등록된 시간표가 없습니다.');
 	   			}else{ 
-	  				console.log("123123123123");
-					console.log(result); 
 				
 					for (var i = 0; i < result['result'].length; i++) {
 						var subjectKey = result['result'][i]['subjectKey'];
