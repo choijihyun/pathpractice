@@ -30,9 +30,7 @@
 		<div class="login_box">
 			<h1 class="text-center wdi_red">Login</h1>
 			<hr>
-			<form>
 				<div class="form-row">
-
 					<!-- input id, pw -->
 					<div class="col-md-12 col-xs-12">
 						<input type="text" id="id"
@@ -66,9 +64,7 @@
 						<button type="button" class="btn btn-lg btn-xs btn-block btn_join"
 							onclick='location.href="/findPW"'>PW</button>
 					</div>
-
 				</div>
-			</form>
 		</div>
 	</div>
 </body>
