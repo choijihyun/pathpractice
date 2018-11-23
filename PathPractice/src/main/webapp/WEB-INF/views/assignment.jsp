@@ -244,22 +244,13 @@
 		//과제 수정버튼 클릭
 		event.preventDefault();
 		$('#assignChange').on('click', function (){ 
-			/* $('dueDate').prop( 'disabled', false );
-			$('importance').prop( 'disabled', false );
-			$('contents').prop( 'disabled', false ); */
 			 if(team == 0){
-				//location = "/assignment_add"; 
-				location.href="/assignment_add?title="+title +"&dueDate="+dueDate +"&importance="+importance
-				+"&contents="+contents +"&assignNo="+assignNo +"&subNo="+subNo;
+				location = "/assignment_add"; 
 			 }
 			else {
-				//location = "/assignment_add_team"; 
-				location.href="/assignment_add_team?title="+title +"&dueDate="+dueDate +"&importance="+importance 
-				+"&contents="+contents +"&assignNo="+assignNo +"&subNo="+subNo;
+				location = "/assignment_add_team"; 
 			}  
-			 console.log(location+"?title="+title +"&dueDate="+dueDate +"&importance="+importance
-					+"&contents="+contents +"&assignNo="+assignNo +"&subNo="+subNo);
-			//updateAssign(location,title,dueDate,importance,contents,assignNo,subNo);
+			updateAssign(location,title,dueDate,importance,contents,assignNo,subNo);
 		});//assignChange Cllick
 			
 	});//btn_pop_assignment Click

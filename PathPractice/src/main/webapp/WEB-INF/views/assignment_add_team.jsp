@@ -149,6 +149,7 @@ $(document).ready(function() {
 	var importance = '${importance}';
 	var contents = '${contents}';
 	var subjectKey = '${subjectKey}'; 
+	var assignNo = '${assignNo}';  
 	
 	if( title!=" " && dueDate!=" " && importance!="" && contents!="")
 		$('#hiddenIsNew').val("update").trigger('change');
@@ -186,6 +187,15 @@ $(document).ready(function() {
 	for(var i=1 ; i<=importance ; i++){
 		$('input:radio[id="p'+i+'"]:radio[name="star-input"]').prop("checked", true);
 	} 
+ 
+	$('#search').on('click', function() {
+		location.href="/find_subject?&page=assignmentAddTeam&title="+title+
+														"&dueDate"+dueDate+
+														"&importance"+importance+
+														"&contents"+contents+
+														"&assignNo"+assignNo;
+	});
+	
 });
 </script>
 
@@ -273,19 +283,5 @@ $(document).ready(function() {
 		
 	});//function
 
-	$('#search').on('click', function() {
-		location.href="/find_subject?&page=assignmentAddTeam";
-	});
 </script>
-
-<!-- <script>
-<div class="input-group-prepend">
-<button class="btn btn-sm btn-outline-danger block" type="button" id="btn_add_member">ADD</button>
-</div>
-<input type="text" class="form-control form-control-sm flat_input m-0" aria-describedby="btn_add_member">
-<input type="text" class="form-control form-control-sm flat_input m-0" aria-describedby="btn_add_member">
-
-</script>
- -->
-
 
