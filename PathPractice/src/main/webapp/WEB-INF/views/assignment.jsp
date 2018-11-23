@@ -163,15 +163,23 @@
 <script src="${pageContext.request.contextPath}/resources/js/common/footer.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common/func_assignment.js"></script>
 
-<script type="text/javascript">
+<script type="text/javascript" scr="func_assignment.js">
+<% String id = (String)session.getAttribute("id"); %>
 	$('#all').on('click', function (){
-		//location.href="/assignment_show_all";
+		$('.content_show_assign').empty();
+		showAllAssignment(<%=id%>);
 	});//처음에는 완료한거 빼고 모두 보여줌, 그리고 본문 창은 싹 비우고 carousel로 창 넘기기
-	$('#team').on('click', function (){ 
+	$('#team').on('click', function (){
+		$('.content_show_assign').empty();
+		showTeamAssignment(<%=id%>);
 	});
 	$('#none').on('click', function (){ 
+		$('.content_show_assign').empty();
+		showNotSuccessAssignment(<%=id%>);
 	});
 	$('#done').on('click', function (){ 
+		$('.content_show_assign').empty();
+		showSuccessAssignment(<%=id%>);
 	});
 	
 </script>
@@ -196,7 +204,6 @@
 
 <!-- modal-->
 <script type="text/javascript">
-	<% String id = (String)session.getAttribute("id"); %>
 
 	$(document).on("click",'.btn_pop_assignment',function() {
 		var body = '';
@@ -261,6 +268,6 @@
 <!-- 모든 과제 불러오기,띄우기 -->
 <script type="text/javascript">
 	$(document).ready(function(){
-		showAllAsignment(<%=id%>);
+		showAllAssignment(<%=id%>);
 	});
 </script>
