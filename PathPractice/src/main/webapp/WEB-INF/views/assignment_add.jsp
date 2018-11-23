@@ -143,7 +143,8 @@ $(document).ready(function() {
  	var dueDate = '${dueDate}';
 	var importance = '${importance}';
 	var contents = '${contents}';
-	var subjectKey = '${subjectKey}'; 
+	var subNo = '${subNo}'; 
+	var assignNo = '${assignNo}'; 
 	
 	if( title!=" " && dueDate!=" " && importance!="" && contents!="")
 		$('#hiddenIsNew').val("update").trigger('change');
@@ -156,8 +157,8 @@ $(document).ready(function() {
 		$('#search').trigger('click');
 	});
 	
-	if(subjectKey == 0){
-		subjectKey = 111111;
+	if(subNo == 0){
+		subNo = 111111;
 		//이런 경우가 언제였지??
 	}
 	
@@ -166,8 +167,8 @@ $(document).ready(function() {
    			url:"/subject/searchSubject.json",
    			type : "GET",
    			data : {
-   				'word':subjectKey,
-   				'select':3
+   				'word':subNo,
+   				'select':1
    			},
    			success : function(result){
            		if(result['result'] === "no data"){ 
@@ -203,13 +204,20 @@ $(document).ready(function() {
 	for(var i=1 ; i<=importance ; i++){
 		$('input:radio[id="p'+i+'"]:radio[name="star-input"]').prop("checked", true);
 	}
+	
+	$('#search').on('click', function() {
+		location.href="/find_subject?&page=assignmentAdd&title="+title+
+														"&dueDate="+dueDate+
+														"&importance="+importance+
+														"&contents="+contents+
+														"&assignNo="+assignNo;
+	});
 });
 </script>
 
 <script type="text/javascript">
 	var subNo = '${subNo}';
 	var assignNo = '${assignNo}';  
-
 	$(document).ready(function() {
 		$('#submit').on('click', function() {
 			<%
@@ -224,9 +232,9 @@ $(document).ready(function() {
 			$("#dueDate").datepicker();
 			var due = document.getElementById("dueDate").value;
 			var radioVal = $('input[name="star-input"]:checked').val();
-			
- 			due = due.replace('/','-');
-			due = due.replace('/','-'); 
+
+
+			console.log("^^^^^^^^^^^^^^^^^^"+assignNo);
 			if($('#hiddenIsNew').val() == "new"){
 				$.ajax({
 					url : "/homework/insertHomework.json",
@@ -289,9 +297,7 @@ $(document).ready(function() {
 		
 	});//function
 
-	$('#search').on('click', function() {
-		location.href="/find_subject?&page=assignmentAdd";
-	});
+	
 </script>
 
 

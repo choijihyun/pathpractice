@@ -52,21 +52,13 @@ var completeAssign = function(dueDate,importance,title,contents,subNo,id,assignN
 
 var updateAssign = function(location,title,dueDate,importance,contents,assignNo,subNo){
 
-	console.log("123123");
-	location.href=location+"?title="+title
+	window.location.href=location+"?title="+title
 		+"&dueDate="+dueDate
 		+"&importance="+importance
 		+"&contents="+contents
 		+"&assignNo="+assignNo
 		+"&subNo="+subNo;
-	
-	console.log(location+"?title="+title
-			+"&dueDate="+dueDate
-			+"&importance="+importance
-			+"&contents="+contents
-			+"&assignNo="+assignNo
-			+"&subNo="+subNo);
-	console.log("123123");
+
 }
 
 var showAllAsignment = function(id){
@@ -125,14 +117,14 @@ var fillInfomation = function(subNo,select,title,contents){
 			},
 			success : function(result){
 	   		if(result['result'] === "no data"){ 
-	   			//alert('검색하려는 과목 없음.');
+	   			alert('검색하려는 과목 없음.');
 	   		}else{
 					subName = result['result'][0]['subName'];
 					$("#subjectName").val(subName);
 	   		}
 	 	},
 	 	error : function(request,status,error){
-			//alert('검색 에러');
+			alert('검색 에러');
 			console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
 		}
 	});

@@ -118,9 +118,21 @@ public class HomeController {
     
     @RequestMapping(value = "/find_subject", method = RequestMethod.GET)
     public String find_subject(Locale locale, Model model,
-    		@RequestParam(value="page", required=false) String page) {
+    		@RequestParam(value="page", required=false) String page,
+    		@RequestParam(value="title", required=false) String title,
+    		@RequestParam(value="dueDate", required=false) String dueDate,
+    		@RequestParam(value="importance", required=false, defaultValue="0") int importance,
+    		@RequestParam(value="contents", required=false) String contents,
+    		@RequestParam(value="assignNo", required=false, defaultValue="0") int assignNo) {
        System.out.println("find_subject!");
+       
        model.addAttribute("page", page);
+       model.addAttribute("title", title);
+       model.addAttribute("dueDate", dueDate);
+       model.addAttribute("importance", importance);
+       model.addAttribute("contents", contents);
+       model.addAttribute("assignNo", assignNo);
+       
        return "find_subject";
     }
     

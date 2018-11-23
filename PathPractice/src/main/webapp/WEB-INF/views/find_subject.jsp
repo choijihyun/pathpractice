@@ -170,21 +170,34 @@
 </script>
 
 <script type="text/javascript">	
-
+	var page = '${page}'; 
+	var title = '${title}'; 
+	var dueDate = '${dueDate}'; 
+	var importance = '${importance}'; 
+	var contents = '${contents}'; 
+	var assignNo = '${assignNo}'; 
+	console.log("assignNo:::"+assignNo);
 	href = function (){
-		var page = '${page}'; 
-		console.log(page);
-	
 		if(page == 'assignmentAdd'){
-			location.href="/assignment_add?subNo="+ $('#hiddenAssign').val()
-					+"&subjectKey="+$('#hiddenSubjectKey').val();
+			location.href="/assignment_add?title="+title+
+			"&dueDate="+dueDate+
+			"&importance="+importance+
+			"&contents="+contents+
+			"&assignNo="+assignNo+
+			"&subNo="+ $('#hiddenAssign').val()+
+			"&subjectKey="+$('#hiddenSubjectKey').val();
 		}
 		else if (page == 'timetablePage'){
 			location.href="/timetable_page?subjectKey="+ $('#hiddenSubjectKey').val();
 		}
 		else if (page == 'assignmentAddTeam'){
-			location.href="/assignment_add_team?subNo="+ $('#hiddenAssign').val()
-					+"&subjectKey="+$('#hiddenSubjectKey').val();
+			location.href="/assignment_add_team?title="+title+
+			"&dueDate="+dueDate+
+			"&importance="+importance+
+			"&contents="+contents+
+			"&assignNo="+assignNo+
+			"&subNo="+ $('#hiddenAssign').val()+
+			"&subjectKey="+$('#hiddenSubjectKey').val();
 		}
 	}
 
@@ -192,23 +205,3 @@
 	$('#cancel').on('click', href );
 </script>
 
-<script type="text/javascript">	/*
-	$('#tableFindSub').on('click', function (){
-		var table = document.getElementById("tableFindSub"),rIndex,cIndex;
-		
-		for(var i = 1 ; i < table.rows.length ; i++){
-			for(var j = 1 ; j<table.rows[i].cells.length ; j++){
-				table.rows[i].cells[j].onclick = function(){console.log(123);
-					rIndex = this.parentElement.rowIndex;
-					cIndex = this.cellIndex;
-
-					console.log("ROW:" +rIndex+ ", Cell:" +cIndex);
-					$('input:radio[id="radio'+rIndex+'"]:radio[name="select"]').prop("checked", true);
-					
-					var subNo = $("#radio"+rIndex).data('subNo');
-					$('#hiddenAssign').val(subNo).trigger('change');
-				}
-			}
-		}
-	});	*/
-</script>
