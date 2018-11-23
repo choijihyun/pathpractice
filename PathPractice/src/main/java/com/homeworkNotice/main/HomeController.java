@@ -136,6 +136,14 @@ public class HomeController {
        return "find_subject";
     }
     
+    @RequestMapping(value = "/announcement", method = RequestMethod.GET)
+    public String announcement(Locale locale, Model model,
+    		@RequestParam(value="subject", required=true) String page) {
+       System.out.println("announcement!");
+       model.addAttribute("page", page);
+       return "announcement";
+    }
+    
     @RequestMapping(value = "/findPW", method = RequestMethod.GET)
     public String findPW(Locale locale, Model model) {
        System.out.println("findPW!");
