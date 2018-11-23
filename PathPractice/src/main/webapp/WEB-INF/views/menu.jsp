@@ -92,7 +92,7 @@
 					subject = result['result'][i]['subject'];
 					if(subject=="")continue;
 					
-					str += '<button class="btn p-1 btn-sm list-group-item" type="button">';
+					str += '<button class="btn p-1 btn-sm list-group-item" type="button" value="vv">';
 					str += subject;
 					str += '</button>';
 					$('.scrollbar_track').append(str);
@@ -106,6 +106,11 @@
 			}
 		});//ajax
 	});//$(document).ready
+	
+	$(document).on("click",'.list-group',function() {
+		var subject = $(this).text();
+		location.href="/announcement?subject="+subject;
+	});// 과목명 선택 해서 그 과목에 해당하는 공지사항 보여줌
 </script>
 
 
