@@ -13,6 +13,9 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import static org.androidtwon.pathandroid.R.id.webView;
@@ -21,12 +24,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView errorVeiw;
     private String myUrl = "http://ghwnwjd.cafe24.com/"; // 접속 URL (내장HTML의 경우 왼쪽과 같이 쓰고 아니면 걍 URL)
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FirebaseMessaging.getInstance().subscribeToTopic("notice");
 
         errorVeiw = (TextView) findViewById(R.id.net_error_view);
         // 웹뷰 셋팅
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 errorVeiw.setVisibility(View.VISIBLE);
             }
         });
+
         mWebView.setWebChromeClient(new WebChromeClient() {
             //alert 처리
             @Override
@@ -84,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
             //confirm 처리
+
             @Override
             public boolean onJsConfirm(WebView view, String url, String message,
                                        final JsResult result) {
@@ -111,6 +114,20 @@ public class MainActivity extends AppCompatActivity {
 
         mWebView.loadUrl(myUrl); // 접속 URL
         mWebView.setWebViewClient(new WebViewClientClass());
+
+
+        FirebaseMessaging.getInstance().subscribeToTopic("news");
+
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(MainActivity.this,  new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+                String token = instanceIdResult.getToken();
+                Log.d("FCM_TOKEN",token);
+            }
+        });
+
+        ////이렇게 ALL 추가 하면 이 디바이스는 ALL을 구독한다는 얘기가 된다. 모두에게 메세지 전송
+        FirebaseMessaging.getInstance().subscribeToTopic("ALL");
     }
 
 
