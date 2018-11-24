@@ -238,6 +238,55 @@ def parsing(announcement,subjects):
 
     return (PARSE)
 
+#blackboard 스크롤링 함수
+def check_user(uid, upw):
+  #chrome의 경우, 아까 받은 chromedriver의 위치를 지정해준다.
+    driver = webdriver.Chrome('/Users/USER/Downloads/chromedriver')
+
+  #암묵적으로 웹 자원 로드를 위해 3초까지 기다림
+    
+    stuid =str(uid)
+    pw = str(upw)
+
+  #url접근
+    
+    driver.get('https://blackboard.sejong.ac.kr')
+    driver.implicitly_wait(3)
+    driver.find_element_by_id('toggle_login_form').click()
+
+    try:
+        driver.find_element_by_name('user_id').send_keys(stuid)
+        try:
+            alert = browser.switch_to_alert()
+            alert.accept()
+            print ("alert accepted")
+        except: 
+            print ("no alert")
+
+    
+        driver.find_element_by_name('password').send_keys(pw)
+        try:
+            alert = browser.switch_to_alert()
+            alert.accept()
+            print ("alert accepted")
+        except:
+            print ("no alert")
+
+        driver.implicitly_wait(3)
+        driver.find_element_by_id("entry-login").click()
+        try:
+            alert = browser.switch_to_alert()
+            alert.accept()
+            driver.find_element_by_id("entry-login").click()
+            print ("alert accepted")
+        except:
+            print ("no alert")
+    except:
+        print("블랙보드 유저가 아님")
+        driver.quit()
+        return False
+        
+
 #####################################################################
 
 #MySQL Connection 연결
@@ -250,25 +299,51 @@ conn = pymysql.connect(host='203.250.148.53',
 #connectino으로 부터 cursor 생성
 curs = conn.cursor()
 
-#sql문 실행
-sql = "select stuId, pw from Student where flag=1"
+sql = "select stuId, pw from Student"
 curs.execute(sql)
-
-#data fetch
 rows = curs.fetchall()
-print(rows)
 
 for stu in rows:
-    lists=get_info(stu[0], stu[1])
-    if lists == False :
-        break
+    lists=[]
+    content=[]
+    subjects=[]
+    #lists=check_user(stu[0], stu[1])
+    #if lists == [] :
+    #    sql = "UPDATE Student SET flag=0 WHERE stuId ="+stu[0]
+    #    curs.execute(sql)
+    #    conn.commit()
+    #    continue
 
+    lists=get_info(stu[0],stu[1])
+    if lists==[]:
+        try :
+            conn.close()
+        except Exception as e: 
+            print(e)
+        finally:
+            print('finally')
+        print("다시 위로")
+        continue
+
+
+    conn = pymysql.connect(host='203.250.148.53',
+                       port=3306,
+                       user='jihyun',
+                       passwd='root',
+                       db='PATH')
+    curs = conn.cursor()
+    
     #과목 불러와서 subjects list에 저장함
     subjects = get_subject(lists)
 
     #parsing한 내용 content list에 저장
     content = parsing(lists, subjects)
 
+    sql="UPDATE Student SET flag=1 where stuId="+stu[0]
+    curs.execute(sql)
+    conn.commit()
+        
+    
     for i in content:
         if eq(i,content[0]):
             continue
@@ -278,17 +353,27 @@ for stu in rows:
             contest = "'"+i[2]+"'"
         date = "'"+i[0]+"'"
         subject = "'"+i[1]+"'"
-        sql = "SELECT count(*) FROM `Announcement` WHERE contest like"+ contest
+        sql = "SELECT count(*) FROM `Announcement` WHERE contest like "+ contest+" and stuId = "+stu[0]
         curs.execute(sql)
         row = curs.fetchall()
         row = str(row)
         i = int(re.findall('\d+', row)[0])
         if i > 0:
-            print("이미 존재하는 데이터")
             continue
         sql="insert into Announcement(stuId,date,subject,contest) values ("+stu[0]+","+date+","+subject+","+contest+")"
         curs.execute(sql)
         conn.commit()
-
-
-conn.close()
+        
+    try :
+        conn.close()
+    except Exception as e: 
+        print(e)
+    finally:
+        print('finally')
+try :
+    conn.close()
+except Exception as e: 
+    print(e)
+finally:
+    print('finally')
+    
