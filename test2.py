@@ -27,8 +27,8 @@ def get_info():
 
   #암묵적으로 웹 자원 로드를 위해 3초까지 기다림
 
-    stuid ='16011008'
-    pw = 'sechljigusjong98'
+    stuid ='1'
+    pw = '1'
   #url접근
     
     driver.get('https://blackboard.sejong.ac.kr')
@@ -244,19 +244,6 @@ def parsing(announcement,subjects):
 
     return (PARSE)
             
-            
-
-lists = get_info()
-if lists == False:
-    #exit()
-    #sys.exit(1)
-    print("false 반")
-
-#과목 불러와서 subjects list에 저장함
-subjects = get_subject(lists)
-
-#parsing한 내용 content list에 저장
-content = parsing(lists, subjects)
 
 #MySQL Connection 연결
 conn = pymysql.connect(host='203.250.148.53',
@@ -264,6 +251,18 @@ conn = pymysql.connect(host='203.250.148.53',
                        user='jihyun',
                        passwd='root',
                        db='PATH')
+            
+
+lists = get_info()
+if lists == []:
+    sql = "UPDATE `Student` SET `flag`=0 WHERE stuId = 
+    curs.execute(sql)
+
+#과목 불러와서 subjects list에 저장함
+subjects = get_subject(lists)
+
+#parsing한 내용 content list에 저장
+content = parsing(lists, subjects)
 
 #connectino으로 부터 cursor 생성
 curs = conn.cursor()
@@ -284,11 +283,11 @@ for i in content:
     if i > 0:
         print("이미 존재하는 데이터")
         continue
-    sql="insert into Announcement(stuId,date,subject,contest) values (16011008,"+date+","+subject+","+contest+")"
+    sql="insert into Announcement(stuId,date,subject,contest) values (,"+date+","+subject+","+contest+")"
     curs.execute(sql)
     conn.commit()
     
-sql = "select * from Announcement"
+sql = "select * from Announcement where stuId=1"
 curs.execute(sql)
 rows = curs.fetchall()
 for row in rows:
