@@ -6,7 +6,14 @@ public class UserDto {
 	private int semester;
 	private String pw;
 	private String email;
+	private String useCookie;
 	
+	public String getUseCookie() {
+		return useCookie;
+	}
+	public void setUseCookie(String useCookie) {
+		this.useCookie = useCookie;
+	}
 	public String getName() {
 		return name;
 	}

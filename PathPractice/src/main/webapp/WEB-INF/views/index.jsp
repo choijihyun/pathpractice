@@ -111,7 +111,7 @@
 					if (result.result === "1") {
 						location.href = "/home";
 					} else {
-						//alert('로그인 실패');
+						alert('아이디나 비밀번호를 다시 확인해 주세요.');
 					}
 				},
 				error : function() {
