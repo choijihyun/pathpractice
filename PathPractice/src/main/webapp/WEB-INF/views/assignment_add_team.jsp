@@ -84,11 +84,13 @@
 						
 						<div class="col-md-3 col-xs-3 my-3 label_input">팀원</div>
 						<div class="col-md-7 col-xs-7 my-2" id="member"> 
-							<div class="input-group">
-								<div class="input-group-prepend">
+							<div class="input-group input-member">
+								<div class="input-group-prepend mb-1">
 							    	<button class="btn btn-sm btn-outline-danger block" type="button" id="btn_add_member">ADD</button>
-							  	</div>
-								<input type="text" class="form-control form-control-sm flat_input m-0" aria-describedby="btn_add_member">
+						
+									<input type="text" class="col-6 form-control form-control-sm flat_input my-0 mx-1 mem-id" placeholder="학번" aria-describedby="btn_add_member">
+									<input type="text" class="col-6 form-control form-control-sm flat_input my-0 mx-1 mem-name" placeholder="이름" aria-describedby="btn_add_member">
+								</div>
 							</div>
 							
 						</div>
@@ -211,3 +213,49 @@ $(document).ready(function() {
 
 </script>
 
+<script type="text/javascript">
+	
+	$(document).ready(function() {
+		
+		$('#btn_add_member').on('click', function() { 
+			var memId = $('.mem-id').val();
+			var memName =  $('.mem-name').val();
+			if( !( memId == '') && !(memName == '') ){
+				//실제로 존재하는 사용자 인지도 확인 해주기(Student table의 name,stuId로 보면 됨)
+				var str = '';
+				str += '<div class="input-group-prepend mb-1">';
+				str += '<button class="btn btn-sm btn-outline-danger block btn-del-member"';
+				str += 'type="button">';
+				str += ' DEL </button>';
+				str += '<input type="text" disabled="true"';
+				str += 'class="col-6 form-control form-control-sm flat_input my-0 mx-1"';
+				str += 'placeholder="'+ $('.mem-id').val() +'" >';
+				str += '<input type="text" disabled="true"';
+				str += 'class="col-6 form-control form-control-sm flat_input my-0 mx-1"';
+				str += 'placeholder="'+ $('.mem-name').val() +'" >';
+				str += '</div>';
+				
+				$('.input-member').append(str);
+			}
+			else{
+				alert("팀원의 정보를 모두 입력 해 주세요");
+			}
+		});//#btn_add_member btn click
+		
+	});//function
+
+</script>
+
+<script type="text/javascript">
+	
+	$(document).ready(function() {
+		
+		$('.btn-del-member').on('click', function() {
+			console.log(123);
+			console.log(this);
+			this.remove();
+		});//#btn_del_member btn click
+		
+	});//function
+
+</script>

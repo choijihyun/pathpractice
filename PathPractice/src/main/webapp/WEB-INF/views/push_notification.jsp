@@ -55,7 +55,7 @@
     if ($myMessage == ""){
         $myMessage = "새글이 등록되었습니다!";
     }
- 
+ 	
     $message = array("message" => $myMessage);
     $message_status = send_notification($tokens, $message);
     echo $message_status;

@@ -58,13 +58,13 @@ public class HomeController {
         return "join";
     }
     
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register(Locale locale, Model model) {
     	System.out.println("register!");
         return "register";
     }
     
-    @RequestMapping(value = "/push_notification", method = RequestMethod.GET)
+    @RequestMapping(value = "/push_notification", method = RequestMethod.POST)
     public String push_notification(Locale locale, Model model) {
     	System.out.println("push_notification!");
         return "push_notification";
