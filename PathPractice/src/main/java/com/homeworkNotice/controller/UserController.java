@@ -231,6 +231,12 @@ public class UserController {
 			@RequestParam(value = "stuId", required=true) String stuId,
 			@RequestParam(value = "pw", required=true) String pw) {
 		
+		if(session.getAttribute("id")!=null) {
+			session.removeAttribute("name");
+			session.removeAttribute("id");
+			session.removeAttribute("email");
+			session.setAttribute("pw",pw);
+		}
 		
 		HashMap<Object, Object> param=new HashMap<Object, Object>();
 		
@@ -258,6 +264,7 @@ public class UserController {
 				session.setAttribute("name", name);
 				session.setAttribute("email", email);
 				session.setAttribute("id",stuId);
+				session.setAttribute("pw",pw);
 				
 			}
 			else {

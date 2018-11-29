@@ -52,4 +52,8 @@ public class UserDao {
 	public int deleteUser(HashMap<Object, Object> param) {
 		return sqlSession.delete("UserDao.deleteUser",param);
 	}
+	
+	public List<UserDto> isUseCookie(HashMap<Object, Object> param) {
+		return sqlSession.selectList("UserDao.selectCookie",param);
+	}
 }
