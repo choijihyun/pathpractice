@@ -27,7 +27,7 @@
 	color: #dd3247;
 }
 .btn_pop_assignment{
-	
+	overflow:hidden;
 }
 .btn_assign_type{
 	border:0;

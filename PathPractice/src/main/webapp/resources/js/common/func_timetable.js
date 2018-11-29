@@ -1,3 +1,25 @@
+function insertTimetable(subjectKey,id){
+		$.ajax({
+			url : "/timeTable/insertTimeTable.json",
+			type : "GET",
+			async : false,
+			data : {
+				'stuId' : id,
+				'subjectKey' : subjectKey
+			},success : function(result) {
+				if (result['result'] === '1') { 
+					//동적으로 table 합치기!!!!!!!!!!!!!!!!!!!!!!	
+				} else {
+					alert('시간표등록실패');
+				}
+			},error : function(request,status,error){
+				alert('검색 에러');
+				console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+			}
+	});
+
+	window.location.href= '/timetable_page';
+}
 
 var findSubjectInfo = function (subjectKey) {
 	$.ajax({

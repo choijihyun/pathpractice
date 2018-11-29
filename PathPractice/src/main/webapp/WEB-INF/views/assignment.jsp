@@ -91,7 +91,6 @@
 												<button type="button" id='teamAssign' class="btn btn-sm btn-info" data-dismiss="modal">team assign</button>
 											</div>
 	
-										<!-- 	<div class="modal-footer"> </div> -->
 										</div>
 									</div>
 								</div>
@@ -100,12 +99,15 @@
 
 					<!-- 과제 전체 보여주는 영역(스트롤바 포함¨) -->
 					<!-- 과제가 여러개 이면 스크롤 생김 -->
-					<div style="overflow:auto; width:auto; height:300px;" class="mt-3 scrollbar scrollbar-track scrollbar-thumb" data-offset="0">
+					<div style="overflow-x:hidden; overflow-y:auto; width:auto; height:300px;" class="mt-3 scrollbar scrollbar-track scrollbar-thumb" data-offset="0">
 
 						<!-- 스크롤바 제외한 과제를 보여주는 영역 -->
 						<div class="px-2 content_show_assign">
-							<!-- Modal -->
-							<div class="modal assign_modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+						
+						</div>
+						
+						<!-- Modal -->
+						<div class="modal assign_modal fade" tabindex="-1" role="dialog" aria-hidden="true">
 								<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 									<div class="modal-content">
 										<div class="modal-header">
@@ -144,8 +146,7 @@
 									</div>
 								</div>
 							</div>
-
-						</div>
+							
 					</div>
 				</div>
 
@@ -168,7 +169,7 @@
 	$('#all').on('click', function (){
 		$('.content_show_assign').empty();
 		showAllAssignment(<%=id%>);
-	});//처음에는 완료한거 빼고 모두 보여줌, 그리고 본문 창은 싹 비우고 carousel로 창 넘기기
+	});
 	$('#team').on('click', function (){
 		$('.content_show_assign').empty();
 		showTeamAssignment(<%=id%>);
@@ -228,21 +229,18 @@
 		for(var i=1 ; i<=importance ; i++)
 		 $('input:radio[id="p'+i+'"]:radio[name="star-input"]').prop("checked", true);
 			 
-		//과제 삭제 버튼 클릭 
-		//event.preventDefault();
+		//과제 삭제 버튼 클릭  
 		$('#assignDel').on('click', function (){
 			var assignNo = $('#hiddenAssign').val();
 			deleteAssign(assignNo,<%=id%>);
 		});//assignDel Cllick
 
-		//과제 완료버튼 클릭
-		//event.preventDefault();
+		//과제 완료버튼 클릭 
 		$('#assignComplete').on('click', function (){ 
 			completeAssign(dueDate,importance,title,contents,subNo,<%=id%>,assignNo,1,team); 
 		});//assignComplete Click
 
-		//과제 수정버튼 클릭
-		event.preventDefault();
+		//과제 수정버튼 클릭 
 		$('#assignChange').on('click', function (){ 
 			 if(team == 0){
 				location = "/assignment_add"; 
@@ -250,7 +248,7 @@
 			else {
 				location = "/assignment_add_team"; 
 			}  
-			updateAssign(location,title,dueDate,importance,contents,assignNo,subNo);
+			locateUpdateAssign(location,title,dueDate,importance,contents,assignNo,subNo);
 		});//assignChange Cllick
 			
 	});//btn_pop_assignment Click

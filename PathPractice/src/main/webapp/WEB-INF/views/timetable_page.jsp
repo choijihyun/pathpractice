@@ -68,9 +68,9 @@
 
 						<!-- 직접 추가하기 창 -->
 						<div class="collapse mt-1 form-add" id="collapseDirect">
-							<div class="card card-body card_directly p-2">
-								<form class="commonForm">
-									<div class="form-group m-0">
+							<div class="card card-body card_directly p-2 commonForm">
+								<!-- <form class="commonForm"> -->
+									<div class="form-group m-0 ">
 										<label for="subjectName" class="col-12 label_input">과목명</label>
 										<input type="text" class="col-10 m-0 form-control input" title="과목명"
 											id="subjectName" style="display:inline-block;">
@@ -152,7 +152,7 @@
 										<label for="place" class="col-12 label_input">장소</label> <input
 											type="text" class="form-control input" title="장소" id="place">
 									</div>
-								</form>
+								<!--</form>  -->
 								<div class="form-row mx-auto btn_submit">
 									<button type="button" id="btnSuccess"
 										class="mx-auto col-5 btn btn-sm btn_add_sub">추가</button>
@@ -187,24 +187,21 @@
 	});
 	$('#plusTime').on('click', function () {
 		$('#collapseDirect').collapse('hide');
-		$('#collapseAdd').collapse('hide');
-		
+		$('#collapseAdd').collapse('hide'); 
 	});
 	$('#btnUndo1').on('click', function () {
 		$('#addByDirectly').trigger('click');
+		$('.commonForm input[type="text"]').val("");
 	});
 	$('#subjectName').on('click', function () {
 		$('#search').trigger('click');
-	}); 
-
+	});  
 </script>
 
 <script type="text/javascript">
 	var userInputId = getCookie("userInputId");
 	console.log(userInputId);
-	<%
-	System.out.println("timetable session : " + session.getAttribute("id"));
-	%>
+	<% System.out.println("timetable session : " + session.getAttribute("id")); %>
 </script>
 
 <script type="text/javascript">
@@ -215,25 +212,23 @@ $('#search').on('click', function() {
 
 <!--시간표 추가 -->
 <script>
+	<% String id = (String) session.getAttribute("id"); %>
 	var subjectKey = '${subjectKey}'; 
 
- 	if(subjectKey == 0){
- 		subjectKey = 111111//?? 직접 추가할 때 subNo어떻게 하는지 물어보기//직접추가하면 교수명 과목명 시작시간 종료시간 장소 모두 입력받은걸로 찾아와서 색칠
+ 	if(subjectKey != 0){
+ 		fillInfomation(subjectKey,3);//직접 추가할 때 subNo어떻게 하는지 물어보기//직접추가하면 교수명 과목명 시작시간 종료시간 장소 모두 입력받은걸로 찾아와서 색칠
 	}
  	
- 	fillInfomation(subjectKey,3);
-	
 	$('#btnSuccess').on('click', function () {
 		if( !chkInput() ) return; 
-		
-		insertTimetable( $('#hiddenSubKey').val() );
-		
-		// select box value init
-		$('select').find("option:eq(0)").prop("selected", true);
-		$('#addByDirectly').trigger('click');
-		$('#plusTime').trigger('click');
-				
-		$('.commonForm input[type="text"]').val(""); 	
+		insertTimetable( $('#hiddenSubKey').val(),<%=id%> );
+	});
+</script>
+
+<!-- 시작할때 시간표 불러오기 -->
+<script>
+	$(document).ready(function(){
+		showAllTimetable(<%=id%>); 
 	});
 </script>
 
@@ -254,36 +249,5 @@ $('#search').on('click', function() {
 	});
 </script> -->
  
-<script>
-	//subjectKey 로 시간표 db에 등록
-	function insertTimetable(subjectKey){
-		<% String id = (String) session.getAttribute("id"); %>
-		$.ajax({
-			url : "/timeTable/insertTimeTable.json",
-			type : "GET",
-			data : {
-				'stuId' : <%=id%>,
-				'subjectKey' : subjectKey
-			},success : function(result) {
-				console.log(result);
-				if (result['result'] === '1') { 
-					location.reload();
-					//$(location).attr('/timetable_page?');
-					//동적으로 table 합치기!!!!!!!!!!!!!!!!!!!!!!			
-				} else {
-					alert('시간표등록실패');
-				}
-			},error : function() {
-				alert('시간표등록에러');
-			}
-		});
-	}
-</script>
 
 <!-- 처음페이지 시작, 추가 수정 삭제시 시간표 정보들 모두 불러오기 -->
-<!-- 시작할때 시간표 불러오기 -->
-<script>
-	$(document).ready(function(){
-		showAllTimetable(<%=id%>); 
-	});
-</script>

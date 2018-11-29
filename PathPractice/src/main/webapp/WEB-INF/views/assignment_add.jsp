@@ -127,6 +127,7 @@
 
 <script src="${pageContext.request.contextPath}/resources/js/common/func_check_input.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/common/func_cookie.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/func_assignment.js"></script>
 
 <script type="text/javascript">
 	var userInputId = getCookie("userInputId");
@@ -151,59 +152,16 @@ $(document).ready(function() {
 	else
 		$('#hiddenIsNew').val("new").trigger('change');
 	
-	$("#title").val(title);
-	$("#contents").val(contents);
+	
 	$('#subjectName').on('click', function () {
 		$('#search').trigger('click');
 	});
 	
-	if(subNo == 0){
-		subNo = 111111;
-		//이런 경우가 언제였지??
+	
+	if(subNo != 0){
+		fillInfomation(subNo,1,title,contents,dueDate,importance);
 	}
 	
-	//subjectKey 으로 과목명 검색해서 textfield에 띄워주기
-	$.ajax({
-   			url:"/subject/searchSubject.json",
-   			type : "GET",
-   			data : {
-   				'word':subNo,
-   				'select':1
-   			},
-   			success : function(result){
-           		if(result['result'] === "no data"){ 
-           			alert('검색하려는 과목 없음.');
-           		}else{
-  					subName = result['result'][0]['subName'];
-  					$("#subjectName").val(subName);
-           		}
-         	},
-         	error : function(request,status,error){
-        		alert('검색 에러');
-        		console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
-        	}
-		});
-	
-	
-	//setting datepicker
-	$(function() {
-		$("#dueDate").datepicker({ 
-			changeMonth: true, 
-	        changeYear: true,
-	        dayNames: ['월', '화', '수', '목', '금', '토', '일'], 
-	        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-			dateFormat : "yy-mm-dd"
-		});
-		
-		strArray = dueDate.split('-');
-		realDate = new Date(strArray[0], strArray[1]-1, strArray[2]); 
-		$("#dueDate").datepicker('setDate',realDate);
-	});
-	
-	//setting importance(star)
-	for(var i=1 ; i<=importance ; i++){
-		$('input:radio[id="p'+i+'"]:radio[name="star-input"]').prop("checked", true);
-	}
 	
 	$('#search').on('click', function() {
 		location.href="/find_subject?&page=assignmentAdd&title="+title+
@@ -218,7 +176,9 @@ $(document).ready(function() {
 <script type="text/javascript">
 	var subNo = '${subNo}';
 	var assignNo = '${assignNo}';  
+	
 	$(document).ready(function() {
+		
 		$('#submit').on('click', function() {
 			<%
 			String id = (String) session.getAttribute("id");
@@ -232,72 +192,20 @@ $(document).ready(function() {
 			$("#dueDate").datepicker();
 			var due = document.getElementById("dueDate").value;
 			var radioVal = $('input[name="star-input"]:checked').val();
-
-
-			console.log("^^^^^^^^^^^^^^^^^^"+assignNo);
-			if($('#hiddenIsNew').val() == "new"){
-				$.ajax({
-					url : "/homework/insertHomework.json",
-					type : "GET",
-					data : {
-						'stuId' : <%=id%>,
-						'importance' : radioVal,
-						'dueDate' : due,
-						'title' : $('#title').val(),
-						'contents' : $('#contents').val(),
-						'success' : 0,
-						'subNo' : subNo,
-						'team' : 0
-					},
-					success : function(result) {
-						console.log(result);
-						if (result['result'] === '1') {
-							location.href = "/assignment";
-						} else {
-							alert('과제등록실패');
-						}
-					},
-					error : function() {
-						alert('과제등록에러');
-					}
-				}); //ajax
-			}//new
+			var title = $('#title').val()
+			var contents = $('#contents').val()
 			
+			if($('#hiddenIsNew').val() == "new"){
+				insertNewHomework(<%=id%>,radioVal,due,title,contents,0,subNo,0);
+			}//new
 			else{
-				$.ajax({
-					url:"/homework/updateHomework.json",
-					type : "GET",
-					data : {
-						'dueDate': due,
-						'importance': radioVal,
-						'title':  $('#title').val(),
-						'contents': $('#contents').val(),
-						'subNo': subNo,
-						'stuId': <%=id%>,
-						'assignNo': assignNo,
-						'success': 0,
-						'team': 0
-					},
-					success : function(result) {
-						console.log(result);
-						if (result['result'] === '1') {
-							location.href = "/assignment";
-						} else {
-							alert('과제수정실패');
-						}
-					},
-					error : function(request,status,error){
-		        		alert('과제수정에러');
-		        		console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
-		        	}
-				});//ajax
+				updateAssign(due,radioVal,title,contents,subNo,<%=id%>,0,0);
 			}//update
 			 
 		});//submit btn click
 		
 	});//function
 
-	
 </script>
 
 

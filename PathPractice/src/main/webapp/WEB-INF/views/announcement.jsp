@@ -85,7 +85,7 @@
 
 					<!-- 과제 전체 보여주는 영역(스트롤바 포함¨) -->
 					<!-- 과제가 여러개 이면 스크롤 생김 -->
-					<div style="overflow:auto; width:auto; height:300px;" class="mt-3 scrollbar scrollbar-track scrollbar-thumb" data-offset="0">
+					<div style="overflow-x:hidden; overflow-y:auto; width:auto; height:300px;" class="mt-3 scrollbar scrollbar-track scrollbar-thumb" data-offset="0">
 
 						<!-- 스크롤바 제외한 과제를 보여주는 영역 -->
 						<div class="px-2 content_show_assign">

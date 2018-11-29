@@ -148,7 +148,7 @@ $(document).ready(function() {
  	var dueDate = '${dueDate}';
 	var importance = '${importance}';
 	var contents = '${contents}';
-	var subjectKey = '${subjectKey}'; 
+	var subNo = '${subNo}'; 
 	var assignNo = '${assignNo}';  
 	
 	if( title!=" " && dueDate!=" " && importance!="" && contents!="")
@@ -161,33 +161,10 @@ $(document).ready(function() {
 		$('#search').trigger('click');
 	});
 	
-	if(subjectKey == 0){
-		subjectKey = 111111;
-		//이런 경우가 언제였지??
+	if(subNo != 0){
+		fillInfomation(subNo,1,title,contents,dueDate,importance);
 	}
 	
-	fillInfomation(subjectKey,3,title,contents);
-
-	//setting datepicker
-	$(function() {
-		$("#dueDate").datepicker({ 
-			changeMonth: true, 
-	        changeYear: true,
-	        dayNames: ['월', '화', '수', '목', '금', '토', '일'], 
-	        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-			dateFormat : "yy-mm-dd"
-		});
-		
-		strArray = dueDate.split('-');
-		realDate = new Date(strArray[0], strArray[1]-1, strArray[2]); 
-		$("#dueDate").datepicker('setDate',realDate);
-	});
-	
- 	//setting importance(star)
-	for(var i=1 ; i<=importance ; i++){
-		$('input:radio[id="p'+i+'"]:radio[name="star-input"]').prop("checked", true);
-	} 
- 
 	$('#search').on('click', function() {
 		location.href="/find_subject?&page=assignmentAddTeam&title="+title+
 														"&dueDate"+dueDate+
@@ -204,6 +181,7 @@ $(document).ready(function() {
 	var assignNo = '${assignNo}';  
 
 	$(document).ready(function() {
+		
 		$('#submit').on('click', function() {
 			<%
 			String id = (String) session.getAttribute("id");
@@ -217,66 +195,14 @@ $(document).ready(function() {
 			$("#dueDate").datepicker();
 			var due = document.getElementById("dueDate").value;
 			var radioVal = $('input[name="star-input"]:checked').val();
-			
- 			due = due.replace('/','-');
-			due = due.replace('/','-'); 
+			var title = $('#title').val()
+			var contents = $('#contents').val()
+ 		 
 			if($('#hiddenIsNew').val() == "new"){
-				$.ajax({
-					url : "/homework/insertHomework.json",
-					type : "GET",
-					data : {
-						'stuId' : <%=id%>,
-						'importance' : radioVal,
-						'dueDate' : due,
-						'title' : $('#title').val(),
-						'contents' : $('#contents').val(),
-						'success' : 0,
-						'subNo' : subNo,
-						'team' : 1
-					},
-					success : function(result) {
-						console.log(result);
-						if (result['result'] === '1') {
-							location.href = "/assignment";
-						} else {
-							alert('과제등록실패');
-						}
-					},
-					error : function() {
-						alert('과제등록에러');
-					}
-				}); //ajax
+				insertNewHomework(<%=id%>,radioVal,due,title,contents,0,subNo,1);
 			}//new
-			
 			else{
-				$.ajax({
-					url:"/homework/updateHomework.json",
-					type : "GET",
-					data : {
-						'dueDate': due,
-						'importance': radioVal,
-						'title':  $('#title').val(),
-						'contents': $('#contents').val(),
-						'subNo': subNo,
-						'stuId': <%=id%>,
-						'assignNo': assignNo,
-						'success': 0,
-						'team': 1
-						//team 이거 언니가 추가해주면 바꾸기
-					},
-					success : function(result) {
-						console.log(result);
-						if (result['result'] === '1') {
-							location.href = "/assignment";
-						} else {
-							alert('과제수정실패');
-						}
-					},
-					error : function(request,status,error){
-		        		alert('과제수정에러');
-		        		console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
-		        	}
-				});//ajax
+				updateAssign(due,radioVal,title,contents,subNo,<%=id%>,0,1);
 			}//update
 			 
 		});//submit btn click

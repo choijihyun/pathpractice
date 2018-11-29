@@ -2,6 +2,7 @@ var deleteAssign = function(assignNo,id){
 	$.ajax({
 		url:"/homework/deleteHomework.json",
 		type : "GET",
+		async : false,
 		data : {
 			'stuId':id,
 			'assignNo': assignNo
@@ -50,7 +51,7 @@ var completeAssign = function(dueDate,importance,title,contents,subNo,id,assignN
 	});//ajax
 }
 
-var updateAssign = function(location,title,dueDate,importance,contents,assignNo,subNo){
+var locateUpdateAssign = function(location,title,dueDate,importance,contents,assignNo,subNo){
 
 	window.location.href=location+"?title="+title
 		+"&dueDate="+dueDate
@@ -58,14 +59,69 @@ var updateAssign = function(location,title,dueDate,importance,contents,assignNo,
 		+"&contents="+contents
 		+"&assignNo="+assignNo
 		+"&subNo="+subNo;
-	
-	console.log(location+"?title="+title
-			+"&dueDate="+dueDate
-			+"&importance="+importance
-			+"&contents="+contents
-			+"&assignNo="+assignNo
-			+"&subNo="+subNo);
 }
+
+var updateAssign = function(due,radioVal,title,contents,subNo,id,success,team){
+	$.ajax({
+		url:"/homework/updateHomework.json",
+		type : "GET",
+		data : {
+			'dueDate': due,
+			'importance': radioVal,
+			'title': title,
+			'contents': contents,
+			'subNo': subNo,
+			'stuId': id,
+			'assignNo': assignNo,
+			'success': success,
+			'team': team
+		},
+		success : function(result) {
+			console.log(result);
+			if (result['result'] === '1') {
+				location.href = "/assignment";
+			} else {
+				alert('과제수정실패');
+			}
+		},
+		error : function(request,status,error){
+    		alert('과제수정에러');
+    		console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+    	}
+	});//ajax
+	
+}
+
+var insertNewHomework = function(id,radioVal,due,title,contents,success,subNo,team){
+	
+	$.ajax({
+		url : "/homework/insertHomework.json",
+		type : "GET",
+		data : {
+			'stuId' : id,
+			'importance' : radioVal,
+			'dueDate' : due,
+			'title' : title,
+			'contents' : contents,
+			'success' : success,
+			'subNo' : subNo,
+			'team' : team
+		},
+		success : function(result) {
+			console.log(result);
+			if (result['result'] === '1') {
+				location.href = "/assignment";
+			} else {
+				alert('과제등록실패');
+			}
+		},
+		error : function() {
+			alert('과제등록에러');
+		}
+	}); //ajax
+
+}
+
 
 var showAllAssignment = function(id){
 	$.ajax({
@@ -235,7 +291,7 @@ var showNotSuccessAssignment = function(id){
 }
 
 
-var fillInfomation = function(subNo,select,title,contents){
+var fillInfomation = function(subNo,select,title,contents,dueDate,importance){
 	$("#title").val(title);
 	$("#contents").val(contents);
 	
@@ -248,16 +304,36 @@ var fillInfomation = function(subNo,select,title,contents){
 			},
 			success : function(result){
 	   		if(result['result'] === "no data"){ 
-	   			//alert('검색하려는 과목 없음.');
+	   			alert('검색하려는 과목 없음.');
 	   		}else{
 					subName = result['result'][0]['subName'];
 					$("#subjectName").val(subName);
 	   		}
 	 	},
 	 	error : function(request,status,error){
-			//alert('검색 에러');
+			alert('검색 에러');
 			console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
 		}
 	});
+	
+	//setting datepicker
+	$(function() {
+		$("#dueDate").datepicker({ 
+			changeMonth: true, 
+	        changeYear: true,
+	        dayNames: ['월', '화', '수', '목', '금', '토', '일'], 
+	        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+			dateFormat : "yy-mm-dd"
+		});
+		
+		strArray = dueDate.split('-');
+		realDate = new Date(strArray[0], strArray[1]-1, strArray[2]); 
+		$("#dueDate").datepicker('setDate',realDate);
+	});
+	
+	//setting importance(star)
+	for(var i=1 ; i<=importance ; i++){
+		$('input:radio[id="p'+i+'"]:radio[name="star-input"]').prop("checked", true);
+	}
 	
 }
