@@ -57,6 +57,18 @@ public class HomeController {
     	System.out.println("join!");
         return "join";
     }
+    
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String register(Locale locale, Model model) {
+    	System.out.println("register!");
+        return "register";
+    }
+    
+    @RequestMapping(value = "/push_notification", method = RequestMethod.GET)
+    public String push_notification(Locale locale, Model model) {
+    	System.out.println("push_notification!");
+        return "push_notification";
+    }
 
 
     //using url parameter for send assignment data to assignment_add.jsp 
@@ -138,9 +150,9 @@ public class HomeController {
     
     @RequestMapping(value = "/announcement", method = RequestMethod.GET)
     public String announcement(Locale locale, Model model,
-    		@RequestParam(value="subject", required=true) String page) {
+    		@RequestParam(value="subject", required=true) String subject) {
        System.out.println("announcement!");
-       model.addAttribute("page", page);
+       model.addAttribute("subject", subject);
        return "announcement";
     }
     

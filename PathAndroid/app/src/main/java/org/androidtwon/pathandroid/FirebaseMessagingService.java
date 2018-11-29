@@ -49,7 +49,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
         //request
         Request request = new Request.Builder()
-                .url("http://ghwnwjd.cafe24.com/fcm/register.php")
+                .url("http://ghwnwjd.cafe24.com/register.jsp")
                 //  /fcm/register.php 이거 언니한테 만들어달라고 해야함
                 .post(body)
                 .build();

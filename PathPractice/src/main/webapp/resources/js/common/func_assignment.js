@@ -52,8 +52,7 @@ var completeAssign = function(dueDate,importance,title,contents,subNo,id,assignN
 
 var updateAssign = function(location,title,dueDate,importance,contents,assignNo,subNo){
 
-	console.log("123123");
-	location.href=location+"?title="+title
+	window.location.href=location+"?title="+title
 		+"&dueDate="+dueDate
 		+"&importance="+importance
 		+"&contents="+contents
@@ -66,7 +65,6 @@ var updateAssign = function(location,title,dueDate,importance,contents,assignNo,
 			+"&contents="+contents
 			+"&assignNo="+assignNo
 			+"&subNo="+subNo);
-	console.log("123123");
 }
 
 var showAllAssignment = function(id){

@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         errorVeiw = (TextView) findViewById(R.id.net_error_view);
         // 웹뷰 셋팅
         mWebView = (WebView) findViewById(R.id.webView);
+        // 자바스크립트 사용을 반드시 true로 해야 한다
         mWebView.getSettings().setJavaScriptEnabled(true);
 
         mWebView.setWebViewClient(new WebViewClient() {

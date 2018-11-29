@@ -66,10 +66,7 @@
 
  <script type="text/javascript"> 
 	$(document).ready(function(){
-		$('#submit').on( 'click', function() { 
-/* 			$("#rePw").toggle();
-			$("#change").toggle(); */
-			 
+		$('#submit').on( 'click', function() { 			 
 			$.ajax({
 				url : "/user/checkUserExist.json",						
 				type : "POST",
@@ -98,7 +95,7 @@
 		
 				
 		// event.preventDefault();
-		/*  $('#change').on('click', function() { 
+		  $('#change').on('click', function() { 
 			$.ajax({
 			 	url: "/user/updatePw.json",
 				type: "POST",
@@ -119,7 +116,7 @@
 					alert('비밀번호 변경 에러');
 				}
 			});//ajax
-		});//change click  */
+		});//change click 
 		
 	});
 		

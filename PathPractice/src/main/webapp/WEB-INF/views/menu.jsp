@@ -81,7 +81,7 @@
 			}, 
 			success : function(result) {
 				if (result['result'] === 'no data') {
-					//alert('등록된 공지사항 없음');
+					alert('등록된 공지사항 없음');
 				} else { 
 					console.log(result);
 				var str = '';

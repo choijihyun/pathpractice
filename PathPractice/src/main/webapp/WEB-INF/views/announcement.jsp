@@ -139,6 +139,7 @@
 	$(document).ready(function(){
 		var subject = '${subject}';
 		//이거 주호한테 url에서 parameter로 가져오는거 안되냐고 물어보기!!!
+		//주호가 보고 고쳤음><ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
 		<% String id = (String)session.getAttribute("id"); %>
 		alert("subect : "+subject);
 		showAllAnnounce(<%=id%>,"고급C프로그래밍및실습");
