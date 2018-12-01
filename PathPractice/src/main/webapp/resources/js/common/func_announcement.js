@@ -1,5 +1,4 @@
 var showAllAnnounce = function(id, subject){
-	alert("id, subject : "+id+" "+subject);
 	$.ajax({
 		url:"/blackboard/getAnnounce.json",
 		type : "GET",
