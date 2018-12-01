@@ -158,26 +158,6 @@ def get_subject(lists):
 
     return (subjects)
 
-
-## 듣는 수업 및 분반 알아내기
-lists = get_info(16011008,'sechljigusjong98')
-subjects = get_subject(lists)
-INFO=[]
-INFOS=[]
-for subject in subjects:
-    INFO=[]
-    info = subject.split("(")
-    #print(info)
-    name = info[0]
-    classnum = info[1]
-    idx = classnum.index(")")
-    classnum = classnum[:idx]
-    print("name"+name)
-    print("classnum"+classnum)
-    INFO.append(name)
-    INFO.append(classnum)
-    INFOS.append(INFO)
-
 #MySQL Connection 연결
 conn = pymysql.connect(host='203.250.148.53',
                        port=3306,
@@ -187,13 +167,30 @@ conn = pymysql.connect(host='203.250.148.53',
 #connectino으로 부터 cursor 생성
 curs = conn.cursor()
 
-sql = "select stuId from Student"
+sql = "select stuId,pw from Student"
 curs.execute(sql)
 rows = curs.fetchall()
+## 듣는 수업 및 분반 알아내기
+
+
+
 
 for stu in rows :
-    
-    ## 수업 subkey찾아서 timtiable DB에 저장해야 함 
+    lists = get_info(stu[0],stu[1])
+    subjects = get_subject(lists)
+    INFO=[]
+    INFOS=[]
+    for subject in subjects:
+        INFO=[]
+        info = subject.split("(")
+        name = info[0]
+        classnum = info[1]
+        idx = classnum.index(")")
+        classnum = classnum[:idx]
+        INFO.append(name)
+        INFO.append(classnum)
+        INFOS.append(INFO)
+        ## 수업 subkey찾아서 timtiable DB에 저장해야 함 
     for info in INFOS:
         try :
             className = info[0]
