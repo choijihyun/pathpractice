@@ -33,34 +33,33 @@ import okhttp3.RequestBody;
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService{
     private static final String TAG = "FirebaseMsgService";
 
-   @Override
-   public void onNewToken(String s) {
-       super.onNewToken(s);
-       Log.d("NEW_TOKEN",s);
-       sendRegistrationToServer(s);
-   }
-    private void sendRegistrationToServer(String token) {
-        // Add custom implementation, as needed.
-
-        OkHttpClient client = new OkHttpClient();
-        RequestBody body = new FormBody.Builder()
-                .add("Token", token)
-                .build();
-
-        //request
-        Request request = new Request.Builder()
-                .url("http://ghwnwjd.cafe24.com/register.jsp")
-                //  /fcm/register.php 이거 언니한테 만들어달라고 해야함
-                .post(body)
-                .build();
-
-        try {
-            client.newCall(request).execute();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    /*@Override
+    public void onNewToken(String s) {
+        super.onNewToken(s);
+        Log.d("NEW_TOKEN",s);
+        sendRegistrationToServer(s);
     }
+     private void sendRegistrationToServer(String token) {
+         // Add custom implementation, as needed.
+
+         OkHttpClient client = new OkHttpClient();
+         RequestBody body = new FormBody.Builder()
+                 .add("Token", token)
+                 .build();
+
+         //request
+         Request request = new Request.Builder()
+                 .url("http://ghwnwjd.cafe24.com/register.jsp")
+                 .post(body)
+                 .build();
+
+         try {
+             client.newCall(request).execute();
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
+
+     }*/
     // [START receive_message]
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -83,7 +82,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 .setContentTitle("FCM PUSH TEST")
                 .setContentText(messageBody)
                 .setAutoCancel(true)
-                .setSound(defaultSoundUri)/*.setLights(000000255,500,2000)*/
+                .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent);
 
         NotificationManager notificationManager =

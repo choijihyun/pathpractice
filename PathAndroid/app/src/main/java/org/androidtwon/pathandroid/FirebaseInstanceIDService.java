@@ -21,7 +21,7 @@ public class FirebaseInstanceIDService extends FirebaseInstanceIdService{
 
     //[START refresh_token]
     //다 FirebaseMessagingService.java 로 옮김
-    /*@Override
+   @Override
     public void onTokenRefresh(){
         //Get updated InstanceID token.
         String token = FirebaseInstanceId.getInstance().getToken();
@@ -40,8 +40,8 @@ public class FirebaseInstanceIDService extends FirebaseInstanceIdService{
 
         //request
         Request request = new Request.Builder()
-                .url("http://ghwnwjd.cafe24.com/fcm/register.php")
-//                /fcm/register.php 이거 언니한테 만들어달라고 해야함
+                .url("http://ghwnwjd.cafe24.com/register.jsp")
+                //은숙엉니가 만들어준 url로 바꾸기
                 .post(body)
                 .build();
 
@@ -51,6 +51,6 @@ public class FirebaseInstanceIDService extends FirebaseInstanceIdService{
             e.printStackTrace();
         }
 
-    }*/
+    }
 
 }

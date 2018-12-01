@@ -18,6 +18,13 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.io.IOException;
+
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+
 import static org.androidtwon.pathandroid.R.id.webView;
 public class MainActivity extends AppCompatActivity {
     private WebView mWebView;
@@ -30,11 +37,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         errorVeiw = (TextView) findViewById(R.id.net_error_view);
+
         // 웹뷰 셋팅
         mWebView = (WebView) findViewById(R.id.webView);
         // 자바스크립트 사용을 반드시 true로 해야 한다
         mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.setWebViewClient(new WebViewClientClass());
 
+        mWebView.loadUrl(myUrl); // 접속 URL
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -113,24 +123,43 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mWebView.loadUrl(myUrl); // 접속 URL
-        mWebView.setWebViewClient(new WebViewClientClass());
 
 
         FirebaseMessaging.getInstance().subscribeToTopic("news");
-
-        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(MainActivity.this,  new OnSuccessListener<InstanceIdResult>() {
+        FirebaseInstanceId.getInstance().getToken();
+/*        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(MainActivity.this,  new OnSuccessListener<InstanceIdResult>() {
             @Override
             public void onSuccess(InstanceIdResult instanceIdResult) {
                 String token = instanceIdResult.getToken();
                 Log.d("FCM_TOKEN",token);
+                sendRegistrationToServer(token);
             }
-        });
-
+        });*/
         ////이렇게 ALL 추가 하면 이 디바이스는 ALL을 구독한다는 얘기가 된다. 모두에게 메세지 전송
         FirebaseMessaging.getInstance().subscribeToTopic("ALL");
     }
 
+   /* private void sendRegistrationToServer(String token) {
+        // Add custom implementation, as needed.
+
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("Token", token)
+                .build();
+
+        //request
+        Request request = new Request.Builder()
+                .url("http://ghwnwjd.cafe24.com/register.jsp")
+                .post(body)
+                .build();
+
+        try {
+            client.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }*/
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

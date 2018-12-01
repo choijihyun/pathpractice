@@ -45,12 +45,12 @@
 					
 					
 					
-					
-				 	<form action="push_notification.php" method="post">
-				        <textarea name="message" rows="4" cols="50" placeholder="메세지를 입력하세요"  required></textarea><br>
-				        <input type="submit" name="submit" value="Send" id="submitButton">
-				    </form>
-				    
+					<h2>Push 알림 메시지 입력</h2>
+					 
+					<!--  <form action="/push_notification" method="post">-->
+					    <textarea name="message" rows="4" cols="50" placeholder="메세지를 입력하세요"></textarea><br>
+					    <input type="submit" name="submit" value="Send" id="submitButton">
+					<!-- </form>-->
     
     
     
@@ -78,27 +78,6 @@
 				</div>
 		</div>
 	</div>
-	
-	
-	<?php
-    include('root-context.xml');
- 
-    $conn =mysqli_connect("jdbc:mysql://203.250.148.53/PATH?useSSL=false&amp;serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=utf8", 
-			jihyun,
-			root,
-			com.mysql.jdbc.Driver);
-    $sql = "Select token From Student";
- 
-    $result = mysqli_query($conn,$sql);
-    while ($row = mysqli_fetch_assoc($result)) {
-?>
-    <ul>
-        <li><?php echo $row["token"]; ?> ...</li>
-    </ul>
- 
-<?php
-    }
-?>
 
 </body>
 </html>
