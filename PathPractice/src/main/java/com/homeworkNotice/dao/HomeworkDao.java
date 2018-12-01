@@ -41,4 +41,8 @@ public class HomeworkDao {
 		return sqlSession.selectList("HomeworkDao.selectHomework", param);
 	}
 	
+	public List<HomeworkDto> pushHomework() {
+		return sqlSession.selectList("HomeworkDao.pushHomework");
+	}
+	
 }

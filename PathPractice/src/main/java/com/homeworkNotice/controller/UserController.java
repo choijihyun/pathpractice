@@ -1,11 +1,7 @@
  package com.homeworkNotice.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import java.util.*;
@@ -26,6 +22,7 @@ import com.homeworkNotice.dao.UserDao;
 import com.homeworkNotice.dto.UserDto;
 import com.homeworkNotice.dao.SubjectDao;
 import com.homeworkNotice.dto.SubjectDto;
+import com.homeworkNotice.dto.TeamDto;
 import com.homeworkNotice.dao.CompleteDao;
 import com.homeworkNotice.dto.CompleteDto;
 import com.homeworkNotice.dao.TimeTableDao;
@@ -224,7 +221,7 @@ public class UserController {
 	//이거는 처음 로그인 할때만 쓰는 controller
 	@RequestMapping(value = "/user/checkUser.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.POST)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.
 	public @ResponseBody String checkUser(//url에 맵핑(연결)된 함수
-			HttpServletRequest request,
+			HttpServletResponse response,
 			HttpSession session,
 			Locale locale, //안드로이드에서 받을 파라미터
 			Model model, //안드로이드에서 받을 파라미터
@@ -440,6 +437,58 @@ public class UserController {
     	}
     	return jSONObject.toString();
 	}
+	
+
+	//select
+		@ResponseBody
+		@RequestMapping(value = "/user/pushUser.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//�� �κ��� url //get������� �� /user/getUserPwdInfo.json�̶�� url�� ���ͼ� ���� Ȯ�� �� �� �ִ�.
+		public String pushUser(
+				Locale locale, 
+				Model model, 
+				@RequestParam(value = "stuId", required=true) String stuId) {
+			
+			HashMap<Object, Object> param=new HashMap<Object, Object>();
+			
+			param.put("stuId",stuId);			
+			
+			List<UserDto> userDtoList =userDao.pushUser(param);	
+
+	    	JSONArray jSONArray=new JSONArray();
+	    	List<JSONObject> jsonList=new ArrayList<JSONObject>();
+			
+	    	if(!userDtoList.isEmpty()) {
+	        	for(int i=0;i<userDtoList.size();i++) {
+	        		JSONObject jSONObject = new JSONObject();
+	        		jSONObject.put("stuId",userDtoList.get(i).getStuId());
+	        		jSONObject.put("token",userDtoList.get(i).getToken());
+	        		
+	        		jSONArray.add(jSONObject);
+	        		
+	        		jsonList.add((JSONObject)jSONArray.get(i));
+	        		
+	        		System.out.println(jsonList);
+	        	}
+	        	
+	        	System.out.println(jsonList);
+	        	
+	        	jSONArray.clear();
+	        	for(int i=0;i<userDtoList.size();i++){
+	        		jSONArray.add(jsonList.get(i));
+	        	}
+	        	
+	        	JSONObject jsObject=new JSONObject();
+	        	jsObject.put("result", jSONArray);
+
+	            return jsObject.toString();
+	        } 
+	        else {
+
+	    		JSONObject jSONObject = new JSONObject();
+	        	jSONObject.put("result", "no data");
+	        	
+	        	return jSONObject.toString();
+	        }
+		}
 
 	
 }

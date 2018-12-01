@@ -24,4 +24,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      <select id="selectHomework" resultType="com.homeworkNotice.dto.HomeworkDto" parameterType="map">
     	select * from Assignment where stuId=#{stuId}
     </select>
+    
+     <select id="pushHomework" resultType="com.homeworkNotice.dto.HomeworkDto" parameterType="map">
+    	select stuId from Assignment where (TO_DAYS(dueDate)-TO_DAYS(now()))=1
+     </select>
 </mapper>

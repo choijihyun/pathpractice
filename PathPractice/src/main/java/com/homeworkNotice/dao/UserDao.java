@@ -37,6 +37,10 @@ public class UserDao {
 	public List<UserDto> selectAllList() {
 		return sqlSession.selectList("UserDao.selectAllUser");//�̰ŵ� ������???????
 	}
+	public List<UserDto> pushUser(HashMap<Object,Object> param) {
+		return sqlSession.selectList("UserDao.pushUser",param);//�̰ŵ� ������???????
+	}
+	
 	public int insertUser(HashMap<Object, Object> param) {
 		return sqlSession.insert("UserDao.insertUser", param);		
 	}
