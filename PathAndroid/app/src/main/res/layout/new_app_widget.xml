@@ -12,7 +12,7 @@
         android:layout_centerVertical="true"
         android:background="#00dd326b"
         android:contentDescription="@string/appwidget_text"
-        android:text="<PATH> Check Homework"
+        android:text="PATH : Check Homework"
         android:textColor="#dd326b"
         android:textSize="15sp"
         android:textStyle="bold|italic" />
