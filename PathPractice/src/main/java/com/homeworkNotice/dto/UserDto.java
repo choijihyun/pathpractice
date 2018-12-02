@@ -6,8 +6,9 @@ public class UserDto {
 	private int semester;
 	private String pw;
 	private String email;
+	private String token;
 	private String useCookie;
-	
+
 	public String getUseCookie() {
 		return useCookie;
 	}
@@ -43,6 +44,12 @@ public class UserDto {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getToken() {
+		return token;
+	}
+	public void setToken(String token) {
+		this.token = token;
 	}
 	
 	

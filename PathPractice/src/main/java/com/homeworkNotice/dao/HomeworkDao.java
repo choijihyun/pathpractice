@@ -41,6 +41,9 @@ public class HomeworkDao {
 		return sqlSession.selectList("HomeworkDao.selectHomework", param);
 	}
 	
+	public List<HomeworkDto> pushHomework() {
+		return sqlSession.selectList("HomeworkDao.pushHomework");
+	}
 	public List<HomeworkDto> selectTeamHomework(HashMap<Object,Object> param) {
 		return sqlSession.selectList("HomeworkDao.selectTeamHomework", param);
 	}
