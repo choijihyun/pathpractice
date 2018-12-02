@@ -120,14 +120,13 @@
 			success : function(result) {
 				console.log(result);
 				if (result["result"] === "1") { //회원가입 성공
-					alert('정보수정 성공');
 					location.href = "/mypage";
 				} else {
-					alert('정보수정 실패');
+					//alert('정보수정 실패');
 				}
 			},
 			error : function() {
-				alert('정보수정 에러');
+				//alert('정보수정 에러');
 			}
 		});
 	});

@@ -57,6 +57,18 @@ public class HomeController {
     	System.out.println("join!");
         return "join";
     }
+    
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String register(Locale locale, Model model) {
+    	System.out.println("register!");
+        return "register";
+    }
+    
+    @RequestMapping(value = "/push_notification", method = RequestMethod.POST)
+    public String push_notification(Locale locale, Model model) {
+    	System.out.println("push_notification!");
+        return "push_notification";
+    }
 
 
     //using url parameter for send assignment data to assignment_add.jsp 
@@ -66,8 +78,9 @@ public class HomeController {
     		@RequestParam(value="dueDate", required=false) String dueDate,
     		@RequestParam(value="importance", required=false, defaultValue="0") int importance,
     		@RequestParam(value="contents", required=false) String contents,
-    		@RequestParam(value="assignNo", required=false) int assignNo,
-    		@RequestParam(value="subNo", required=false, defaultValue="0") int subNo) {
+    		@RequestParam(value="assignNo", required=false, defaultValue="0") int assignNo,
+    		@RequestParam(value="subNo", required=false, defaultValue="0") int subNo,
+    		@RequestParam(value="subjectKey", required=false, defaultValue="0") int subjectKey) {
   
     	System.out.println("assignment_add! ");
     	
@@ -77,7 +90,30 @@ public class HomeController {
     	model.addAttribute("contents", contents);
     	model.addAttribute("assignNo", assignNo);
     	model.addAttribute("subNo", subNo);
+    	model.addAttribute("subjectKey", subjectKey);
         return "assignment_add";
+    }
+    
+    @RequestMapping(value = "/assignment_add_team", method = RequestMethod.GET)
+    public String assignment_add_team(Locale locale, Model model,
+    		@RequestParam(value="title", required=false) String title,
+    		@RequestParam(value="dueDate", required=false) String dueDate,
+    		@RequestParam(value="importance", required=false, defaultValue="0") int importance,
+    		@RequestParam(value="contents", required=false) String contents,
+    		@RequestParam(value="assignNo", required=false, defaultValue="0") int assignNo,
+    		@RequestParam(value="subNo", required=false, defaultValue="0") int subNo,
+    		@RequestParam(value="subjectKey", required=false, defaultValue="0") int subjectKey) {
+  
+    	System.out.println("assignment_add_team! ");
+    	
+    	model.addAttribute("title", title);
+    	model.addAttribute("dueDate", dueDate);
+    	model.addAttribute("importance", importance);
+    	model.addAttribute("contents", contents);
+    	model.addAttribute("assignNo", assignNo);
+    	model.addAttribute("subNo", subNo);
+    	model.addAttribute("subjectKey", subjectKey);
+        return "assignment_add_team";
     }
     
     @RequestMapping(value = "/assignment", method = RequestMethod.GET)
@@ -94,10 +130,30 @@ public class HomeController {
     
     @RequestMapping(value = "/find_subject", method = RequestMethod.GET)
     public String find_subject(Locale locale, Model model,
-    		@RequestParam(value="page", required=false) String page) {
+    		@RequestParam(value="page", required=false) String page,
+    		@RequestParam(value="title", required=false) String title,
+    		@RequestParam(value="dueDate", required=false) String dueDate,
+    		@RequestParam(value="importance", required=false, defaultValue="0") int importance,
+    		@RequestParam(value="contents", required=false) String contents,
+    		@RequestParam(value="assignNo", required=false, defaultValue="0") int assignNo) {
        System.out.println("find_subject!");
+       
        model.addAttribute("page", page);
+       model.addAttribute("title", title);
+       model.addAttribute("dueDate", dueDate);
+       model.addAttribute("importance", importance);
+       model.addAttribute("contents", contents);
+       model.addAttribute("assignNo", assignNo);
+       
        return "find_subject";
+    }
+    
+    @RequestMapping(value = "/announcement", method = RequestMethod.GET)
+    public String announcement(Locale locale, Model model,
+    		@RequestParam(value="subject", required=true) String subject) {
+       System.out.println("announcement!");
+       model.addAttribute("subject", subject);
+       return "announcement";
     }
     
     @RequestMapping(value = "/findPW", method = RequestMethod.GET)
@@ -120,11 +176,11 @@ public class HomeController {
     
     @RequestMapping(value = "/timetable_page", method = RequestMethod.GET)
     public String timetable_page(Locale locale, Model model,
-    		@RequestParam(value="subNo", required=false, defaultValue="0") int subNo) {
+    		@RequestParam(value="subjectKey", required=false, defaultValue="0") int subjectKey) {
        
     	System.out.println("timetable_page!");
        
-    	model.addAttribute("subNo", subNo);
+    	model.addAttribute("subjectKey", subjectKey);
     	return "timetable_page";
     }
     

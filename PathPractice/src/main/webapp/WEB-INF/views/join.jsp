@@ -127,14 +127,14 @@
 						console.log(result);
 
 		            if(result["result"] === "1"){
-		            	alert('회원가입 성공');
+		            	//alert('회원가입 성공');
 		            	location.href = "/";
 		            }else{
-		            	alert('회원가입 성공');
+		            	//alert('회원가입 성공');
 		            }
 		        },
 		        error : function(){
-		        	alert('회원가입 에러');
+		        	//alert('회원가입 에러');
 		        }
 		    });
 		});

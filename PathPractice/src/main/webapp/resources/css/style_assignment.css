@@ -10,14 +10,12 @@
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
-/*�긽�떒,�븯�떒 諛� �젣�쇅�븳 媛��슫�뜲 �쁺�뿭*/
 .main_area{
 	margin-bottom: 5px;
 	margin-top: 5px;
 	background: #fff;
 }
 
-/*怨쇱젣 異붽�踰꾪듉*/
 .btn_add{
 	border:0;
 	border-radius: 0;
@@ -28,22 +26,27 @@
 	background: #fff;
 	color: #dd3247;
 }
-/*��怨쇱젣�씤吏� 媛쒖씤媛��젣�씤吏� �꽑�깮�븯�뒗 btngroup*/
+.btn_pop_assignment{
+	overflow:hidden;
+}
 .btn_assign_type{
 	border:0;
 	max-width: 60px;
 	max-height: 30px;
 	color: #fff;
 	background: #dd3247;
+	font-size: 9pt;
 }
-.btn_assign_type:active{
+.btn_assign_type:focus{
 	border:0;
 	max-width: 60px;
 	max-height: 30px;
-	color: #fff;
+	color: #dd3247;
 	background: #fff;
+	font-size: 9pt;
+	box-shadow : none;
 }
-/*濡쒓렇�븘�썐 踰꾪듉*/
+ 
 .btn-log-out{
 	border: 0;
 	margin-left: 25px;
@@ -55,7 +58,7 @@
 	max-height: 30px;
 
 }
-/*濡쒓렇�븘�썐 踰꾪듉�뿉 留덉슦�뒪 �삱由� �븣*/
+ 
 .btn-logout:hover{
 	border-radius: 0;
 	background: transparent;
@@ -65,21 +68,42 @@
 	max-height: 30px;
 }
 
-/*紐⑤뱺 怨쇱젣 蹂댁뿬二쇰뒗 �쁺�뿭*/
+ 
 .content_show_assign{
 	border:1;
 	background: #fff;
 	color : #6c757d;
 }
 
-/*怨쇱젣 �븯�굹 �븯�굹�뿉 ���븳 �쁺�뿭*/
+ 
 .assign-each{
 	border: 0;
 	background: #f5f5f5;
 	margin: 10px;
 }
+.modal-body,
+.modal-title{
+	color: black;
+	justify-content: center;  
+}
 
-/*�뒪�겕濡ㅻ컮 �냽�꽦*/
+.flat_input{
+	margin-top: 20px;
+	border: none;
+	border-radius: 0;
+	border-bottom: 1px solid #dd3247;
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+	
+	background-position: -500px 0;
+	background-size: 100% 100%;
+	background-repeat: no-repeat; 
+}
+.label_input{
+	color: #dd3247;
+	font-size: 14px;
+	font-weight: bold;
+}
 .scrollbar-track::-webkit-scrollbar-track {
 	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
 	background-color: #F5F5F5;

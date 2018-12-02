@@ -91,16 +91,15 @@
           success: function(result) {
             console.log(result);
             if (result['result'] === "1") { 
-              //document.getElementById('pw').style.display="";rmfo
-              alert("해당 아이디 맞음");
+              //document.getElementById('pw').style.display="";rmfo 
               $('#rePw').css('display', '');
               $('#change').css('display', '');
             } else {
-              alert("회원정보 없음");
+              //alert("회원정보 없음");
             }
           },
           error: function() {
-            alert('비밀번호 찾기 에러');
+           // alert('비밀번호 찾기 에러');
           }
         });//ajax
       });//blackboard click

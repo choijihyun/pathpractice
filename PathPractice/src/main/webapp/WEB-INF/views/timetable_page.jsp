@@ -68,9 +68,9 @@
 
 						<!-- 직접 추가하기 창 -->
 						<div class="collapse mt-1 form-add" id="collapseDirect">
-							<div class="card card-body card_directly p-2">
-								<form class="commonForm">
-									<div class="form-group m-0">
+							<div class="card card-body card_directly p-2 commonForm">
+								<!-- <form class="commonForm"> -->
+									<div class="form-group m-0 ">
 										<label for="subjectName" class="col-12 label_input">과목명</label>
 										<input type="text" class="col-10 m-0 form-control input" title="과목명"
 											id="subjectName" style="display:inline-block;">
@@ -152,7 +152,7 @@
 										<label for="place" class="col-12 label_input">장소</label> <input
 											type="text" class="form-control input" title="장소" id="place">
 									</div>
-								</form>
+								<!--</form>  -->
 								<div class="form-row mx-auto btn_submit">
 									<button type="button" id="btnSuccess"
 										class="mx-auto col-5 btn btn-sm btn_add_sub">추가</button>
@@ -187,24 +187,21 @@
 	});
 	$('#plusTime').on('click', function () {
 		$('#collapseDirect').collapse('hide');
-		$('#collapseAdd').collapse('hide');
-		
+		$('#collapseAdd').collapse('hide'); 
 	});
 	$('#btnUndo1').on('click', function () {
 		$('#addByDirectly').trigger('click');
+		$('.commonForm input[type="text"]').val("");
 	});
 	$('#subjectName').on('click', function () {
 		$('#search').trigger('click');
-	}); 
-
+	});  
 </script>
 
 <script type="text/javascript">
 	var userInputId = getCookie("userInputId");
 	console.log(userInputId);
-	<%
-	System.out.println("timetable session : " + session.getAttribute("id"));
-	%>
+	<% System.out.println("timetable session : " + session.getAttribute("id")); %>
 </script>
 
 <script type="text/javascript">
@@ -215,84 +212,23 @@ $('#search').on('click', function() {
 
 <!--시간표 추가 -->
 <script>
-	var subNo = '${subNo}'; 
+	<% String id = (String) session.getAttribute("id"); %>
+	var subjectKey = '${subjectKey}'; 
 
- 	if(subNo == 0){
-		subNo = 111111//?? 직접 추가할 때 subNo어떻게 하는지 물어보기//직접추가하면 교수명 과목명 시작시간 종료시간 장소 모두 입력받은걸로 찾아와서 색칠
+ 	if(subjectKey != 0){
+ 		fillInfomation(subjectKey,3);//직접 추가할 때 subNo어떻게 하는지 물어보기//직접추가하면 교수명 과목명 시작시간 종료시간 장소 모두 입력받은걸로 찾아와서 색칠
 	}
-	$.ajax({
-			url:"/subject/searchSubject.json",
-			type : "GET",
-			data : {
-				'word':subNo, //subNO로 subjectKey랑 과목 정보들 가져오기 //find_subject해서 url parameter로 가져옴
-				'select':1
-			},
-			success : function(result){
-       		if(result['result'] === "no data"){ 
-       			alert('없는 과목입니다.');
-       		}else{
-					console.log(result);
-					
-					subName = result['result'][0]['subName'];
-					classroom = result['result'][0]['classroom'];
-					profName = result['result'][0]['profName'];
-					subjectKey = result['result'][0]['subjectKey'];
-					startHour = result['result'][0]['startHour'];
-					endHour = result['result'][0]['endHour'];
-					day = result['result'][0]['day'];
-					
-					if(day != null){
-						day1 = day.slice(0,1);
-						day2 = day.slice(1,2);	
-						shour = startHour.slice(0,2);//앞에2개 자르기
-						sminute = startHour.slice(3,5);
-						ehour = endHour.slice(0,2);
-						eminute = endHour.slice(3,5);
-					}
-					else{
-						day1 = day2 = null;
-						shour = sminute = ehour = eminute = null;
-						alert("사이버 강의 입니다. 요일과 장소,시간을 직접 등록 해 주세요. ");
-						//싸강도 할꺼야???
-					}
-
-					context = subName.concat(" ",classroom);
-					$('#hiddenSubKey').val(subjectKey).trigger('change');
-					
-					$('#plusTime').trigger('click');
-					$('#addByDirectly').trigger('click');
-					
-					$("#subjectName").val(subName);
-					$("#place").val(classroom);
-					$("#professorName").val(profName);
-					$("#day1").val(day1);
-					$("#day2").val(day2);
-					$("#sHour").val(shour);
-					$("#sMinute").val(sminute);
-					$("#eHour").val(ehour);
-					$("#eMinute").val(eminute);
-       		}
-     	},
-     	error : function(request,status,error){
-    		alert('검색 에러');
-    		console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
-    	}
-	});
-	
+ 	
 	$('#btnSuccess').on('click', function () {
 		if( !chkInput() ) return; 
-		
-		//FUNCTION
-		insertTimetable( $('#hiddenSubKey').val() );//parameter로 subjectKey //hidden으로 기억
-		
-		// select box value init
-		$('select').find("option:eq(0)").prop("selected", true);
-		$('#addByDirectly').trigger('click');
-		$('#plusTime').trigger('click');
-				
-		$('.commonForm input[type="text"]').val(""); 
-		
-		
+		insertTimetable( $('#hiddenSubKey').val(),<%=id%> );
+	});
+</script>
+
+<!-- 시작할때 시간표 불러오기 -->
+<script>
+	$(document).ready(function(){
+		showAllTimetable(<%=id%>); 
 	});
 </script>
 
@@ -313,83 +249,5 @@ $('#search').on('click', function() {
 	});
 </script> -->
  
-<script>
-	//subjectKey 로 시간표 db에 등록
-	function insertTimetable(subjectKey){
-		<% String id = (String) session.getAttribute("id"); %>
-		$.ajax({
-			url : "/timeTable/insertTimeTable.json",
-			type : "GET",
-			data : {
-				'stuId' : <%=id%>,
-				'subjectKey' : subjectKey
-			},success : function(result) {
-				console.log(result);
-				if (result['result'] === '1') {
-					alert('시간표등록성공');
-					
-					//FUNCTION
-					displayTimetable(shour,sminute,ehour,eminute,day1,day2,context);//parameter로 시작 시간,종료시간,요일
-					//동적으로 table 합치기!!!!!!!!!!!!!!!!!!!!!!
-					
-					//나중에 이건 불러오기 할때 그쪽에도 추가해야 함
-					for(var i=1 ; i<=5 ; i++){
-	 					$(".content"+i).each(function() {
-							var text = $(this).text();
-							var cnt=0;
-							console.log("내용="+text);
-							if( text != '#'){
-								var rows = $(".content"+i+":contains('" + text + "')"); //subjectKey로 판별할 수 있게 바꾸기
-								console.log( text,rows.length);
-								//행열 찍어보기
-								if (rows.length > 1) {
-									rows.eq(0).attr("rowspan", rows.length);
-									rows.not(":eq(0)").remove();
-									console.log( "ater: "+rows.length);
-								}
-				 				cnt++;
-							}
-			 				console.log("cnt=",cnt);
-						});//요일 두개인 과목에는 이상해!! 
-					}
-			
-				} else {
-					alert('시간표등록실패');
-				}
-			},error : function() {
-				alert('시간표등록에러');
-			}
-		});
-	}
-</script>
 
 <!-- 처음페이지 시작, 추가 수정 삭제시 시간표 정보들 모두 불러오기 -->
-<!-- 시작할때 시간표 불러오기 -->
-<script>
-	//subjectKey 로 시간표 db에 등록
-	$(document).ready(function(){
-		$.ajax({
-			url : "/timeTable/searchTimeTable.json",
-			type : "GET",
-			data : {
-				'stuId' : <%=id%>
-			},success : function(result) {
-				if (result['result'] === "no data") {
-					alert('등록된 시간표가 없습니다.');				
-				} else {
-					alert('시간표 불러오기 성공');
-					console.log(result);
-					
-					for (var i = 0; i < result['result'].length; i++) {
-						var subjectKey = result['result'][i]['subjectKey'];
-						console.log("sub = ",subjectKey);
-						//subject 키로 과목정보들 찾아와서 색칠하기
-						findSubjectInfo(subjectKey);
-					}
-				}
-			},error : function() {
-				alert('시간표 불러오기 에러');
-			}
-		});
-	});
-</script>

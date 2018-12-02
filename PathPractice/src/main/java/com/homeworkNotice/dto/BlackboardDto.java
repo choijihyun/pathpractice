@@ -4,7 +4,7 @@ public class BlackboardDto {
 	private String stuId;
 	private String date;
 	private String subject;
-	private String content;
+	private String contest;
 	
 	public String getStuId() {
 		return stuId;
@@ -24,11 +24,11 @@ public class BlackboardDto {
 	public void setsubject(String subject) {
 		this.subject = subject;
 	}
-	public String getcontent() {
-		return content;
+	public String getcontest() {
+		return contest;
 	}
-	public void setcontent(String content) {
-		this.content = content;
+	public void setcontest(String content) {
+		this.contest = content;
 	}
 	
 }

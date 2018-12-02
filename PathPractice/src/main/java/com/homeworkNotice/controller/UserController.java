@@ -228,6 +228,12 @@ public class UserController {
 			@RequestParam(value = "stuId", required=true) String stuId,
 			@RequestParam(value = "pw", required=true) String pw) {
 		
+		if(session.getAttribute("id")!=null) {
+			session.removeAttribute("name");
+			session.removeAttribute("id");
+			session.removeAttribute("email");
+			session.setAttribute("pw",pw);
+		}
 		
 		HashMap<Object, Object> param=new HashMap<Object, Object>();
 		
@@ -255,26 +261,7 @@ public class UserController {
 				session.setAttribute("name", name);
 				session.setAttribute("email", email);
 				session.setAttribute("id",stuId);
-				
-				File file = new File("C:\\Users\\USER\\Desktop\\PATH\\PathPractice\\src\\main\\webapp\\WEB-INF\\userInfo.txt");
-				FileWriter writer = null;
-				String message = stuId+"\r\n"+pw;
-				try {
-		            // 기존 파일의 내용에 이어서 쓰려면 true를, 기존 내용을 없애고 새로 쓰려면 false를 지정한다.
-		            writer = new FileWriter(file, false);
-		            writer.write(message);
-		            writer.flush();
-		            
-		            System.out.println("DONE");
-		        } catch(IOException e) {
-		            e.printStackTrace();
-		        } finally {
-		            try {
-		                if(writer != null) writer.close();
-		            } catch(IOException e) {
-		                e.printStackTrace();
-		            }
-		        }
+				session.setAttribute("pw",pw);
 				
 			}
 			else {

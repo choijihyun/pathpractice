@@ -42,20 +42,21 @@
 			<div class="jumbotron p-md-3 text-white rounded main_area">
 
 				<div class="d-flex align-items-center p-3 my-3 rounded"
-					style="background: #f2f2f2;">
+					style="background: #f2f2f2;margin-top: 0px;">
 					<div class="lh-100">
 						<div style="text-align: center">
 							<strong class="info" style="text-align: center"> 공지사항 </strong>
 						</div>
 					</div>
 				</div>
-
-			</div>
-			
-			<!-- 등록된 과제를 보여주는 scroll창 -->
+							<!-- 등록된 과제를 보여주는 scroll창 -->
 				<div style="overflow: auto; width: auto; height: 130px;"
 					class="mt-3 content_preview_assignment scrollbar scrollbar_track scrollbar_thumb"
 					data-spy="scroll" data-offset="0"></div>
+
+			</div>
+			
+
 
 			<!-- footer 하단바 class="app-footer" -->
 			<div id="footer"></div>
@@ -73,7 +74,7 @@
 	$(document).ready(function() {
 	//과제 불러오기
 		$.ajax({
-			url : "/blackboard/getAnnounce.json",
+			url : "/blackboard/getSubject.json",
 			type : "POST",
 			data : {
 			'stuId' :<%=id%>
@@ -81,30 +82,35 @@
 			success : function(result) {
 				if (result['result'] === 'no data') {
 					alert('등록된 공지사항 없음');
-				} else {
-					alert('공지사항 불러오기 성공');
+				} else { 
 					console.log(result);
+				var str = '';
+				var subject='';
+				str += '<div class="list-group">';
+				console.log(result['result'].length);
 				for (var i = 0; i < result['result'].length; i++) {
-					var date = result['result'][i]['date'];
-					var subject = result['result'][i]['subject'];
-					var contents = result['result'][i]['content'];
-					var str = '';
-					str += '<button type="button" ';
-					str += 'class="btn btn-lg btn-block btn-outline-danger">';
-					str += '<h6 id="assign'+ (i + 1) + 'Subject" ';
-					str += 'style="font-weight: bold" class="mb-2">-'+ subject + '</h6>';
-					str += '<p6 id="assign'+ (i + 1) + 'Context">'+ contents+ '</p6>';
-					str += '<p6 id="assign'+ (i + 1) + 'Date">'+ date+ '</p6>';
+					subject = result['result'][i]['subject'];
+					if(subject=="")continue;
+					
+					str += '<button class="btn p-1 btn-sm list-group-item" type="button" value="vv">';
+					str += subject;
 					str += '</button>';
-					$('.content_preview_assignment').append(str);
+					$('.scrollbar_track').append(str);
+					str='';
+					str += '<div class="list-group">'
 					}
 				}
 			},
 			error : function() {
-				alert('공지사항 불러오기 에러');
+				//alert('공지사항 불러오기 에러');
 			}
 		});//ajax
 	});//$(document).ready
+	
+	$(document).on("click",'.list-group',function() {
+		var subject = $(this).text();
+		location.href="/announcement?subject="+subject;
+	});// 과목명 선택 해서 그 과목에 해당하는 공지사항 보여줌
 </script>
 
 

@@ -1,8 +1,6 @@
-<%@page language="java" contentType="text/html; cahrset=UTF-8"
-	pageEncoding="UTF-8" %>
 <!DOCTYPE html>
+<%@page language="java" contentType="text/html; cahrset=UTF-8" pageEncoding="UTF-8" %>
 <html lang="kr">
-
 <head>
 <%
 	if(session.getAttribute("id")==null)
@@ -24,7 +22,7 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 </head>
 
@@ -34,11 +32,10 @@
       <div class=" login_box ">
         <h1 class="text-center wdi_red">changePW</h1>
         <hr>
-        <form>
           <div class="form-row">
             <!-- input id, pw -->
             <div class= "col-md-12 col-xs-12">
-             <input type="text" id="id" class="form-control form-control-lg flat_input" placeholder="username">
+             <input type="text" id="id" class="form-control form-control-lg flat_input" placeholder="username" >
            </div>
            <div class= "col-md-12 col-xs-12 ">
              <input type="password" id="pw" class="form-control form-control-lg flat_input" placeholder="password" >
@@ -54,71 +51,74 @@
             
 			<!-- 변경할 비밀번호 입력-->
             <div class="col-md-12 col-xs-12">
-              <input type="password" id="rePw" class="form-control form-control-lg flat_input" placeholder="password" style="display:none;" >
+              <input type="password" id="rePw" class="form-control form-control-lg flat_input" placeholder="new_password" style="display:none;" >
             </div>
-            <div class= "col-md-12 col-xs-12" >
-              <a class="btn btn-lg btn-block btn_submit" id="change" style="display:none;">
+            <div class= "col-md-12 col-xs-12 mt-3 " >
+              <button class="btn btn-md btn_submit mx-0"  id="change" style="display:none;" >
               	  변경
-              </a>
+              </button>
             </div>
           </div>
-        </form>
       </div>
   </div>
 </body>
 </html>
 
-  <script type="text/javascript">
-
-      $('#submit').on('click', function() {
-        $.ajax({
-          url: "/user/checkUserExist.json",
-          type: "POST",
-          data: {
-            'stuId':$('#id').val(),
-            'pw':$('#pw').val()
-          },
-          success: function(result) {
-            console.log(result);
-            if (result['result'] === "1") { 
-              //document.getElementById('pw').style.display="";rmfo
-              alert("해당 아이디 맞음");
-              $('#rePw').css('display', '');
-              $('#change').css('display', '');
-            } else {
-              alert("회원정보 없음");
-            }
-          },
-          error: function(request,status,error) {
-        	  alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-            alert('비밀번호 찾기 에러');
-            location.href = "/changePW";
-          }
-        });//ajax
-      });//submit click
-
-      $('#change').on('click', function() { 
-    	  event.preventDefault();
-        $.ajax({
-          url: "/user/updatePw.json",
-          type: "POST",
-          data: {
-        	  'stuId':$('#id').val(), 
-        	  'pw':$('#rePw').val()
-        	  },
-          success: function(result) {
-            console.log(result);
-            //if (result['result'] === "1") {
-            //  alert("비밀번호 변경 실패");
-            //  location.href = "/mypage";
-            //} else {
-            //  alert("비밀번호 변경 성공");
-            //}
-          },
-          error: function() {
-            alert('비밀번호 변경 에러');
-          }
-        });//ajax
-      });//change click
-
-  </script>
+ <script type="text/javascript"> 
+	$(document).ready(function(){
+		$('#submit').on( 'click', function() { 			 
+			$.ajax({
+				url : "/user/checkUserExist.json",						
+				type : "POST",
+				data : {
+					'stuId' : $("#id").val(),
+					'pw' :  $("#pw").val()
+				},
+				success : function(result) {
+					if (result['result'] === "1") {
+						console.log(result);
+						$("#rePw").toggle();
+						$("#change").toggle();
+					} else {
+						alert("회원정보 없음");
+					}
+				},
+				error : function(request, status, error) {
+					console.log("code:" + request.status + "\n"
+							+ "message:" + request.responseText + "\n"
+							+ "error:" + error);
+					console.log('비밀번호 찾기 에러');
+					location.href = "/changePW";
+				}
+			});//ajax */
+		});//submit click
+		
+				
+		// event.preventDefault();
+		  $('#change').on('click', function() { 
+			$.ajax({
+			 	url: "/user/updatePw.json",
+				type: "POST",
+				data: {
+					'stuId':$('#id').val(), 
+					'pw':$('#rePw').val()
+				},
+				success: function(result) {
+					if (result['result'] === '1') {
+						alert("비밀번호 변경 성공");
+						console.log(result);
+						location.href = "/mypage";
+					} else { 
+						alert("비밀번호 변경 실패");
+					}
+				},
+				error: function() {
+					alert('비밀번호 변경 에러');
+				}
+			});//ajax
+		});//change click 
+		
+	});
+		
+	
+</script>

@@ -30,9 +30,7 @@
 		<div class="login_box">
 			<h1 class="text-center wdi_red">Login</h1>
 			<hr>
-			<form>
 				<div class="form-row">
-
 					<!-- input id, pw -->
 					<div class="col-md-12 col-xs-12">
 						<input type="text" id="id"
@@ -44,7 +42,18 @@
 							class="form-control form-control-lg flat_input"
 							placeholder="password">
 					</div>
-
+					
+					
+					
+					<h2>Push 알림 메시지 입력</h2>
+					 
+					<!--  <form action="/push_notification" method="post">-->
+					    <textarea name="message" rows="4" cols="50" placeholder="메세지를 입력하세요"></textarea><br>
+					    <input type="submit" name="submit" value="Send" id="submitButton">
+					<!-- </form>-->
+    
+    
+    
 					<!-- remember user infomation - checkbox -->
 					<div class="checkbox col-md-12">
 						<label> <input type="checkbox" value="remember-me"
@@ -66,11 +75,10 @@
 						<button type="button" class="btn btn-lg btn-xs btn-block btn_join"
 							onclick='location.href="/findPW"'>PW</button>
 					</div>
-
 				</div>
-			</form>
 		</div>
 	</div>
+
 </body>
 </html>
 
@@ -115,7 +123,8 @@
 					if (result.result === "1") {
 						location.href = "/home";
 					} else {
-						alert('로그인 실패');
+
+						alert('아이디나 비밀번호를 다시 확인해 주세요.');
 					}
 				},
 				error : function() {
@@ -125,4 +134,8 @@
 		});
 	});
 </script>
+
+
+
+
 
