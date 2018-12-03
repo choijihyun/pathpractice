@@ -46,16 +46,7 @@
 			<hr>
 			<form>
 				<div class="form-row commonForm">
-					<!--PW lable/input tag -->
-					<div class="col-md-3 col-xs-3 label_input">
-						<h6>PW</h6>
-					</div>
-					<div class="col-md-9 col-xs-9">
-						<input type="password"
-							class="form-control form-control-lg flat_input" title="PW"
-							id="pw">
-					</div>
-
+				
 					<!--NAME lable/input tag -->
 					<div class="col-md-3 col-xs-3 label_input">
 						<h6>NAME</h6>

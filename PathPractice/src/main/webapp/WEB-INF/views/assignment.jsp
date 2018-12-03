@@ -62,7 +62,7 @@
 						<div class= "p-0 col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4">
 							<div class="btn-group" role="group" aria-label="Basic example">
 								<button type="button" class="btn  btn_assign_type" id="all">ALL</button>
-								<button type="button" class="btn  btn_assign_type" id="none">None</button>
+								<button type="button" class="btn  btn_assign_type" id="none">Personal</button>
 								<button type="button" class="btn  btn_assign_type" id="team">Team</button>
 								<button type="button" class="btn  btn_assign_type" id="done">Done</button>
 							</div>

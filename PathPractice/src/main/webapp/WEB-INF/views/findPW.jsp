@@ -65,25 +65,27 @@
             data : {'stuId':$('#id').val()},
             success : function(result){
                if(result['result'] === "no data"){
-                  //alert('회원정보가 없습니다.');
+                  alert('회원정보가 없습니다.');
                }else{
                  $('#email').val(result['email']).trigger('change');
                  $('#to_pw').val(result['pw']).trigger('change');
 
-                  $.ajax({
+                  /* $.ajax({
                     type:"post",
                     url : "content_me.php",
                     success : function(result){
                       if(result){ 
                       }
                       else{
-                       // alert("메일이 전송되지 않았습니다.");
+                        alert("메일이 전송되지 않았습니다.");
                       }
                     },
                     error : function(){
                      // alert("php에 접근하지 못하였습니다.");
                     }
-                  });
+                  }); */
+                  
+                  
                }
             },
             error : function(){

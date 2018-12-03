@@ -62,7 +62,6 @@
 						onclick="location.href='/changePW'">비밀번호 변경</button>
 					<button class="btn p-1 btn-sm list-group-item" type="button">알림끄기</button>
 					<button class="btn p-1 btn-sm list-group-item" type="button">탈퇴</button>
-					<button class="btn p-1 btn-sm list-group-item" type="button">블렉보드</button>
 				</div>
 			</div>
 
@@ -79,29 +78,6 @@
 
   <script type="text/javascript">
     $(document).ready(function() {
-    	
-      $('#blackboard').on('click', function() {
-        $.ajax({
-          url: "/user/checkUserExist.json",
-          type: "POST",
-          data: {
-            'stuId':$('#id').val(),
-            'pw':$('#pw').val()
-          },
-          success: function(result) {
-            console.log(result);
-            if (result['result'] === "1") { 
-              //document.getElementById('pw').style.display="";rmfo 
-              $('#rePw').css('display', '');
-              $('#change').css('display', '');
-            } else {
-              //alert("회원정보 없음");
-            }
-          },
-          error: function() {
-           // alert('비밀번호 찾기 에러');
-          }
-        });//ajax
-      });//blackboard click
+    
     });
   </script>
