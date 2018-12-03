@@ -21,7 +21,7 @@ public class FirebaseInstanceIDService extends FirebaseInstanceIdService{
 
     //[START refresh_token]
     //다 FirebaseMessagingService.java 로 옮김
-   @Override
+  /* @Override
     public void onTokenRefresh(){
         //Get updated InstanceID token.
         String token = FirebaseInstanceId.getInstance().getToken();
@@ -51,6 +51,6 @@ public class FirebaseInstanceIDService extends FirebaseInstanceIdService{
             e.printStackTrace();
         }
 
-    }
+    }*/
 
 }

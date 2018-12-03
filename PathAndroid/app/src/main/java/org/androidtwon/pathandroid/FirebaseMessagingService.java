@@ -33,7 +33,7 @@ import okhttp3.RequestBody;
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService{
     private static final String TAG = "FirebaseMsgService";
 
-    /*@Override
+    @Override
     public void onNewToken(String s) {
         super.onNewToken(s);
         Log.d("NEW_TOKEN",s);
@@ -59,7 +59,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
              e.printStackTrace();
          }
 
-     }*/
+     }
     // [START receive_message]
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -74,8 +74,6 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                                                                 intent,
                                                                 PendingIntent.FLAG_ONE_SHOT);
 
-
-
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.bar_icon)
@@ -87,13 +85,21 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        /*PowerManager pm = (PowerManager) this.getSystemService(Context.POWER_SERVICE);
-        PowerManager.WakeLock wakelock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, "TAG");
-        wakelock.acquire(5000);*/
+       //2
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
-/*
+    //1
+}
+
+
+//2
+ /*PowerManager pm = (PowerManager) this.getSystemService(Context.POWER_SERVICE);
+        PowerManager.WakeLock wakelock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, "TAG");
+        wakelock.acquire(5000);*/
+
+
+/* //1
     public Bitmap getBitmapFromURL(String strURL) {
 
         try {
@@ -109,4 +115,3 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             return null;
         }
     }*/
-}
