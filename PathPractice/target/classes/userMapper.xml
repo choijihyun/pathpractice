@@ -31,10 +31,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	update Student set name=#{name},semester=#{semester},pw=#{pw},email=#{email} where stuId=#{stuId}
     </update>
     
-    
     <delete id="deleteUser" parameterType="map">
     	delete from Student where stuId=#{stuId}
     </delete>
+     
+   <update id="insertToken" parameterType="map">
+    	update Student set token=#{token} where stuId=#{stuId}
+    </update>
     
     <select id="selectCookie" parameterType="map">
     	select useCookie from Student where stuId = #{stuId}

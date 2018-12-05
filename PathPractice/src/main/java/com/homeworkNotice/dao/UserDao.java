@@ -27,15 +27,13 @@ public class UserDao {
 	}
 
 	public List<UserDto> selectUser(HashMap<Object, Object> param) { 
-		return sqlSession.selectList("UserDao.selectUser", param);//�̰ǹ�����??????? 
-		//user-mapping.xml�� �������� sql(����)�� userDao(ĳ����)�� ����ϴ� �κ��̾�
+		return sqlSession.selectList("UserDao.selectUser", param);
 	}
 	public List<UserDto> selectUserInfo(HashMap<Object, Object> param) { 
-		return sqlSession.selectList("UserDao.selectUserInfo", param);//�̰ǹ�����??????? 
-		//user-mapping.xml�� �������� sql(����)�� userDao(ĳ����)�� ����ϴ� �κ��̾�
+		return sqlSession.selectList("UserDao.selectUserInfo", param);
 	}
 	public List<UserDto> selectAllList() {
-		return sqlSession.selectList("UserDao.selectAllUser");//�̰ŵ� ������???????
+		return sqlSession.selectList("UserDao.selectAllUser");
 	}
 	public List<UserDto> pushUser(HashMap<Object,Object> param) {
 		return sqlSession.selectList("UserDao.pushUser",param);//�̰ŵ� ������???????
@@ -60,4 +58,10 @@ public class UserDao {
 	public List<UserDto> isUseCookie(HashMap<Object, Object> param) {
 		return sqlSession.selectList("UserDao.selectCookie",param);
 	}
+
+	public int insertToken(HashMap<Object, Object> param) {
+		return sqlSession.insert("UserDao.insertToken", param);		
+	}
+	
+	
 }

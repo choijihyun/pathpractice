@@ -277,7 +277,7 @@ public class UserController {
 	
 	//이거는 비밀번호 바꿀 때 혹은 비밀번호 확인할 떄 쓰는 controller
 	@RequestMapping(value = "/user/checkUserExist.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.POST)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.
-	public @ResponseBody String checkUserExist(//url에 맵핑(연결)된 함수
+	public @ResponseBody String checkUserExist(//urRl에 맵핑(연결)된 함수
 			HttpServletRequest request,
 			HttpSession session,
 			Locale locale, //안드로이드에서 받을 파라미터
@@ -424,7 +424,40 @@ public class UserController {
     	}
     	return jSONObject.toString();
 	}
-	
+
+	@ResponseBody
+    @RequestMapping(value ="/user/insertToken.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value라는 값에 매핑, get방식 사용
+    public String insertToken(
+    			Model model,
+    			@RequestParam(value = "stuId", required=true) String stuId,
+    			@RequestParam(value = "token", required=true) String token) { // 이렇게 5개의 파라미터를 받아오고 내용 안쓰면 x
+		HashMap<Object, Object> param=new HashMap<Object, Object>(); //각각의 id마다 hashmap 만들어주니까 생성을 해줌
+    	
+		param.put("stuId", stuId);
+		param.put("token",token);
+		
+		System.out.println(param);
+		
+		int result=0;
+		try {
+			result=userDao.insertToken(param);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+
+		System.out.println(result);
+    	JSONObject jSONObject = new JSONObject();
+    	//그래서 여기서 성공 or 실패 구분해서 안드로이드에 json 데이터를 결과로 전달해줄거야
+    	if(result==1) {
+    		jSONObject.put("result", "1");//성공     		
+    	}
+    	else {
+    		jSONObject.put("result", "0");
+    	}
+    	return jSONObject.toString();
+	}
 
 	//select
 		@ResponseBody
