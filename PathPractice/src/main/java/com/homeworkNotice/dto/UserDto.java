@@ -4,6 +4,7 @@ public class UserDto {
 	private String name;
 	private String stuId;
 	private int semester;
+	private int flag;
 	private String pw;
 	private String email;
 	private String token;
@@ -52,5 +53,11 @@ public class UserDto {
 		this.token = token;
 	}
 	
+	public int getFlag() {
+		return flag;
+	}
+	public void setFlag(int flag) {
+		this.flag = flag;
+	}
 	
 }

@@ -57,13 +57,14 @@ public class UserController {
     public String getUserPwdInfo(//url에 맵핑(연결)된 함수
 			Locale locale, //안드로이드에서 받을 파라미터
 			Model model, //안드로이드에서 받을 파라미터
-    			@RequestParam(value = "stuId", required=true) String stuId) {//안드로이드에서 받을 파라미터, 사실 요거 하나만 받음 댐
+    			@RequestParam(value = "stuId", required=true) String stuId,
+    			@RequestParam(value = "email", required=true) String email) {//안드로이드에서 받을 파라미터, 사실 요거 하나만 받음 댐
 		// ?id=1 이런식으로 치면 1에 해당하는 password가 나오는 함수인데 여기에서 @RequestParam 부분은 id라는 거를 받아줄 통? 을 만들었다고 보면 됨
 		
 		HashMap<Object, Object> param=new HashMap<Object, Object>();// 이부분은 잘 모르겠어요!!!!!!!!!!!!!!!!!!!!!!!!!
 		//xml의 sql에서 필요로 하는 정보가 있다면 여기에 담아서 전달해줌. 이 함수에선 id겠지?(밑에 보이는)
 
-		param.put("stuId",stuId);		
+		param.put("stuId",stuId);
 		//파라미터에 안드로이드에서 건네받은 id를 등록한다
     	List<UserDto> userDtoList=userDao.selectUser(param);//쿼리문 만들고 싶으면 user-mapping.xml 참고
     	//id들을 userdto 리스트에 저장함
@@ -78,9 +79,8 @@ public class UserController {
     	//Dao4. Dao3까지 진행해서 만든 sql을 userDao.?????로 만들어서 사용하면 되고, 파라미터 넣는법은 바로 위에 적었지??ㅎㅎ
     	
     	JSONObject jSONObject = new JSONObject();
-    	if(!userDtoList.isEmpty()) {//반환받은 데이터가 유효하면(db에 있으면) 브라우저 화면에 결과를 뿌려준다
+    	if(!userDtoList.isEmpty() && userDtoList.get(0).getEmail().equals(email)) {//반환받은 데이터가 유효하면(db에 있으면) 브라우저 화면에 결과를 뿌려준다
         	jSONObject.put("pw", userDtoList.get(0).getPw()); 
-        	jSONObject.put("email", userDtoList.get(0).getEmail());
         	//여기도 궁금!!!! 그 userDtoList.get(0)은 뭘 의미하는거에영???
         	//db에서 받은 리스트들 중 첫번째 인덱스를 가져오는거야 (근데 사실 id로 가져오면 항상 1개밖에 없긴함;;;ㅎㅎ)
     	}
@@ -510,6 +510,39 @@ public class UserController {
 	        	
 	        	return jSONObject.toString();
 	        }
+		}
+		
+		@RequestMapping(value = "/user/BlackboardUser.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.POST)//요 부분이 url //get방식으로 저 /user/getUserPwdInfo.json이라는 url로 들어와서 값을 확인 할 수 있다.
+		public @ResponseBody String BlackboardUser(//url에 맵핑(연결)된 함수
+				HttpServletResponse response,
+				HttpSession session,
+				Locale locale, //안드로이드에서 받을 파라미터
+				Model model, //안드로이드에서 받을 파라미터
+				@RequestParam(value = "stuId", required=true) String stuId) {
+			
+			HashMap<Object, Object> param=new HashMap<Object, Object>();
+			
+			param.put("stuId",stuId);
+			
+			
+			System.out.println(param);
+			List<UserDto> userDtoList=userDao.selectUserInfo(param);
+		
+			
+			JSONObject jSONObject = new JSONObject();
+			if(!userDtoList.isEmpty() && userDtoList.size()==1) {//반환받은 데이터가 유효하면(db에 있으면) 브라우저 화면에 결과를 뿌려준다
+				if(userDtoList.get(0).getFlag()==1) {
+					jSONObject.put("result","1");//id도 존재하고 비번도 맞는 경우
+				}
+				else {
+					jSONObject.put("result","0");//비번이 다른 경우
+				}
+			}
+			else {//없으면 에러라고 브라우저에 뿌려준다
+				jSONObject.put("result", "0"); //id가 존재하지 않는경우
+			}
+			//System.out.println(jSONObject.toString());
+			return jSONObject.toString();//요청한 내용들을 반환해준다.
 		}
 
 	
