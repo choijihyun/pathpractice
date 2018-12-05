@@ -45,8 +45,7 @@
 				</div>
 
 				<!-- 등록된 과제를 보여주는 scroll창 -->
-				<div style="cursor: pointer; overflow: auto; width: auto; height: 130px;"
-					onclick="location.href='/assignment';"
+				<div style=" overflow: auto; width: auto; height: 130px;"
 					class="mt-3 content_preview_assignment scrollbar scrollbar_track scrollbar_thumb"
 					data-spy="scroll" data-offset="0"></div>
 
@@ -85,7 +84,7 @@
 			type : "GET",
 			data : {
 			'stuId' :<%=id%>,
-			//'select' : 1
+			'select' : 1
 			}, 
 			success : function(result) {
 				if (result['result'] === 'no data') {
@@ -96,10 +95,11 @@
 					var assign_title = result['result'][i]['title'];
 					var assign_contents = result['result'][i]['contents'];
 					var str = '';
-					str += '<button type="button" ';
-					str += 'class="btn btn-lg btn-block btn-outline-danger">';
+					str += '<button type="button" '; 
+					str += 'class="btn btn-lg btn-block btn-outline-danger btn_preview">';
 					str += '<h6 id="assign'+ (i + 1) + 'Title" ';
-					str += 'style="font-weight: bold" class="mb-2">-'+ assign_title + '</h6>';
+					str += '    onclick = "location.href=\"/assignment\";"      ';
+					str += 'style="cursor: pointer; font-weight: bold" class="mb-2">-'+ assign_title + '</h6>';
 					str += '<p6 id="assign'+ (i + 1) + 'Context">'+ assign_contents+ '</p6>';
 					str += '</button>';
 					$('.content_preview_assignment').append(str);

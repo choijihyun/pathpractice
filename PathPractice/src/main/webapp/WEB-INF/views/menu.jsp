@@ -49,15 +49,13 @@
 						</div>
 					</div>
 				</div>
-							<!-- 등록된 과제를 보여주는 scroll창 -->
+				<!-- 등록된 과제를 보여주는 scroll창 -->
 				<div style="overflow: auto; width: auto; height: 130px;"
 					class="mt-3 content_preview_assignment scrollbar scrollbar_track scrollbar_thumb"
 					data-spy="scroll" data-offset="0"></div>
-
+					
 			</div>
 			
-
-
 			<!-- footer 하단바 class="app-footer" -->
 			<div id="footer"></div>
 

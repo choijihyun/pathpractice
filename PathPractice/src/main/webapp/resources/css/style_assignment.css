@@ -114,4 +114,11 @@
 .scrollbar-thumb::-webkit-scrollbar-thumb {
 	border-radius: 10px;
 	background-color : #dd3247;
-	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);}
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+}
+#sort{
+	border-color:#dd3247;
+	color: #dd3247;
+	background: #fff;
+	font-size: 9pt;
+}

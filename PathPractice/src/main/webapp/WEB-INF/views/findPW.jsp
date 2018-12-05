@@ -3,10 +3,6 @@
 <!DOCTYPE html>
 <html lang="kr">
 <head>
-<%
-	if(session.getAttribute("id")==null)
-		response.sendRedirect("/");
-%>
    <title>find password</title>
 <!-- Required meta tags -->
 <meta charset="utf-8">
