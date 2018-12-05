@@ -42,7 +42,7 @@
 	<div
 		class="container m-0 p-0 justify-content-md-center justify-content-xs-center">
 		<div class="login_box ">
-			<h1 class="text-center wdi_red">JOIN</h1>
+			<h1 class="text-center wdi_red">CHANGE INFOMATION</h1>
 			<hr>
 			<form>
 				<div class="form-row commonForm">
@@ -97,27 +97,29 @@
 
 <script type="text/javascript">
 	$('#btnUpdate').on('click', function() {
-
+		<%
+		String id = (String) session.getAttribute("id");
+		%>
+		event.preventDefault();
 		$.ajax({
-			url : "http://localhost:8090/user/updatetUser.json",
-			type : "GET",
+			url : "/user/updateUser.json",
+			type : "post",
 			data : {
-				'stuId' : 1,
-				'pw' : $('#pw').val(),
+				'stuId' :<%=id%>,
 				'name' : $('#name').val(),
 				'semester' : $('#semester').val(),
 				'email' : $('#email').val()
 			},
 			success : function(result) {
-				console.log(result);
-				if (result["result"] === "1") { //회원가입 성공
+				if (result.result === "1") {
 					location.href = "/mypage";
 				} else {
-					//alert('정보수정 실패');
+					alert('정보수정 실패');
 				}
 			},
-			error : function() {
-				//alert('정보수정 에러');
+			error : function(request,status,error) {
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+
 			}
 		});
 	});

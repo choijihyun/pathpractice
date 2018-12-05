@@ -27,8 +27,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updatePw">
     	update Student set pw=#{pw} where stuId=#{stuId}
     </update>
-    <update id="updateUser">
-    	update Student set name=#{name},semester=#{semester},pw=#{pw},email=#{email} where stuId=#{stuId}
+    <update id="updateUser"  parameterType="map">
+    	update Student set name=#{name},semester=#{semester},email=#{email} where stuId=#{stuId}
     </update>
     
     <delete id="deleteUser" parameterType="map">

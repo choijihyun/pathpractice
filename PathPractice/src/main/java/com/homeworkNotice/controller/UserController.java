@@ -142,21 +142,22 @@ public class UserController {
     	return jSONObject.toString();
 	}
 
-	@ResponseBody
-    @RequestMapping(value = "/user/updateUser.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)
-    public String updateUser(
-    			Model model,
-    			@RequestParam(value="name",required=true) String name,
-    			@RequestParam(value = "stuId", required=true) String stuId,
+    @RequestMapping(value = "/user/updateUser.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.POST)
+    public @ResponseBody String updateUser(
+    		HttpServletResponse response,
+			HttpSession session,
+			Locale locale, //안드로이드에서 받을 파라미터
+			Model model, //안드로이드에서 받을 파라미터
+    			@RequestParam(value = "name",required=true) String name,
     			@RequestParam(value = "semester", required=true) final int semester,
-    			@RequestParam(value = "pw", required=true) String pw,
+    			@RequestParam(value = "stuId", required=true) String stuId,
     			@RequestParam(value = "email", required=true) String email) {
 		HashMap<Object, Object> param=new HashMap<Object, Object>();
 		
-		param.put("name", name);
-		param.put("stuId",stuId);		
+		System.out.println("/user/updateUser.json !@@@@");
+		param.put("stuId", stuId);
+		param.put("name", name);	
 		param.put("semester",semester);		
-		param.put("pw",pw);		
 		param.put("email",email);
 		//
 		System.out.println(param);
@@ -170,22 +171,24 @@ public class UserController {
 			// TODO: handle exception
 		}
 
-		System.out.println(result);
-    	JSONObject jSONObject = new JSONObject();
+
+		System.out.println("######result : " +result);
+		JSONObject jSONObject = new JSONObject();
     	
-    	if(result==1) {
-    		jSONObject.put("result", "1");	
+    	if(result == 1) {
+    		System.out.println("controller에서는 성공!");
+    		jSONObject.put("result","1");	
     	}
     	else {
-    		jSONObject.put("result", "0");
+    		jSONObject.put("result","0");
     	}
+    	System.out.println("뀨잉뽀잉 ㄴ"+jSONObject.toString());
     	return jSONObject.toString();
 	}
 	
 	
-	@ResponseBody
     @RequestMapping(value = "/user/updatePw.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.POST)
-    public String updatePw(
+    public @ResponseBody String updatePw(
     			Model model,
     			@RequestParam(value = "stuId", required=true) String stuId,
     			@RequestParam(value = "pw", required=true) String pw) { 
@@ -205,7 +208,6 @@ public class UserController {
 			// TODO: handle exception
 		}
 
-		System.out.println(result);
     	JSONObject jSONObject = new JSONObject();
     	if(result==1) {
     		jSONObject.put("result", "1");	
@@ -213,7 +215,7 @@ public class UserController {
     	else {
     		jSONObject.put("result", "0");
     	}
-    	System.out.println(jSONObject.toString());
+    	//System.out.println("뀨잉뽀잉 ㄴ"+jSONObject.toString());
     	return jSONObject.toString();
 	}
 
