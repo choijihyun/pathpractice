@@ -452,7 +452,7 @@ public class UserController {
 	}
 
 	@ResponseBody
-    @RequestMapping(value ="/user/insertToken.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value라는 값에 매핑, get방식 사용
+    @RequestMapping(value ="/user/insertToken.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.POST)// value라는 값에 매핑, get방식 사용
     public String insertToken(
     			Model model,
     			@RequestParam(value = "stuId", required=true) String stuId,

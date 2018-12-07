@@ -64,8 +64,17 @@
 	background-position: 0 0;
 	border-bottom: 1px solid #dd3247;
 }
+
+ .btn_del_member{
+	box-shadow: none;
+	outline: none;
+	box-sizing: 10px;
+}
+
+#btn_add_reader,
 #btn_add_member{
 	box-shadow: none;
+	outline: none;
 	box-sizing: 10px;
 }
 .label_input{

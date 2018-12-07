@@ -42,12 +42,14 @@
 	color: #fff;
 	-webkit-transition: all 0.8s;
 	transition: all 0.8s;
+	 outline: none;
 }
 /*가입 완료 버튼 클릭 했을 때*/
 .btn_join:hover{
 	background: transparent;
 	border: 1px solid #dd3247;
 	color: #dd3247;
+	 outline: none;
 }
 /*가입 취소 버튼*/
 .btn_cancel {
@@ -56,15 +58,17 @@
 	color: #fff;
 	-webkit-transition: all 0.8s;
 	transition: all 0.8s;
+	 outline: none;
 }
 /*가입 취소 버튼 클릭 했을 때*/
 .btn_cancel:hover{
 	background: transparent;
 	border: 1px solid gray;
 	color: gray;
+	 outline: none;
 }
 /*학년 선택 dropdown*/
-.dropdown_semester{
+.dropdown_semester, .dropdown_semester:focus{
 	position: relative;
 	margin-top: 30px;
 	margin-bottom: 15px;
@@ -73,4 +77,5 @@
 	background: #fff;
 	color: #dd3247;
 	border: 1px solid #dd3247;
+	outline: none;
 }
