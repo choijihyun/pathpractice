@@ -27,8 +27,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updatePw">
     	update Student set pw=#{pw} where stuId=#{stuId}
     </update>
-    <update id="updateUser">
-    	update Student set name=#{name},semester=#{semester},pw=#{pw},email=#{email} where stuId=#{stuId}
+    <update id="updateUser"  parameterType="map">
+    	update Student set name=#{name},semester=#{semester},email=#{email} where stuId=#{stuId}
     </update>
     
     <delete id="deleteUser" parameterType="map">
@@ -42,6 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectCookie" parameterType="map">
     	select useCookie from Student where stuId = #{stuId}
     </select> 
+   
     
     <!--
         로그인된 경우 해당 세션id와 유효시간을 사용자 테이블에 세팅한다. 이 밑에가 지현이가 코딩한부분

@@ -65,8 +65,7 @@
 </html>
 
  <script type="text/javascript"> 
-	$(document).ready(function(){
-		$('#submit').on( 'click', function() { 			 
+		$('#submit').on( 'click', function() { 	
 			$.ajax({
 				url : "/user/checkUserExist.json",						
 				type : "POST",
@@ -74,9 +73,8 @@
 					'stuId' : $("#id").val(),
 					'pw' :  $("#pw").val()
 				},
-				success : function(result) {
-					if (result['result'] === "1") {
-						console.log(result);
+				success : function(RESULT) {
+					if (RESULT.result === "1") {
 						$("#rePw").toggle();
 						$("#change").toggle();
 					} else {
@@ -84,41 +82,38 @@
 					}
 				},
 				error : function(request, status, error) {
-					console.log("code:" + request.status + "\n"
-							+ "message:" + request.responseText + "\n"
-							+ "error:" + error);
-					console.log('비밀번호 찾기 에러');
-					location.href = "/changePW";
-				}
-			});//ajax */
-		});//submit click
+					console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+				location.href = "/changePW";
+			}
+		});//ajax */
+	});//submit click
 		
-				
-		// event.preventDefault();
-		  $('#change').on('click', function() { 
-			$.ajax({
-			 	url: "/user/updatePw.json",
-				type: "POST",
-				data: {
-					'stuId':$('#id').val(), 
-					'pw':$('#rePw').val()
-				},
-				success: function(result) {
-					if (result['result'] === '1') {
-						alert("비밀번호 변경 성공");
-						console.log(result);
-						location.href = "/mypage";
-					} else { 
-						alert("비밀번호 변경 실패");
-					}
-				},
-				error: function() {
-					alert('비밀번호 변경 에러');
-				}
-			});//ajax
-		});//change click 
 		
-	});
+</script>
+<script type="text/javascript">
+	  $('#change').on('click', function() { 
+		  event.preventDefault();
+		$.ajax({
+		 	url: "/user/updatePw.json",
+			type: "POST",
+			data: {
+				'stuId':$('#id').val(), 
+				'pw':$('#rePw').val()
+			},
+			success : function(result){
+				if (result['result'] === "1") {
+					alert("비밀번호 변경 성공");
+					location.href = "/mypage";
+				} else { 
+					alert("비밀번호 변경 실패");
+				}
+			},
+			error: function() {
+				alert('비밀번호 변경 에러');
+				console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+			}
+		});//ajax
+	});//change click 
 		
 	
 </script>
