@@ -1,5 +1,6 @@
  package com.homeworkNotice.controller;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.WebUtils;
 
 import com.homeworkNotice.dao.UserDao;
 import com.homeworkNotice.dto.UserDto;
@@ -229,12 +231,9 @@ public class UserController {
 			Model model, //안드로이드에서 받을 파라미터
 			@RequestParam(value = "stuId", required=true) String stuId,
 			@RequestParam(value = "pw", required=true) String pw) {
-		
-		if(session.getAttribute("id")!=null) {
-			session.removeAttribute("name");
-			session.removeAttribute("id");
-			session.removeAttribute("email");
-			session.setAttribute("pw",pw);
+		int result=0;
+		if(session.getAttribute("login")!=null) {
+			session.removeAttribute("login");
 		}
 		
 		HashMap<Object, Object> param=new HashMap<Object, Object>();
@@ -264,6 +263,31 @@ public class UserController {
 				session.setAttribute("email", email);
 				session.setAttribute("id",stuId);
 				session.setAttribute("pw",pw);
+				
+				if(user!=null) {
+					System.out.println("!!!!!!#######@@@@@@@@@");
+					session.setAttribute("login", user);
+					System.out.println("user.get(0).getUseCookie() = "+user.get(0).getUseCookie());
+					if(user.get(0).getUseCookie().equals("1")) {
+						System.out.println("!!!!!!#######@@@@@@@@@!!!!!!!!!!!!!!!!!!%%%%%%%%");
+						UserDao dao = new UserDao();
+						Cookie cookie = new Cookie("loginCookie", session.getId());
+						cookie.setPath("/");
+						int amount = 60*60*24*7;
+						cookie.setMaxAge(amount);
+						response.addCookie(cookie);
+						Date sessionLimit = new Date(System.currentTimeMillis()+(1000*amount));
+						/*
+						JSONObject jSONObject2 = new JSONObject();
+						HashMap<Object, Object> PARAM2=new HashMap<Object, Object>();
+						PARAM2.put("stuId", user.get(0).getStuId());
+						PARAM2.put("sessionId", session.getId());
+						PARAM2.put("next", sessionLimit);
+						System.out.println(PARAM2);
+						result = dao.keepLogin(PARAM2);
+						*/
+					}
+				}
 				
 			}
 			else {
@@ -301,7 +325,7 @@ public class UserController {
 		JSONObject jSONObject = new JSONObject();
 		if(!userDtoList.isEmpty() && userDtoList.size()==1) {//반환받은 데이터가 유효하면(db에 있으면) 브라우저 화면에 결과를 뿌려준다
 			if(pw.equals(userDtoList.get(0).getPw())) {
-				System.out.println("checkUserExist 유저 확인됌");
+				System.out.println("checkUserExist 유저 확인됨");
 				if(stuId==session.getAttribute("Id")) {
 					jSONObject.put("result","0");//본인의 아이디가 아닌경ㅇ
 				}
@@ -545,5 +569,106 @@ public class UserController {
 			return jSONObject.toString();//요청한 내용들을 반환해준다.
 		}
 
+	@RequestMapping(value = "/user/preHandle.json", produces = "application/json;text/plain;charset=UTF-8", method = RequestMethod.POST) 
+	public @ResponseBody void preHandle(// url에 맵핑(연결)된 함수
+			HttpServletResponse response,
+			HttpServletRequest request,
+			HttpSession session,
+			Locale locale, // 안드로이드에서 받을  파라미터
+			Model model // 안드로이드에서 받을 파라미터
+	) {
+		JSONObject jSONObject = new JSONObject();
+		UserDao dao = new UserDao();
+		session = request.getSession();
+		Object obj = session.getAttribute("login");
+		System.out.println("obj = " + obj);
+		if (obj == null) {
+			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+			System.out.println("loginCookie = " + loginCookie.getComment());
+			System.out.println("loginCookie = " + loginCookie.getValue());
+			if (loginCookie.getComment() != null) {
+				String sessionId = loginCookie.getValue();
+				if (sessionId != null) {
+					HashMap<Object, Object> param = new HashMap<Object, Object>();
+					param.put("sessionId", sessionId);
+					List<UserDto> uservo = dao.checkUserWithSessionKey(param);
+
+					if (!uservo.isEmpty() && uservo != null) {
+						session.setAttribute("login", uservo);
+						return;
+					}
+				}
+			}
+		}
+		return;
+	}
+		
+		@ResponseBody
+	    @RequestMapping(value = "/user/checkbox.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)
+	    public String checkbox(
+	    			Locale locale, 
+	    			Model model,
+	    			@RequestParam(value = "select", required=true) final int select,
+	    			@RequestParam(value = "stuId", required=true) String stuId) {
+			HashMap<Object, Object> param=new HashMap<Object, Object>();	
+			param.put("stuId",stuId);
+			param.put("check", select);
+			
+			int result=0;
+			try {
+				result=userDao.checkbox(param);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				// TODO: handle exception
+			}
+
+	    	JSONObject jSONObject = new JSONObject();
+	    	//그래서 여기서 성공 or 실패 구분해서 안드로이드에 json 데이터를 결과로 전달해줄거야
+	    	if(result==1) {
+	    		jSONObject.put("result", "1");//성공     		
+	    	}
+	    	else {
+	    		jSONObject.put("result", "0");
+	    	}
+	    	return jSONObject.toString();
+		}
+		
+		@ResponseBody
+	    @RequestMapping(value = "/user/logout.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)
+	    public void logout(
+	    			Locale locale, 
+	    			Model model,
+	    			HttpSession session,
+	    			HttpServletRequest request,
+	    			HttpServletResponse response,
+	    			@RequestParam(value = "stuId", required=true) String stuId) {
+			
+	    	Object obj = session.getAttribute("login");
+	    	if(obj!=null) {
+	    		UserDto vo = (UserDto)obj;
+	    		
+	    		session.removeAttribute("login");
+	    		session.invalidate();
+	    		int result =0;
+	    		Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+	    		if(loginCookie!=null) {
+	    			loginCookie.setPath("/");
+	    			loginCookie.setMaxAge(0);
+	    			response.addCookie(loginCookie);
+	    			Date date = new Date(System.currentTimeMillis());
+	    			
+	    			UserDao dao = new UserDao();
+	    			JSONObject jSONObject2 = new JSONObject();
+					HashMap<Object, Object> PARAM2=new HashMap<Object, Object>();
+					PARAM2.put("stuId",stuId);
+					PARAM2.put("sessionId", session.getId());
+					PARAM2.put("next", date);
+					result = dao.keepLogin(PARAM2);
+	    		}
+	    	}
+			
 	
+		}
+		
 }

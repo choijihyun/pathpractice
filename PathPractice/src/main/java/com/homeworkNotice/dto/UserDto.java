@@ -9,6 +9,9 @@ public class UserDto {
 	private String email;
 	private String token;
 	private String useCookie;
+	private String sessionkey;
+	private String sessionlimit;
+	
 
 	public String getUseCookie() {
 		return useCookie;
@@ -58,6 +61,20 @@ public class UserDto {
 	}
 	public void setFlag(int flag) {
 		this.flag = flag;
+	}
+	
+	public String getSessionKey() {
+		return sessionkey;
+	}
+	public void setSessionKey(String sessionkey) {
+		this.sessionkey = sessionkey;
+	}
+	
+	public String getSessionLimit() {
+		return sessionlimit;
+	}
+	public void setSessionLimit(String sessionlimit) {
+		this.sessionlimit = sessionlimit;
 	}
 	
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.homeworkNotice.dto.HomeworkDto;
 import com.homeworkNotice.dto.UserDto;
 
+
 @Repository
 public class HomeworkDao {
 	
@@ -38,6 +39,8 @@ public class HomeworkDao {
 	}
 	
 	public List<HomeworkDto> selectHomework(HashMap<Object,Object> param) {
+		System.out.println("Dao param:::::::"+param);
+		
 		return sqlSession.selectList("HomeworkDao.selectHomework", param);
 	}
 	

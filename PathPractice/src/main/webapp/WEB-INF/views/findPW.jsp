@@ -58,26 +58,32 @@
 </html>
 
 <script type="text/javascript">
-      $('#submit').on('click',function(){
-    	  event.preventDefault();
-         $.ajax({
-            url:"/user/getUserPwdInfo.json",
-            type : "GET",
-            data : {
-            	'stuId':$('#id').val(),
-            	'email':$('#email').val()
-            },
-       		success : function(result) {
-    			if (result.result ===  "no data") {
-                  alert('정보가 동일하지 않습니다.');
-               	}
-    			else{
-                 alert("비밀번호 : "+result.result);
-               	}
-            },
-            error : function(){
-							//alert('비밀번호 찾기 에러');
+$('#submit').on('click', function() {
+
+	//setCookie("userInputId", userInputId, 7); // 7일 동안 쿠키 보관
+	event.preventDefault();
+
+	$.ajax({
+		url : "/user/getUserPwdInfo.json",
+		method : "GET",
+		data : {
+			'stuId' : $('#id').val(),
+			'email':$('#email').val()
+		},
+		success : function(result) {
+			if (result.result === "no data") {
+				alert('정보가 동일하지 않습니다.');
+			} 
+			else{
+                alert("비밀번호 : "+result.pw);
             }
-         });
+		},
+		error : function() {
+			alert('비밀번호 찾기 에러');
+			console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+		}
+	});
+
+     
       });
 </script>

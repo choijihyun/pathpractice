@@ -166,10 +166,10 @@ public class SubjectController {
 		case 4:subjectDtoList =subjectDao.search3Subject(param);break;//profname
 		default:subjectDtoList =subjectDao.searchSubject(param);break;
 		}
-		//subNo 濡� 李얜뒗 寃쎌슦
-		//subName �쑝濡� 李얜뒗 寃쎌슦
-		//subjectKey 濡� 李얜뒗 寃쎌슦 
-		//profName �쑝濡� 李얜뒗 寃쎌슦
+		//subNo 
+		//subName 
+		//subjectKey  
+		//profName 
 		
     	JSONArray jSONArray=new JSONArray();
     	List<JSONObject> jsonList=new ArrayList<JSONObject>();
@@ -201,30 +201,7 @@ public class SubjectController {
         		
         		System.out.println(jsonList);
         	}
-        	/*
-        	Collections.sort( jsonList, new Comparator<JSONObject>() {
 
-    		    public int compare(JSONObject a, JSONObject b) {
-    		        String valA = new String();
-    		        String valB = new String();
-    		        int vA,vB;
-    		        
-    		      
-    		        switch(select) {
-    		        case 1: vA = (Integer) a.get("assignNo");vB = (Integer) b.get("assignNo");if(vA==vB) return 0; if(vA>vB) return 1; else return -1;
-    		        case 2: valA = (String) a.get("stuId");valB = (String) b.get("stuId");break;
-    		        case 3: valA = (String) a.get("registerDate");valB = (String) b.get("registerDate");break;
-    		        case 4: valA = (String) a.get("dueDate");valB = (String) b.get("dueDate");break;
-    		        case 5: vA = (Integer) a.get("importance");vB = (Integer) b.get("importance");if(vA==vB) return 0; if(vA>vB) return 1; else return -1;
-    		        case 6: valA = (String) a.get("title");valB = (String) b.get("title");break; 
-    		        case 7: valA = (String) a.get("contents");valB = (String) b.get("contents");break;
-    		        case 8: valA = (String) a.get("subNo");valB = (String) b.get("subNo");break;
-    		        case 9: vA= (Integer)a.get("success");vB = (Integer) b.get("success");if(vA==vB) return 0; if(vA>vB) return 1; else return -1;
-    		        }
-
-    		        return valA.compareTo(valB);
-    		    }
-    		});  */
         	System.out.println(jsonList);
         	
         	
@@ -244,7 +221,7 @@ public class SubjectController {
         	return jSONObject.toString();
         }
 	}
-	
+
 
 	@ResponseBody
     @RequestMapping(value = "/subject/deleteSubject.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕, get�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝占�

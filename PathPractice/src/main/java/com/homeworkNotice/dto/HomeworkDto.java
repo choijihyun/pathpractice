@@ -10,7 +10,7 @@ public class HomeworkDto {
 	private String contents;
 	private String subNo;
 	private int success;
-	private String team;
+	private int team;
 	
 	public int getAssignNo() {
 		return assignNo;
@@ -66,10 +66,10 @@ public class HomeworkDto {
 	public void setSuccess(int success) {
 		this.success = success;
 	}
-	public String getTeam() {
+	public int getTeam() {
 		return team;
 	}
-	public void setTeam(String team) {
+	public void setTeam(int team) {
 		this.team = team;
 	}
 	
