@@ -92,7 +92,7 @@
 </script>
 <script type="text/javascript">
 	  $('#change').on('click', function() { 
-		  event.preventDefault();
+		  //event.preventDefault();
 		$.ajax({
 		 	url: "/user/updatePw.json",
 			type: "POST",
@@ -100,13 +100,14 @@
 				'stuId':$('#id').val(), 
 				'pw':$('#rePw').val()
 			},
-			success : function(result){
-				if (result['result'] === "1") {
+			success : function(Result){
+				/*if (Result.result == "1") {
 					alert("비밀번호 변경 성공");
-					location.href = "/mypage";
+					
 				} else { 
 					alert("비밀번호 변경 실패");
-				}
+				}*/
+				location.href = "/mypage";
 			},
 			error: function() {
 				alert('비밀번호 변경 에러');
