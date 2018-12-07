@@ -25,7 +25,6 @@ public class TeamDao {
 	public int insertTeam(HashMap<Object,Object> param) {
 		return sqlSession.insert("TeamDao.insertTeam",param);
 	}
-	
 	public int deleteTeam(HashMap<Object, Object> param) {
 		return sqlSession.delete("TeamDao.deleteTeam",param);
 	}

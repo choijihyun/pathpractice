@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.homeworkNotice.dao.HomeworkDao;
 import com.homeworkNotice.dao.UserDao;
+import com.homeworkNotice.dao.TeamDao;
 import com.homeworkNotice.dto.CompleteDto;
 import com.homeworkNotice.dto.HomeworkDto;
 import com.homeworkNotice.dto.UserDto;
+import com.homeworkNotice.dto.TeamDto;
+
 
 @Controller
 public class HomeworkController {
@@ -24,8 +27,11 @@ public class HomeworkController {
 	@Autowired
 	private HomeworkDao	homeworkDao;
 	private UserDao userDao;
+	private TeamDao teamDao;
 	
 	
+	//team 이 1이면 그 해당하는 student 들도 homework 등록 해줌 
+	//해당하는 homework 정보 얻어와서 insert 같이 해줌
 	//insert
 	@ResponseBody
     @RequestMapping(value = "/homework/insertHomework.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value占쏙옙占� 占쏙옙占쏙옙 占쏙옙占쏙옙, get占쏙옙占� 占쏙옙占�
@@ -38,7 +44,7 @@ public class HomeworkController {
     			@RequestParam(value = "contents", required=true) String contents,
     			@RequestParam(value = "subNo", required=true) String subNo,
     			@RequestParam(value = "success", required=true) final int success,
-    			@RequestParam(value = "team",required=false) String team) { // 占싱뤄옙占쏙옙 5占쏙옙占쏙옙 占식띰옙占쏙옙拷占� 占쌨아울옙占쏙옙 占쏙옙占쏙옙 占싫억옙占쏙옙 x
+    			@RequestParam(value = "team",required=false) final int team) { // 占싱뤄옙占쏙옙 5占쏙옙占쏙옙 占식띰옙占쏙옙拷占� 占쌨아울옙占쏙옙 占쏙옙占쏙옙 占싫억옙占쏙옙 x
 		HashMap<Object, Object> param=new HashMap<Object, Object>(); //占쏙옙占쏙옙占쏙옙 id占쏙옙占쏙옙 hashmap 占쏙옙占쏙옙占쏙옙獵歐占� 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙
 		
 		param.put("stuId",stuId);			
@@ -51,9 +57,9 @@ public class HomeworkController {
 		param.put("team", team);
 		
 		int result=0;
+		
 		try {
-			result=homeworkDao.insertHomework(param);
-			
+			result=homeworkDao.insertHomework(param);	
 		} catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle exception
@@ -140,7 +146,7 @@ public class HomeworkController {
     			@RequestParam(value = "stuId", required=true) String stuId,
     			@RequestParam(value = "assignNo", required=true) final int assignNo,
     			@RequestParam(value = "success", required=true) final int success,
-    			@RequestParam(value = "team",required=true) String team) {
+    			@RequestParam(value = "team",required=true) final int team) {
 		
 		HashMap<Object, Object> param=new HashMap<Object, Object>(); //占쏙옙占쏙옙占쏙옙 id占쏙옙占쏙옙 hashmap 占쏙옙占쏙옙占쏙옙獵歐占� 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙
 					
@@ -184,39 +190,86 @@ public class HomeworkController {
 				Locale locale, //占싫듸옙占쏙옙絹恙∽옙占� 占쏙옙占쏙옙 占식띰옙占쏙옙占�
 				Model model, //占싫듸옙占쏙옙絹恙∽옙占� 占쏙옙占쏙옙 占식띰옙占쏙옙占�
 				@RequestParam(value = "stuId", required=true) String stuId,
-				@RequestParam(value = "select",required=true) final int select) {
+				@RequestParam(value = "select",required=true) final int select,
+				@RequestParam(value = "order",required=true) final int order) {
 			
 			HashMap<Object, Object> param=new HashMap<Object, Object>();
 			
 			param.put("stuId",stuId);
+			param.put("select",select);
+			param.put("order",order);
 			
 			List<HomeworkDto> homeworkDtoList =homeworkDao.selectHomework(param);	
 
 	    	JSONArray jSONArray=new JSONArray();
 	    	List<JSONObject> jsonList=new ArrayList<JSONObject>();
-	    	JSONObject tmp;
-	    	
+	    	JSONObject tmp;	    	
 	    	
 	    	if(!homeworkDtoList.isEmpty()) {//占쏙옙환占쏙옙占쏙옙 占쏙옙占쏙옙占싶곤옙 占쏙옙효占싹몌옙(db占쏙옙 占쏙옙占쏙옙占쏙옙) 占쏙옙占쏙옙占쏙옙 화占썽에 占쏙옙占쏙옙占� 占싼뤄옙占쌔댐옙
-	        	for(int i=0;i<homeworkDtoList.size();i++) {
-	        		JSONObject jSONObject = new JSONObject();
-	        		jSONObject.put("assignNo",homeworkDtoList.get(i).getAssignNo());
-	        		jSONObject.put("stuId",homeworkDtoList.get(i).getStuId());
-	        		jSONObject.put("registerDate", homeworkDtoList.get(i).getRegisterDate());
-	        		jSONObject.put("dueDate", homeworkDtoList.get(i).getDueDate());
-	        		jSONObject.put("importance", homeworkDtoList.get(i).getImportance());
-	        		jSONObject.put("title",homeworkDtoList.get(i).getTitle());
-	        		jSONObject.put("contents",homeworkDtoList.get(i).getContents());
-	        		jSONObject.put("subNo",homeworkDtoList.get(i).getSubNo());
-	        		jSONObject.put("success",homeworkDtoList.get(i).getSuccess());
-	        		jSONObject.put("team", homeworkDtoList.get(i).getTeam());
+	    		for(int i=0;i<homeworkDtoList.size();i++) {
+	    			JSONObject jSONObject = null;
+	        		if(select==0) {
+	        			jSONObject = new JSONObject();
+		        		jSONObject.put("assignNo",homeworkDtoList.get(i).getAssignNo());
+		        		jSONObject.put("stuId",homeworkDtoList.get(i).getStuId());
+		        		jSONObject.put("registerDate", homeworkDtoList.get(i).getRegisterDate());
+		        		jSONObject.put("dueDate", homeworkDtoList.get(i).getDueDate());
+		        		jSONObject.put("importance", homeworkDtoList.get(i).getImportance());
+		        		jSONObject.put("title",homeworkDtoList.get(i).getTitle());
+		        		jSONObject.put("contents",homeworkDtoList.get(i).getContents());
+		        		jSONObject.put("subNo",homeworkDtoList.get(i).getSubNo());
+		        		jSONObject.put("success",homeworkDtoList.get(i).getSuccess());
+		        		jSONObject.put("team", homeworkDtoList.get(i).getTeam());
+	        		}else if(select==1&&(homeworkDtoList.get(i).getTeam()==0)&&(homeworkDtoList.get(i).getSuccess()==0)) {
+	        			jSONObject = new JSONObject();jSONObject.put("assignNo",homeworkDtoList.get(i).getAssignNo());
+		        		jSONObject.put("stuId",homeworkDtoList.get(i).getStuId());
+		        		jSONObject.put("registerDate", homeworkDtoList.get(i).getRegisterDate());
+		        		jSONObject.put("dueDate", homeworkDtoList.get(i).getDueDate());
+		        		jSONObject.put("importance", homeworkDtoList.get(i).getImportance());
+		        		jSONObject.put("title",homeworkDtoList.get(i).getTitle());
+		        		jSONObject.put("contents",homeworkDtoList.get(i).getContents());
+		        		jSONObject.put("subNo",homeworkDtoList.get(i).getSubNo());
+		        		jSONObject.put("success",homeworkDtoList.get(i).getSuccess());
+		        		jSONObject.put("team", homeworkDtoList.get(i).getTeam());
+	        		}else if(select==2&&(homeworkDtoList.get(i).getTeam()!=0)&&(homeworkDtoList.get(i).getSuccess()==0)){
+	        			System.out.println("select 2 히히");
+	        			jSONObject = new JSONObject();
+	        			jSONObject.put("assignNo",homeworkDtoList.get(i).getAssignNo());
+		        		jSONObject.put("stuId",homeworkDtoList.get(i).getStuId());
+		        		jSONObject.put("registerDate", homeworkDtoList.get(i).getRegisterDate());
+		        		jSONObject.put("dueDate", homeworkDtoList.get(i).getDueDate());
+		        		jSONObject.put("importance", homeworkDtoList.get(i).getImportance());
+		        		jSONObject.put("title",homeworkDtoList.get(i).getTitle());
+		        		jSONObject.put("contents",homeworkDtoList.get(i).getContents());
+		        		jSONObject.put("subNo",homeworkDtoList.get(i).getSubNo());
+		        		jSONObject.put("success",homeworkDtoList.get(i).getSuccess());
+		        		jSONObject.put("team", homeworkDtoList.get(i).getTeam());
+	        		}else if(select==3&&(homeworkDtoList.get(i).getSuccess()==1)) {
+	        			jSONObject = new JSONObject();
+	        			jSONObject.put("assignNo",homeworkDtoList.get(i).getAssignNo());
+		        		jSONObject.put("stuId",homeworkDtoList.get(i).getStuId());
+		        		jSONObject.put("registerDate", homeworkDtoList.get(i).getRegisterDate());
+		        		jSONObject.put("dueDate", homeworkDtoList.get(i).getDueDate());
+		        		jSONObject.put("importance", homeworkDtoList.get(i).getImportance());
+		        		jSONObject.put("title",homeworkDtoList.get(i).getTitle());
+		        		jSONObject.put("contents",homeworkDtoList.get(i).getContents());
+		        		jSONObject.put("subNo",homeworkDtoList.get(i).getSubNo());
+		        		jSONObject.put("success",homeworkDtoList.get(i).getSuccess());
+		        		jSONObject.put("team", homeworkDtoList.get(i).getTeam());
+	        		}else {
+	        			System.out.println("null 히히");
+	        			jSONObject=new JSONObject();
+	        		}
+	        		if(!jSONObject.isEmpty()) {
+	        			System.out.println("비지 않으면 넣어라!");
+	        			jSONArray.add(jSONObject);
 	        		
-	        		jSONArray.add(jSONObject);
+	        			jsonList.add((JSONObject)jSONArray.get(i));
 	        		
-	        		jsonList.add((JSONObject)jSONArray.get(i));
-	        		
-	        		System.out.println(jsonList);
+	        			System.out.println(jsonList);
+	        		}
 	        	}
+	        	
 
 	        	jSONArray.clear();
 	        	/*
@@ -490,22 +543,7 @@ public class HomeworkController {
 	        		jsonList.add((JSONObject)jSONArray.get(i));
 	        		
 	        		System.out.println(jsonList);
-	        	}
-	        	/*
-	        	Collections.sort( jsonList, new Comparator<JSONObject>() {
-
-	    		    public int compare(JSONObject a, JSONObject b) {
-	    		        String valA = new String();
-	    		        String valB = new String();
-	    		        int vA,vB;
-
-
-	    		        return valA.compareTo(valB);
-	    		    }
-	    		});
-	    		
-	    		*/
-	        	System.out.println(jsonList);
+	        	}	        	System.out.println(jsonList);
 	        	
 	        	jSONArray.clear();
 	        	for(int i=0;i<homeworkDtoList.size();i++){
