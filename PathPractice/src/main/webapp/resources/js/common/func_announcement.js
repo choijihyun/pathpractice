@@ -18,7 +18,7 @@ var showAllAnnounce = function(id, subject){
 
 					var str = '';
 					str += '<button type="button" ';
-					str += 'class="btn btn-lg btn-block btn-outline-danger btn_pop_assignment" ';
+					str += 'class="btn btn-lg btn-block btn-outline-danger btn_pop_announce" ';
 					str += 'data-date= " ' + result['result'][i]['date'] + ' " ';
 					str += 'data-team= " ' + result['result'][i]['contest'] + ' " ';
 					str += 'data-contents= " ' + announce_contest + '">';

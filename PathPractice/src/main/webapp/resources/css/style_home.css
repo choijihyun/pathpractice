@@ -31,7 +31,9 @@
 	max-width: 60px;
 	max-height: 30px;
 }
-
+.btn_preivew{
+	overflow:hidden;
+}
 /*과제 보여주는 작은 영역*/
 .content_preview_assignment{
 	border:1;

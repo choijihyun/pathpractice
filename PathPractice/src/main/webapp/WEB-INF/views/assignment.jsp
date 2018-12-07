@@ -6,22 +6,6 @@
 	if(session.getAttribute("id")==null)
 		response.sendRedirect("/");
 %>
-<style>
-.star-input>.input,
-.star-input>.input>input:checked+label{display: inline-block;vertical-align:top;background:url('${pageContext.request.contextPath}/resources/img/grade_img.png')no-repeat;}
-.star-input{display:inline-block; white-space:nowrap;width:225px;height:20px;line-height:10px;}
-.star-input>.input{display:inline-block;width:150px;background-size:150px;height:28px;white-space:nowrap;overflow:hidden;position: relative;}
-.star-input>.input>input{position:absolute;width:1px;height:1px;opacity:0;}
-.star-input>.input>label{width:30px;height:0;padding:28px 0 0 0;overflow: hidden;float:left;position: absolute;top: 0;left: 0;}
-.star-input>.input>input:checked+label{background-size: 150px;background-position: 0 bottom;}
-.star-input>.input>label[for="p1"]{width:30px;z-index:5;}
-.star-input>.input>label[for="p2"]{width:60px;z-index:4;}
-.star-input>.input>label[for="p3"]{width:90px;z-index:3;}
-.star-input>.input>label[for="p4"]{width:120px;z-index:2;}
-.star-input>.input>label[for="p5"]{width:150px;z-index:1;}
-.star-input>output{display:inline-block;width:60px; font-size:18px;text-align:right; vertical-align:middle;}
-.form-row>.col, .form-row>[class*=col-]{padding-top : 5px;}
-</style>
 
 <head>
 	<title>assignment</title>
@@ -33,11 +17,11 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 	<!-- Customize CSS -->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style_assignment.css">
-
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/5star.css">
 
 	<!-- fontawesome img -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-
+	
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -67,9 +51,16 @@
 								<button type="button" class="btn  btn_assign_type" id="done">Done</button>
 							</div>
 						</div>
-						<div class= "col-6 col-xs-6 col-sm-6 col-lg-6 col-md-6">
+						<div class= "col-3 col-xs-3 col-sm-3 col-lg-3 col-md-3">
+							<select class="form-control-sm" id="sort">
+							<option id="none">선택</option>
+							<option id="date">기한</option>
+							<option id="importance">중요도</option>
+						</select>
 						</div>
-						<!-- log-out 아이콘 버튼 누르면 assignment_add로 이동 -->
+						<div class= "col-3 col-xs-3 col-sm-3 col-lg-3 col-md-3">
+						</div>
+						<!-- plus 아이콘 버튼 누르면 팀인지 개인인지 선택하게 함 -->
 						<div class= "col-2 col-xs-2 col-sm-2 col-lg-2 col-md-2">
 							<button class="btn btn-lg btn_add p-0" aria-label="Left Align" >
 								<span class="fas fa-plus-square"></span>
@@ -129,13 +120,15 @@
 											</div>
 											
 											<div class="col-md-3 col-xs-3 m-0 label_input my-2">중요도</div>
-											<span class="star-input col-md-7 col-xs-7 my-2" id="importance"> <span class="input">
-											<input type="radio" name="star-input" value="1" id="p1" disabled="true"> <label for="p1">1</label>
-											<input type="radio" name="star-input" value="2" id="p2" disabled="true"> <label for="p2">2</label>
-											<input type="radio" name="star-input" value="3" id="p3" disabled="true"> <label for="p3">3</label> 
-											<input type="radio" name="star-input" value="4" id="p4" disabled="true"> <label for="p4">4</label> 
-											<input type="radio" name="star-input" value="5" id="p5" disabled="true"> <label for="p5">5</label>
 											
+										 	<span class="rate-area rate-block  col-md-7 col-xs-7 my-2" id="importance">
+											  <input type="radio" id="p5" name="star-input" value="5" disabled="true"/> <label for="p5">5</label>
+											  <input type="radio" id="p4" name="star-input" value="4" disabled="true"/> <label for="p4">4</label>
+											  <input type="radio" id="p3" name="star-input" value="3" disabled="true"/> <label for="p3">3</label>
+											  <input type="radio" id="p2" name="star-input" value="2" disabled="true"/> <label for="p2">2</label>
+											  <input type="radio" id="p1" name="star-input" value="1" disabled="true"/> <label for="p1">1</label>
+											</span>
+
 										</div>
 
 										<div class="modal-footer">
@@ -252,11 +245,4 @@
 		});//assignChange Cllick
 			
 	});//btn_pop_assignment Click
-</script>
-
-<!-- 모든 과제 불러오기,띄우기 -->
-<script type="text/javascript">
-	$(document).ready(function(){
-		showAllAssignment(<%=id%>);
-	});
 </script>

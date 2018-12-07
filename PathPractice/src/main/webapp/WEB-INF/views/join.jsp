@@ -3,10 +3,6 @@
 <!doctype html>
 <html lang="kr">
 <head>
-<%
-	if(session.getAttribute("id")==null)
-		response.sendRedirect("/");
-%>
 <title>join Page</title>
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -130,11 +126,11 @@
 		            	//alert('회원가입 성공');
 		            	location.href = "/";
 		            }else{
-		            	//alert('회원가입 성공');
+		            	alert('회원가입 실패');
 		            }
 		        },
 		        error : function(){
-		        	//alert('회원가입 에러');
+		        	alert('회원가입 에러');
 		        }
 		    });
 		});

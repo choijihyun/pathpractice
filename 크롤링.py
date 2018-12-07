@@ -25,7 +25,7 @@ def get_time(line):
     if " 전" in line:
         if "시간" in line:
             var = 0
-        if "일" in line:
+        elif "일" in line:
             idx = line.index("전")
             time = line[:idx-2]
             var = int(re.findall('\d+', time)[0])
@@ -34,8 +34,8 @@ def get_time(line):
         
         dd=datetime.today().day - var
         if dd <= 0:
-            if mm == 12:
-                mm = 1
+            if mm == 1:
+                mm = 12
             else :
                 mm-=1
 
@@ -342,7 +342,6 @@ for stu in rows:
     sql="UPDATE Student SET flag=1 where stuId="+stu[0]
     curs.execute(sql)
     conn.commit()
-        
     
     for i in content:
         if eq(i,content[0]):
@@ -363,6 +362,7 @@ for stu in rows:
         sql="insert into Announcement(stuId,date,subject,contest) values ("+stu[0]+","+date+","+subject+","+contest+")"
         curs.execute(sql)
         conn.commit()
+        
         
     try :
         conn.close()

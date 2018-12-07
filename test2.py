@@ -27,8 +27,8 @@ def get_info():
 
   #암묵적으로 웹 자원 로드를 위해 3초까지 기다림
 
-    stuid ='1'
-    pw = '1'
+    stuid ='16011008'
+    pw = 'sechljigusjong98'
   #url접근
     
     driver.get('https://blackboard.sejong.ac.kr')
@@ -62,13 +62,10 @@ def get_info():
             print ("alert accepted")
         except:
             print ("no alert")
-            #print("블랙보드 유저가 아님")
-            #driver.quit()
-            #return False
     except:
         print("블랙보드 유저가 아님")
         driver.quit()
-        #return False
+        return False
         
 
   #공지사항 찾아가기
@@ -76,8 +73,7 @@ def get_info():
     driver.implicitly_wait(5)
 
 
-
-  #ipython 써서 확인하기
+    #ipython으로 한단계 한단계 확인할 수 있음
     sleep(10)
 
     text = driver.page_source
@@ -172,17 +168,19 @@ def get_time(line):
     if " 전" in line:
         if "시간" in line:
             var = 0
-        if "일" in line:
+        elif "일" in line:
             idx = line.index("전")
             time = line[:idx-2]
             var = int(re.findall('\d+', time)[0])
 
-        mm=(datetime.today().month)
-        
+        print("var = ",var)
+        mm=int(datetime.today().month)
+        print("mm = ",mm)
         dd=datetime.today().day - var
+        print("dd = ",dd)
         if dd <= 0:
-            if mm == 12:
-                mm = 1
+            if mm == 1:
+                mm = 12
             else :
                 mm-=1
 
@@ -218,6 +216,7 @@ def parsing(announcement,subjects):
         for j in line:
             if eq(j,line[0]): #처음줄은 무조건 날짜나옴
                 nalzza = get_time(j)
+                print(nalzza)
             else:
                 if "코스 공지사항" in j:
                     for subject in subjects:
@@ -243,58 +242,16 @@ def parsing(announcement,subjects):
         PARSE.append(parse)
 
     return (PARSE)
-            
 
-#MySQL Connection 연결
-conn = pymysql.connect(host='203.250.148.53',
-                       port=3306,
-                       user='jihyun',
-                       passwd='root',
-                       db='PATH')
             
 
 lists = get_info()
-if lists == []:
-    sql = "UPDATE `Student` SET `flag`=0 WHERE stuId = 
-    curs.execute(sql)
 
 #과목 불러와서 subjects list에 저장함
 subjects = get_subject(lists)
 
 #parsing한 내용 content list에 저장
 content = parsing(lists, subjects)
-
-#connectino으로 부터 cursor 생성
-curs = conn.cursor()
-for i in content:
-    if eq(i,content[0]):
-        continue
-    if "'" in i[2]:
-        contest = '"'+i[2]+'"'
-    else :
-        contest = "'"+i[2]+"'"
-    date = "'"+i[0]+"'"
-    subject = "'"+i[1]+"'"
-    sql = "SELECT count(*) FROM `Announcement` WHERE contest like"+ contest
-    curs.execute(sql)
-    row = curs.fetchall()
-    row = str(row)
-    i = int(re.findall('\d+', row)[0])
-    if i > 0:
-        print("이미 존재하는 데이터")
-        continue
-    sql="insert into Announcement(stuId,date,subject,contest) values (,"+date+","+subject+","+contest+")"
-    curs.execute(sql)
-    conn.commit()
-    
-sql = "select * from Announcement where stuId=1"
-curs.execute(sql)
-rows = curs.fetchall()
-for row in rows:
-    print("================")
-    print(row)
-
-conn.close()
 
 
         

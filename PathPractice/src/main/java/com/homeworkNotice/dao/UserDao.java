@@ -62,6 +62,6 @@ public class UserDao {
 	public int insertToken(HashMap<Object, Object> param) {
 		return sqlSession.insert("UserDao.insertToken", param);		
 	}
-	
+
 	
 }

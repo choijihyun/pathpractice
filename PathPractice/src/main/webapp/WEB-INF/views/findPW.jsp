@@ -3,10 +3,6 @@
 <!DOCTYPE html>
 <html lang="kr">
 <head>
-<%
-	if(session.getAttribute("id")==null)
-		response.sendRedirect("/");
-%>
    <title>find password</title>
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -37,7 +33,12 @@
 					<div class="col-md-12 col-xs-12">
 						<input type="text" id="id"
 							class="form-control form-control-lg flat_input"
-							placeholder="username">
+							placeholder="userID">
+					</div>
+					<div class="col-md-12 col-xs-12">
+						<input type="text" id="email"
+							class="form-control form-control-lg flat_input"
+							placeholder="email">
 					</div>
 					<div class="col-md-6 col-xs-6 mt-3">
 						<button type="button" class="btn btn-block btn-sm btn_submit"
@@ -57,41 +58,26 @@
 </html>
 
 <script type="text/javascript">
-   $(document).ready(function(){
       $('#submit').on('click',function(){
+    	  event.preventDefault();
          $.ajax({
             url:"/user/getUserPwdInfo.json",
             type : "GET",
-            data : {'stuId':$('#id').val()},
-            success : function(result){
-               if(result['result'] === "no data"){
-                  alert('회원정보가 없습니다.');
-               }else{
-                 $('#email').val(result['email']).trigger('change');
-                 $('#to_pw').val(result['pw']).trigger('change');
-
-                  /* $.ajax({
-                    type:"post",
-                    url : "content_me.php",
-                    success : function(result){
-                      if(result){ 
-                      }
-                      else{
-                        alert("메일이 전송되지 않았습니다.");
-                      }
-                    },
-                    error : function(){
-                     // alert("php에 접근하지 못하였습니다.");
-                    }
-                  }); */
-                  
-                  
-               }
+            data : {
+            	'stuId':$('#id').val(),
+            	'email':$('#email').val()
+            },
+       		success : function(result) {
+    			if (result.result ===  "no data") {
+                  alert('정보가 동일하지 않습니다.');
+               	}
+    			else{
+                 alert("비밀번호 : "+result.result);
+               	}
             },
             error : function(){
 							//alert('비밀번호 찾기 에러');
             }
          });
       });
-   });
 </script>

@@ -45,7 +45,7 @@
 					style="background: #f2f2f2;margin-top: 0px;">
 					<div class="lh-100">
 						<div style="text-align: center">
-							<strong class="info" style="text-align: center"> 공지사항 </strong>
+							<strong class="info" style="text-align: center"> 블랙보드에 연동하세요! </strong>
 						</div>
 					</div>
 				</div>
@@ -65,68 +65,6 @@
 </body>
 </html>
 
-<script type="text/javascript">
-	<%
-	String id = (String) session.getAttribute("id");
-	%>
-	$(document).ready(function() {
-		$.ajax({
-			url : "/user/BlackboardUser.json",
-			type : "POST",
-			data : {
-				'stuId' :<%=id%>
-			},
-			success : funcdtion(result){
-				if(result.result == "0"){ // blackboard 유저가 아닐 때
-					location.href = "/menu_none";
-				}
-			},
-			error : function() {
-				//alert('공지사항 불러오기 에러');
-			}
-		});
-		
-	//과제 불러오기
-		//event.preventDefault();
-		$.ajax({
-			url : "/blackboard/getSubject.json",
-			type : "POST",
-			data : {
-			'stuId' :<%=id%>
-			}, 
-			success : function(result) {
-				if (result['result'] === 'no data') {
-					alert('등록된 공지사항 없음');
-				} else { 
-					console.log(result);
-				var str = '';
-				var subject='';
-				str += '<div class="list-group">';
-				console.log(result['result'].length);
-				for (var i = 0; i < result['result'].length; i++) {
-					subject = result['result'][i]['subject'];
-					if(subject=="")continue;
-					
-					str += '<button class="btn p-1 btn-sm list-group-item" type="button" value="vv">';
-					str += subject;
-					str += '</button>';
-					$('.scrollbar_track').append(str);
-					str='';
-					str += '<div class="list-group">'
-					}
-				}
-			},
-			error : function() {
-				//alert('공지사항 불러오기 에러');
-			}
-		});//ajax
-	});//$(document).ready
-	
-	$(document).on("click",'.list-group',function() {
-		var subject = $(this).text();
-		location.href="/announcement?subject="+subject;
-	});// 과목명 선택 해서 그 과목에 해당하는 공지사항 보여줌
-</script>
 
 
 <script src="${pageContext.request.contextPath}/resources/js/common/header.js"></script>

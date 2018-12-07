@@ -179,10 +179,7 @@ public class HomeworkController {
     	}
     	return jSONObject.toString();
 	}
-	
-
-	
-	
+/*
 	//select
 		@ResponseBody
 		@RequestMapping(value = "/homework/selectHomework.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//占쏙옙 占싸븝옙占쏙옙 url //get占쏙옙占쏙옙占쏙옙占� 占쏙옙 /user/getUserPwdInfo.json占싱띰옙占� url占쏙옙 占쏙옙占싶쇽옙 占쏙옙占쏙옙 확占쏙옙 占쏙옙 占쏙옙 占쌍댐옙.
@@ -298,7 +295,7 @@ public class HomeworkController {
 		        		jSONArray.add(jsonList.get(i));
 		        	}
 		        	
-	        	}*/
+	        	}
 	        	JSONObject jsObject=new JSONObject();
 	        	jsObject.put("result", jSONArray);
 
@@ -312,7 +309,7 @@ public class HomeworkController {
 	        	return jSONObject.toString();
 	        }
 		}
-		
+		*/
 		//pushHomework
 			@ResponseBody
 			@RequestMapping(value = "/homework/pushHomework.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//占쏙옙 占싸븝옙占쏙옙 url //get占쏙옙占쏙옙占쏙옙占� 占쏙옙 /user/getUserPwdInfo.json占싱띰옙占� url占쏙옙 占쏙옙占싶쇽옙 占쏙옙占쏙옙 확占쏙옙 占쏙옙 占쏙옙 占쌍댐옙.

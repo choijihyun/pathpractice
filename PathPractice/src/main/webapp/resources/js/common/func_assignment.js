@@ -128,7 +128,8 @@ var showAllAssignment = function(id){
 		url:"/homework/selectHomework.json",
 		type : "GET",
 		data : {
-			'stuId':id
+			'stuId':id,
+			'select':1//이거 나중에 언니가 우선순위 반영하면 바꿔야ㅑ함
 		},
 		success : function(result){
 			if(result['result'] === 'no data'){
@@ -158,9 +159,10 @@ var showAllAssignment = function(id){
 				}
 			}
 		},
-		error : function(){
-			alert('불러오기 에러');
-		}
+		error : function(request,status,error){
+    		alert('불러오기에러');
+    		console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+    	}
 	});//ajax
 }
 
@@ -317,15 +319,7 @@ var fillInfomation = function(subNo,select,title,contents,dueDate,importance){
 	});
 	
 	//setting datepicker
-	$(function() {
-		$("#dueDate").datepicker({ 
-			changeMonth: true, 
-	        changeYear: true,
-	        dayNames: ['월', '화', '수', '목', '금', '토', '일'], 
-	        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-			dateFormat : "yy-mm-dd"
-		});
-		
+	$(function() {		
 		strArray = dueDate.split('-');
 		realDate = new Date(strArray[0], strArray[1]-1, strArray[2]); 
 		$("#dueDate").datepicker('setDate',realDate);

@@ -39,7 +39,7 @@
 			<hr>
 			<div class="jumbotron p-0 rounded main_area">
 				<div class="form-row m-3 p-3">
-					<div class="col-md-3 col-xs-3 mt-1 mb-1 label_input">과목명</div>
+					<div class="col-md-3 col-xs-3 mt-1 mb-1 label_input">과목명</div>
 					<div class="col-md-7 col-xs-7 ">
 						<input type="text"
 							class="form-control form-control-sm mt-1 mb-1 flat_input"
@@ -55,21 +55,21 @@
 						<colgroup>
 							<col width="5%" />
 							<col width="5%" />
-							<col width="25%" />
-							<col width="5%" />
+							<col width="30%" />
+							<col width="10%" />
 							<col width="20%" />
-							<col width="20%" />
-							<col width="20%" />
+							<col width="15%" />
+							<col width="15%" />
 						</colgroup>
 						<thead>
 							<tr>
 								<th class="text-center">NO</th>
 								<th class="text-center" style="border-left: 1px solid #e5e5e5;">CK</th>
-								<th class="text-center" style="border-left: 1px solid #e5e5e5;">과목명</th>
+								<th class="text-center" style="border-left: 1px solid #e5e5e5;">과목명</th>
 								<th class="text-center" style="border-left: 1px solid #e5e5e5;">요일</th>
 								<th class="text-center" style="border-left: 1px solid #e5e5e5;">시간</th>
-								<th class="text-center" style="border-left: 1px solid #e5e5e5;">장소</th>
-								<th class="text-center" style="border-left: 1px solid #e5e5e5;">교수명</th>
+								<th class="text-center" style="border-left: 1px solid #e5e5e5;">장소</th>
+								<th class="text-center" style="border-left: 1px solid #e5e5e5;">교수명</th>
 							</tr>
 						</thead>
 						<tbody></tbody>
@@ -90,6 +90,8 @@
 	<input type="hidden" id="hiddenSubjectKey" name="hide" value="">
 </body>
 </html>
+<script src="${pageContext.request.contextPath}/resources/js/common/func_findSubject.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/common/func_assignment.js"></script>
 
 <script type="text/javascript">
    	$('#click').on('click',function(){ 
@@ -106,7 +108,6 @@
    			success : function(result){
            		if(result['result'] === "no data"){ 
            			alert('없는 과목입니다.');
-  					console.log(result);
            		}else{ 
   					console.log(result);
            			var	tableLen =result['result'].length
@@ -122,14 +123,13 @@
 						cell[5] = newRow.insertCell(5),
 						cell[6] = newRow.insertCell(6),
            				cell[0].innerHTML = i+1;
-           				cell[1].innerHTML = '<input type="radio" id="radio'+(i+1)+'" name="select" data-sub-no="'+result['result'][i]['subNo']+'" data-subject-key="'+result['result'][i]['subjectKey']+'">';
+           				cell[1].innerHTML = '<input type="radio" id="radio'+(i+1)+'" name="select" data-sub-name="'+ result['result'][i]['subName'] +'" data-sub-no="'+result['result'][i]['subNo']+'" data-subject-key="'+result['result'][i]['subjectKey']+'"/>';
            				cell[2].innerHTML = result['result'][i]['subName'];
            				cell[3].innerHTML = result['result'][i]['day'];
            				cell[4].innerHTML = result['result'][i]['startHour'];
 						cell[5].innerHTML = result['result'][i]['classroom'];
            				cell[6].innerHTML = result['result'][i]['profName'];
 							
-           				console.log()
           	 			$(newRow).addClass("stripe_border_top");
 						$(newRow).addClass("add_row");
            				for(var j=0 ; j<6 ; j++)
@@ -144,12 +144,14 @@
         				table.rows[i].cells[j].onclick = function(){
         					rIndex = this.parentElement.rowIndex;
         					cIndex = this.cellIndex;
-
-        					console.log("ROW:" +rIndex+ ", Cell:" +cIndex);
+        					
         					$('input:radio[id="radio'+rIndex+'"]:radio[name="select"]').prop("checked", true);
         					
+        					var subName = $("#radio"+rIndex).data('subName');
         					var subNo = $("#radio"+rIndex).data('subNo');
         					var subjectKey = $("#radio"+rIndex).data('subjectKey');
+        					
+        					$('#subjectName').val(subName).trigger('change');
         					$('#hiddenAssign').val(subNo).trigger('change');
         					$('#hiddenSubjectKey').val(subjectKey).trigger('change');
         				}
@@ -171,32 +173,45 @@
 	var importance = '${importance}'; 
 	var contents = '${contents}'; 
 	var assignNo = '${assignNo}'; 
-	console.log("assignNo:::"+assignNo);
-	href = function (){
+	
+	$('#submit').on('click',function(){ 
+		$.ajax({
+   			url:"/subject/searchSubject.json",
+   			type : "GET",
+   			data : {
+   				'word':$('#subjectName').val(),
+   				'select':0
+   			},
+   			success : function(result){
+           		if(result['result'] === "no data"){ 
+           			alert('없는 과목입니다.');
+           		}else{
+           			href(page);
+           		}
+         	},
+         	error : function(request,status,error){
+        		alert('검색 에러');
+        		console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+        	}
+		});
+	});
+	
+	$('#cancel').on('click',function(){ 
+		href(page);
+	});
+	
+	function href(page){
 		if(page == 'assignmentAdd'){
-			location.href="/assignment_add?title="+title+
-			"&dueDate="+dueDate+
-			"&importance="+importance+
-			"&contents="+contents+
-			"&assignNo="+assignNo+
-			"&subNo="+ $('#hiddenAssign').val()+
-			"&subjectKey="+$('#hiddenSubjectKey').val();
-		}
-		else if (page == 'timetablePage'){
-			location.href="/timetable_page?subjectKey="+ $('#hiddenSubjectKey').val();
+			page="/assignment_add"
+			locateAssign(page,title,dueDate,importance,contents,assignNo,$('#hiddenAssign').val(),$('#hiddenSubjectKey').val());
 		}
 		else if (page == 'assignmentAddTeam'){
-			location.href="/assignment_add_team?title="+title+
-			"&dueDate="+dueDate+
-			"&importance="+importance+
-			"&contents="+contents+
-			"&assignNo="+assignNo+
-			"&subNo="+ $('#hiddenAssign').val()+
-			"&subjectKey="+$('#hiddenSubjectKey').val();
+			page="/assignment_add_team"
+			locateAssign(page,title,dueDate,importance,contents,assignNo,$('#hiddenAssign').val(),$('#hiddenSubjectKey').val());
+		}
+		else if (page == 'timetablePage'){
+			location.href="/timetable_page?subjectKey="+$('#hiddenSubjectKey').val();
 		}
 	}
-
-	$('#submit').on('click', href );
-	$('#cancel').on('click', href );
 </script>
 

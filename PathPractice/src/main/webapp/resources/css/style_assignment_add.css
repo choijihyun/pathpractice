@@ -80,3 +80,9 @@
 	color: #6c757d;
 }
 
+ #dueDate{
+	color:black !important; 
+} 
+#dueDate:hover{
+	color:black !important; 
+}  
