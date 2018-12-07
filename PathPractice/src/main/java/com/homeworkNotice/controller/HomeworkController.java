@@ -203,6 +203,7 @@ public class HomeworkController {
 	    	JSONObject tmp;
 	    	int j=0;
 	    	
+	    	//select 0: all//select 1: personal//select 2:team//select 3:complete
 	    	if(!homeworkDtoList.isEmpty()) {//占쏙옙환占쏙옙占쏙옙 占쏙옙占쏙옙占싶곤옙 占쏙옙효占싹몌옙(db占쏙옙 占쏙옙占쏙옙占쏙옙) 占쏙옙占쏙옙占쏙옙 화占썽에 占쏙옙占쏙옙占� 占싼뤄옙占쌔댐옙
 	    		for(int i=0;i<homeworkDtoList.size();i++) {
 	    			JSONObject jSONObject = null;
@@ -268,6 +269,7 @@ public class HomeworkController {
 	        	
 
 	        	jSONArray.clear();
+	        	// jSONArray 에 정렬해서 넣는 부분 order 에 따라서 다름	
 	        	for(int i=0;i<jsonList.size();i++){
 	        		jSONArray.add(jsonList.get(i));
 	        	}
