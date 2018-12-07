@@ -28,7 +28,8 @@ public class HomeController {
     private UserDao userDao;
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String home(Locale locale, Model model) {
+    public String home(Locale locale, Model model,
+    		@RequestParam(value="token", required=false) String token) {
     	System.out.println("server start");
     	/*
     	 * �򰥸� �� ���ο����� ��~~~~~~~~~~~~~~
@@ -42,6 +43,7 @@ public class HomeController {
     	}
     	 * �򰥸� �� ���ο����� ��~~~~~~~~~~~~~~
     	*/
+    	model.addAttribute("token", token);
         return "index";
     }
     
@@ -59,8 +61,11 @@ public class HomeController {
     }
     
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String register(Locale locale, Model model) {
+    public String register(Locale locale, Model model,
+    		@RequestParam(value="token", required=false) String token) {
     	System.out.println("register!");
+
+    	model.addAttribute("token", token);
         return "register";
     }
     

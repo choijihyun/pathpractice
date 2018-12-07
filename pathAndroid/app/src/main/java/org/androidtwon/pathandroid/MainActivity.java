@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         mWebView.setWebViewClient(new WebViewClientClass());
 
         mWebView.loadUrl(myUrl); // 접속 URL
-
+/*
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                         .show();
                 return true;
             }
-        });
+        });*/
 
         FirebaseMessaging.getInstance().subscribeToTopic("news");
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( MainActivity.this,  new OnSuccessListener<InstanceIdResult>() {
@@ -130,12 +130,14 @@ public class MainActivity extends AppCompatActivity {
             public void onSuccess(InstanceIdResult instanceIdResult) {
                 String newToken = instanceIdResult.getToken();
                 Log.e("FCM Token",newToken);
+
             }
         });
         ////이렇게 ALL 추가 하면 이 디바이스는 ALL을 구독한다는 얘기가 된다. 모두에게 메세지 전송
         FirebaseMessaging.getInstance().subscribeToTopic("ALL");
-    }
 
+
+    }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK) && mWebView.canGoBack()) {
@@ -146,12 +148,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private class WebViewClientClass extends WebViewClient {
-        @Override
+        /*@Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             Log.d("check URL",url);
             view.loadUrl(url);
             return true;
-        }
+        }*/
     }
 
 
