@@ -33,36 +33,16 @@ import okhttp3.RequestBody;
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService{
     private static final String TAG = "FirebaseMsgService";
 
+    // [START receive_message]
     @Override
     public void onNewToken(String s) {
         super.onNewToken(s);
         Log.d("NEW_TOKEN",s);
         sendRegistrationToServer(s);
     }
-     private void sendRegistrationToServer(String token) {
-         // Add custom implementation, as needed.
-
-         OkHttpClient client = new OkHttpClient();
-         RequestBody body = new FormBody.Builder()
-                 .add("Token", token)
-                 .build();
-
-         //request
-         Request request = new Request.Builder()
-                 .url("http://ghwnwjd.cafe24.com/register.jsp")
-                 .post(body)
-                 .build();
-
-         try {
-             client.newCall(request).execute();
-         } catch (IOException e) {
-             e.printStackTrace();
-         }
-
-     }
-    // [START receive_message]
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
+        super.onMessageReceived(remoteMessage);
         sendPushNotification(remoteMessage.getData().get("message"));
     }
 
@@ -90,6 +70,29 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
     //1
+
+
+    private void sendRegistrationToServer(String token) {
+        // Add custom implementation, as needed.
+
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("Token", token)
+                .build();
+
+        //request
+        Request request = new Request.Builder()
+                .url("http://ghwnwjd.cafe24.com/register.jsp")
+                .post(body)
+                .build();
+
+        try {
+            client.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
 
 

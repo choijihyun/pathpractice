@@ -1,3 +1,4 @@
+/*
 package org.androidtwon.pathandroid;
 
 import android.util.Log;
@@ -12,16 +13,18 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
+*/
 /**
  * Created by ghwnw on 2018-11-17.
- */
+ *//*
+
 
 public class FirebaseInstanceIDService extends FirebaseInstanceIdService{
     private static final String TAG = "MyFirebaseIDService";
 
     //[START refresh_token]
     //다 FirebaseMessagingService.java 로 옮김
-  /* @Override
+     @Override
     public void onTokenRefresh(){
         //Get updated InstanceID token.
         String token = FirebaseInstanceId.getInstance().getToken();
@@ -40,7 +43,7 @@ public class FirebaseInstanceIDService extends FirebaseInstanceIdService{
 
         //request
         Request request = new Request.Builder()
-                .url("http://ghwnwjd.cafe24.com/register.jsp")
+                .url("http://ghwnwjd.cafe24.com/user/insertToken")
                 //은숙엉니가 만들어준 url로 바꾸기
                 .post(body)
                 .build();
@@ -51,6 +54,7 @@ public class FirebaseInstanceIDService extends FirebaseInstanceIdService{
             e.printStackTrace();
         }
 
-    }*/
+    }
 
 }
+*/

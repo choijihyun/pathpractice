@@ -60,6 +60,18 @@
 							<input type="text" class="form-control form-control-sm mt-1 mb-1 flat_input" title="내용" id="contents">
 						</div>
 						
+						<div class="col-md-3 col-xs-3 my-3 label_input">팀장</div>
+						<div class="col-md-7 col-xs-7 my-2" id="reader"> 
+							<div class="input-group input-reader">
+								<div class="input-group-prepend mb-1">
+							    	<button class="btn btn-sm btn-outline-danger block" type="button" id="btn_add_reader">ADD</button>
+						
+									<input type="text" class="col-6 form-control form-control-sm flat_input my-0 mx-1 reader-id" placeholder="학번" aria-describedby="btn_add_reader">
+									<input type="text" class="col-6 form-control form-control-sm flat_input my-0 mx-1 reader-name" placeholder="이름" aria-describedby="btn_add_reader">
+								</div>
+							</div>
+						</div>
+						
 						<div class="col-md-3 col-xs-3 my-3 label_input">팀원</div>
 						<div class="col-md-7 col-xs-7 my-2" id="member"> 
 							<div class="input-group input-member">
@@ -70,7 +82,6 @@
 									<input type="text" class="col-6 form-control form-control-sm flat_input my-0 mx-1 mem-name" placeholder="이름" aria-describedby="btn_add_member">
 								</div>
 							</div>
-							
 						</div>
 						
 						<div class="col-md-3 col-xs-3 my-2 label_input">중요도</div>
@@ -80,7 +91,7 @@
 						  <input type="radio" id="p3" name="star-input" value="3" /> <label for="p3">3</label>
 						  <input type="radio" id="p2" name="star-input" value="2" /> <label for="p2">2</label>
 						  <input type="radio" id="p1" name="star-input" value="1" /> <label for="p1">1</label>
-						</span>>
+						</span>
 
 						<div class="col-md-3 col-xs-3 my-2 label_input">마감일</div>
 						<div class="col-md-6 col-xs-6 my-2"">
@@ -178,8 +189,6 @@ $(document).ready(function() {
 			if (!chkInput())
 				return;
 
-			event.preventDefault();
-
 			$("#dueDate").datepicker();
 			var due = document.getElementById("dueDate").value;
 			var radioVal = $('input[name="star-input"]:checked').val();
@@ -203,28 +212,25 @@ $(document).ready(function() {
 	
 	$(document).ready(function() {
 		
+		$(document).on("click", '.btn_del_member', function() {
+			$(this).parent().remove();
+			$(".reader-id").prop('disabled',false);
+			$(".reader-name").prop('disabled',false);
+	    });
+
 		$('#btn_add_member').on('click', function() { 
-			var memId = $('.mem-id').val();
-			var memName =  $('.mem-name').val();
-			if( !( memId == '') && !(memName == '') ){
-				//실제로 존재하는 사용자 인지도 확인 해주기(Student table의 name,stuId로 보면 됨)
-				var str = '';
-				str += '<div class="input-group-prepend mb-1">';
-				str += '<button class="btn btn-sm btn-outline-danger block btn-del-member"';
-				str += 'type="button">';
-				str += ' DEL </button>';
-				str += '<input type="text" disabled="true"';
-				str += 'class="col-6 form-control form-control-sm flat_input my-0 mx-1"';
-				str += 'placeholder="'+ $('.mem-id').val() +'" >';
-				str += '<input type="text" disabled="true"';
-				str += 'class="col-6 form-control form-control-sm flat_input my-0 mx-1"';
-				str += 'placeholder="'+ $('.mem-name').val() +'" >';
-				str += '</div>';
-				
-				$('.input-member').append(str);
-			}
-			else{
-				alert("팀원의 정보를 모두 입력 해 주세요");
+			positionId = ".mem-id";
+			positionName = ".mem-name";
+			where = ".input-member";
+			addmember( positionId, positionName, where);
+		});//#btn_add_member btn click
+		
+		$('#btn_add_reader').on('click', function() { 
+			if(! $('.reader-id').is(":disabled") ){
+				positionId = ".reader-id";
+				positionName = ".reader-name";
+				where = ".input-reader";
+				addmember( positionId, positionName, where);
 			}
 		});//#btn_add_member btn click
 		
@@ -232,16 +238,3 @@ $(document).ready(function() {
 
 </script>
 
-<script type="text/javascript">
-	
-	$(document).ready(function() {
-		
-		$('.btn-del-member').on('click', function() {
-			console.log(123);
-			console.log(this);
-			this.remove();
-		});//#btn_del_member btn click
-		
-	});//function
-
-</script>

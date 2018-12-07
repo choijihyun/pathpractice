@@ -38,21 +38,24 @@
 	color: #fff;
 	-webkit-transition: all 0.8s;
 	transition: all 0.8s;
+	 outline: none;
 }
 /*로그인 버튼 클릭 했을 때*/
-.btn_login:hover{
+.btn_login:hover, .btn_login:focus{
 	background: transparent;
 	border: 1px solid #dd3247;
 	color: #dd3247;
+	 outline: none;
 }
 /*f로그인 유지 선택하는 checkbox*/
-.checkbox{
+.checkbox, .checkbox:hover{
 	margin-top: 20px;
 	margin-bottom: 15px;
 	font-size: 15px;
 	color: #dd3247;
 	-webkit-transition: all 0.8s;
 	transition: all 0.8s;
+	 outline: none;
 }
 /*가입 버튼*/
 .btn_join{

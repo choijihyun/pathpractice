@@ -1,3 +1,41 @@
+var addmember = function( positionId, positionName, where){
+	//check user is exist
+			
+	
+			var idObj = $(positionId);
+			var nameObj =  $(positionName);
+			if( !( idObj.val() == '') && !(nameObj.val() == '') ){
+				//실제로 존재하는 사용자 인지도 확인 해주기(Student table의 name,stuId로 보면 됨)
+				var str = '';
+				str += '<div class="input-group-prepend mb-1 btn-parent">';
+				str += '<button class="btn_del_member btn btn-sm btn-outline-danger block "';
+				str += 'type="button">';
+				str += 'DEL</button>';
+				str += '<input type="text" disabled="true"';
+				str += 'class="col-6 form-control form-control-sm flat_input my-0 mx-1"';
+				str += 'placeholder="'+ idObj.val() +'" >';
+				str += '<input type="text" disabled="true"';
+				str += 'class="col-6 form-control form-control-sm flat_input my-0 mx-1"';
+				str += 'placeholder="'+ nameObj.val() +'" >';
+				str += '</div>';
+				
+				idObj.val('').trigger('change');
+				nameObj.val('').trigger('change');
+				$(where).append(str);
+				
+				
+				if(positionId == ".reader-id"){
+					$(positionId).prop('disabled',true);
+					$(positionName).prop('disabled',true);
+				}
+				
+			}
+			else{
+				alert("팀원의 정보를 모두 입력 해 주세요");
+			}
+			return true;
+		}
+
 var deleteAssign = function(assignNo,id){
 	$.ajax({
 		url:"/homework/deleteHomework.json",
