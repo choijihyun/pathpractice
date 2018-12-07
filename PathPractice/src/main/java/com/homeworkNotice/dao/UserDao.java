@@ -63,5 +63,15 @@ public class UserDao {
 		return sqlSession.insert("UserDao.insertToken", param);		
 	}
 
+	public List<UserDto> checkUserWithSessionKey(HashMap<Object, Object> param) { 
+		return sqlSession.selectList("UserDao.checkUserWithSessionKey", param);
+	}
 	
+	public int keepLogin(HashMap<Object, Object> param) {
+		return sqlSession.update("UserDao.keepLogin", param);		
+	}
+	
+	public int checkbox(HashMap<Object,Object> param) {
+		return sqlSession.update("UserDao.checkbox",param);
+	}
 }

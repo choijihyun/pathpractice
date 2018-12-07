@@ -86,6 +86,11 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
+		$.ajax({
+			url : "/user/preHandle.json",
+			method : "POST"
+		});
+		
 		<%
 			System.out.println("index session : " + session.getAttribute("id"));
 		%>
@@ -98,13 +103,25 @@
 		}
 
 		$("#idSaveCheck").change(function() {
+			flag=0;
 			if ($("#idSaveCheck").is(":checked")) {
 				console.log("check in remember me");
-				var userInputId = $('#id').val();
+				flag=1;
 				//setCookie("userInputId", userInputId, 7); 
 			} else {
 				console.log("no check");
-				deleteCookie("userInputId");
+				flag=0;
+			}
+
+			if ($('#id').val() != "") {
+				$.ajax({
+					url :"/user/checkbox.json",
+					type : "GET",
+					data :{
+						"stuId" : $('#id').val(),
+						"select" : flag
+					}					
+				});
 			}
 		});
 		$('#submit').on('click', function() {

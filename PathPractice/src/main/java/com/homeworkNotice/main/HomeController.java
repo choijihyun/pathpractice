@@ -170,7 +170,7 @@ public class HomeController {
 
     @RequestMapping(value = "/menu_non", method = RequestMethod.GET)
     public String menu_non(Locale locale, Model model) {
-       System.out.println("menu!");
+       System.out.println("menu_non!");
         return "menu_non";
     }
     

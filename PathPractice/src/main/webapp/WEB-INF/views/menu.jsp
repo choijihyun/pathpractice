@@ -76,9 +76,9 @@
 			data : {
 				'stuId' :<%=id%>
 			},
-			success : funcdtion(result){
+			success : function(result){
 				if(result.result == "0"){ // blackboard 유저가 아닐 때
-					location.href = "/menu_none";
+					location.href = "/menu_non";
 				}
 			},
 			error : function() {
