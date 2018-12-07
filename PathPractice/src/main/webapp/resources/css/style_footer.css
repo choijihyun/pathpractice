@@ -14,7 +14,13 @@
 	background: #f9f9f9;
 	color: #6c757d;
 }
-
+.btn-icon:focus{
+	border: 0;
+	background: #f9f9f9;
+	color: #6c757d;
+	outline: none;
+	box-shadow: none; 
+}
 .btn-icon:hover{
 	border: 0;
 	background: #f9f9f9;

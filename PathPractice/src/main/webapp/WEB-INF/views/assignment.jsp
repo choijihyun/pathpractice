@@ -53,7 +53,7 @@
 						</div>
 						<div class= "col-3 col-xs-3 col-sm-3 col-lg-3 col-md-3">
 							<select class="form-control-sm" id="sort">
-							<option id="none">선택</option>
+							<option id="default">기본</option>
 							<option id="date">기한</option>
 							<option id="importance">중요도</option>
 						</select>
