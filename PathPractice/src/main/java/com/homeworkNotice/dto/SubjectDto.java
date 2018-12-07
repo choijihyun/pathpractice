@@ -11,6 +11,7 @@ public class SubjectDto {
 	private String startHour;
 	private String endHour;
 	private String add;
+	private double credit;
 	
 	public int getSubjectKey() {
 		return subjectKey;
@@ -72,5 +73,12 @@ public class SubjectDto {
 	public void setClassNum(String classNum) {
 		this.classNum = classNum;
 	}
+	public double getCredit() {
+		return credit;
+	}
+	public void setCredit(double credit) {
+		this.credit = credit;
+	}
+	
 	
 }

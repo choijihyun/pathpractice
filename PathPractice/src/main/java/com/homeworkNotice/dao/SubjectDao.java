@@ -36,8 +36,10 @@ public class SubjectDao {
 	public List<SubjectDto> search3Subject(HashMap<Object,Object> param) {
 		return sqlSession.selectList("SubjectDao.search3Subject", param);
 	}
-	
-	
+	public List<SubjectDto> searchCredit(HashMap<Object,Object> param) {
+		System.out.println("Dao param:::::::"+param);
+		return sqlSession.selectList("SubjectDao.searchCredit", param);
+	}
 	public int insertSubject(HashMap<Object, Object> param) {
 		return sqlSession.insert("SubjectDao.insertSubject", param);		
 	}
