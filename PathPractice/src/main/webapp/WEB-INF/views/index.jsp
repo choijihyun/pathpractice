@@ -125,7 +125,6 @@
 			}
 		});
 		
-		/* var token = '${token}'; */
  		$('#submit').on('click', function() {
 
 			//setCookie("userInputId", userInputId, 7); // 7일 동안 쿠키 보관
@@ -141,28 +140,7 @@
 				success : function(result) {
 					if (result.result === "1") {
 						
-						 <%String token = (String)request.getAttribute("token");%>;
-						console.log("token in index == "+<%=token%>); 
-						
-						var form = document.createElement('form');
-						var obj1,obj2;
-						obj1 = document.createElement('input');
-						obj1.setAttribute('type', 'hidden');
-						obj1.setAttribute('name', 'page');
-						obj1.setAttribute('value', '"index"');
-						
-						obj2 = document.createElement('input');
-						obj2.setAttribute('type', 'hidden');
-						obj2.setAttribute('name', 'user');
-						obj2.setAttribute('value', $('#id').val());
-						
-						form.appendChild(obj1);
-						form.appendChild(obj2);
-						
-						form.setAttribute('method', 'post');
-						form.setAttribute('action', "/register?token="+<%=token%>);
-						document.body.appendChild(form);
-						form.submit();
+						location.href = "/home";
 
 					}else{
 						alert('아이디나 비밀번호를 다시 확인해 주세요.');
@@ -175,8 +153,3 @@
 		}); 
 	});
 </script>
-
-
-
-
-

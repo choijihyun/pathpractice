@@ -35,12 +35,12 @@
 	
 	
 %>
-<script>
+<!-- <script>
 var location= function(token){
 	System.out.println("back to index");
 	location.href="/?token="+token;
 }
-</script>
+</script> -->
 <script type="text/javascript">
 var token = <%=token%>;
 var page = <%=pageName%>;
