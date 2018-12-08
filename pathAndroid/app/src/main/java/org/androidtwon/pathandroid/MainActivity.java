@@ -125,14 +125,14 @@ public class MainActivity extends AppCompatActivity {
         });*/
 
         FirebaseMessaging.getInstance().subscribeToTopic("news");
-        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( MainActivity.this,  new OnSuccessListener<InstanceIdResult>() {
+      /*  FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( MainActivity.this,  new OnSuccessListener<InstanceIdResult>() {
             @Override
             public void onSuccess(InstanceIdResult instanceIdResult) {
                 String newToken = instanceIdResult.getToken();
                 Log.e("FCM Token",newToken);
 
             }
-        });
+        });*/
         ////이렇게 ALL 추가 하면 이 디바이스는 ALL을 구독한다는 얘기가 된다. 모두에게 메세지 전송
         FirebaseMessaging.getInstance().subscribeToTopic("ALL");
 
