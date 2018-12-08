@@ -103,7 +103,7 @@
 		event.preventDefault();
 		$.ajax({
 			url : "/user/updateUser.json",
-			type : "post",
+			type : "POST",
 			data : {
 				'stuId' :<%=id%>,
 				'name' : $('#name').val(),

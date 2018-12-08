@@ -91,16 +91,28 @@
 			method : "POST"
 		});
 		
-		<%
+<%
+			int FF=0;
 			System.out.println("index session : " + session.getAttribute("id"));
-		%>
-		var userInputId = getCookie("userInputId");
-		$('#id').val(userInputId);
-
-		if ($('#id').val() != "") {
-			console.log("id.val()");
-			$("#idSaveCheck").attr("checked", true);
-		}
+			if(session.getAttribute("id")!=null){
+				FF=1;
+				String id = (String)session.getAttribute("id");
+				String pw = (String)session.getAttribute("pw");
+				String check = (String)session.getAttribute("check");
+				System.out.println("id, pw, checkbox : "+id+pw+check);
+				if(FF == 1){
+%>
+				
+				if(<%=check%>=="1"){
+					$("#idSaveCheck").attr('checked', true) ;
+					$('#id').val(<%=id%>);
+					$('#pw').val(<%=pw%>);
+				}
+<%		
+				}
+			}
+%>
+				
 
 		$("#idSaveCheck").change(function() {
 			flag=0;
