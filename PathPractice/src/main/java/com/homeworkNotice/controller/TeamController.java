@@ -27,9 +27,11 @@ import com.homeworkNotice.dto.TeamDto;
 @Controller
 public class TeamController {
 	
-	@Autowired
+	//주호 안쓰는거 같아서 주석 쳐놔써!!!
+/*	@Autowired
 	private SubjectDao	subjectDao;
-	private UserDao userDao;
+	private UserDao userDao;*/
+	@Autowired
 	private TeamDao teamDao;
 
 	//insert
@@ -56,7 +58,8 @@ public class TeamController {
 		param.put("leaderName",leaderName);
 		param.put("leaderNum",leaderNum);
 		param.put("memOneName",memOneName);
-		param.put("memoneNum",memOneNum);
+		//주호 memoneNum -> memOneNum
+		param.put("memOneNum",memOneNum);
 		param.put("memTwoName",memTwoName);
 		param.put("memTwoNum",memTwoNum);
 		param.put("memThreeName",memThreeName);
@@ -109,7 +112,8 @@ public class TeamController {
 		param.put("leaderName",leaderName);
 		param.put("leaderNum",leaderNum);
 		param.put("memOneName",memOneName);
-		param.put("memoneNum",memOneNum);
+		//주호 memoneNum -> memOneNum
+		param.put("memOneNum",memOneNum);
 		param.put("memTwoName",memTwoName);
 		param.put("memTwoNum",memTwoNum);
 		param.put("memThreeName",memThreeName);

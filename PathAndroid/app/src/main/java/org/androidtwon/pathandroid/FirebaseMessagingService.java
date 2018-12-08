@@ -1,5 +1,6 @@
 package org.androidtwon.pathandroid;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -29,6 +30,7 @@ import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService{
     private static final String TAG = "FirebaseMsgService";
@@ -55,7 +57,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                                                                 PendingIntent.FLAG_ONE_SHOT);
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this,"ChannelId")
                 .setSmallIcon(R.drawable.bar_icon)
                 .setContentTitle("FCM PUSH TEST")
                 .setContentText(messageBody)
@@ -74,20 +76,22 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
     private void sendRegistrationToServer(String token) {
         // Add custom implementation, as needed.
-
         OkHttpClient client = new OkHttpClient();
+
         RequestBody body = new FormBody.Builder()
                 .add("Token", token)
                 .build();
 
         //request
         Request request = new Request.Builder()
-                .url("http://ghwnwjd.cafe24.com/register.jsp")
+                .url("http://ghwnwjd.cafe24.com/register")
                 .post(body)
                 .build();
 
         try {
-            client.newCall(request).execute();
+            Response response = client.newCall(request).execute();
+            Log.d("REGISTER","Go!!");
+            Log.d("Response",response.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }

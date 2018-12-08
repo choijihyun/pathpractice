@@ -326,7 +326,7 @@ public class UserController {
 		JSONObject jSONObject = new JSONObject();
 		if(!userDtoList.isEmpty() && userDtoList.size()==1) {//반환받은 데이터가 유효하면(db에 있으면) 브라우저 화면에 결과를 뿌려준다
 			if(pw.equals(userDtoList.get(0).getPw())) {
-				System.out.println("checkUserExist 유저 확인됌");
+				System.out.println("checkUserExist 유저 확인됨");
 				if(stuId==session.getAttribute("Id")) {
 					jSONObject.put("result","0");//본인의 아이디가 아닌경ㅇ
 				}
@@ -453,7 +453,7 @@ public class UserController {
 	}
 
 	@ResponseBody
-    @RequestMapping(value ="/user/insertToken.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.POST)// value라는 값에 매핑, get방식 사용
+    @RequestMapping(value ="/user/insertToken.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value라는 값에 매핑, get방식 사용
     public String insertToken(
     			Model model,
     			@RequestParam(value = "stuId", required=true) String stuId,

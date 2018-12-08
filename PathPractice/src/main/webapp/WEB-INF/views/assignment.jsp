@@ -53,9 +53,9 @@
 						</div>
 						<div class= "col-3 col-xs-3 col-sm-3 col-lg-3 col-md-3">
 							<select class="form-control-sm" id="sort">
-							<option id="default">기본</option>
-							<option id="date">기한</option>
-							<option id="importance">중요도</option>
+							<option value="default">default</option>
+							<option value="date">date</option>
+							<option value="importance">importance</option>
 						</select>
 						</div>
 						<div class= "col-3 col-xs-3 col-sm-3 col-lg-3 col-md-3">
@@ -159,21 +159,29 @@
 
 <script type="text/javascript" scr="func_assignment.js">
 <% String id = (String)session.getAttribute("id"); %>
+	var option;
+	var sort = $('#sort').val();
+	console.log("sort::"+sort);
+	
+	if(sort=="defalut") option=0;
+	else if(sort=="date") option=1;
+	else option=2;
+	
 	$('#all').on('click', function (){
 		$('.content_show_assign').empty();
-		showAllAssignment(<%=id%>);
-	});
-	$('#team').on('click', function (){
-		$('.content_show_assign').empty();
-		showTeamAssignment(<%=id%>);
+		showAllAssignment(<%=id%>,0,option);
 	});
 	$('#none').on('click', function (){ 
 		$('.content_show_assign').empty();
-		showNotSuccessAssignment(<%=id%>);
+		showAllAssignment(<%=id%>,1,option);
+	});
+	$('#team').on('click', function (){
+		$('.content_show_assign').empty();
+		showAllAssignment(<%=id%>,2,option);
 	});
 	$('#done').on('click', function (){ 
 		$('.content_show_assign').empty();
-		showSuccessAssignment(<%=id%>);
+		showAllAssignment(<%=id%>,3,option);
 	});
 	
 </script>
