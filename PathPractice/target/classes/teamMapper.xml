@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- Dao1. 여기에 알맞은 sql을 만들고, id(sql을 구분해줄수 있는)와 resultType(반환해줄 형태)를 적는다~ -->
 	<!-- Dao2. 근데 where절(sql 문법을 절 이라고 표현한다!!)에 뭔가 집어넣어서 select 해야하면 parameterType을 넣는다  -->
 	<!-- Dao3. 그건 parameterType="map" 이라고 항상 적으면 된다  -->
-    <insert id="insertTeam" parameterType="map">
+    <insert id="insertTeam" parameterType="map" useGeneratedKeys="true" keyProperty="teamNum">
     <!-- 주호 values에 파라미터 몇개 빠진거 채워 넣음  -->
     	insert into Team(leaderName,leaderNum,memOneName,memOneNum,memTwoName,memTwoNum,memThreeName,memThreeNum,memFourName,memFourNum) 
     	values ( #{leaderName},#{leaderNum},#{memOneName},#{memOneNum},#{memTwoName},#{memTwoNnum},#{memThreeName},#{memThreeNum},#{memFourName},#{memFourNum})

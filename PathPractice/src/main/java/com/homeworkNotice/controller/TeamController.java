@@ -76,12 +76,14 @@ public class TeamController {
 			e.printStackTrace();
 			// TODO: handle exception
 		}
-
+			
+		System.out.println("++++"+param.get("teamNum"));
+		
 		System.out.println(result);
     	JSONObject jSONObject = new JSONObject();
     	
     	if(result==1) {
-    		jSONObject.put("result", "1");    		
+    		jSONObject.put("result", param.get("teamNum"));    		
     	}
     	else {
     		jSONObject.put("result", "0");
