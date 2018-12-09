@@ -53,8 +53,9 @@
 				<div style="overflow: auto; width: auto; height: 130px;"
 					class="mt-3 content_preview_assignment scrollbar scrollbar_track scrollbar_thumb"
 					data-spy="scroll" data-offset="0">
-					
-					<img scr="${pageContext.request.contextPath}/resources/img/blackboard.jpg">
+					<a class="btn btn-sm btn_icon" aria-label="Left Align" align="left">
+						<img src="${pageContext.request.contextPath}/resources/img/blackboard.jpg" width=225" height="190" align="left">
+					</a>
 				</div>
 					
 			</div>
