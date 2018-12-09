@@ -1,4 +1,4 @@
-<%@page language="java" contentType="text/html; cahrset=UTF-8"
+<%@page language="java" contentType="text/html; charrset=UTF-8"
 	pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="kr">
@@ -52,7 +52,11 @@
 				<!-- 등록된 과제를 보여주는 scroll창 -->
 				<div style="overflow: auto; width: auto; height: 130px;"
 					class="mt-3 content_preview_assignment scrollbar scrollbar_track scrollbar_thumb"
-					data-spy="scroll" data-offset="0"></div>
+					data-spy="scroll" data-offset="0">
+					<a class="btn btn-sm btn_icon" aria-label="Left Align" align="left">
+						<img src="${pageContext.request.contextPath}/resources/img/blackboard.jpg" width=225" height="190" align="left">
+					</a>
+				</div>
 					
 			</div>
 			

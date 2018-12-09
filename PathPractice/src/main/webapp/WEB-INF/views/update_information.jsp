@@ -1,4 +1,4 @@
-<%@page language="java" contentType="text/html; cahrset=UTF-8"
+<%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="kr">
@@ -103,7 +103,7 @@
 		event.preventDefault();
 		$.ajax({
 			url : "/user/updateUser.json",
-			type : "post",
+			type : "POST",
 			data : {
 				'stuId' :<%=id%>,
 				'name' : $('#name').val(),

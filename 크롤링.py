@@ -123,16 +123,17 @@ def get_info(uid, upw):
     try :
         for tr in rd:
             if flag==1:
-                break;
+                break
             line = tr.text
             lines = line.split("\n")
             for line in lines:
+                #print(lines[0])
                 if "열기" in line:
                     continue
                 if "닫기" in line:
                     continue
-                if "오" in line:
-                    continue
+                #if "오" in line:
+                #    continue
                 if " 전" in line and eq(line,lines[0]):
                     idx = line.index("전")
                     if "일" in line:
@@ -165,6 +166,9 @@ def get_subject(lists):
         for line in ll:
             if "공지사항" in line:
                 try :
+                    if "시스템" in line:
+                        subjects.append("시스템 공지사항")
+                        continue
                     idx = line.index("→")
                     lline = line[idx+3:]
                     try:
@@ -205,6 +209,8 @@ def parsing(announcement,subjects):
     PARSE=[]
     parse=[]
     for line in announcement:
+        print(line)
+        
         flag=0
         parse=[]
         context=""
@@ -213,13 +219,14 @@ def parsing(announcement,subjects):
             if eq(j,line[0]): #처음줄은 무조건 날짜나옴
                 nalzza = get_time(j)
             else:
-                if "코스 공지사항" in j:
+                if "공지사항" in j:
                     for subject in subjects:
                         if subject in j:
                             subject_name = subject
-                    idx = j.index(")")
-                    context = j[idx+1:] # 내용 저장
-                    context += "\n"
+                    if ")" in j:
+                        idx = j.index(")")
+                        context = j[idx+1:] # 내용 저장
+                        context += "\n"
                 elif "코스·조직" in j:
                     for subject in subjects:
                         if subject in j:
@@ -339,6 +346,8 @@ for stu in rows:
     #parsing한 내용 content list에 저장
     content = parsing(lists, subjects)
 
+    for subject in subjects:
+        print(subject)
     sql="UPDATE Student SET flag=1 where stuId="+stu[0]
     curs.execute(sql)
     conn.commit()

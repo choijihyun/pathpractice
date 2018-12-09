@@ -1,4 +1,4 @@
-<%@page language="java" contentType="text/html; cahrset=UTF-8"
+<%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd>
 <html lang="kr">
@@ -43,16 +43,16 @@
 							placeholder="password">
 					</div>
 					
+				<!-- 	
 					
-					
-					<h2>Push 알림 메시지 입력</h2>
+					<h6>Push 알림 메시지 입력</h6>
 					 
-					<!--  <form action="/push_notification" method="post">-->
-					    <textarea name="message" rows="4" cols="50" placeholder="메세지를 입력하세요"></textarea><br>
+					  <form action="/push_notification" method="post">
+					    <textarea name="message" rows="4" cols="10" placeholder="메세지를 입력하세요"></textarea><br>
 					    <input type="submit" name="submit" value="Send" id="submitButton">
-					<!-- </form>-->
+					</form>
     
-    
+     -->
     
 					<!-- remember user infomation - checkbox -->
 					<div class="checkbox col-md-12">
@@ -81,6 +81,7 @@
 
 </body>
 </html>
+		
 
 <script src="${pageContext.request.contextPath}/resources/js/common/func_cookie.js"></script>
 
@@ -91,16 +92,28 @@
 			method : "POST"
 		});
 		
-		<%
+<%
+			int FF=0;
 			System.out.println("index session : " + session.getAttribute("id"));
-		%>
-		var userInputId = getCookie("userInputId");
-		$('#id').val(userInputId);
-
-		if ($('#id').val() != "") {
-			console.log("id.val()");
-			$("#idSaveCheck").attr("checked", true);
-		}
+			if(session.getAttribute("id")!=null){
+				FF=1;
+				String id = (String)session.getAttribute("id");
+				String pw = (String)session.getAttribute("pw");
+				String check = (String)session.getAttribute("check");
+				System.out.println("id, pw, checkbox : "+id+pw+check);
+				if(FF == 1){
+%>
+				
+				if(<%=check%>=="1"){
+					$("#idSaveCheck").attr('checked', true) ;
+					$('#id').val(<%=id%>);
+					$('#pw').val(<%=pw%>);
+				}
+<%		
+				}
+			}
+%>
+				
 
 		$("#idSaveCheck").change(function() {
 			flag=0;
@@ -124,11 +137,12 @@
 				});
 			}
 		});
-		$('#submit').on('click', function() {
+		
+ 		$('#submit').on('click', function() {
 
 			//setCookie("userInputId", userInputId, 7); // 7일 동안 쿠키 보관
 			event.preventDefault();
-
+	
 			$.ajax({
 				url : "/user/checkUser.json",
 				method : "post",
@@ -138,21 +152,17 @@
 				},
 				success : function(result) {
 					if (result.result === "1") {
+						
 						location.href = "/home";
-					} else {
 
+					}else{
 						alert('아이디나 비밀번호를 다시 확인해 주세요.');
 					}
-				},
+				},//success
 				error : function() {
 					alert('로그인 에러');
 				}
 			});
-		});
+		}); 
 	});
 </script>
-
-
-
-
-

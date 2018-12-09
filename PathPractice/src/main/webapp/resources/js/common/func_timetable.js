@@ -228,3 +228,146 @@ var showAllTimetable = function(id){
 		}
 	});
 }
+
+var showAlltable = function(id){
+	
+	$.ajax({
+		url : "/timeTable/searchTimeTable.json",
+		type : "GET",
+		data : {
+			'stuId' : id
+		},success : function(result) {
+			if (result['result'] === "no data") {
+				alert('등록된 시간표가 없습니다.');				
+			} else {
+				
+				var str='';
+				str+='<table style="overflow: auto;" id="tableDel"';
+				str+='class="table table-sm table_time">';
+				str+='<colgroup>';
+				str+='<col width="10%" />';
+				str+='<col width="10%" />';
+				str+='<col width="40%" />';
+				str+='<col width="40%" />';
+				str+='</colgroup>';
+				str+='<thead>';
+				str+='<tr>';
+				str+='<th class="text-center">No</th>';
+				str+='<th class="text-center" style="border-left: 1px solid #e5e5e5;">CK</th>';
+				str+='<th class="text-center" style="border-left: 1px solid #e5e5e5;">과목명</th>';
+				str+='<th class="text-center" style="border-left: 1px solid #e5e5e5;">장소</th>';
+				str+='</tr>';
+				str+='</thead>';
+				str+='<tbody></tbody>';
+				str+='</table>';
+				str+='<button type="button" id="btnDelete"';
+				str+='class="mx-auto col-5 btn btn-xs">삭제</button>';
+				str+='<button type="button" id="btnCancle"';
+				str+='class="mx-auto col-5 btn btn-xs">취소</button>';
+				var tableChart = document.getElementById("tableChart");
+				tableChart.innerHTML=str;	
+				
+				var table = document.getElementById("tableDel"), rIndex, cIndex;
+				var cell = new Array();
+				
+				for (var i = 0; i < result['result'].length; i++) {
+					var subjectKey = result['result'][i]['subjectKey'];
+					
+					$.ajax({
+						url:"/subject/searchSubject.json",
+						type : "GET",
+						async: false,
+						data : {
+							'word':subjectKey, //subNO로 subjectKey랑 과목 정보들 가져오기 //find_subject해서 url parameter로 가져옴
+							'select':3
+						},
+						success : function(result){
+					   		if(result['result'] === "no data"){ 
+					 			alert('없는 과목입니다.');
+					 		}else{
+								console.log(result);
+								
+								subName = result['result'][0]['subName'];
+								classroom = result['result'][0]['classroom'];
+								
+								var table = document.getElementById("tableDel"), rIndex, cIndex;
+								var cell = new Array();
+								newRow = table.insertRow(table.length),
+								cell[0] = newRow.insertCell(0),
+								cell[1] = newRow.insertCell(1),
+								cell[2] = newRow.insertCell(2),
+								cell[3] = newRow.insertCell(3),
+								cell[0].innerHTML = i+1;
+								cell[1].innerHTML = '<input type="radio" id="radio'+(i+1)+'" name="select" data-subject-key="'+result['result'][0]['subjectKey']+'">';
+								cell[2].innerHTML = subName;
+								cell[3].innerHTML = classroom;
+								
+								$(newRow).addClass("stripe_border_top");
+								$(newRow).addClass("add_row");
+								for(var j=0 ; j<3 ; j++)
+									$(cell[j]).css("border-right","1px solid #e5e5e5");
+								
+								var table = document.getElementById("tableDel"), rIndex, cIndex;
+								for(var k = 1 ; k < table.rows.length ; k++){
+									for(var l = 1 ; l<table.rows[k].cells.length ; l++){
+										table.rows[k].cells[l].onclick = function(){
+											rIndex = this.parentElement.rowIndex;
+											cIndex = this.cellIndex;
+
+											console.log(rIndex,cIndex);
+											$('input:radio[id="radio'+rIndex+'"]:radio[name="select"]').prop("checked", true);
+											
+											var subjectKey = $("#radio"+rIndex).data('subjectKey');
+											
+											$('#btnDelete').on('click', function (){
+												$.ajax({
+													url : "/timeTable/deleteTimeTable.json",
+													type : "GET",
+													async: false,
+													data : {
+														'stuId' : id,
+														'subjectKey' : subjectKey
+													},success : function(result) {
+														if(result['result'] === '1'){
+															console.log("delete??????"+result);
+														}
+														else{
+															alert('시간표 삭제 실패');
+														}
+													},error : function() {
+														alert('시간표 삭제 에러');
+													}
+												});
+												$('#tableDel').remove();
+												$('#btnDelete').remove();
+												$('#btnCancle').remove();
+												location.reload();
+											});
+											
+											$('#btnCancle').on('click', function (){
+												$('#tableDel').remove();
+												$('#btnDelete').remove();
+												$('#btnCancle').remove();
+											});
+											//talbe삭제
+											
+										}
+									}
+								}
+					   		}
+					 	},
+					 	error : function(request,status,error){
+							alert('검색 에러');
+							console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+						}
+					});
+				}
+			
+			}
+		},error : function() {
+			alert('시간표 불러오기 에러');
+		}
+	});
+}
+
+

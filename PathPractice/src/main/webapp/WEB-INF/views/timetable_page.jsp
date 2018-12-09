@@ -1,4 +1,4 @@
-<%@page language="java" contentType="text/html; cahrset=UTF-8"
+<%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="kr">
@@ -44,6 +44,10 @@
 						aria-label="Left Align" aria-expanded="false"
 						aria-controls="collapseAdd">
 						<span class="fas fa-plus-square"></span>
+					</button>
+					<button id="minusTime" class="btn-lg btn_add p-0 mr-4" type="button"
+						aria-label="Left Align" aria-expanded="false">
+						<span class="fas fa-minus-square"></span>
 					</button>
 				</div>
 
@@ -165,6 +169,7 @@
 				</div>
 
 				<div id="timetable"></div>
+				<div id="tableChart"></div>
 			</div>
 			<!-- footer 하단바 class="app-footer" -->
 			<div id="footer"></div>
@@ -233,21 +238,15 @@ $('#search').on('click', function() {
 </script>
 
 <!-- 테이블 클릭 시 수정할 수 있게 -->
-<!-- <script>
-	var table = document.getElementById("table"),rIndex,cIndex;
+<script>
+$('#minusTime').on('click', function () {
+	showAlltable(<%=id%>);	
+	
+	var table = document.getElementById("tableDel"), rIndex, cIndex;
+});
 
-		$('#').on('click', function (){
-		for(var i = 1 ; i < table.rows.length ; i++){				
-			for(var j = 1 ; j<table.rows[i].cells.length ; j++){
-				table.rows[i].cells[j].onclick = function(){
-					rIndex = this.parentElement.rowIndex;
-					cIndex = this.cellIndex;
-					console.log("ROW:" +rIndex+ ", Cell:" +cIndex);
-				}
-			}
-		}	
-	});
-</script> -->
+
+</script>
  
 
 <!-- 처음페이지 시작, 추가 수정 삭제시 시간표 정보들 모두 불러오기 -->

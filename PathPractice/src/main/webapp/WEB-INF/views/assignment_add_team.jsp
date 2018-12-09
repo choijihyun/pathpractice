@@ -1,5 +1,5 @@
 <!doctype html>
-<%@page language="java" contentType="text/html; cahrset=UTF-8"
+<%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" %>
 <html lang="kr">
 <%
@@ -39,7 +39,7 @@
 			<div class="login_box">
 				<h2 class="text-center wdi_red mt-1">ADD TEAM ASSINGMENT</h2>
 				<hr class="m-1">
-				<form class="commonForm">
+				<div class="commonForm">
 					<div class="form-row m-3">
 						<div class="col-md-3 col-xs-3 my-2 label_input">과목명</div>
 						<div class="col-md-7 col-xs-7 ">
@@ -83,15 +83,17 @@
 								</div>
 							</div>
 						</div>
+						<div class="col-md-2 col-xs-2 my-3"></div>
 						
 						<div class="col-md-3 col-xs-3 my-2 label_input">중요도</div>
-						<span class="rate-area  col-md-7 col-xs-7 ">
+						<span class="rate-area  col-md-6 col-xs-6 ">
 						  <input type="radio" id="p5" name="star-input" value="5" /> <label for="p5">5</label>
 						  <input type="radio" id="p4" name="star-input" value="4" /> <label for="p4">4</label>
 						  <input type="radio" id="p3" name="star-input" value="3" /> <label for="p3">3</label>
 						  <input type="radio" id="p2" name="star-input" value="2" /> <label for="p2">2</label>
 						  <input type="radio" id="p1" name="star-input" value="1" /> <label for="p1">1</label>
 						</span>
+						<div class="col-md-2 col-xs-2 my-3"></div>
 
 						<div class="col-md-3 col-xs-3 my-2 label_input">마감일</div>
 						<div class="col-md-6 col-xs-6 my-2"">
@@ -113,10 +115,11 @@
 						</div>
 					</div>
 
-				</form>
+				</div>
 			</div>
 	</div>
 	<input type="hidden" id="hiddenIsNew" name="hide" value="" >
+	<input type="hidden" id="hiddenCnt" name="hide" value=0 >
 </body>
 </html>
 
@@ -185,23 +188,71 @@ $(document).ready(function() {
 			<%
 			String id = (String) session.getAttribute("id");
 			%>
-			
+			$(".mem-id").prop('disabled',true);
+			$(".mem-name").prop('disabled',true);
+		/* 	
 			if (!chkInput())
-				return;
+				return; */
 
 			$("#dueDate").datepicker();
 			var due = document.getElementById("dueDate").value;
 			var radioVal = $('input[name="star-input"]:checked').val();
 			var title = $('#title').val()
 			var contents = $('#contents').val()
- 		 
+ 		 	var userInfomation = new Array(" "," "," "," "," "," "," "," "," "," ");
+			var i=0;
+			
 			if($('#hiddenIsNew').val() == "new"){
 				insertNewHomework(<%=id%>,radioVal,due,title,contents,0,subNo,1);
 			}//new
 			else{
 				updateAssign(due,radioVal,title,contents,subNo,<%=id%>,0,1);
-			}//update
+			}//update 
 			 
+			$(".userId").each(function() {
+				var userId = $(this).val();
+				console.log("id="+userId);
+				userInfomation[i] = userId;
+				i = i+2;
+			});
+
+			i=1;
+			$(".userName").each(function() {
+				var userName = $(this).val();
+				console.log("name="+userName);
+				userInfomation[i] = userName;
+				i = i+2;
+			});
+			console.log(userInfomation);
+			$.ajax({
+				url:"/team/insertTeam.json",
+				type : "GET",
+				async : false,
+				data : {
+					'leaderName':userInfomation[0],
+					'leaderNum': userInfomation[1],
+					'memOneName':userInfomation[2],
+					'memOneNum': userInfomation[3],
+					'memTwoName':userInfomation[4],
+					'memTwoNum': userInfomation[5],
+					'memThreeName':userInfomation[6],
+					'memThreeNum': userInfomation[7],
+					'memFourName':userInfomation[8],
+					'memFourNum': userInfomation[9],
+					
+				},
+				success : function(result){
+					if(result['result'] === "1"){ 
+						console.log(result);
+					}else{
+						alert('팀원등록 실패');
+					}
+				},
+				error : function(request,status,error){
+					alert('팀원등록 에러');
+					console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+		    	}
+			});//ajax
 		});//submit btn click
 		
 	});//function
@@ -214,15 +265,35 @@ $(document).ready(function() {
 		
 		$(document).on("click", '.btn_del_member', function() {
 			$(this).parent().remove();
+	
+			cnt = Number($('#hiddenCnt').val())-1;
+			$('#hiddenCnt').val(cnt).trigger('change');
+			if(cnt<4){
+				$(".mem-id").prop('disabled',false);
+				$(".mem-name").prop('disabled',false);
+			}
+	    });
+		
+		$(document).on("click", '.btn_del_reader', function() {
+			$(this).parent().remove();
 			$(".reader-id").prop('disabled',false);
 			$(".reader-name").prop('disabled',false);
 	    });
 
 		$('#btn_add_member').on('click', function() { 
-			positionId = ".mem-id";
-			positionName = ".mem-name";
-			where = ".input-member";
-			addmember( positionId, positionName, where);
+			cnt = Number($('#hiddenCnt').val())+1;
+			$('#hiddenCnt').val(cnt).trigger('change');
+			
+			if(cnt<5){
+				positionId = ".mem-id";
+				positionName = ".mem-name";
+				where = ".input-member";
+				addmember( positionId, positionName, where);
+			}
+			if(cnt==4){
+				$(".mem-id").prop('disabled',true);
+				$(".mem-name").prop('disabled',true);
+			}
 		});//#btn_add_member btn click
 		
 		$('#btn_add_reader').on('click', function() { 

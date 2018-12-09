@@ -177,6 +177,7 @@ rows = curs.fetchall()
 
 for stu in rows :
     lists = get_info(stu[0],stu[1])
+    stuId = stu[0]
     subjects = get_subject(lists)
     INFO=[]
     INFOS=[]
@@ -194,6 +195,8 @@ for stu in rows :
     for info in INFOS:
         try :
             className = info[0]
+            if "시스템 공지사항" in className:
+                continue
             classNum = info[1]
             sql = "select subjectKey from Subject where subName = '"+className+"' and classNum = '"+classNum+"'"
             curs.execute(sql)
