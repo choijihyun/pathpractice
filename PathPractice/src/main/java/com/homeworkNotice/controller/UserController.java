@@ -282,7 +282,7 @@ public class UserController {
 						PARAM2.put("sessionId", session.getId());
 						PARAM2.put("next", sessionLimit);
 						System.out.println(PARAM2);
-					//	result = userDao.keepLogin(PARAM2);
+						result = userDao.keepLogin(PARAM2);
 						
 					}
 				}
@@ -553,12 +553,12 @@ public class UserController {
 			
 			JSONObject jSONObject = new JSONObject();
 			if(!userDtoList.isEmpty() && userDtoList.size()==1) {//반환받은 데이터가 유효하면(db에 있으면) 브라우저 화면에 결과를 뿌려준다
-				/*if(userDtoList.get(0).getFlag()==1) {
+				if(userDtoList.get(0).getFlag()==1) {
 					jSONObject.put("result","1");//id도 존재하고 비번도 맞는 경우
 				}
 				else {
 					jSONObject.put("result","0");//비번이 다른 경우
-				}*/
+				}
 			}
 			else {//없으면 에러라고 브라우저에 뿌려준다
 				jSONObject.put("result", "0"); //id가 존재하지 않는경우
@@ -593,7 +593,7 @@ public class UserController {
 				param.put("sessionId", sessionId);
 				System.out.println("시작");
 				System.out.println("param : "+param);
-				/*if(userDao.checkUserWithSessionKey(param)!=null) {
+				if(userDao.checkUserWithSessionKey(param)!=null) {
 					List<UserDto> uservo = userDao.checkUserWithSessionKey(param);
 					System.out.println("끝");
 
@@ -605,7 +605,7 @@ public class UserController {
 						session.setAttribute("checkbox", uservo.get(0).getUseCookie());
 						return;
 					}
-				}*/
+				}
 				return;			
 			}
 		}
@@ -625,7 +625,7 @@ public class UserController {
 			
 			int result=0;
 			try {
-				//result=userDao.checkbox(param);
+				result=userDao.checkbox(param);
 				
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -674,7 +674,7 @@ public class UserController {
 					PARAM2.put("stuId",stuId);
 					PARAM2.put("sessionId", session.getId());
 					PARAM2.put("next", date);
-					//result = userDao.keepLogin(PARAM2);
+					result = userDao.keepLogin(PARAM2);
 					System.out.println("!!!!!!!!!!!!!!!!!!1Result = "+result);
 	    		}
 	    	}

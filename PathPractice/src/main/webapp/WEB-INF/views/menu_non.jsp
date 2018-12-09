@@ -1,4 +1,4 @@
-<%@page language="java" contentType="text/html; charrset=UTF-8"
+<%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="kr">
@@ -15,6 +15,7 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 	<!-- Customize CSS -->
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style_menunon.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/style_menu.css">
 
 	<!-- fontawesome ì¼ë¡ icon ì¬ì©íê¸° -->
@@ -50,12 +51,16 @@
 					</div>
 				</div>
 				<!-- 등록된 과제를 보여주는 scroll창 -->
-				<div style="overflow: auto; width: auto; height: 130px;"
+				<div style="overflow: auto; width: auto; height: 300px;"
 					class="mt-3 content_preview_assignment scrollbar scrollbar_track scrollbar_thumb"
 					data-spy="scroll" data-offset="0">
-					<a class="btn btn-sm btn_icon" aria-label="Left Align" align="left">
-						<img src="${pageContext.request.contextPath}/resources/img/blackboard.jpg" width=225" height="190" align="left">
-					</a>
+					<div class="btn btn-sm btn_icon" aria-label="Left Align" align="left">
+						<img src="${pageContext.request.contextPath}/resources/img/blackboard.jpg" width=225" height="190" align="left" style="border:10 solid black">
+						
+					</div>
+					<h6 class="mb-0 lh-100 info"> 포털 로그인한 후에 위의 그림과 같이 들어가 설정에서 비밀번호를 uis와 동일하게 변경해주세요.
+						</h6>
+					
 				</div>
 					
 			</div>
