@@ -89,7 +89,7 @@ var completeAssign = function(dueDate,importance,title,contents,subNo,id,assignN
 }
 
 var locateUpdateAssign = function(location,title,dueDate,importance,contents,assignNo,subNo){
-
+	
 	window.location.href=location+"?title="+title
 		+"&dueDate="+dueDate
 		+"&importance="+importance

@@ -217,7 +217,14 @@
 		var subNo = $(this).data('subNo');
 		var assignNo = $(this).data('assignNo');
 		var team = $(this).data('team');
-			
+		
+		var String = "00";
+		subNo = String+subNo;
+		subNo = subNo.replace(/(\s*)/g,"");
+		var len = subNo.length;
+		subNo = subNo.substr(len-6,6);
+		// alert("##################subNo = "+subNo);
+		
 		$('#hiddenAssign').val(assignNo).trigger('change');
 		$('#hiddenSub').val(subNo).trigger('change');
 
@@ -238,6 +245,7 @@
 
 		//과제 완료버튼 클릭 
 		$('#assignComplete').on('click', function (){ 
+			//alert("##################subNo = "+subNo);
 			completeAssign(dueDate,importance,title,contents,subNo,<%=id%>,assignNo,1,team); 
 		});//assignComplete Click
 
@@ -249,6 +257,7 @@
 			else {
 				location = "/assignment_add_team"; 
 			}  
+			// alert("##################subNo = "+subNo);
 			locateUpdateAssign(location,title,dueDate,importance,contents,assignNo,subNo);
 		});//assignChange Cllick
 			

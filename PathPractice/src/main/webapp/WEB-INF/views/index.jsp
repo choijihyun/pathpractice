@@ -114,7 +114,7 @@
 			}
 %>
 				
-
+<!--
 		$("#idSaveCheck").change(function() {
 			flag=0;
 			if ($("#idSaveCheck").is(":checked")) {
@@ -137,7 +137,7 @@
 				});
 			}
 		});
-		
+		-->
  		$('#submit').on('click', function() {
 
 			//setCookie("userInputId", userInputId, 7); // 7일 동안 쿠키 보관
@@ -163,6 +163,29 @@
 					alert('로그인 에러');
 				}
 			});
+			
+			
+			flag=0;
+			if ($("#idSaveCheck").is(":checked")) {
+				//alert("check in remember me");
+				flag=1;
+				//setCookie("userInputId", userInputId, 7); 
+			} else {
+				//alert("no check");
+				flag=0;
+			}
+
+			if ($('#id').val() != "") {
+				event.preventDefault();
+				$.ajax({
+					url :"/user/checkbox.json",
+					type : "GET",
+					data :{
+						"stuId" : $('#id').val(),
+						"select" : flag
+					}					
+				});
+			}
 		}); 
 	});
 </script>

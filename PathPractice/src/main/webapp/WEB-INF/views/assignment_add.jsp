@@ -130,6 +130,13 @@ $(document).ready(function() {
 	var subNo = '${subNo}'; 
 	var assignNo = '${assignNo}'; 
 	
+	var String = "00";
+	subNo = String+subNo;
+	subNo = subNo.replace(/(\s*)/g,"");
+	var len = subNo.length;
+	subNo = subNo.substr(len-6,6);
+	//alert("##################subNo = "+subNo);
+	
 	if( title!=" " && dueDate!=" " && importance!="" && contents!="")
 		$('#hiddenIsNew').val("update").trigger('change');
 	else
@@ -150,6 +157,7 @@ $(document).ready(function() {
 
 
 	if(subNo != 0){
+		//alert("##################subNo = "+subNo);
 		fillInfomation(subNo,1,title,contents,dueDate,importance);
 	}
 	
@@ -167,6 +175,13 @@ $(document).ready(function() {
 <script type="text/javascript">
 	var subNo = '${subNo}';
 	var assignNo = '${assignNo}';  
+	
+	var String = "00";
+	subNo = String+subNo;
+	subNo = subNo.replace(/(\s*)/g,"");
+	var len = subNo.length;
+	subNo = subNo.substr(len-6,6);
+	//alert("##################subNo = "+subNo);
 	
 	$(document).ready(function() {
 		
@@ -186,6 +201,7 @@ $(document).ready(function() {
 			var title = $('#title').val()
 			var contents = $('#contents').val()
 			
+			alert("##################subNo = "+subNo);
 			if($('#hiddenIsNew').val() == "new"){
 				insertNewHomework(<%=id%>,radioVal,due,title,contents,0,subNo,0);
 			}//new
