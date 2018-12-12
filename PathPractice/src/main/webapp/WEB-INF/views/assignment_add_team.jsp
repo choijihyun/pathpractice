@@ -219,8 +219,6 @@ $(document).ready(function() {
  		 	var userInfomation = new Array();
 			var i=0;
 			
-			
-			 
 			$(".userId").each(function() {
 				var userId = $(this).val();
 				console.log("id="+userId);
@@ -261,9 +259,8 @@ $(document).ready(function() {
 							insertNewHomework(<%=id%>,radioVal,due,title,contents,0,subNo,result['result']);
 						}//new
 						else{
-							//alert("##################subNo = "+subNo);
 							updateAssign(due,radioVal,title,contents,subNo,<%=id%>,0,result['result']);
-						}//update 
+						}
 					}
 				},
 				error : function(request,status,error){
@@ -271,6 +268,8 @@ $(document).ready(function() {
 					console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
 		    	}
 			});//ajax
+			
+			
 		});//submit btn click
 		
 	});//function

@@ -242,6 +242,7 @@
 		$('#assignDel').on('click', function (){
 			var assignNo = $('#hiddenAssign').val();
 			deleteAssign(assignNo,<%=id%>);
+			//team이면 team테이블도 삭제 해야함...
 		});//assignDel Cllick
 
 		//과제 완료버튼 클릭 
