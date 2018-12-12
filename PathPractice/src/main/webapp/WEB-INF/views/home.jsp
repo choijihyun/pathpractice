@@ -84,7 +84,8 @@
 			type : "GET",
 			data : {
 			'stuId' :<%=id%>,
-			'select' : 1
+			'select' : 0,
+			'order' : 0
 			}, 
 			success : function(result) {
 				if (result['result'] === 'no data') {

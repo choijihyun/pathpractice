@@ -200,7 +200,8 @@
 	});
 	$('#subjectName').on('click', function () {
 		$('#search').trigger('click');
-	});  
+	}); 
+	
 </script>
 
 <script type="text/javascript">

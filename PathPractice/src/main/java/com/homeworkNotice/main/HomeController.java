@@ -85,7 +85,8 @@ public class HomeController {
     		@RequestParam(value="contents", required=false) String contents,
     		@RequestParam(value="assignNo", required=false, defaultValue="0") int assignNo,
     		@RequestParam(value="subNo", required=false, defaultValue="0") int subNo,
-    		@RequestParam(value="subjectKey", required=false, defaultValue="0") int subjectKey) {
+    		@RequestParam(value="subjectKey", required=false, defaultValue="0") int subjectKey,
+    		@RequestParam(value="team", required=false, defaultValue="0") int team) {
   
     	System.out.println("assignment_add! ");
     	
@@ -96,6 +97,7 @@ public class HomeController {
     	model.addAttribute("assignNo", assignNo);
     	model.addAttribute("subNo", subNo);
     	model.addAttribute("subjectKey", subjectKey);
+    	model.addAttribute("team", team);
         return "assignment_add";
     }
     
@@ -107,9 +109,10 @@ public class HomeController {
     		@RequestParam(value="contents", required=false) String contents,
     		@RequestParam(value="assignNo", required=false, defaultValue="0") int assignNo,
     		@RequestParam(value="subNo", required=false, defaultValue="0") int subNo,
-    		@RequestParam(value="subjectKey", required=false, defaultValue="0") int subjectKey) {
+    		@RequestParam(value="subjectKey", required=false, defaultValue="0") int subjectKey,
+    		@RequestParam(value="team", required=false, defaultValue="0") int team) {
   
-    	System.out.println("assignment_add_team! ");
+    	System.out.println("assignment_add_team!_123123");
     	
     	model.addAttribute("title", title);
     	model.addAttribute("dueDate", dueDate);
@@ -118,6 +121,7 @@ public class HomeController {
     	model.addAttribute("assignNo", assignNo);
     	model.addAttribute("subNo", subNo);
     	model.addAttribute("subjectKey", subjectKey);
+    	model.addAttribute("team", team);
         return "assignment_add_team";
     }
     

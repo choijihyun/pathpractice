@@ -144,7 +144,8 @@ $(document).ready(function() {
 	var contents = '${contents}';
 	var subNo = '${subNo}'; 
 	var assignNo = '${assignNo}'; 
-	
+	var team = '${team}'; 
+
 	var String = "00";
 	subNo = String+subNo;
 	subNo = subNo.replace(/(\s*)/g,"");
@@ -173,6 +174,7 @@ $(document).ready(function() {
 	if(subNo != 0){
 		//alert("###############subNo = "+subNo);
 		fillInfomation(subNo,1,title,contents,dueDate,importance);
+		fillMember(team);
 	}
 	
 	$('#search').on('click', function() {
@@ -214,16 +216,10 @@ $(document).ready(function() {
 			var radioVal = $('input[name="star-input"]:checked').val();
 			var title = $('#title').val()
 			var contents = $('#contents').val()
- 		 	var userInfomation = new Array(" "," "," "," "," "," "," "," "," "," ");
+ 		 	var userInfomation = new Array();
 			var i=0;
 			
-			if($('#hiddenIsNew').val() == "new"){
-				insertNewHomework(<%=id%>,radioVal,due,title,contents,0,subNo,1);
-			}//new
-			else{
-				//alert("##################subNo = "+subNo);
-				updateAssign(due,radioVal,title,contents,subNo,<%=id%>,0,1);
-			}//update 
+			
 			 
 			$(".userId").each(function() {
 				var userId = $(this).val();
@@ -258,10 +254,16 @@ $(document).ready(function() {
 					
 				},
 				success : function(result){
-					if(result['result'] === "1"){ 
-						console.log(result);
-					}else{
+					if(result['result'] === "no data"){ 
 						alert('팀원등록 실패');
+					}else{
+						if($('#hiddenIsNew').val() == "new"){
+							insertNewHomework(<%=id%>,radioVal,due,title,contents,0,subNo,result['result']);
+						}//new
+						else{
+							//alert("##################subNo = "+subNo);
+							updateAssign(due,radioVal,title,contents,subNo,<%=id%>,0,result['result']);
+						}//update 
 					}
 				},
 				error : function(request,status,error){

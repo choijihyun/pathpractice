@@ -343,17 +343,16 @@ var showAlltable = function(id){
 												$('#btnCancle').remove();
 												location.reload();
 											});
-											
-											$('#btnCancle').on('click', function (){
-												$('#tableDel').remove();
-												$('#btnDelete').remove();
-												$('#btnCancle').remove();
-											});
 											//talbe삭제
-											
 										}
 									}
 								}
+								
+								$('#btnCancle').on('click', function (){
+									$('#tableDel').remove();
+									$('#btnDelete').remove();
+									$('#btnCancle').remove();
+								});
 					   		}
 					 	},
 					 	error : function(request,status,error){

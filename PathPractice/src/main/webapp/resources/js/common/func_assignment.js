@@ -88,14 +88,15 @@ var completeAssign = function(dueDate,importance,title,contents,subNo,id,assignN
 	});//ajax
 }
 
-var locateUpdateAssign = function(location,title,dueDate,importance,contents,assignNo,subNo){
+var locateUpdateAssign = function(location,title,dueDate,importance,contents,assignNo,subNo,team){
 	
 	window.location.href=location+"?title="+title
 		+"&dueDate="+dueDate
 		+"&importance="+importance
 		+"&contents="+contents
 		+"&assignNo="+assignNo
-		+"&subNo="+subNo;
+		+"&subNo="+subNo
+		+"&team="+team;
 }
 
 var updateAssign = function(due,radioVal,title,contents,subNo,id,success,team){
@@ -205,132 +206,6 @@ var showAllAssignment = function(id,select,order){
 	});//ajax
 }
 
-/*var showTeamAssignment = function(id){
-	event.preventDefault();
-	$.ajax({
-		url:"/homework/selectTeamHomework.json",
-		type : "GET",
-		data : {
-			'stuId':id
-		},
-		success : function(result){
-			if(result['result'] === 'no data'){
-				alert('등록과제 없음');
-			}else{ 
-				console.log(result);
-				for(var i=0 ; i<result['result'].length ; i++){
-
-					var assign_title = result['result'][i]['title'];
-					var assign_contents = result['result'][i]['contents'];
-
-					var str = '';
-					str += '<button type="button" ';
-					str += 'class="btn btn-lg btn-block btn-outline-danger btn_pop_assignment" ';
-					str += 'data-due-date= " ' + result['result'][i]['dueDate'] + ' " ';
-					str += 'data-importance= " ' + result['result'][i]['importance'] + ' " ';
-					str += 'data-title= " ' + assign_title + ' " ';
-					str += 'data-assign-no= " ' + result['result'][i]['assignNo'] + ' " ';
-					str += 'data-sub-no= " ' + result['result'][i]['subNo'] + ' " ';
-					str += 'data-team= " ' + result['result'][i]['team'] + ' " ';
-					str += 'data-contents= " ' + assign_contents + '">';
-					str += '<h6 id="assign' + (i+1) + 'Title" ';
-					str += 'style="font-weight: bold" class="mb-2">-' + assign_title + '</h6>';
-					str += '<p6 id="assign' + (i+1) + 'Context">' + assign_contents + '</p6>';
-					str += '</button>';
-					$('.content_show_assign').append(str);
-				}
-			}
-		},
-		error : function(){
-			alert('불러오기 에러');
-		}
-	});//ajax
-}
-
-var showSuccessAssignment = function(id){
-	event.preventDefault();
-	$.ajax({
-		url:"/homework/selectSuccessHomework.json",
-		type : "GET",
-		data : {
-			'stuId':id
-		},
-		success : function(result){
-			if(result['result'] === 'no data'){
-				alert('등록과제 없음');
-			}else{ 
-				console.log(result);
-				for(var i=0 ; i<result['result'].length ; i++){
-
-					var assign_title = result['result'][i]['title'];
-					var assign_contents = result['result'][i]['contents'];
-
-					var str = '';
-					str += '<button type="button" ';
-					str += 'class="btn btn-lg btn-block btn-outline-danger btn_pop_assignment" ';
-					str += 'data-due-date= " ' + result['result'][i]['dueDate'] + ' " ';
-					str += 'data-importance= " ' + result['result'][i]['importance'] + ' " ';
-					str += 'data-title= " ' + assign_title + ' " ';
-					str += 'data-assign-no= " ' + result['result'][i]['assignNo'] + ' " ';
-					str += 'data-sub-no= " ' + result['result'][i]['subNo'] + ' " ';
-					str += 'data-team= " ' + result['result'][i]['team'] + ' " ';
-					str += 'data-contents= " ' + assign_contents + '">';
-					str += '<h6 id="assign' + (i+1) + 'Title" ';
-					str += 'style="font-weight: bold" class="mb-2">-' + assign_title + '</h6>';
-					str += '<p6 id="assign' + (i+1) + 'Context">' + assign_contents + '</p6>';
-					str += '</button>';
-					$('.content_show_assign').append(str);
-				}
-			}
-		},
-		error : function(){
-			alert('불러오기 에러');
-		}
-	});//ajax
-}
-
-var showNotSuccessAssignment = function(id){
-	event.preventDefault();
-	$.ajax({
-		url:"/homework/selectNotSuccessHomework.json",
-		type : "GET",
-		data : {
-			'stuId':id
-		},
-		success : function(result){
-			if(result['result'] === 'no data'){
-				alert('등록과제 없음');
-			}else{ 
-				console.log(result);
-				for(var i=0 ; i<result['result'].length ; i++){
-
-					var assign_title = result['result'][i]['title'];
-					var assign_contents = result['result'][i]['contents'];
-
-					var str = '';
-					str += '<button type="button" ';
-					str += 'class="btn btn-lg btn-block btn-outline-danger btn_pop_assignment" ';
-					str += 'data-due-date= " ' + result['result'][i]['dueDate'] + ' " ';
-					str += 'data-importance= " ' + result['result'][i]['importance'] + ' " ';
-					str += 'data-title= " ' + assign_title + ' " ';
-					str += 'data-assign-no= " ' + result['result'][i]['assignNo'] + ' " ';
-					str += 'data-sub-no= " ' + result['result'][i]['subNo'] + ' " ';
-					str += 'data-team= " ' + result['result'][i]['team'] + ' " ';
-					str += 'data-contents= " ' + assign_contents + '">';
-					str += '<h6 id="assign' + (i+1) + 'Title" ';
-					str += 'style="font-weight: bold" class="mb-2">-' + assign_title + '</h6>';
-					str += '<p6 id="assign' + (i+1) + 'Context">' + assign_contents + '</p6>';
-					str += '</button>';
-					$('.content_show_assign').append(str);
-				}
-			}
-		},
-		error : function(){
-			alert('불러오기 에러');
-		}
-	});//ajax
-}
-*/
 
 var fillInfomation = function(subNo,select,title,contents,dueDate,importance){
 	$("#title").val(title);
@@ -369,4 +244,52 @@ var fillInfomation = function(subNo,select,title,contents,dueDate,importance){
 		$('input:radio[id="p'+i+'"]:radio[name="star-input"]').prop("checked", true);
 	}
 	
+}
+
+var fillMember = function(team){
+	
+	$.ajax({
+			url:"/team/searchTeam.json",
+			type : "GET",
+			data : {
+				'teamNum':team
+			},
+			success : function(result){
+	   		if(result['result'] === "no data"){ 
+	   			alert('검색하려는 멤버 없음.');
+	   		}else{
+	   			console.log(result['result']);
+	   			if(result['result'][0]['leaderName'] != null){
+		   			$(".reader-id").val(result['result'][0]['leaderNum']);
+		   			$(".reader-name").val(result['result'][0]['leaderName']);
+	   				$('#btn_add_reader').trigger('click');
+	   			}
+	   			if(result['result'][0]['memOneName'] != null){
+		   			$(".mem-id").val(result['result'][0]['memOneNum']);
+		   			$(".mem-name").val(result['result'][0]['memOneName']);
+	   				$('#btn_add_member').trigger('click');
+	   			}
+	   			if(result['result'][0]['memTwoName'] != null){
+		   			$(".mem-id").val(result['result'][0]['memTwoNum']);
+		   			$(".mem-name").val(result['result'][0]['memTwoName']);
+	   				$('#btn_add_member').trigger('click');
+	   			}
+	   			if(result['result'][0]['memThreeName'] !=  null){
+		   			$(".mem-id").val(result['result'][0]['memThreeNum']);
+		   			$(".mem-name").val(result['result'][0]['memThreeName']);
+	   				$('#btn_add_member').trigger('click');
+	   			}
+	   			if(result['result'][0]['memFourName'] != null){
+		   			$(".mem-id").val(result['result'][0]['memFourNum']);
+		   			$(".mem-name").val(result['result'][0]['memFourName']);
+	   				$('#btn_add_member').trigger('click');
+	   			}				
+	   		}
+	 	},
+	 	error : function(request,status,error){
+			alert('멤버 검색 에러');
+			console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+		}
+	});
+		
 }

@@ -166,7 +166,8 @@
 	if(sort=="defalut") option=0;
 	else if(sort=="date") option=1;
 	else option=2;
-	
+
+	showAllAssignment(<%=id%>,0,option);
 	$('#all').on('click', function (){
 		$('.content_show_assign').empty();
 		showAllAssignment(<%=id%>,0,option);
@@ -258,7 +259,7 @@
 				location = "/assignment_add_team"; 
 			}  
 			// alert("##################subNo = "+subNo);
-			locateUpdateAssign(location,title,dueDate,importance,contents,assignNo,subNo);
+			locateUpdateAssign(location,title,dueDate,importance,contents,assignNo,subNo,team);
 		});//assignChange Cllick
 			
 	});//btn_pop_assignment Click
