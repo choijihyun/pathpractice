@@ -160,27 +160,46 @@
 <script type="text/javascript" scr="func_assignment.js">
 <% String id = (String)session.getAttribute("id"); %>
 	var option;
-	var sort = $('#sort').val();
-	console.log("sort::"+sort);
-	
-	if(sort=="defalut") option=0;
-	else if(sort=="date") option=1;
-	else option=2;
+	var sort;
 
 	showAllAssignment(<%=id%>,0,option);
 	$('#all').on('click', function (){
+		sort = $('#sort').val();
+		console.log("sort::"+sort);
+		if(sort=="defalut") option=0;
+		else if(sort=="date") option=1;
+		else option=2;
+		
 		$('.content_show_assign').empty();
 		showAllAssignment(<%=id%>,0,option);
 	});
 	$('#none').on('click', function (){ 
+		sort = $('#sort').val();
+		console.log("sort::"+sort);
+		if(sort=="defalut") option=0;
+		else if(sort=="date") option=1;
+		else option=2;
+		
 		$('.content_show_assign').empty();
 		showAllAssignment(<%=id%>,1,option);
 	});
 	$('#team').on('click', function (){
+		sort = $('#sort').val();
+		console.log("sort::"+sort);
+		if(sort=="defalut") option=0;
+		else if(sort=="date") option=1;
+		else option=2;
+	
 		$('.content_show_assign').empty();
 		showAllAssignment(<%=id%>,2,option);
 	});
 	$('#done').on('click', function (){ 
+		sort = $('#sort').val();
+		console.log("sort::"+sort);
+		if(sort=="defalut") option=0;
+		else if(sort=="date") option=1;
+		else option=2;
+		
 		$('.content_show_assign').empty();
 		showAllAssignment(<%=id%>,3,option);
 	});

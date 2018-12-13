@@ -199,6 +199,7 @@ $(document).ready(function() {
 	subNo = subNo.substr(len-6,6);
 	//alert("##################subNo = "+subNo);
 	
+	var team = '${team}'; 
 	$(document).ready(function() {
 		
 		$('#submit').on('click', function() {
@@ -207,9 +208,9 @@ $(document).ready(function() {
 			%>
 			$(".mem-id").prop('disabled',true);
 			$(".mem-name").prop('disabled',true);
-		/* 	
-			if (!chkInput())
-				return; */
+	
+			/* if (!chkInput())
+				return;  */
 
 			$("#dueDate").datepicker();
 			var due = document.getElementById("dueDate").value;
@@ -234,43 +235,82 @@ $(document).ready(function() {
 				i = i+2;
 			});
 			console.log(userInfomation);
-			$.ajax({
-				url:"/team/insertTeam.json",
-				type : "GET",
-				async : false,
-				data : {
-					'leaderName':userInfomation[0],
-					'leaderNum': userInfomation[1],
-					'memOneName':userInfomation[2],
-					'memOneNum': userInfomation[3],
-					'memTwoName':userInfomation[4],
-					'memTwoNum': userInfomation[5],
-					'memThreeName':userInfomation[6],
-					'memThreeNum': userInfomation[7],
-					'memFourName':userInfomation[8],
-					'memFourNum': userInfomation[9],
-					
-				},
-				success : function(result){
-					if(result['result'] === "no data"){ 
-						alert('팀원등록 실패');
-					}else{
-						if($('#hiddenIsNew').val() == "new"){
+			
+			
+			
+			if($('#hiddenIsNew').val() == "new"){
+				$.ajax({
+					url:"/team/insertTeam.json",
+					type : "GET",
+					async : false,
+					data : {
+						'leaderName':userInfomation[0],
+						'leaderNum': userInfomation[1],
+						'memOneName':userInfomation[2],
+						'memOneNum': userInfomation[3],
+						'memTwoName':userInfomation[4],
+						'memTwoNum': userInfomation[5],
+						'memThreeName':userInfomation[6],
+						'memThreeNum': userInfomation[7],
+						'memFourName':userInfomation[8],
+						'memFourNum': userInfomation[9],
+					},
+					success : function(result){
+						if(result['result'] === "no data"){ 
+							alert('팀원등록 실패');
+						}else{
 							insertNewHomework(<%=id%>,radioVal,due,title,contents,0,subNo,result['result']);
-						}//new
-						else{
-							updateAssign(due,radioVal,title,contents,subNo,<%=id%>,0,result['result']);
+							alert('팀원등록 성공');
 						}
-					}
-				},
-				error : function(request,status,error){
-					alert('팀원등록 에러');
-					console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
-		    	}
-			});//ajax
+					},
+					error : function(request,status,error){
+						alert('팀원등록 에러');
+						console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+			    	}
+				});//ajax
+				
+			}//new
+			else{
+				$.ajax({
+					url:"/team/updateTeam.json",
+					type : "GET",
+					async : false,
+					data : {
+						'teamNum':team,
+						'leaderName':userInfomation[0],
+						'leaderNum': userInfomation[1],
+						'memOneName':userInfomation[2],
+						'memOneNum': userInfomation[3],
+						'memTwoName':userInfomation[4],
+						'memTwoNum': userInfomation[5],
+						'memThreeName':userInfomation[6],
+						'memThreeNum': userInfomation[7],
+						'memFourName':userInfomation[8],
+						'memFourNum': userInfomation[9],
+					},
+					success : function(result){
+						if(result['result'] === 0){ 
+							alert('팀원수정 실패');
+						}else{
+							updateAssign(due,radioVal,title,contents,subNo,<%=id%>,0,team);
+							alert('팀원수정 성공');
+						}
+					},
+					error : function(request,status,error){
+						alert('팀원수정 에러');
+						console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+			    	}
+				});//ajax
+				
+			}
+			
+			
+			
 			
 			
 		});//submit btn click
+		
+		
 		
 	});//function
 
