@@ -35,16 +35,21 @@ var addmember = function( positionId, positionName, where){
 	return true;
 }
 
-var deleteAssign = function(assignNo,id){
+var deleteAssign = function(select,no,id){
+
+	console.log("assignNo===="+no);
+	console.log("id===="+id);
 	$.ajax({
 		url:"/homework/deleteHomework.json",
 		type : "GET",
 		async : false,
 		data : {
 			'stuId':id,
-			'assignNo': assignNo
+  			'select':select,
+			'assignNo': no
 		},
 		success : function(result){
+			console.log(result);
 			if(result['result'] === "1"){ 
 				console.log(result);
 			}else{
@@ -131,7 +136,7 @@ var updateAssign = function(due,radioVal,title,contents,subNo,id,success,team){
 }
 
 var insertNewHomework = function(id,radioVal,due,title,contents,success,subNo,team){
-	
+	console.log("func!!!============"+id);
 	$.ajax({
 		url : "/homework/insertHomework.json",
 		type : "GET",
@@ -148,7 +153,10 @@ var insertNewHomework = function(id,radioVal,due,title,contents,success,subNo,te
 		success : function(result) {
 			console.log(result);
 			if (result['result'] === '1') {
-				location.href = "/assignment";
+				if(team == 0){
+					console.log("func!!!============"+id);
+					location.href = "/assignment";
+				}
 			} else {
 				alert('과제등록실패');
 			}
@@ -256,7 +264,6 @@ var fillMember = function(team){
 			},
 			success : function(result){
 	   		if(result['result'] === "no data"){ 
-	   			alert('검색하려는 멤버 없음.');
 	   		}else{
 	   			console.log(result['result']);
 	   			if(result['result'][0]['leaderName'] != null){

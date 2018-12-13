@@ -35,7 +35,7 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/은숙/Documents/카카오톡 받은 파일/jar파일/gcm-server.jar"/>
-	<classpathentry kind="lib" path="C:/Users/은숙/Documents/카카오톡 받은 파일/jar파일/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ghwnw/Desktop/gcm-server.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ghwnw/Desktop/json-simple-1.1.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

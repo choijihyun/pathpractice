@@ -60,7 +60,6 @@
 						onclick="location.href='/update_information'">정보수정</button>
 					<button class="btn p-1 btn-sm list-group-item" type="button"
 						onclick="location.href='/changePW'">비밀번호 변경</button>
-					<button class="btn p-1 btn-sm list-group-item" type="button">알림끄기</button>
 					<button class="btn p-1 btn-sm list-group-item" type="button">탈퇴</button>
 				</div>
 			</div>
