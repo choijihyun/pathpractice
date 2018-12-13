@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="insertTeam" parameterType="map" useGeneratedKeys="true" keyProperty="teamNum">
     <!-- 주호 values에 파라미터 몇개 빠진거 채워 넣음  -->
     	insert into Team(leaderName,leaderNum,memOneName,memOneNum,memTwoName,memTwoNum,memThreeName,memThreeNum,memFourName,memFourNum) 
-    	values ( #{leaderName},#{leaderNum},#{memOneName},#{memOneNum},#{memTwoName},#{memTwoNnum},#{memThreeName},#{memThreeNum},#{memFourName},#{memFourNum})
+    	values ( #{leaderName},#{leaderNum},#{memOneName},#{memOneNum},#{memTwoName},#{memTwoNum},#{memThreeName},#{memThreeNum},#{memFourName},#{memFourNum})
     </insert>
     <delete id="deleteTeam" parameterType="map">
     	delete from Team where teamNum=#{teamNum}

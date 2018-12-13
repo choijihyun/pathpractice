@@ -32,14 +32,12 @@ public class SubjectController {
 	private UserDao userDao;
 	private UserDto	userDto;
 	
-	
 
-	//�뜝�룞�삕�뜝�룞�삕�뜝占� insert
 	@ResponseBody
 	@RequestMapping(value = "/subject/insertSubject", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//�뜝�룞�삕 �뜝�떥釉앹삕�뜝�룞�삕 url //get�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕 /user/getUserPwdInfo.json�뜝�떛�씛�삕�뜝占� url�뜝�룞�삕 �뜝�룞�삕�뜝�떢�눦�삕 �뜝�룞�삕�뜝�룞�삕 �솗�뜝�룞�삕 �뜝�룞�삕 �뜝�룞�삕 �뜝�뙇�뙋�삕.
-	public String insertSubject(//url�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕(�뜝�룞�삕�뜝�룞�삕)�뜝�룞�삕 �뜝�뙃�눦�삕
-			Locale locale, //�뜝�떕�벝�삕�뜝�룞�삕永방걲�댙�삕�뜝占� �뜝�룞�삕�뜝�룞�삕 �뜝�떇�씛�삕�뜝�룞�삕�뜝占�
-			Model model, //�뜝�떕�벝�삕�뜝�룞�삕永방걲�댙�삕�뜝占� �뜝�룞�삕�뜝�룞�삕 �뜝�떇�씛�삕�뜝�룞�삕�뜝占�
+	public String insertSubject(
+			Locale locale, 
+			Model model, 
 			@RequestParam(value = "subNo", required=false) String subNo,
 			@RequestParam(value = "classNum", required=false) String classNum, //classNum �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�떛琉꾩삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕 ! �뜝�룞�삕���뜝�떍�뙋�삕
 			@RequestParam(value = "subName", required=true) String subName,
@@ -50,7 +48,6 @@ public class SubjectController {
 			@RequestParam(value = "endHour", required=false) String endHour,
 			@RequestParam(value = "add", required=false) String add
 			){
-		//add�뜝�룞�삕�뜝�룞�삕 �뜝�떩諭꾩삕
 		
 		HashMap<Object, Object> param=new HashMap<Object, Object>();
 		
@@ -76,7 +73,7 @@ public class SubjectController {
 
 		System.out.println(result);
     	JSONObject jSONObject = new JSONObject();
-    	//�뜝�뙎琉꾩삕�뜝�룞�삕 �뜝�룞�삕�뜝�뜦�꽌 �뜝�룞�삕�뜝�룞�삕 or �뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�뙏�눦�삕 �뜝�떕�벝�삕�뜝�룞�삕永방걲占� json �뜝�룞�삕�뜝�룞�삕�뜝�떢紐뚯삕 �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝�뙐嫄곗뼲�삕
+    
     	if(result==1) {
     		jSONObject.put("result", "1");//�뜝�룞�삕�뜝�룞�삕    		
     	}
@@ -101,7 +98,7 @@ public class SubjectController {
     	
     	JSONArray jSONArray=new JSONArray();
     	List<JSONObject> jsonList=new ArrayList<JSONObject>();
-        if(!subjectDtoList.isEmpty()) {//�뜝�룞�삕�솚�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�떢怨ㅼ삕 �뜝�룞�삕�슚�뜝�떦紐뚯삕(db�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕) �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �솕�뜝�띂�뿉 �뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�떬琉꾩삕�뜝�뙏�뙋�삕
+        if(!subjectDtoList.isEmpty()) {
         	for(int i=0;i<subjectDtoList.size();i++) {
         		JSONObject jSONObject = new JSONObject();
         		jSONObject.put("add",subjectDtoList.get(i).getAdd());
@@ -124,8 +121,8 @@ public class SubjectController {
 
             return jsObject.toString();
         } 
-        else {//�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�떬琉꾩삕�뜝�뙏�뙋�삕
-
+        else {
+        	
     		JSONObject jSONObject = new JSONObject();
         	jSONObject.put("result", "no data");
         	
@@ -137,7 +134,7 @@ public class SubjectController {
 	//search
 	@ResponseBody
 	@RequestMapping(value = "/subject/searchSubject.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//�뜝�룞�삕 �뜝�떥釉앹삕�뜝�룞�삕 url //get�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝占� �뜝�룞�삕 /user/getUserPwdInfo.json�뜝�떛�씛�삕�뜝占� url�뜝�룞�삕 �뜝�룞�삕�뜝�떢�눦�삕 �뜝�룞�삕�뜝�룞�삕 �솗�뜝�룞�삕 �뜝�룞�삕 �뜝�룞�삕 �뜝�뙇�뙋�삕.
-	public String searchSubject(//url�뜝�룞�삕 �뜝�룞�삕�뜝�룞�삕(�뜝�룞�삕�뜝�룞�삕)�뜝�룞�삕 �뜝�뙃�눦�삕
+	public String searchSubject(
 			Locale locale, //�뜝�떕�벝�삕�뜝�룞�삕永방걲�댙�삕�뜝占� �뜝�룞�삕�뜝�룞�삕 �뜝�떇�씛�삕�뜝�룞�삕�뜝占�
 			Model model, //�뜝�떕�벝�삕�뜝�룞�삕永방걲�댙�삕�뜝占� �뜝�룞�삕�뜝�룞�삕 �뜝�떇�씛�삕�뜝�룞�삕�뜝占�
 			@RequestParam(value = "word", required=false) String word,
