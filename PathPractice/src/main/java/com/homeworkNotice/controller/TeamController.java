@@ -36,7 +36,7 @@ public class TeamController {
 
 	//insert
 	@ResponseBody
-	@RequestMapping(value = "/team/insertTeam", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//�� �κ��� url //get������� �� /user/getUserPwdInfo.json�̶�� url�� ���ͼ� ���� Ȯ�� �� �� �ִ�.
+	@RequestMapping(value = "/team/insertTeam.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)//�� �κ��� url //get������� �� /user/getUserPwdInfo.json�̶�� url�� ���ͼ� ���� Ȯ�� �� �� �ִ�.
 	public String insertTeam(
 			Locale locale, //�ȵ���̵忡�� ���� �Ķ����
 			Model model, //�ȵ���̵忡�� ���� �Ķ����
