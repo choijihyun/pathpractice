@@ -69,7 +69,7 @@
 					<!--      <div id="home"></div> -->
 					<div class="col-md-6 col-xs-6">
 						<button type="button" class="btn btn-lg btn-xs btn-block btn_join"
-							onclick='location.href="/join"'>회원가입</button>
+							onclick='location.href="/join"'>SignUp</button>
 					</div>
 					<div class="col-md-6 col-xs-6">
 						<button type="button" class="btn btn-lg btn-xs btn-block btn_join"
