@@ -11,6 +11,9 @@
 .main_area{
 	background: #fff;
 }
+.table_time{
+	font-size: 10pt;
+}
 /*로그아웃 버튼*/
 .btn_logout{
 	border: 0;

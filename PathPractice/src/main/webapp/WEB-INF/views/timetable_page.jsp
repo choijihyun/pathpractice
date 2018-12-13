@@ -35,7 +35,7 @@
 			<div id="header"></div>
 
 			<!-- 상단바와 하단바를 제외한 부분 class="main-area" -->
-			<div class="jumbotron p-md-0 m-0 main_area">
+			<div class="jumbotron p-md-0 m-0 main_area p-0">
 				<!-- + 버튼  -->
 				<div class="row col-auto justify-content-end setting">
 					<div class="col-10 col-xs-10 col-sm-10 col-lg-10 col-md-10"></div>

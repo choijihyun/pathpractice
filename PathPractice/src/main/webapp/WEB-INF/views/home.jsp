@@ -36,7 +36,7 @@
 			<div id="header"></div>
 			
 			<!-- 상단바와 하단바를 제외한 부분 class="main-area" -->
-			<div class="jumbotron p-md-0 text-white main_area">
+			<div class="jumbotron p-md-0 text-white main_area  p-0">
 				<div style="cursor: pointer; height: auto;"
 					onclick="location.href='/timetable_page';"
 					class="scrollbar scrollbar_track scrollbar_thumb" data-spy="scroll"
@@ -89,7 +89,7 @@
 			}, 
 			success : function(result) {
 				if (result['result'] === 'no data') {
-					//alert('등록된 과제 없음');
+					alert('등록된 과제 없음');
 				} else { 
 					console.log(result);
 				for (var i = 0; i < result['result'].length; i++) {
@@ -107,8 +107,9 @@
 					}
 				}
 			},
-			error : function() {
-				//alert('과제불러오기 에러');
+			error : function(request,status,error){
+				alert('과제불러오기 에러');
+				console.log('message:'+request.responseText+'\n'+'error:'+error);
 			}
 		});//ajax
 		

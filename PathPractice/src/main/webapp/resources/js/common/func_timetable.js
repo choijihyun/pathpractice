@@ -261,9 +261,9 @@ var showAlltable = function(id){
 				str+='<tbody></tbody>';
 				str+='</table>';
 				str+='<button type="button" id="btnDelete"';
-				str+='class="mx-auto col-5 btn btn-xs">삭제</button>';
+				str+='class="mx-auto col-5 btn btn-sm btn_add">삭제</button>';
 				str+='<button type="button" id="btnCancle"';
-				str+='class="mx-auto col-5 btn btn-xs">취소</button>';
+				str+='class="mx-auto col-5 btn btn-sm btn_add">취소</button>';
 				var tableChart = document.getElementById("tableChart");
 				tableChart.innerHTML=str;	
 				

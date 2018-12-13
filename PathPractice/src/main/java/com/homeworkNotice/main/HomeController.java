@@ -112,7 +112,7 @@ public class HomeController {
     		@RequestParam(value="subjectKey", required=false, defaultValue="0") int subjectKey,
     		@RequestParam(value="team", required=false, defaultValue="0") int team) {
   
-    	System.out.println("assignment_add_team!_123123");
+    	System.out.println("assignment_add_team!");
     	
     	model.addAttribute("title", title);
     	model.addAttribute("dueDate", dueDate);
