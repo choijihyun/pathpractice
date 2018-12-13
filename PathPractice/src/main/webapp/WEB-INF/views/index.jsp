@@ -107,7 +107,7 @@
 				if(<%=check%>=="1"){
 					$("#idSaveCheck").attr('checked', true) ;
 					$('#id').val(<%=id%>);
-					$('#pw').val(<%=pw%>);
+					//$('#pw').val(<%=pw%>);
 				}
 <%		
 				}
