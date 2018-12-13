@@ -219,9 +219,13 @@ $(document).ready(function() {
 			var contents = $('#contents').val()
  		 	var userInfomation = new Array();
 			var i=0;
+			var check=0;
 			
 			$(".userId").each(function() {
 				var userId = $(this).val();
+				if(userId==null){
+					check=i;
+				}
 				console.log("id="+userId);
 				userInfomation[i] = userId;
 				i = i+2;
@@ -260,6 +264,13 @@ $(document).ready(function() {
 							alert('팀원등록 실패');
 						}else{
 							insertNewHomework(<%=id%>,radioVal,due,title,contents,0,subNo,result['result']);
+							var i=1;
+							while(1){
+								if(userInfomation[i]==null)break;
+								if(userInfomation[i]==<%=id%>)continue;
+								insertNewHomework(userInfomation[i],radioVal,due,title,contents,0,subNo,result['result']);
+								i+=2;
+							}
 							alert('팀원등록 성공');
 						}
 					},
