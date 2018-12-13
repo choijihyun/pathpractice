@@ -17,9 +17,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	delete from Team where teamNum=#{teamNum}
     </delete>
     
-    
     <update id="updateTeam" parameterType="map">
-    	update Team set leaderName=#{leaderName},leaderNum=#{leaderNum},memOneName=#{memOneName},memOneNum=#{memOneNum},memTwoName=#{memTwoName},memTwoNum=#{memTwoNum},memThreeName=#{memThreeName},memThreeNum=#{memThreeNum},memFourName=#{memFourName},memFourNum=#{memFourNum}
+    	update Team set leaderName=#{leaderName},leaderNum=#{leaderNum},memOneName=#{memOneName},memOneNum=#{memOneNum},memTwoName=#{memTwoName},memTwoNum=#{memTwoNum},memThreeName=#{memThreeName},memThreeNum=#{memThreeNum},memFourName=#{memFourName},memFourNum=#{memFourNum} where teamNum=#{teamNum}
     </update>
    
      <select id="searchTeam" resultType="com.homeworkNotice.dto.TeamDto" parameterType="map">

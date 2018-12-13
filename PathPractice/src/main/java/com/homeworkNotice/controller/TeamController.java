@@ -95,7 +95,7 @@ public class TeamController {
     @RequestMapping(value = "/team/updateTeam.json", produces="application/json;text/plain;charset=UTF-8", method = RequestMethod.GET)// value��� ���� ����, get��� ���
     public String updateTeam(
     			Model model,
-
+    			@RequestParam(value = "teamNum",required=true) final int teamNum,
     			@RequestParam(value = "leaderName", required=true) String leaderName,
     			@RequestParam(value = "leaderNum", required=true) String leaderNum,
     			@RequestParam(value = "memOneName", required=true) String memOneName,
@@ -109,6 +109,7 @@ public class TeamController {
 		HashMap<Object, Object> param=new HashMap<Object, Object>(); 
 					
 
+		param.put("teamNum",teamNum);
 		param.put("leaderName",leaderName);
 		param.put("leaderNum",leaderNum);
 		param.put("memOneName",memOneName);
