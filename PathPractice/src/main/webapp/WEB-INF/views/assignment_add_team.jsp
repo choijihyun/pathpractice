@@ -281,7 +281,9 @@ $(document).ready(function() {
 				});//ajax
 				
 			}//new
+			
 			else{
+				console.log("########"+team);
 				$.ajax({
 					url:"/team/updateTeam.json",
 					type : "GET",
