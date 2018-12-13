@@ -43,16 +43,20 @@
 
 					<!-- 개인인지 팀플인지 추가 등 설정 버튼들 있는 곳­-->
 					<div class="row col-auto justify-content-end setting">
-						<div class= "p-0 col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4">
-							<div class="btn-group" role="group" aria-label="Basic example">
+						<div class= "p-0 col-7 col-xs-7 col-sm-7 col-lg-7 col-md-7">
+							<!-- <div class="btn-group" role="group" aria-label="Basic example">
 								<button type="button" class="btn  btn_assign_type" id=" all ">all</button>
 								<button type="button" class="btn  btn_assign_type" id=" none ">personal</button>
 								<button type="button" class="btn  btn_assign_type" id=" team ">team</button>
 								<button type="button" class="btn  btn_assign_type" id=" done ">done</button>
-							</div>
+							</div> -->
+							<button type="button" class="btn  btn_assign_type" id="all">all</button>
+							<button type="button" class="btn  btn_assign_type" id="none">personal</button>
+							<button type="button" class="btn  btn_assign_type" id="team">team</button>
+							<button type="button" class="btn  btn_assign_type" id="done">done</button>
 						</div>
-						<div class= "col-3 col-xs-3 col-sm-3 col-lg-3 col-md-3">
-						</div>
+						<!--  <div class= "col-3 col-xs-3 col-sm-3 col-lg-3 col-md-3">
+						</div>  -->
 						<div class= "col-3 col-xs-3 col-sm-3 col-lg-3 col-md-3">
 							<select class="form-control-xs" id="sort">
 							<option value="default">default</option>
@@ -60,6 +64,8 @@
 							<option value="importance">importance</option>
 						</select>
 						</div>
+						
+						
 						<!-- plus 아이콘 버튼 누르면 팀인지 개인인지 선택하게 함 -->
 						<div class= "col-2 col-xs-2 col-sm-2 col-lg-2 col-md-2">
 							<button class="btn btn-lg btn_add p-0" aria-label="Left Align" >
@@ -295,7 +301,7 @@
 					}
 				},
 				error : function(){
-					alert('삭제 에러');
+					//alert('삭제 에러');
 				}
 			});//ajax
 			}	
