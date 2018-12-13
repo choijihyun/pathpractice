@@ -220,7 +220,7 @@ public class HomeworkController {
 	    	if(!homeworkDtoList.isEmpty()) {//占쏙옙환占쏙옙占쏙옙 占쏙옙占쏙옙占싶곤옙 占쏙옙효占싹몌옙(db占쏙옙 占쏙옙占쏙옙占쏙옙) 占쏙옙占쏙옙占쏙옙 화占썽에 占쏙옙占쏙옙占� 占싼뤄옙占쌔댐옙
 	    		for(int i=0;i<homeworkDtoList.size();i++) {
 	    			JSONObject jSONObject = null;
-	        		if(select==0) {
+	        		if(select==0&&(homeworkDtoList.get(i).getSuccess()==0)) {
 	        			jSONObject = new JSONObject();
 		        		jSONObject.put("assignNo",homeworkDtoList.get(i).getAssignNo());
 		        		jSONObject.put("stuId",homeworkDtoList.get(i).getStuId());
