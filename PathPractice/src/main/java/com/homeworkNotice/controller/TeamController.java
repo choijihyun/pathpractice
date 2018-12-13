@@ -132,7 +132,7 @@ public class TeamController {
 			// TODO: handle exception
 		}
 
-
+		System.out.println("updateeeeeeeeeeeeeeee"+result);
     	JSONObject jSONObject = new JSONObject();
     	if(result==1) {
     		jSONObject.put("result", "1");		

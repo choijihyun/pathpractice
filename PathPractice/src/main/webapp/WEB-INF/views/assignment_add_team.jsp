@@ -199,9 +199,11 @@ $(document).ready(function() {
 	subNo = subNo.substr(len-6,6);
 	//alert("##################subNo = "+subNo);
 	
-	var team = '${team}'; 
+	
+	
 	$(document).ready(function() {
-		
+		var team = '${team}'; 
+		console.log("########"+team);
 		$('#submit').on('click', function() {
 			<%
 			String id = (String) session.getAttribute("id");
@@ -256,7 +258,7 @@ $(document).ready(function() {
 						'memFourNum': userInfomation[9],
 					},
 					success : function(result){
-						if(result['result'] === "no data"){ 
+						if(result['result'] === "0"){ 
 							alert('팀원등록 실패');
 						}else{
 							insertNewHomework(<%=id%>,radioVal,due,title,contents,0,subNo,result['result']);
@@ -272,7 +274,6 @@ $(document).ready(function() {
 			}//new
 			
 			else{
-				console.log("########"+team);
 				$.ajax({
 					url:"/team/updateTeam.json",
 					type : "GET",
@@ -300,7 +301,7 @@ $(document).ready(function() {
 					},
 					error : function(request,status,error){
 						alert('팀원수정 에러');
-						console.log("code:"+request.status+'\n'+'message:'+request.responseText+'\n'+'error:'+error);
+						console.log('message:'+request.responseText+'\n'+'error:'+error);
 			    	}
 				});//ajax
 				
