@@ -425,10 +425,12 @@ public class UserController {
 		int result=0,result1=0,result2=0,result3=0,result4=0;
 		try {
 			result=userDao.deleteUser(param);
+			/*
 			result1=subjectDao.deleteSubject(param);
 			result2=homeworkDao.deleteAllHomework(param);
 			result3=completeDao.deleteAllComplete(param);
 			result4=timeTableDao.deleteAllTimeTable(param);
+			*/
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -438,7 +440,7 @@ public class UserController {
 		System.out.println(result);
     	JSONObject jSONObject = new JSONObject();
     	//그래서 여기서 성공 or 실패 구분해서 안드로이드에 json 데이터를 결과로 전달해줄거야
-    	if(result==1&&result1==1&&result2==1&&result3==1&&result4==1) {
+    	if(result==1/*&&result1==1&&result2==1&&result3==1&&result4==1*/) {
     		jSONObject.put("result", "1");//성공     		
     	}
     	else {
