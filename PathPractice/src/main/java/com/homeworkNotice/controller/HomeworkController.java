@@ -113,15 +113,22 @@ public class HomeworkController {
 			Locale locale, //占싫듸옙占쏙옙絹恙∽옙占� 占쏙옙占쏙옙 占식띰옙占쏙옙占�
 			Model model, //占싫듸옙占쏙옙絹恙∽옙占� 占쏙옙占쏙옙 占식띰옙占쏙옙占�
 			@RequestParam(value = "stuId", required=true) String stuId,
+			@RequestParam(value = "select", required=true) final int select,
 			@RequestParam(value="assignNo",required=true) final int assignNo) {
 		
 		HashMap<Object, Object> param=new HashMap<Object, Object>();
 		
 		param.put("stuId",stuId);
 		param.put("assignNo",assignNo);
+	
+		int result=0;
 		
-		
-		int result=homeworkDao.deleteHomework(param);
+		//0이면 assignNo
+		if(select==0) {
+			result=homeworkDao.deleteHomework(param);
+		}else if(select==1) {
+			result=homeworkDao.deleteHomework2(param);
+		}
 	
 		
 		JSONObject jSONObject = new JSONObject();

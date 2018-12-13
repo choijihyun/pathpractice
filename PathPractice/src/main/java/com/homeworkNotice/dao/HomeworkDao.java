@@ -31,6 +31,9 @@ public class HomeworkDao {
 	public int deleteHomework(HashMap<Object, Object> param) {
 		return sqlSession.delete("HomeworkDao.deleteHomework",param);
 	}
+	public int deleteHomework2(HashMap<Object, Object> param) {
+		return sqlSession.delete("HomeworkDao.deleteHomework2",param);
+	}
 	public int deleteAllHomework(HashMap<Object, Object> param) {
 		return sqlSession.delete("HomeworkDao.deleteAllHomework",param);
 	}
