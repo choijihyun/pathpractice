@@ -372,7 +372,7 @@ public class HomeworkController {
 		        	for(int i=0;i<jsonList.size();i++){
 		        		for(int k=0;k<jsonList.size()-1;k++) {
 		        			
-		        			if((int)(jsonList.get(k).get("importance"))>(int)(jsonList.get(k+1).get("importance"))) {
+		        			if((int)(jsonList.get(k).get("importance"))<(int)(jsonList.get(k+1).get("importance"))) {
 		        				tmp.putAll(jsonList.get(k));
 		        				jsonList.get(k).clear();
 		        				jsonList.get(k).putAll(jsonList.get(k+1));
