@@ -218,7 +218,7 @@ $(document).ready(function() {
 			var title = $('#title').val()
 			var contents = $('#contents').val()
  		 	var userInfomation = new Array();
-			var i=0;
+			var i=1;
 			var check=0;
 			
 			$(".userId").each(function() {
@@ -231,7 +231,7 @@ $(document).ready(function() {
 				i = i+2;
 			});
 
-			i=1;
+			i=0;
 			$(".userName").each(function() {
 				var userName = $(this).val();
 				console.log("name="+userName);
