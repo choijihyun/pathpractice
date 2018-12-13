@@ -425,12 +425,12 @@ public class UserController {
 		int result=0,result1=0,result2=0,result3=0,result4=0;
 		try {
 			result=userDao.deleteUser(param);
-			
+			/*
 			result1=subjectDao.deleteSubject(param);
 			result2=homeworkDao.deleteAllHomework(param);
 			result3=completeDao.deleteAllComplete(param);
 			result4=timeTableDao.deleteAllTimeTable(param);
-			
+			*/
 			
 		} catch (Exception e) {
 			e.printStackTrace();
