@@ -45,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
     
     <delete id="deleteSubject" parameterType="map">
-    	delete from Subject where add=#{add}
+    	delete from Subject where stuId=#{stuId}
     </delete>
     
 </mapper>
