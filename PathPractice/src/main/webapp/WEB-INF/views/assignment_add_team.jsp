@@ -303,6 +303,7 @@ $(document).ready(function() {
 						'memFourNum': userInfomation[9],
 					},
 					success : function(result){
+						console.log("%%%%%%%%5"+result);
 						if(result['result'] === 0){ 
 							alert('팀원수정 실패');
 						}else{
