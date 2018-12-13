@@ -45,20 +45,20 @@
 					<div class="row col-auto justify-content-end setting">
 						<div class= "p-0 col-4 col-xs-4 col-sm-4 col-lg-4 col-md-4">
 							<div class="btn-group" role="group" aria-label="Basic example">
-								<button type="button" class="btn  btn_assign_type" id="all">ALL</button>
-								<button type="button" class="btn  btn_assign_type" id="none">Personal</button>
-								<button type="button" class="btn  btn_assign_type" id="team">Team</button>
-								<button type="button" class="btn  btn_assign_type" id="done">Done</button>
+								<button type="button" class="btn  btn_assign_type" id=" all ">all</button>
+								<button type="button" class="btn  btn_assign_type" id=" none ">personal</button>
+								<button type="button" class="btn  btn_assign_type" id=" team ">team</button>
+								<button type="button" class="btn  btn_assign_type" id=" done ">done</button>
 							</div>
 						</div>
 						<div class= "col-3 col-xs-3 col-sm-3 col-lg-3 col-md-3">
-							<select class="form-control-sm" id="sort">
+						</div>
+						<div class= "col-3 col-xs-3 col-sm-3 col-lg-3 col-md-3">
+							<select class="form-control-xs" id="sort">
 							<option value="default">default</option>
 							<option value="date">date</option>
 							<option value="importance">importance</option>
 						</select>
-						</div>
-						<div class= "col-3 col-xs-3 col-sm-3 col-lg-3 col-md-3">
 						</div>
 						<!-- plus 아이콘 버튼 누르면 팀인지 개인인지 선택하게 함 -->
 						<div class= "col-2 col-xs-2 col-sm-2 col-lg-2 col-md-2">
@@ -242,6 +242,7 @@
 		var subNo = $(this).data('subNo');
 		var assignNo = $(this).data('assignNo');
 		var team = $(this).data('team');
+		var userInfomation = new Array();
 		
 		var String = "00";
 		subNo = String+subNo;
@@ -265,7 +266,48 @@
 		//과제 삭제 버튼 클릭  
 		$('#assignDel').on('click', function (){
 			var assignNo = $('#hiddenAssign').val();
-			deleteAssign(assignNo,<%=id%>);
+		
+			
+			if(team != 0){
+			$.ajax({
+				url:"/team/searchTeam.json",
+				type : "GET",
+				async : false,
+				data : {
+					'teamNum': team
+				},
+				success : function(result){
+					if(result['result'] === "=no data"){ 
+						alert('팀원 검색 실패');
+					}else{
+						console.log(result);
+						console.log(result['result'][0]['leaderNum']);
+						userInfomation[0] = result['result'][0]['leaderNum'];
+						userInfomation[1] = result['result'][0]['memOneNum'];
+						userInfomation[2] = result['result'][0]['memTwoNum'];
+						userInfomation[3] = result['result'][0]['memThreeNum'];
+						userInfomation[4] = result['result'][0]['memFourNum'];
+						console.log(userInfomation);
+						for(var i=0 ; i<userInfomation.length ; i++){
+							if(userInfomation[i] != null)
+								deleteAssign(1,team,userInfomation[i]);
+						}  
+					}
+				},
+				error : function(){
+					alert('삭제 에러');
+				}
+			});//ajax
+			}	
+			else{
+				deleteAssign(0,assignNo,<%=id%>); 
+			}	
+			<%-- for(i=1 ; i<userInfomation.length ; i=i+2){
+				console.log(i+"=i , id="+userInfomation[i]);
+				if(userInfomation[i] == null) break;
+				if(userInfomation[i] == <%=id%>) continue;
+				insertNewHomework(userInfomation[i],radioVal,due,title,contents,0,subNo,team);
+			} --%>
 			//team이면 team테이블도 삭제 해야함...
 		});//assignDel Cllick
 

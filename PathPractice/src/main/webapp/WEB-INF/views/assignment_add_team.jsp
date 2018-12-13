@@ -266,13 +266,15 @@ $(document).ready(function() {
 							alert('팀원등록 실패');
 						}else{
 							insertNewHomework(<%=id%>,radioVal,due,title,contents,0,subNo,result['result']);
-							var i=1;
-							while(1){
-								if(userInfomation[i]==null)break;
-								if(userInfomation[i]==<%=id%>)continue;
+							i = 1;
+							console.log(i+"=i , userid="+<%=id%>);
+							for(i=1 ; i<userInfomation.length ; i=i+2){
+								console.log(i+"=i , id="+userInfomation[i]);
+								if(userInfomation[i] == null) break;
+								if(userInfomation[i] == <%=id%>) continue;
 								insertNewHomework(userInfomation[i],radioVal,due,title,contents,0,subNo,result['result']);
-								i+=2;
 							}
+							location.href = "/assignment";
 							alert('팀원등록 성공');
 						}
 					},
@@ -319,12 +321,7 @@ $(document).ready(function() {
 				
 			}
 			
-			
-			
-			
-			
 		});//submit btn click
-		
 		
 		
 	});//function
