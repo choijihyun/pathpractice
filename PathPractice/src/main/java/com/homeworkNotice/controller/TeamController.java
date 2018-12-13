@@ -76,8 +76,6 @@ public class TeamController {
 			e.printStackTrace();
 			// TODO: handle exception
 		}
-			
-		System.out.println("++++"+param.get("teamNum"));
 		
 		System.out.println(result);
     	JSONObject jSONObject = new JSONObject();

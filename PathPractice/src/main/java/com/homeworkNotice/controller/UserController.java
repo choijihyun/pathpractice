@@ -156,12 +156,11 @@ public class UserController {
     			@RequestParam(value = "email", required=true) String email) {
 		HashMap<Object, Object> param=new HashMap<Object, Object>();
 		
-		System.out.println("/user/updateUser.json !@@@@");
 		param.put("stuId", stuId);
 		param.put("name", name);	
 		param.put("semester",semester);		
 		param.put("email",email);
-		//
+		
 		System.out.println(param);
 		
 		int result=0;
@@ -184,7 +183,6 @@ public class UserController {
     	else {
     		jSONObject.put("result","0");
     	}
-    	System.out.println("뀨잉뽀잉 ㄴ"+jSONObject.toString());
     	return jSONObject.toString();
 	}
 	
@@ -584,21 +582,19 @@ public class UserController {
 		System.out.println("obj = " + obj);
 		if (obj == null) { // 로그인 된 세션이 없는 경우
 			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie"); // 만들어놨던 쿠키 꺼내옴
-			System.out.println("loginCookie = " + loginCookie.getComment());
-			System.out.println("loginCookie = " + loginCookie.getValue());
+			//System.out.println("loginCookie = " + loginCookie.getComment());
+			//System.out.println("loginCookie = " + loginCookie.getValue());
 			if (loginCookie != null) { // 쿠키가 존재하는경우, 
 				String sessionId = loginCookie.getValue(); // 저장해놨던 sessionId 가져오기!
 				System.out.println("sessionId는 null이 아님");
 				HashMap<Object, Object> param = new HashMap<Object, Object>();
 				param.put("sessionId", sessionId);
-				System.out.println("시작");
 				System.out.println("param : "+param);
 				if(userDao.checkUserWithSessionKey(param)!=null) {
 					List<UserDto> uservo = userDao.checkUserWithSessionKey(param);
 					System.out.println("끝");
 
 					if (!uservo.isEmpty() && uservo != null) {
-						System.out.println("조건문 들어옴");
 						session.setAttribute("login", uservo);
 						session.setAttribute("id", uservo.get(0).getStuId());
 						session.setAttribute("pw", uservo.get(0).getPw());
@@ -652,7 +648,7 @@ public class UserController {
 	    			HttpServletRequest request,
 	    			HttpServletResponse response,
 	    			@RequestParam(value = "stuId", required=true) String stuId) {
-	System.out.println("logout controller에 들어옴 뀨ㅠ뀨ㅠ");
+	
 	    	Object obj = session.getAttribute("login");
 	    	if(obj!=null) {
 	    		UserDto vo = (UserDto)obj;

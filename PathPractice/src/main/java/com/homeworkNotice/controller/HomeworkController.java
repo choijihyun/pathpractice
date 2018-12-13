@@ -408,10 +408,10 @@ public class HomeworkController {
 
 		    	if(!homeworkDtoList.isEmpty()) {//반환받은 데이터가 유효하면(db에 있으면) 브라우저 화면에 결과를 뿌려준다
 		    		for(int i=0;i<homeworkDtoList.size();i++) {
-		    		//	param.clear();
+		    			param.clear();
 		    			//param.put("stuId",homeworkDtoList.get(i).getStuId());
 		    			JSONObject jSONObject = new JSONObject();
-		    	//		List<UserDto> pushList=userDao.pushUser(param);
+		    			//List<UserDto> pushList=userDao.pushUser(param);
 		        		jSONObject.put("stuId",homeworkDtoList.get(i).getStuId());
 		        		
 		        		jSONArray.add(jSONObject);
