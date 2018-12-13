@@ -326,6 +326,8 @@ public class HomeworkController {
 		        			n1=calc1/(24*60*60*1000);
 		        			n2=calc2/(24*60*60*1000);
 		        			
+		        			System.out.println("##########################n1:"+n1);
+		        			System.out.println("##########################n2:"+n2);
 		        			if(n1<=10) {
 		        				sav1=((creditList[k]/12.0)+(int)jsonList.get(k).get("importance"))*Math.pow(2,10-n1);
 		        			}else if(n1>10) {
