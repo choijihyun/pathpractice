@@ -179,6 +179,8 @@ public class UserController {
     	if(result == 1) {
     		System.out.println("controller에서는 성공!");
     		jSONObject.put("result","1");	
+    		session.removeAttribute("name");
+			session.setAttribute("name", name);
     	}
     	else {
     		jSONObject.put("result","0");

@@ -70,6 +70,7 @@ def get_info(uid, upw):
     
     driver.get('https://blackboard.sejong.ac.kr')
     driver.implicitly_wait(3)
+    driver.find_element_by_id('close').click()
     driver.find_element_by_id('toggle_login_form').click()
 
     try:
