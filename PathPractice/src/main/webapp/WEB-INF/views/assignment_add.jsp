@@ -79,6 +79,7 @@
 						  <input type="radio" id="p1" name="star-input" value="1" /> <label for="p1">1</label>
 						</span>
 	
+						<div class="col-md-2 col-xs-2 my-3"></div>
 
 						<div class="col-md-3 col-xs-3 my-2 label_input">마감일</div>
 						<div class="col-md-6 col-xs-6 mt-1 mb-1">

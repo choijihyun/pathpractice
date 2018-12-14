@@ -32,14 +32,14 @@
 <body class="text-center">
 
 	<!-- Container -->
-			<div class="container m-0 p-0 justify-content-md-center justify-content-xs-center">
+			<div class="container m-0 p-0 justify-content-md-center justify-content-xs-center"   >
 			<div class="login_box">
 
 				<!-- header  class="app-header" -->
 				<div id="header"></div>
 
 				<!-- 상당바와 하단바를 제외한 부분 class="main-area" -->
-				<div class="jumbotron m-2 p-0 text-white rounded main_area">
+				<div class="jumbotron m-2 p-0 text-white rounded main_area"  >
 
 					<!-- 개인인지 팀플인지 추가 등 설정 버튼들 있는 곳­-->
 					<div class="row col-auto justify-content-end setting">
@@ -96,7 +96,7 @@
 
 					<!-- 과제 전체 보여주는 영역(스트롤바 포함¨) -->
 					<!-- 과제가 여러개 이면 스크롤 생김 -->
-					<div style="overflow-x:hidden; overflow-y:auto; width:auto; height:300px;" class="mt-3 scrollbar scrollbar-track scrollbar-thumb" data-offset="0">
+					<div style="overflow-x:hidden; overflow-y:auto; width:auto; height:480px;" class="mt-3 scrollbar scrollbar-track scrollbar-thumb" data-offset="0">
 
 						<!-- 스크롤바 제외한 과제를 보여주는 영역 -->
 						<div class="px-2 content_show_assign">

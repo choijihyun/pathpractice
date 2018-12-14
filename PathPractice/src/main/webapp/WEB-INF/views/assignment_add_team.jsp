@@ -40,7 +40,7 @@
 				<h2 class="text-center wdi_red mt-1">ADD TEAM ASSINGMENT</h2>
 				<hr class="m-1">
 				<div class="commonForm">
-					<div class="form-row m-3">
+					<div class="form-row m-3" >
 						<div class="col-md-3 col-xs-3 my-2 label_input">과목명</div>
 						<div class="col-md-7 col-xs-7 ">
 							<input type="text" class="form-control form-control-sm mt-1 mb-1  flat_input" id="subjectName" title="과목명">

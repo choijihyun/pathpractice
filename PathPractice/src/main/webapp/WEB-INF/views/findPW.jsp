@@ -26,20 +26,24 @@
 	<!-- Container -->
 	<div class="container m-0 p-0 justify-content-md-center justify-content-xs-center" id="content">
 		<div class="login_box ">
-			<h1 class="text-center wdi_red">PW</h1>
+			<h1 class="text-center wdi_red">Find PW</h1>
 			<hr>
-			<form>
-				<div class="form-row">
-					<div class="col-md-12 col-xs-12">
-						<input type="text" id="id"
-							class="form-control form-control-lg flat_input"
-							placeholder="userID">
+				<div class="form-row" style="overflow-x:hidden; overflow-y:auto; width:auto; height:480px;">
+					
+					<div class="col-md-3 col-xs-3 label_input">
+						<h6>ID</h6>
 					</div>
-					<div class="col-md-12 col-xs-12">
-						<input type="text" id="email"
-							class="form-control form-control-lg flat_input"
-							placeholder="email">
+					<div class="col-md-9 col-xs-9">
+						<input type="text" id="id" class="form-control form-control-lg flat_input" placeholder="userID">
+					</div>	
+					
+					<div class="col-md-3 col-xs-3 label_input">
+						<h6>Email</h6>
 					</div>
+					<div class="col-md-9 col-xs-9">
+					<input type="text" id="email" class="form-control form-control-lg flat_input" placeholder="email">
+					</div>
+					
 					<div class="col-md-6 col-xs-6 mt-3">
 						<button type="button" class="btn btn-block btn-sm btn_submit"
 							id="submit">FIND</button>
@@ -49,7 +53,6 @@
 							onclick='location.href="/"'>CANCEL</button>
 					</div>
 				</div>
-			</form>
 		</div>
 	</div>
 	<input type="hidden" id="email" name="hide" value="">

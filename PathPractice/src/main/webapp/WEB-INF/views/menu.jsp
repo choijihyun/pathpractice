@@ -39,7 +39,7 @@
 			<div id="header"></div>
 
 			<!-- 상단바와 하단바를 제외한 부분 class="main-area" -->
-			<div class="jumbotron p-md-3 text-white rounded main_area">
+			<div class="jumbotron p-md-3 text-white rounded main_area" style="overflow: auto; width: auto; height: 480px;">
 
 				<div class="d-flex align-items-center p-3 my-3 rounded"
 					style="background: #f2f2f2;margin-top: 0px;">
@@ -50,7 +50,7 @@
 					</div>
 				</div>
 				<!-- 등록된 과제를 보여주는 scroll창 -->
-				<div style="overflow: auto; width: auto; height: 130px;"
+				<div style="overflow: auto; width: auto;"
 					class="mt-3 content_preview_assignment scrollbar scrollbar_track scrollbar_thumb"
 					data-spy="scroll" data-offset="0"></div>
 					

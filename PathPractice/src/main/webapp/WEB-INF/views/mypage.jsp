@@ -39,7 +39,7 @@
 			<div id="header"></div>
 
 			<!-- 상단바와 하단바를 제외한 부분 class="main-area" -->
-			<div class="jumbotron p-0 rounded main_area">
+			<div class="jumbotron p-0 rounded main_area" style="overflow: auto; width: auto; height: 500px;">
 				<div class="d-flex align-items-center p-3 my-3 rounded"
 					style="background: #f2f2f2;">
 					<i class="fas fa-user m-3 user_icon"></i>

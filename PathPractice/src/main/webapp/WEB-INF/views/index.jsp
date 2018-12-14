@@ -26,11 +26,11 @@
 
 <body class="text-center">
 	<!-- Container -->
-	<div class="container m-0 p-0 justify-content-md-center justify-content-xs-center">
+	<div class="container m-0 p-0 justify-content-md-center justify-content-xs-center" >
 		<div class="login_box">
 			<h1 class="text-center wdi_red">Login</h1>
 			<hr>
-				<div class="form-row">
+				<div class="form-row" style="overflow-x:hidden; overflow-y:auto; width:auto; height:480px;">
 					<!-- input id, pw -->
 					<div class="col-md-12 col-xs-12">
 						<input type="text" id="id"

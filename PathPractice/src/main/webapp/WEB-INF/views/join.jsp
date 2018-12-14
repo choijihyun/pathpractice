@@ -28,7 +28,6 @@
 		<div class="login_box ">
 			<h1 class="text-center wdi_red">JOIN</h1>
 			<hr>
-			<form>
 				<div class="form-row commonForm">
 
 					<!-- ID lable/input tag -->
@@ -92,7 +91,6 @@
 					</div>
 
 				</div>
-			</form>
 		</div>
 	</div>
 </body>
